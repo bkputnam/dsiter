@@ -1,2 +1,9 @@
+apply plugin: 'java'
+
+task main(type:JavaExec) {
+	main = 'blatis.HelloWorld'
+	classpath = sourceSets.main.runtimeClasspath
+}
+
 task wrapper(type: Wrapper) { gradleVersion = '2.12' }
 
