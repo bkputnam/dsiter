@@ -15,7 +15,7 @@ public class TestGreaterThanEqualsPredicate {
 
 
     @Test
-    public void testGtPredicateIntTrue() {
+    public void testGtePredicateIntTrue() {
 
         Row row = new Row();
         row.ints = new int[] { 2, 1 };
@@ -29,7 +29,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateIntFalse() {
+    public void testGtePredicateIntFalse() {
 
         Row row = new Row();
         row.ints = new int[] { 1, 2 };
@@ -43,7 +43,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateLongTrue() {
+    public void testGtePredicateLongTrue() {
 
         Row row = new Row();
         row.longs = new long[] { 2, 1 };
@@ -57,7 +57,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateLongFalse() {
+    public void testGtePredicateLongFalse() {
 
         Row row = new Row();
         row.longs = new long[] { 1, 2 };
@@ -71,7 +71,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateFloatTrue() {
+    public void testGtePredicateFloatTrue() {
 
         Row row = new Row();
         row.floats = new float[] { 2, 1 };
@@ -85,7 +85,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateFloatFalse() {
+    public void testGtePredicateFloatFalse() {
 
         Row row = new Row();
         row.floats = new float[] { 1, 2 };
@@ -99,7 +99,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateDoubleTrue() {
+    public void testGtePredicateDoubleTrue() {
 
         Row row = new Row();
         row.doubles = new double[] { 2, 1 };
@@ -113,7 +113,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateDoubleFalse() {
+    public void testGtePredicateDoubleFalse() {
 
         Row row = new Row();
         row.doubles = new double[] { 1, 2 };
@@ -127,7 +127,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateIntEquals() {
+    public void testGtePredicateIntEquals() {
         Row row = new Row();
         row.ints = new int[] { 1, 1 };
 
@@ -140,7 +140,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateLongEquals() {
+    public void testGtePredicateLongEquals() {
         Row row = new Row();
         row.longs = new long[] { 1, 1 };
 
@@ -153,7 +153,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateFloatEquals() {
+    public void testGtePredicateFloatEquals() {
         Row row = new Row();
         row.floats = new float[] { 1, 1 };
 
@@ -166,7 +166,7 @@ public class TestGreaterThanEqualsPredicate {
     }
 
     @Test
-    public void testGtPredicateDoubleEquals() {
+    public void testGtePredicateDoubleEquals() {
         Row row = new Row();
         row.doubles = new double[] { 1, 1 };
 
