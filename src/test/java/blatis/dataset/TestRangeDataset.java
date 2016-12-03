@@ -25,7 +25,7 @@ public class TestRangeDataset {
 		while( it.tryMoveNext() ) {
 			Row row = it.getCurrentRow();
 			int val = (int)colAccessor.getValueFromRow(row);
-			assertEquals(val, expected[index]);
+			assertEquals(expected[index], val);
 			index++;
 		}
 	}
@@ -42,6 +42,6 @@ public class TestRangeDataset {
 		while( it.tryMoveNext() ) {
 			count++;
 		}
-		assertEquals(count, 0);
+		assertEquals(0, count);
 	}
 }
