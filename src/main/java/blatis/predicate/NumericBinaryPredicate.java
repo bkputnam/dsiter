@@ -1,6 +1,7 @@
 package blatis.predicate;
 
 import blatis.row.ColumnDescriptor;
+import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.Row;
 
@@ -22,12 +23,12 @@ public abstract class NumericBinaryPredicate extends AbstractBinaryPredicate {
             );
         }
 
-        ColumnDescriptor.Type type = lhs.getType();
+        ColumnType type = lhs.getType();
         innerPredicate =
-            type == ColumnDescriptor.Type.INT ? new IntPredicate(lhs, rhs) :
-            type == ColumnDescriptor.Type.LONG ? new LongPredicate(lhs, rhs) :
-            type == ColumnDescriptor.Type.FLOAT ? new FloatPredicate(lhs, rhs) :
-            type == ColumnDescriptor.Type.DOUBLE ? new DoublePredicate(lhs, rhs) :
+            type == ColumnType.INT ? new IntPredicate(lhs, rhs) :
+            type == ColumnType.LONG ? new LongPredicate(lhs, rhs) :
+            type == ColumnType.FLOAT ? new FloatPredicate(lhs, rhs) :
+            type == ColumnType.DOUBLE ? new DoublePredicate(lhs, rhs) :
             null;
         if( innerPredicate == null ) {
             throw new IllegalArgumentException("Unsupported column type: " + type);

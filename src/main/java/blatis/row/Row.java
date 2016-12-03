@@ -10,6 +10,13 @@ public class Row {
 
 	public Row() { }
 
+	public Row(int... vals) { this.ints = vals.clone(); }
+	public Row(long... vals) { this.longs = vals.clone(); }
+	public Row(float... vals) { this.floats = vals.clone(); }
+	public Row(double... vals) { this.doubles = vals.clone(); }
+	public Row(String... vals) { this.strings = vals.clone(); }
+	public Row(boolean... vals) { this.bools = vals.clone(); }
+
 	public Row(RowShape shape) {
 		if(shape.getNumInts() > 0) {
 			ints = new int[shape.getNumInts()];

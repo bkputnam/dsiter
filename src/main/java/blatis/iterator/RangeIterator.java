@@ -1,6 +1,7 @@
 package blatis.iterator;
 
 import blatis.row.ColumnDescriptor;
+import blatis.row.ColumnType;
 import blatis.row.Row;
 
 public class RangeIterator extends AbstractDatasetIterator {
@@ -9,7 +10,7 @@ public class RangeIterator extends AbstractDatasetIterator {
 	private int numVals;
 
 	private static ColumnDescriptor[] columns = {
-		new ColumnDescriptor("value", ColumnDescriptor.Type.INT, 0)
+		new ColumnDescriptor("value", ColumnType.INT, 0)
 	};
 
 	private Row row;

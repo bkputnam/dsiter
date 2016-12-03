@@ -1,5 +1,6 @@
 package blatis.iterator;
 
+import blatis.row.ColumnType;
 import blatis.row.Row;
 import blatis.row.RowShape;
 import blatis.row.ColumnDescriptor;
@@ -32,24 +33,24 @@ public abstract class AbstractDatasetIterator {
 		ColumnDescriptor[] cds = this.getColumnDescriptors();
 		for(int i=0; i<cds.length; i++) {
 			ColumnDescriptor cd = cds[i];
-			ColumnDescriptor.Type type = cd.getType();
+			ColumnType type = cd.getType();
 
-			if(type == ColumnDescriptor.Type.INT) {
+			if(type == ColumnType.INT) {
 				numInts++;
 			}
-			else if(type == ColumnDescriptor.Type.LONG) {
+			else if(type == ColumnType.LONG) {
 				numLongs++;
 			}
-			else if(type == ColumnDescriptor.Type.FLOAT) {
+			else if(type == ColumnType.FLOAT) {
 				numFloats++;
 			}
-			else if(type == ColumnDescriptor.Type.DOUBLE) {
+			else if(type == ColumnType.DOUBLE) {
 				numDoubles++;
 			}
-			else if(type == ColumnDescriptor.Type.STRING) {
+			else if(type == ColumnType.STRING) {
 				numStrings++;
 			}
-			else if(type == ColumnDescriptor.Type.BOOLEAN) {
+			else if(type == ColumnType.BOOLEAN) {
 				numBools++;
 			}
 		}

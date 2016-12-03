@@ -9,14 +9,38 @@ public abstract class ColumnAccessor implements IRowAccessor {
 	}
 
 	public abstract Object getValueFromRow(Row row);
-	public abstract ColumnDescriptor.Type getType();
+	public abstract ColumnType getType();
+
+	public static ColumnAccessor create(ColumnType type, int rowArrayIndex) {
+		if( type == ColumnType.INT ) {
+			return new ColumnAccessor.IntAccessor( rowArrayIndex );
+		}
+		else if( type == ColumnType.LONG ) {
+			return new ColumnAccessor.LongAccessor( rowArrayIndex );
+		}
+		else if( type == ColumnType.FLOAT ) {
+			return new ColumnAccessor.FloatAccessor( rowArrayIndex );
+		}
+		else if( type == ColumnType.DOUBLE ) {
+			return new ColumnAccessor.DoubleAccessor( rowArrayIndex );
+		}
+		else if( type == ColumnType.STRING ) {
+			return new ColumnAccessor.StringAccessor( rowArrayIndex );
+		}
+		else if( type == ColumnType.BOOLEAN ) {
+			return new ColumnAccessor.BoolAccessor( rowArrayIndex );
+		}
+		else {
+			throw new Error("Programmer Error: unrecognized Type: " + type);
+		}
+	}
 
 	public static class IntAccessor extends ColumnAccessor {
 		public IntAccessor(int index) {
 			super(index);
 		}
 
-		public ColumnDescriptor.Type getType() { return ColumnDescriptor.Type.INT; }
+		public ColumnType getType() { return ColumnType.INT; }
 
 		public Object getValueFromRow(Row row) {
 			return row.ints[this.index];
@@ -28,7 +52,7 @@ public abstract class ColumnAccessor implements IRowAccessor {
 			super(index);
 		}
 
-		public ColumnDescriptor.Type getType() { return ColumnDescriptor.Type.LONG; }
+		public ColumnType getType() { return ColumnType.LONG; }
 
 		public Object getValueFromRow(Row row) {
 			return row.longs[this.index];
@@ -40,7 +64,7 @@ public abstract class ColumnAccessor implements IRowAccessor {
 			super(index);
 		}
 
-		public ColumnDescriptor.Type getType() { return ColumnDescriptor.Type.FLOAT; }
+		public ColumnType getType() { return ColumnType.FLOAT; }
 
 		public Object getValueFromRow(Row row) {
 			return row.floats[this.index];
@@ -52,7 +76,7 @@ public abstract class ColumnAccessor implements IRowAccessor {
 			super(index);
 		}
 
-		public ColumnDescriptor.Type getType() { return ColumnDescriptor.Type.DOUBLE; }
+		public ColumnType getType() { return ColumnType.DOUBLE; }
 
 		public Object getValueFromRow(Row row) {
 			return row.doubles[this.index];
@@ -64,7 +88,7 @@ public abstract class ColumnAccessor implements IRowAccessor {
 			super(index);
 		}
 
-		public ColumnDescriptor.Type getType() { return ColumnDescriptor.Type.STRING; }
+		public ColumnType getType() { return ColumnType.STRING; }
 
 		public Object getValueFromRow(Row row) {
 			return row.strings[this.index];
@@ -76,7 +100,7 @@ public abstract class ColumnAccessor implements IRowAccessor {
 			super(index);
 		}
 
-		public ColumnDescriptor.Type getType() { return ColumnDescriptor.Type.BOOLEAN; }
+		public ColumnType getType() { return ColumnType.BOOLEAN; }
 
 		public Object getValueFromRow(Row row) {
 			return row.bools[this.index];

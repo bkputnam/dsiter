@@ -5,5 +5,5 @@ package blatis.row;
  */
 public interface IRowAccessor {
     public Object getValueFromRow(Row row);
-    public ColumnDescriptor.Type getType();
+    public ColumnType getType();
 }

@@ -3,6 +3,7 @@ package blatis.iterator;
 import java.util.Set;
 import java.util.HashSet;
 
+import blatis.row.ColumnType;
 import blatis.row.Row;
 import blatis.row.RowShape;
 import blatis.row.ColumnDescriptor;
@@ -36,7 +37,7 @@ public class ZipIterator extends AbstractDatasetIterator {
 		for(int i=0; i<rightCds.length; i++) {
 			ColumnDescriptor rcd = rightCds[i];
 			String rightName = rcd.getName();
-			ColumnDescriptor.Type rightType = rcd.getType();
+			ColumnType rightType = rcd.getType();
 
 			if(leftColNames.contains(rightName)) {
 				throw new RuntimeException("Programmer error: cannot zip two iterators with a common column name (" + rightName + ")");

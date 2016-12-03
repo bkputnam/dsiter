@@ -24,27 +24,27 @@ public class RowShape {
 	public int getNumStrings() { return numStrings; }
 	public int getNumBools() { return numBools; }
 
-	public int getNum(ColumnDescriptor.Type type) {
-		if(type == ColumnDescriptor.Type.INT) {
+	public int getNum(ColumnType type) {
+		if(type == ColumnType.INT) {
 			return getNumInts();
 		}
-		else if(type == ColumnDescriptor.Type.LONG) {
+		else if(type == ColumnType.LONG) {
 			return getNumLongs();
 		}
-		else if(type == ColumnDescriptor.Type.FLOAT) {
+		else if(type == ColumnType.FLOAT) {
 			return getNumFloats();
 		}
-		else if(type == ColumnDescriptor.Type.DOUBLE) {
+		else if(type == ColumnType.DOUBLE) {
 			return getNumDoubles();
 		}
-		else if(type == ColumnDescriptor.Type.STRING) {
+		else if(type == ColumnType.STRING) {
 			return getNumStrings();
 		}
-		else if(type == ColumnDescriptor.Type.BOOLEAN) {
+		else if(type == ColumnType.BOOLEAN) {
 			return getNumBools();
 		}
 		else {
-			throw new RuntimeException("This should be impossible");
+			throw new Error("Programmer error: unrecognized ColumnType: " + type);
 		}
 	}
 }
