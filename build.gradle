@@ -8,6 +8,8 @@ dependencies {
 	testCompile 'junit:junit:4.+'
 }
 
+sourceCompatibility = 1.8
+
 task main(type:JavaExec) {
 	main = 'blatis.HelloWorld'
 	classpath = sourceSets.main.runtimeClasspath
