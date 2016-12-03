@@ -29,4 +29,19 @@ public class TestRangeDataset {
 			index++;
 		}
 	}
+
+	@Test
+	public void testRange0() {
+		RangeDataset rd = new RangeDataset(0);
+		AbstractDatasetIterator it = rd.getIterator();
+
+		ColumnDescriptor cd = it.getColumnDescriptor("value");
+		ColumnAccessor colAccessor = cd.getAccessor();
+
+		int count = 0;
+		while( it.tryMoveNext() ) {
+			count++;
+		}
+		assertEquals(count, 0);
+	}
 }
