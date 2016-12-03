@@ -1,7 +1,7 @@
 package blatis.iterator;
 
-import blatis.dataset.ColumnDescriptor;
-import blatis.dataset.Row;
+import blatis.row.ColumnDescriptor;
+import blatis.row.Row;
 
 public class RangeIterator extends AbstractDatasetIterator {
 

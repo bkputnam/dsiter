@@ -1,4 +1,4 @@
-package blatis.dataset;
+package blatis.row;
 
 public class Row {
 	public int[] ints;

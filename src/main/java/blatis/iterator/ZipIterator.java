@@ -3,9 +3,9 @@ package blatis.iterator;
 import java.util.Set;
 import java.util.HashSet;
 
-import blatis.dataset.Row;
-import blatis.dataset.RowShape;
-import blatis.dataset.ColumnDescriptor;
+import blatis.row.Row;
+import blatis.row.RowShape;
+import blatis.row.ColumnDescriptor;
 
 public class ZipIterator extends AbstractDatasetIterator {
 

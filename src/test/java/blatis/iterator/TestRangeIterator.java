@@ -1,13 +1,10 @@
 package blatis.iterator;
 
 import static org.junit.Assert.*;
-import org.junit.Before;
+
 import org.junit.Test;
 
-import blatis.dataset.ColumnDescriptor;
-import blatis.dataset.Row;
-import blatis.dataset.RowShape;
-import blatis.iterator.RangeIterator;
+import blatis.row.RowShape;
 
 public class TestRangeIterator {
 

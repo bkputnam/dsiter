@@ -1,12 +1,13 @@
 package blatis.dataset;
 
 import static org.junit.Assert.*;
-import org.junit.Before;
+
+import blatis.row.ColumnAccessor;
+import blatis.row.ColumnDescriptor;
+import blatis.row.RowShape;
 import org.junit.Test;
 
-import blatis.dataset.RangeDataset;
-import blatis.dataset.ColumnDescriptor;
-import blatis.dataset.Row;
+import blatis.row.Row;
 import blatis.iterator.AbstractDatasetIterator;
 
 public class TestRangeDataset {

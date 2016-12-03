@@ -1,11 +1,11 @@
 package blatis.operation;
 
 import static org.junit.Assert.*;
-import org.junit.Before;
+
 import org.junit.Test;
 
 import blatis.dataset.RangeDataset;
-import blatis.dataset.ColumnDescriptor;
+import blatis.row.ColumnDescriptor;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.RenameIterator;
 import blatis.iterator.IterUtils;

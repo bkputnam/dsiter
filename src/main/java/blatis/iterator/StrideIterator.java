@@ -1,7 +1,7 @@
 package blatis.iterator;
 
-import blatis.dataset.Row;
-import blatis.dataset.ColumnDescriptor;
+import blatis.row.Row;
+import blatis.row.ColumnDescriptor;
 
 public class StrideIterator extends AbstractDatasetIterator {
 

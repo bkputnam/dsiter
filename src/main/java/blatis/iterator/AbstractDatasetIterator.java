@@ -1,8 +1,8 @@
 package blatis.iterator;
 
-import blatis.dataset.Row;
-import blatis.dataset.RowShape;
-import blatis.dataset.ColumnDescriptor;
+import blatis.row.Row;
+import blatis.row.RowShape;
+import blatis.row.ColumnDescriptor;
 
 public abstract class AbstractDatasetIterator {
 	public abstract boolean tryMoveNext();

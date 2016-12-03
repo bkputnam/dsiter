@@ -2,12 +2,9 @@ package blatis.iterator;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 
-import blatis.iterator.AbstractDatasetIterator;
-import blatis.dataset.ColumnAccessor;
-import blatis.dataset.Row;
+import blatis.row.ColumnAccessor;
+import blatis.row.Row;
 
 public class IterUtils {
 
