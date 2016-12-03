@@ -127,7 +127,7 @@ public class TestLessThanPredicate {
     }
 
     @Test
-    public void testLtePredicateIntEquals() {
+    public void testLtPredicateIntEquals() {
         Row row = new Row();
         row.ints = new int[] { 1, 1 };
 
@@ -140,7 +140,7 @@ public class TestLessThanPredicate {
     }
 
     @Test
-    public void testLtePredicateLongEquals() {
+    public void testLtPredicateLongEquals() {
         Row row = new Row();
         row.longs = new long[] { 1, 1 };
 
@@ -153,7 +153,7 @@ public class TestLessThanPredicate {
     }
 
     @Test
-    public void testLtePredicateFloatEquals() {
+    public void testLtPredicateFloatEquals() {
         Row row = new Row();
         row.floats = new float[] { 1, 1 };
 
@@ -166,7 +166,7 @@ public class TestLessThanPredicate {
     }
 
     @Test
-    public void testLtePredicateDoubleEquals() {
+    public void testLtPredicateDoubleEquals() {
         Row row = new Row();
         row.doubles = new double[] { 1, 1 };
 
