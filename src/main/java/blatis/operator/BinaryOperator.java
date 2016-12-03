@@ -44,6 +44,9 @@ public abstract class BinaryOperator implements IRowAccessor {
     protected boolean eitherTypeIs(ColumnType type) {
         return lhs.getType() == type || rhs.getType() == type;
     }
+    protected boolean bothTypesAre(ColumnType type) {
+        return lhs.getType() == type && rhs.getType() == type;
+    }
 
     private InnerOperator getInnerOperator(ColumnType lhsType, ColumnType rhsType) {
         if(lhsType == ColumnType.INT) {
