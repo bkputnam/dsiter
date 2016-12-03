@@ -12,8 +12,9 @@ public class ColumnDescriptor {
 		this.rowArrayIndex = rowArrayIndex;
 	}
 
-	public String getName() { return this.name; }
-	public Type getType() { return this.type; }
+	public String getName() { return name; }
+	public Type getType() { return type; }
+	public int getRowArrayIndex() { return rowArrayIndex; }
 
 	public ColumnAccessor getAccessor() {
 		if( this.type == Type.INT ) {
