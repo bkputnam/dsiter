@@ -1,4 +1,6 @@
-package blatis.row;
+package blatis.predicate;
+
+import blatis.row.Row;
 
 /**
  * Created by bkputnam on 12/3/16.
