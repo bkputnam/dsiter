@@ -7,7 +7,7 @@ import blatis.row.Row;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public abstract class NumericBinaryPredicate extends BinaryPredicate {
+public abstract class NumericBinaryPredicate extends AbstractBinaryPredicate {
 
     protected IPredicate innerPredicate;
 
@@ -44,7 +44,7 @@ public abstract class NumericBinaryPredicate extends BinaryPredicate {
     protected abstract boolean compareFloats(float lhs, float rhs);
     protected abstract boolean compareDoubles(double lhs, double rhs);
 
-    private class IntPredicate extends BinaryPredicate {
+    private class IntPredicate extends AbstractBinaryPredicate {
         public IntPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -53,7 +53,7 @@ public abstract class NumericBinaryPredicate extends BinaryPredicate {
         }
     }
 
-    private class LongPredicate extends BinaryPredicate {
+    private class LongPredicate extends AbstractBinaryPredicate {
         public LongPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -62,7 +62,7 @@ public abstract class NumericBinaryPredicate extends BinaryPredicate {
         }
     }
 
-    private class FloatPredicate extends BinaryPredicate {
+    private class FloatPredicate extends AbstractBinaryPredicate {
         public FloatPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -71,7 +71,7 @@ public abstract class NumericBinaryPredicate extends BinaryPredicate {
         }
     }
 
-    private class DoublePredicate extends BinaryPredicate {
+    private class DoublePredicate extends AbstractBinaryPredicate {
         public DoublePredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
