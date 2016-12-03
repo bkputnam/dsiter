@@ -15,3 +15,8 @@ task main(type:JavaExec) {
 
 task wrapper(type: Wrapper) { gradleVersion = '2.12' }
 
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
