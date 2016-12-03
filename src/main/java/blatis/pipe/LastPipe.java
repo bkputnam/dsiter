@@ -1,11 +1,11 @@
-package blatis.operation;
+package blatis.pipe;
 
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.LastIterator;
 
-public class LastOperation extends AbstractOperation {
+public class LastPipe extends AbstractPipe {
 
-	public LastOperation() { }
+	public LastPipe() { }
 
 	public AbstractDatasetIterator applyTo(AbstractDatasetIterator src) {
 		return new LastIterator( src );

@@ -1,4 +1,4 @@
-package blatis.operation;
+package blatis.pipe;
 
 import static org.junit.Assert.*;
 

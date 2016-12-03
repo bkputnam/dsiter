@@ -1,8 +1,8 @@
-package blatis.operation;
+package blatis.pipe;
 
 import blatis.iterator.AbstractDatasetIterator;
 
-public abstract class AbstractOperation {
+public abstract class AbstractPipe {
 	
 	public abstract AbstractDatasetIterator applyTo(AbstractDatasetIterator src);
 

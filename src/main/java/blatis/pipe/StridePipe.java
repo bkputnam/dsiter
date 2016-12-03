@@ -1,13 +1,13 @@
-package blatis.operation;
+package blatis.pipe;
 
 import blatis.iterator.StrideIterator;
 import blatis.iterator.AbstractDatasetIterator;
 
-public class StrideOperation extends AbstractOperation {
+public class StridePipe extends AbstractPipe {
 
 	private int stride;
 
-	public StrideOperation(int stride) {
+	public StridePipe(int stride) {
 		this.stride = stride;
 	}
 

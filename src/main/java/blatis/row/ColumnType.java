@@ -9,5 +9,9 @@ public enum ColumnType {
     FLOAT,
     DOUBLE,
     STRING,
-    BOOLEAN
+    BOOLEAN;
+
+    public boolean isNumeric() {
+        return this == INT || this == LONG || this == FLOAT || this == DOUBLE;
+    }
 }

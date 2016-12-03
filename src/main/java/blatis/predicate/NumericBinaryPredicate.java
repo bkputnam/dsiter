@@ -1,6 +1,5 @@
 package blatis.predicate;
 
-import blatis.row.ColumnDescriptor;
 import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.Row;
@@ -8,7 +7,7 @@ import blatis.row.Row;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public abstract class NumericBinaryPredicate extends AbstractBinaryPredicate {
+public abstract class NumericBinaryPredicate extends BinaryPredicate {
 
     protected IPredicate innerPredicate;
 
@@ -45,7 +44,7 @@ public abstract class NumericBinaryPredicate extends AbstractBinaryPredicate {
     protected abstract boolean compareFloats(float lhs, float rhs);
     protected abstract boolean compareDoubles(double lhs, double rhs);
 
-    private class IntPredicate extends AbstractBinaryPredicate {
+    private class IntPredicate extends BinaryPredicate {
         public IntPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -54,7 +53,7 @@ public abstract class NumericBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class LongPredicate extends AbstractBinaryPredicate {
+    private class LongPredicate extends BinaryPredicate {
         public LongPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -63,7 +62,7 @@ public abstract class NumericBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class FloatPredicate extends AbstractBinaryPredicate {
+    private class FloatPredicate extends BinaryPredicate {
         public FloatPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -72,7 +71,7 @@ public abstract class NumericBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class DoublePredicate extends AbstractBinaryPredicate {
+    private class DoublePredicate extends BinaryPredicate {
         public DoublePredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override

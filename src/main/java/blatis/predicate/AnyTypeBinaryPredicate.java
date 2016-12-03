@@ -1,6 +1,5 @@
 package blatis.predicate;
 
-import blatis.row.ColumnDescriptor;
 import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.Row;
@@ -8,7 +7,7 @@ import blatis.row.Row;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public abstract class AnyTypeBinaryPredicate extends AbstractBinaryPredicate {
+public abstract class AnyTypeBinaryPredicate extends BinaryPredicate {
 
     protected IPredicate innerPredicate;
 
@@ -49,7 +48,7 @@ public abstract class AnyTypeBinaryPredicate extends AbstractBinaryPredicate {
     protected abstract boolean compareStrings(String lhs, String rhs);
     protected abstract boolean compareBools(boolean lhs, boolean rhs);
 
-    private class IntPredicate extends AbstractBinaryPredicate {
+    private class IntPredicate extends BinaryPredicate {
         public IntPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -58,7 +57,7 @@ public abstract class AnyTypeBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class LongPredicate extends AbstractBinaryPredicate {
+    private class LongPredicate extends BinaryPredicate {
         public LongPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -67,7 +66,7 @@ public abstract class AnyTypeBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class FloatPredicate extends AbstractBinaryPredicate {
+    private class FloatPredicate extends BinaryPredicate {
         public FloatPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -76,7 +75,7 @@ public abstract class AnyTypeBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class DoublePredicate extends AbstractBinaryPredicate {
+    private class DoublePredicate extends BinaryPredicate {
         public DoublePredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -85,7 +84,7 @@ public abstract class AnyTypeBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class StringPredicate extends AbstractBinaryPredicate {
+    private class StringPredicate extends BinaryPredicate {
         public StringPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
@@ -94,7 +93,7 @@ public abstract class AnyTypeBinaryPredicate extends AbstractBinaryPredicate {
         }
     }
 
-    private class BoolPredicate extends AbstractBinaryPredicate {
+    private class BoolPredicate extends BinaryPredicate {
         public BoolPredicate(IRowAccessor lhs, IRowAccessor rhs) { super(lhs, rhs); }
 
         @Override
