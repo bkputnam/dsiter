@@ -32,11 +32,13 @@ public class StrideOperation extends AbstractOperation {
 		public boolean tryMoveNext() {
 			if( isFirstTime ) {
 				isFirstTime = false;
-				boolean success = this.src.tryMoveNext();
-				if( success ) {
-					currentRow = null;
+				if( src.tryMoveNext() ) {
+					currentRow = src.getCurrentRow();
+					return true;
 				}
-				return success;
+				else {
+					return false;
+				}
 			}
 			else {
 				for( int i=0; i<stride; i++) {
@@ -44,15 +46,12 @@ public class StrideOperation extends AbstractOperation {
 						return false;
 					}
 				}
-				currentRow = null;
+				currentRow = this.src.getCurrentRow().clone();
 				return true;
 			}
 		}
 
 		public Row getCurrentRow() {
-			if( currentRow == null ) {
-				currentRow = this.src.getCurrentRow().clone();
-			}
 			return currentRow;
 		}
 

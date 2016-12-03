@@ -15,19 +15,19 @@ import blatis.iterator.IterUtils;
 public class TestStrideOperation {
 
 	@Test
-	public void testStride3() {
+	public void testStride4() {
 
 		RangeDataset rd = new RangeDataset(10);
 		AbstractDatasetIterator it = rd.getIterator();
 
-		StrideOperation so = new StrideOperation(3);
+		StrideOperation so = new StrideOperation(4);
 		it = so.applyTo(it);
 
 		List<Object> values = IterUtils.getColumn(it, "value");
-		int[] expectedValues = new int[] { 0, 3, 6, 9 };
+		int[] expectedValues = new int[] { 0, 4, 8 };
 
 		for( int i=0; i<values.size(); i++ ) {
-			assertEquals( (int)values.get(i), expectedValues[i] );
+			assertEquals( expectedValues[i], (int)values.get(i) );
 		}
 	}
 
@@ -37,17 +37,17 @@ public class TestStrideOperation {
 		RangeDataset rd = new RangeDataset(10);
 		AbstractDatasetIterator it = rd.getIterator();
 
-		StrideOperation so = new StrideOperation(3);
+		StrideOperation so = new StrideOperation(4);
 		it = so.applyTo(it);
 
 		LastOperation lo = new LastOperation();
 		it = lo.applyTo(it);
 
 		List<Object> values = IterUtils.getColumn(it, "value");
-		int[] expectedValues = new int[] { 9 };
+		int[] expectedValues = new int[] { 8 };
 
 		for( int i=0; i<values.size(); i++ ) {
-			assertEquals( (int)values.get(i), expectedValues[i] );
+			assertEquals( expectedValues[i], (int)values.get(i) );
 		}
 	}
 }
