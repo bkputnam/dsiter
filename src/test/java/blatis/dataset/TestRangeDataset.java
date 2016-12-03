@@ -44,4 +44,17 @@ public class TestRangeDataset {
 		}
 		assertEquals(0, count);
 	}
+
+	@Test
+	public void testShape() {
+
+		RowShape shape = (new RangeDataset(1)).getIterator().getShape();
+
+		assertEquals(1, shape.getNumInts());
+		assertEquals(0, shape.getNumLongs());
+		assertEquals(0, shape.getNumFloats());
+		assertEquals(0, shape.getNumDoubles());
+		assertEquals(0, shape.getNumStrings());
+		assertEquals(0, shape.getNumBools());
+	}
 }
