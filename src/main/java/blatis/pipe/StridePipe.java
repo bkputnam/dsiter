@@ -3,7 +3,7 @@ package blatis.pipe;
 import blatis.iterator.StrideIterator;
 import blatis.iterator.AbstractDatasetIterator;
 
-public class StridePipe extends AbstractPipe {
+public class StridePipe implements IPipe {
 
 	private int stride;
 

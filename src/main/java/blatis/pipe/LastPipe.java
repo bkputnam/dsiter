@@ -3,7 +3,7 @@ package blatis.pipe;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.LastIterator;
 
-public class LastPipe extends AbstractPipe {
+public class LastPipe implements IPipe {
 
 	public LastPipe() { }
 

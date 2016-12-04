@@ -1,5 +1,6 @@
 package blatis.iterator;
 
+import blatis.pipe.IPipe;
 import blatis.row.ColumnType;
 import blatis.row.Row;
 import blatis.row.RowShape;
@@ -9,6 +10,10 @@ public abstract class AbstractDatasetIterator {
 	public abstract boolean tryMoveNext();
 	public abstract Row getCurrentRow();
 	public abstract ColumnDescriptor[] getColumnDescriptors();
+
+	public AbstractDatasetIterator pipe(IPipe pipe) {
+		return pipe.applyTo(this);
+	}
 
 	public ColumnDescriptor getColumnDescriptor(String name) {
 		ColumnDescriptor[] cds = this.getColumnDescriptors();
