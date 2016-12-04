@@ -2,16 +2,13 @@ package blatis.pipe;
 
 import static org.junit.Assert.*;
 
+import blatis.iterator.*;
 import org.junit.Test;
 
 import blatis.dataset.RangeDataset;
 import blatis.row.ColumnDescriptor;
 import blatis.row.ColumnAccessor;
 import blatis.row.Row;
-import blatis.iterator.AbstractDatasetIterator;
-import blatis.iterator.StrideIterator;
-import blatis.iterator.RenameIterator;
-import blatis.iterator.ZipIterator;
 
 public class TestZipIterator {
 
@@ -62,5 +59,39 @@ public class TestZipIterator {
 		}
 
 		assertEquals(5, count);
+	}
+
+	@Test
+	public void testMultiZip() {
+
+		Integer[] vals1 = new Integer[] { 1, 2, 3, 4, 5, };
+		Float[] vals2 = new Float[] { 3.142f, 2.718f, 0f, 1f, -1f };
+		Boolean[] vals3 = new Boolean[] { true, true, false, false, false };
+		String[] vals4 = new String[] { "hello", "world", "foo", "bar", "baz" };
+
+		AbstractDatasetIterator it1 = new RenameIterator(new ArrayIterator<Integer>(vals1), "value", "a");
+		AbstractDatasetIterator it2 = new RenameIterator(new ArrayIterator<Float>(vals2), "value", "b");
+		AbstractDatasetIterator it3 = new RenameIterator(new ArrayIterator<Boolean>(vals3), "value", "c");
+		AbstractDatasetIterator it4 = new RenameIterator(new ArrayIterator<String>(vals4), "value", "d");
+
+		ZipIterator it = new ZipIterator(it1, it2, it3, it4);
+
+		ColumnDescriptor[] cds = it.getColumnDescriptors();
+		ColumnAccessor ca1 = cds[0].getAccessor();
+		ColumnAccessor ca2 = cds[1].getAccessor();
+		ColumnAccessor ca3 = cds[2].getAccessor();
+		ColumnAccessor ca4 = cds[3].getAccessor();
+
+		int index = 0;
+		while(it.tryMoveNext()) {
+			Row row = it.getCurrentRow();
+
+			assertEquals(vals1[index], ca1.getValueFromRow(row));
+			assertEquals(vals2[index], ca2.getValueFromRow(row));
+			assertEquals(vals3[index], ca3.getValueFromRow(row));
+			assertEquals(vals4[index], ca4.getValueFromRow(row));
+
+			index++;
+		}
 	}
 }

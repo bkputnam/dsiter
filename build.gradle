@@ -17,6 +17,10 @@ task main(type:JavaExec) {
 
 task wrapper(type: Wrapper) { gradleVersion = '2.12' }
 
+tasks.withType(JavaCompile){
+    options.compilerArgs += '-Xlint:unchecked'
+}
+
 test {
     testLogging {
         events "passed", "skipped", "failed"

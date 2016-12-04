@@ -8,6 +8,10 @@ public class RowShape {
 	private int numStrings;
 	private int numBools;
 
+	public RowShape() {
+		this(0, 0, 0, 0, 0, 0);
+	}
+
 	public RowShape(int numInts, int numLongs, int numFloats, int numDoubles, int numStrings, int numBools) {
 		this.numInts = numInts;
 		this.numLongs = numLongs;
@@ -46,5 +50,68 @@ public class RowShape {
 		else {
 			throw new Error("Programmer error: unrecognized ColumnType: " + type);
 		}
+	}
+
+	public void setNum(ColumnType type, int num) {
+		if(type == ColumnType.INT) {
+			numInts = num;
+		}
+		else if(type == ColumnType.LONG) {
+			numLongs = num;
+		}
+		else if(type == ColumnType.FLOAT) {
+			numFloats = num;
+		}
+		else if(type == ColumnType.DOUBLE) {
+			numDoubles = num;
+		}
+		else if(type == ColumnType.STRING) {
+			numStrings = num;
+		}
+		else if(type == ColumnType.BOOLEAN) {
+			numBools = num;
+		}
+		else {
+			throw new Error("Programmer error: unrecognized ColumnType: " + type);
+		}
+	}
+
+	public void incrNum(ColumnType type) {
+		if(type == ColumnType.INT) {
+			numInts++;
+		}
+		else if(type == ColumnType.LONG) {
+			numLongs++;
+		}
+		else if(type == ColumnType.FLOAT) {
+			numFloats++;
+		}
+		else if(type == ColumnType.DOUBLE) {
+			numDoubles++;
+		}
+		else if(type == ColumnType.STRING) {
+			numStrings++;
+		}
+		else if(type == ColumnType.BOOLEAN) {
+			numBools++;
+		}
+		else {
+			throw new Error("Programmer error: unrecognized ColumnType: " + type);
+		}
+	}
+
+	public static RowShape add(RowShape shape1, RowShape shape2) {
+		return new RowShape(
+			shape1.numInts + shape2.numInts,
+			shape1.numLongs + shape2.numLongs,
+			shape1.numFloats + shape2.numFloats,
+			shape1.numDoubles + shape2.numDoubles,
+			shape1.numStrings + shape2.numStrings,
+			shape1.numBools + shape2.numBools
+		);
+	}
+
+	public RowShape add(RowShape other) {
+		return RowShape.add(this, other);
 	}
 }

@@ -1,101 +1,93 @@
 package blatis.iterator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
-import blatis.row.ColumnType;
-import blatis.row.Row;
-import blatis.row.RowShape;
-import blatis.row.ColumnDescriptor;
+import blatis.row.*;
 
 public class ZipIterator extends AbstractDatasetIterator {
 
-	private AbstractDatasetIterator leftSrc;
-	private AbstractDatasetIterator rightSrc;
+
+	private AbstractDatasetIterator[] srcIters;
+	private int[] srcIterColumnCounts;
 
 	private ColumnDescriptor[] combinedColumnDescriptors;
+	private ColumnMutator[] mutators;
+	private ColumnAccessor[] accessors;
 	private Row combinedRow;
-	private RowShape leftShape;
-	private RowShape rightShape;
 
-	public ZipIterator(AbstractDatasetIterator leftSrc, AbstractDatasetIterator rightSrc) {
-		this.leftSrc = leftSrc;
-		this.rightSrc = rightSrc;
+	public ZipIterator(AbstractDatasetIterator... srcIters) {
+		this.srcIters = srcIters;
 
-		ColumnDescriptor[] leftCds = leftSrc.getColumnDescriptors();
-		ColumnDescriptor[] rightCds = rightSrc.getColumnDescriptors();
-		leftShape = leftSrc.getShape();
-		rightShape = rightSrc.getShape();
-		combinedColumnDescriptors = new ColumnDescriptor[ leftCds.length + rightCds.length ];
+		RowShape shape = new RowShape();
+		List<ColumnMutator> mutatorList = new ArrayList<ColumnMutator>();
+		List<ColumnAccessor> accessorList = new ArrayList<ColumnAccessor>();
+		List<ColumnDescriptor> columnDescriptorList = new ArrayList<ColumnDescriptor>();
+		Set<String> names = new HashSet<String>();
+		srcIterColumnCounts = new int[srcIters.length];
 
-		Set<String> leftColNames = new HashSet<String>();
-		for(int i=0; i<leftCds.length; i++) {
-			leftColNames.add(leftCds[i].getName());
-			combinedColumnDescriptors[i] = leftCds[i];
-		}
+		for(int i=0; i<srcIters.length; i++) {
+			AbstractDatasetIterator it = srcIters[i];
+			ColumnDescriptor[] itCds = it.getColumnDescriptors();
+			srcIterColumnCounts[i] = itCds.length;
 
-		for(int i=0; i<rightCds.length; i++) {
-			ColumnDescriptor rcd = rightCds[i];
-			String rightName = rcd.getName();
-			ColumnType rightType = rcd.getType();
+			for(ColumnDescriptor cd : itCds) {
+				ColumnType type = cd.getType();
+				int rowArrayIndex = shape.getNum(type);
 
-			if(leftColNames.contains(rightName)) {
-				throw new RuntimeException("Programmer error: cannot zip two iterators with a common column name (" + rightName + ")");
+				columnDescriptorList.add(new ColumnDescriptor(
+					cd.getName(),
+					cd.getType(),
+					rowArrayIndex
+				));
+				accessorList.add(cd.getAccessor());
+
+				String name = cd.getName();
+				if(names.contains(name)) {
+					throw new RuntimeException("Cannot zip iterators with a common column name (" + name + ")");
+				}
+				names.add(name);
+
+				mutatorList.add(ColumnMutator.create(
+					type,
+					rowArrayIndex
+				));
+				shape.incrNum(type);
 			}
-
-			combinedColumnDescriptors[i + leftCds.length] = new ColumnDescriptor(
-				rightName,
-				rightType,
-				leftShape.getNum(rightType) + rcd.getRowArrayIndex()
-			);
 		}
 
-		combinedRow = new Row(this.getShape());
+		mutators = mutatorList.toArray(new ColumnMutator[0]);
+		accessors = accessorList.toArray(new ColumnAccessor[0]);
+		combinedColumnDescriptors = columnDescriptorList.toArray(new ColumnDescriptor[0]);
+		combinedRow = new Row(shape);
 	}
 
 	public boolean tryMoveNext() {
-		return leftSrc.tryMoveNext() && rightSrc.tryMoveNext();
+		for(int i=0; i<srcIters.length; i++) {
+			if(!srcIters[i].tryMoveNext()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public Row getCurrentRow() {
-		Row leftRow = leftSrc.getCurrentRow();
-		for(int i=0; i<leftShape.getNumInts(); i++) {
-			combinedRow.ints[i] = leftRow.ints[i];
-		}
-		for(int i=0; i<leftShape.getNumLongs(); i++) {
-			combinedRow.longs[i] = leftRow.longs[i];
-		}
-		for(int i=0; i<leftShape.getNumFloats(); i++) {
-			combinedRow.floats[i] = leftRow.floats[i];
-		}
-		for(int i=0; i<leftShape.getNumDoubles(); i++) {
-			combinedRow.doubles[i] = leftRow.doubles[i];
-		}
-		for(int i=0; i<leftShape.getNumStrings(); i++) {
-			combinedRow.strings[i] = leftRow.strings[i];
-		}
-		for(int i=0; i<leftShape.getNumBools(); i++) {
-			combinedRow.bools[i] = leftRow.bools[i];
-		}
+		int combinedIndex = 0;
+		for(int iterIndex=0; iterIndex<srcIters.length; iterIndex++) {
+			AbstractDatasetIterator it = srcIters[iterIndex];
+			int itColCount = srcIterColumnCounts[iterIndex];
+			Row itRow = it.getCurrentRow();
 
-		Row rightRow = rightSrc.getCurrentRow();
-		for(int i=0; i<rightShape.getNumInts(); i++) {
-			combinedRow.ints[i + leftShape.getNumInts()] = rightRow.ints[i];
-		}
-		for(int i=0; i<rightShape.getNumLongs(); i++) {
-			combinedRow.longs[i + leftShape.getNumLongs()] = rightRow.longs[i];
-		}
-		for(int i=0; i<rightShape.getNumFloats(); i++) {
-			combinedRow.floats[i + leftShape.getNumFloats()] = rightRow.floats[i];
-		}
-		for(int i=0; i<rightShape.getNumDoubles(); i++) {
-			combinedRow.doubles[i + leftShape.getNumDoubles()] = rightRow.doubles[i];
-		}
-		for(int i=0; i<rightShape.getNumStrings(); i++) {
-			combinedRow.strings[i + leftShape.getNumStrings()] = rightRow.strings[i];
-		}
-		for(int i=0; i<rightShape.getNumBools(); i++) {
-			combinedRow.bools[i + leftShape.getNumBools()] = rightRow.bools[i];
+			for(int iterColIndex=0; iterColIndex<itColCount; iterColIndex++) {
+				Object o = accessors[combinedIndex].getValueFromRow(itRow);
+				mutators[combinedIndex].setValueInRow(
+					combinedRow,
+					o
+				);
+				combinedIndex++;
+			}
 		}
 
 		return combinedRow;
