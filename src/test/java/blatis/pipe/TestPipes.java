@@ -1,15 +1,16 @@
 package blatis.pipe;
 
 import blatis.iterator.AbstractDatasetIterator;
+import blatis.iterator.ArrayIterator;
 import blatis.iterator.IterUtils;
 import blatis.iterator.RangeIterator;
 import blatis.operator.ModuloOperator;
 import blatis.predicate.EqualsPredicate;
 import blatis.predicate.IPredicate;
-import blatis.row.ColumnAccessor;
-import blatis.row.ColumnType;
-import blatis.row.ConstantAccessor;
+import blatis.row.*;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by bkputnam on 12/3/16.
@@ -64,5 +65,38 @@ public class TestPipes {
                 .pipe(new RenamePipe("value", "a"));
 
         IterUtils.assertValues(it, "a", new Integer[] {0, 1, 2, 3, 4});
+    }
+
+    @Test
+    public void testZipPipe() {
+
+        AbstractDatasetIterator it = new RangeIterator(5)
+            .pipe(
+                new ZipPipe(
+                    new ArrayIterator<Integer>(1, 3, 5, 7, 9)
+                        .pipe(new RenamePipe("value", "a"))
+                )
+            );
+
+        ColumnAccessor ca1 = it.getColumnDescriptor("value").getAccessor();
+        ColumnAccessor ca2 = it.getColumnDescriptor("a").getAccessor();
+
+        int[][] expected = new int[][] {
+            {0, 1},
+            {1, 3},
+            {2, 5},
+            {3, 7},
+            {4, 9}
+        };
+
+        int count = 0;
+        while(it.tryMoveNext()) {
+            Row row = it.getCurrentRow();
+
+            assertEquals(expected[count][0], ca1.getValueFromRow(row));
+            assertEquals(expected[count][1], ca2.getValueFromRow(row));
+            count++;
+        }
+        assertEquals(5, count);
     }
 }
