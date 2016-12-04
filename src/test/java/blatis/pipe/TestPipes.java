@@ -56,4 +56,13 @@ public class TestPipes {
                 .pipe(new FirstPipe());
         IterUtils.assertValues(it, "value", new Integer[] {5});
     }
+
+    @Test
+    public void testRenamePipe() {
+
+        AbstractDatasetIterator it = new RangeIterator(5)
+                .pipe(new RenamePipe("value", "a"));
+
+        IterUtils.assertValues(it, "a", new Integer[] {0, 1, 2, 3, 4});
+    }
 }
