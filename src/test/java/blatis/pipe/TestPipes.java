@@ -36,15 +36,24 @@ public class TestPipes {
     public void testFilterPipe() {
 
         IPredicate isEvenPredicate = new EqualsPredicate(
-            new ModuloOperator(
-                ColumnAccessor.create(ColumnType.INT, 0),
-                new ConstantAccessor(2)
-            ),
-            new ConstantAccessor(0)
+                new ModuloOperator(
+                        ColumnAccessor.create(ColumnType.INT, 0),
+                        new ConstantAccessor(2)
+                ),
+                new ConstantAccessor(0)
         );
 
         AbstractDatasetIterator it = new RangeIterator(10)
                 .pipe(new FilterPipe(isEvenPredicate));
         IterUtils.assertValues(it, "value", new Integer[] {0, 2, 4, 6, 8});
+    }
+
+    @Test
+    public void testFirstAndSkipPipes() {
+
+        AbstractDatasetIterator it = new RangeIterator(10)
+                .pipe(new SkipPipe(5))
+                .pipe(new FirstPipe());
+        IterUtils.assertValues(it, "value", new Integer[] {5});
     }
 }
