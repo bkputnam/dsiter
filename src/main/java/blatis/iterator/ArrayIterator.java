@@ -34,7 +34,7 @@ public class ArrayIterator<T> extends AbstractDatasetIterator {
                     sample.getClass().getSimpleName() + ")"
                 );
             }
-            mutator = ColumnMutator.create(type, 0);
+            mutator = new ColumnMutator(type, 0);
             RowShape shape = new RowShape();
             shape.setNum(type, 1);
             row = new Row(shape);

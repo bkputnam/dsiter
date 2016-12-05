@@ -3,83 +3,168 @@ package blatis.row;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public abstract class ColumnMutator implements IRowMutator {
+public class ColumnMutator implements IRowMutator {
+
     protected int index;
+    protected IRowMutator innerMutator;
 
-    protected ColumnMutator(int index) { this.index = index; }
 
-    public abstract void setValueInRow(Row row, Object value);
-    public abstract ColumnType getType();
 
-    public static ColumnMutator create(ColumnType type, int rowArrayIndex) {
-        if( type == ColumnType.INT ) {
-            return new ColumnMutator.IntMutator( rowArrayIndex );
-        }
-        else if( type == ColumnType.LONG ) {
-            return new ColumnMutator.LongMutator( rowArrayIndex );
-        }
-        else if( type == ColumnType.FLOAT ) {
-            return new ColumnMutator.FloatMutator( rowArrayIndex );
-        }
-        else if( type == ColumnType.DOUBLE ) {
-            return new ColumnMutator.DoubleMutator( rowArrayIndex );
-        }
-        else if( type == ColumnType.STRING ) {
-            return new ColumnMutator.StringMutator( rowArrayIndex );
-        }
-        else if( type == ColumnType.BOOLEAN ) {
-            return new ColumnMutator.BoolMutator( rowArrayIndex );
-        }
-        else {
-            throw new Error("Programmer Error: unrecognized Type: " + type);
-        }
+    public ColumnMutator(ColumnType type, int index) {
+
+		if(type == ColumnType.INT) {
+			innerMutator = new INT(index);
+		}
+		else if(type == ColumnType.LONG) {
+			innerMutator = new LONG(index);
+		}
+		else if(type == ColumnType.FLOAT) {
+			innerMutator = new FLOAT(index);
+		}
+		else if(type == ColumnType.DOUBLE) {
+			innerMutator = new DOUBLE(index);
+		}
+		else if(type == ColumnType.STRING) {
+			innerMutator = new STRING(index);
+		}
+		else if(type == ColumnType.BOOLEAN) {
+			innerMutator = new BOOLEAN(index);
+		}
+		else {
+			throw new Error("This should be impossible");
+		}
     }
 
-    public static class IntMutator extends ColumnMutator {
-        public IntMutator(int index) { super(index); }
+    public void setValueInRow(Row row, Object value) {
+        innerMutator.setValueInRow(row, value);
+    }
+
+    public ColumnType getType() {
+        return innerMutator.getType();
+    }
+
+
+    public INT asIntMutator() { return (INT)innerMutator; }
+    public LONG asLongMutator() { return (LONG)innerMutator; }
+    public FLOAT asFloatMutator() { return (FLOAT)innerMutator; }
+    public DOUBLE asDoubleMutator() { return (DOUBLE)innerMutator; }
+    public STRING asStringMutator() { return (STRING)innerMutator; }
+    public BOOLEAN asBoolMutator() { return (BOOLEAN)innerMutator; }
+
+
+    public static class INT implements IRowMutator {
+        private int index;
+
+        public INT(int index) {
+            this.index = index;
+        }
+
+        public void setIntInRow(Row row, int val) {
+            row.ints[index] = val;
+        }
+
+        @Override
+        public void setValueInRow(Row row, Object value) {
+            setIntInRow(row, (int)value);
+        }
 
         public ColumnType getType() { return ColumnType.INT; }
-
-        public void setValueInRow(Row row, Object value) { row.ints[this.index] = (int)value; }
     }
 
-    public static class LongMutator extends ColumnMutator {
-        public LongMutator(int index) { super(index); }
+    public static class LONG implements IRowMutator {
+        private int index;
+
+        public LONG(int index) {
+            this.index = index;
+        }
+
+        public void setLongInRow(Row row, long val) {
+            row.longs[index] = val;
+        }
+
+        @Override
+        public void setValueInRow(Row row, Object value) {
+            setLongInRow(row, (long)value);
+        }
 
         public ColumnType getType() { return ColumnType.LONG; }
-
-        public void setValueInRow(Row row, Object value) { row.longs[this.index] = (long)value; }
     }
 
-    public static class FloatMutator extends ColumnMutator {
-        public FloatMutator(int index) { super(index); }
+    public static class FLOAT implements IRowMutator {
+        private int index;
+
+        public FLOAT(int index) {
+            this.index = index;
+        }
+
+        public void setFloatInRow(Row row, float val) {
+            row.floats[index] = val;
+        }
+
+        @Override
+        public void setValueInRow(Row row, Object value) {
+            setFloatInRow(row, (float)value);
+        }
 
         public ColumnType getType() { return ColumnType.FLOAT; }
-
-        public void setValueInRow(Row row, Object value) { row.floats[this.index] = (float)value; }
     }
 
-    public static class DoubleMutator extends ColumnMutator {
-        public DoubleMutator(int index) { super(index); }
+    public static class DOUBLE implements IRowMutator {
+        private int index;
+
+        public DOUBLE(int index) {
+            this.index = index;
+        }
+
+        public void setDoubleInRow(Row row, double val) {
+            row.doubles[index] = val;
+        }
+
+        @Override
+        public void setValueInRow(Row row, Object value) {
+            setDoubleInRow(row, (double)value);
+        }
 
         public ColumnType getType() { return ColumnType.DOUBLE; }
-
-        public void setValueInRow(Row row, Object value) { row.doubles[this.index] = (double)value; }
     }
 
-    public static class StringMutator extends ColumnMutator {
-        public StringMutator(int index) { super(index); }
+    public static class STRING implements IRowMutator {
+        private int index;
+
+        public STRING(int index) {
+            this.index = index;
+        }
+
+        public void setStringInRow(Row row, String val) {
+            row.strings[index] = val;
+        }
+
+        @Override
+        public void setValueInRow(Row row, Object value) {
+            setStringInRow(row, (String)value);
+        }
 
         public ColumnType getType() { return ColumnType.STRING; }
-
-        public void setValueInRow(Row row, Object value) { row.strings[this.index] = (String)value; }
     }
 
-    public static class BoolMutator extends ColumnMutator {
-        public BoolMutator(int index) { super(index); }
+    public static class BOOLEAN implements IRowMutator {
+        private int index;
+
+        public BOOLEAN(int index) {
+            this.index = index;
+        }
+
+        public void setBoolInRow(Row row, boolean val) {
+            row.bools[index] = val;
+        }
+
+        @Override
+        public void setValueInRow(Row row, Object value) {
+            setBoolInRow(row, (boolean)value);
+        }
 
         public ColumnType getType() { return ColumnType.BOOLEAN; }
-
-        public void setValueInRow(Row row, Object value) { row.bools[this.index] = (boolean)value; }
     }
+
+
 }

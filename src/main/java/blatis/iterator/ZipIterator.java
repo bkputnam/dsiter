@@ -50,7 +50,7 @@ public class ZipIterator extends AbstractDatasetIterator {
 				}
 				names.add(name);
 
-				mutatorList.add(ColumnMutator.create(
+				mutatorList.add(new ColumnMutator(
 					type,
 					rowArrayIndex
 				));
