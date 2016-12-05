@@ -38,7 +38,7 @@ public class TestPipes {
 
         IPredicate isEvenPredicate = new EqualsPredicate(
                 new ModuloOperator(
-                        ColumnAccessor.create(ColumnType.INT, 0),
+                        new ColumnAccessor(ColumnType.INT, 0),
                         new ConstantAccessor(2)
                 ),
                 new ConstantAccessor(0)

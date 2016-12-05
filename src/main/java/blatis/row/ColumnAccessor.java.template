@@ -1,0 +1,36 @@
+package blatis.row;
+
+${Disclaimer}
+
+public class ColumnAccessor extends TypedRowAccessor {
+
+    private int index;
+
+	public ColumnAccessor(ColumnType type, int index) {
+	    this.index = index;
+	    super.type = type;
+		super.innerAccessor = getInnerAccessor();
+	}
+
+	private IRowAccessor getInnerAccessor() {
+		IRowAccessor result =
+<% ColumnTypes.each{ type -> %>			type == ColumnType.${type.type} ? new ${type.type}() :
+<% } %>			null;
+
+		if(result == null) {
+			throw new IllegalArgumentException("Programmer error: unrecognized ColumnType: " + type);
+		}
+		return result;
+	}
+
+<% ColumnTypes.each{ type -> %>
+	private class ${type.type} extends TypedRowAccessor.${type.type} {
+		@Override
+		public ${type.nativeType} get${type.capitalized}FromRow(Row row) {
+			return row.${type.rowArray}[index];
+		}
+	}
+<% } %>
+
+}
+

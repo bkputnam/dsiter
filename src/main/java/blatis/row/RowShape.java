@@ -1,6 +1,7 @@
 package blatis.row;
 
 public class RowShape {
+
 	private int numInts;
 	private int numLongs;
 	private int numFloats;
@@ -13,6 +14,7 @@ public class RowShape {
 	}
 
 	public RowShape(int numInts, int numLongs, int numFloats, int numDoubles, int numStrings, int numBools) {
+
 		this.numInts = numInts;
 		this.numLongs = numLongs;
 		this.numFloats = numFloats;
@@ -21,14 +23,18 @@ public class RowShape {
 		this.numBools = numBools;
 	}
 
-	public int getNumInts() { return numInts; }
-	public int getNumLongs() { return numLongs; }
-	public int getNumFloats() { return numFloats; }
-	public int getNumDoubles() { return numDoubles; }
-	public int getNumStrings() { return numStrings; }
-	public int getNumBools() { return numBools; }
+
+		public int getNumInts() { return numInts; }
+		public int getNumLongs() { return numLongs; }
+		public int getNumFloats() { return numFloats; }
+		public int getNumDoubles() { return numDoubles; }
+		public int getNumStrings() { return numStrings; }
+		public int getNumBools() { return numBools; }
+
+
 
 	public int getNum(ColumnType type) {
+
 		if(type == ColumnType.INT) {
 			return getNumInts();
 		}
@@ -48,11 +54,12 @@ public class RowShape {
 			return getNumBools();
 		}
 		else {
-			throw new Error("Programmer error: unrecognized ColumnType: " + type);
+			throw new Error("This should be impossible");
 		}
 	}
 
 	public void setNum(ColumnType type, int num) {
+
 		if(type == ColumnType.INT) {
 			numInts = num;
 		}
@@ -72,11 +79,12 @@ public class RowShape {
 			numBools = num;
 		}
 		else {
-			throw new Error("Programmer error: unrecognized ColumnType: " + type);
+			throw new Error("This should be impossible");
 		}
 	}
 
 	public void incrNum(ColumnType type) {
+
 		if(type == ColumnType.INT) {
 			numInts++;
 		}
@@ -96,12 +104,13 @@ public class RowShape {
 			numBools++;
 		}
 		else {
-			throw new Error("Programmer error: unrecognized ColumnType: " + type);
+			throw new Error("This should be impossible");
 		}
 	}
 
 	public static RowShape add(RowShape shape1, RowShape shape2) {
 		return new RowShape(
+
 			shape1.numInts + shape2.numInts,
 			shape1.numLongs + shape2.numLongs,
 			shape1.numFloats + shape2.numFloats,

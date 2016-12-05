@@ -17,7 +17,7 @@ public class ColumnDescriptor {
 	public int getRowArrayIndex() { return rowArrayIndex; }
 
 	public ColumnAccessor getAccessor() {
-		return ColumnAccessor.create(type, rowArrayIndex);
+		return new ColumnAccessor(type, rowArrayIndex);
 	}
 
 }

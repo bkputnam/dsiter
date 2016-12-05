@@ -17,8 +17,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.INT;
         Row row = new Row(1, 1);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -30,8 +30,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.INT;
         Row row = new Row(1, 2);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -43,8 +43,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.LONG;
         Row row = new Row(1L, 1L);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -56,8 +56,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.LONG;
         Row row = new Row(1L, 2L);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -69,8 +69,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.FLOAT;
         Row row = new Row(1F, 1F);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -82,8 +82,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.FLOAT;
         Row row = new Row(1F, 2F);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -95,8 +95,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.DOUBLE;
         Row row = new Row(1D, 1D);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -108,8 +108,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.DOUBLE;
         Row row = new Row(1D, 2D);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -121,8 +121,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.STRING;
         Row row = new Row("foo", "foo");
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -134,8 +134,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.STRING;
         Row row = new Row("foo", "bar");
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -147,8 +147,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.BOOLEAN;
         Row row = new Row(true, true);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 
@@ -160,8 +160,8 @@ public class TestEqualsPredicate {
         ColumnType type = ColumnType.BOOLEAN;
         Row row = new Row(true, false);
 
-        ColumnAccessor ca1 = ColumnAccessor.create(type, 0);
-        ColumnAccessor ca2 = ColumnAccessor.create(type, 1);
+        ColumnAccessor ca1 = new ColumnAccessor(type, 0);
+        ColumnAccessor ca2 = new ColumnAccessor(type, 1);
 
         EqualsPredicate ep = new EqualsPredicate(ca1, ca2);
 

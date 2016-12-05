@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 apply plugin: 'java'
 
 repositories {
@@ -10,12 +12,21 @@ dependencies {
 
 sourceCompatibility = 1.8
 
-task main(type:JavaExec) {
-	main = 'blatis.HelloWorld'
-	classpath = sourceSets.main.runtimeClasspath
+task wrapper(type: Wrapper) { gradleVersion = '2.12' }
+
+task applyTemplates(type: Copy) {
+    def templateConfigFile = "src/build/resources/templateConfig.json"
+    inputs.file templateConfigFile
+
+    from "src/main/java"
+    into "src/main/java"
+    include "**/*.java.template"
+
+    rename { filename -> filename - ~/\.template$/ }
+    expand new JsonSlurper().parse(new File(templateConfigFile))
 }
 
-task wrapper(type: Wrapper) { gradleVersion = '2.12' }
+compileJava.dependsOn applyTemplates
 
 tasks.withType(JavaCompile){
     options.compilerArgs += '-Xlint:unchecked'
@@ -25,7 +36,7 @@ test {
     testLogging {
         afterSuite { desc, result ->
             if (!desc.parent) { // will match the outermost suite
-                println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                println "\nResults: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
             }
         }
     }

@@ -1,111 +1,80 @@
 package blatis.row;
 
-public abstract class ColumnAccessor implements IRowAccessor {
+///////////////////////////////////////////
+//	DO NOT EDIT!!!
+//
+//	This is generated code. Edit the template instead.
+///////////////////////////////////////////
 
-	protected int index;
+public class ColumnAccessor extends TypedRowAccessor {
 
-	protected ColumnAccessor(int index) {
-		this.index = index;
+    private int index;
+
+	public ColumnAccessor(ColumnType type, int index) {
+	    this.index = index;
+	    super.type = type;
+		super.innerAccessor = getInnerAccessor();
 	}
 
-	public abstract Object getValueFromRow(Row row);
-	public abstract ColumnType getType();
+	private IRowAccessor getInnerAccessor() {
+		IRowAccessor result =
+			type == ColumnType.INT ? new INT() :
+			type == ColumnType.LONG ? new LONG() :
+			type == ColumnType.FLOAT ? new FLOAT() :
+			type == ColumnType.DOUBLE ? new DOUBLE() :
+			type == ColumnType.STRING ? new STRING() :
+			type == ColumnType.BOOLEAN ? new BOOLEAN() :
+			null;
 
-	public static ColumnAccessor create(ColumnType type, int rowArrayIndex) {
-		if( type == ColumnType.INT ) {
-			return new ColumnAccessor.IntAccessor( rowArrayIndex );
+		if(result == null) {
+			throw new IllegalArgumentException("Programmer error: unrecognized ColumnType: " + type);
 		}
-		else if( type == ColumnType.LONG ) {
-			return new ColumnAccessor.LongAccessor( rowArrayIndex );
-		}
-		else if( type == ColumnType.FLOAT ) {
-			return new ColumnAccessor.FloatAccessor( rowArrayIndex );
-		}
-		else if( type == ColumnType.DOUBLE ) {
-			return new ColumnAccessor.DoubleAccessor( rowArrayIndex );
-		}
-		else if( type == ColumnType.STRING ) {
-			return new ColumnAccessor.StringAccessor( rowArrayIndex );
-		}
-		else if( type == ColumnType.BOOLEAN ) {
-			return new ColumnAccessor.BoolAccessor( rowArrayIndex );
-		}
-		else {
-			throw new Error("Programmer Error: unrecognized Type: " + type);
-		}
+		return result;
 	}
 
-	public static class IntAccessor extends ColumnAccessor {
-		public IntAccessor(int index) {
-			super(index);
-		}
 
-		public ColumnType getType() { return ColumnType.INT; }
-
-		public Object getValueFromRow(Row row) {
-			return row.ints[this.index];
+	private class INT extends TypedRowAccessor.INT {
+		@Override
+		public int getIntFromRow(Row row) {
+			return row.ints[index];
 		}
 	}
 
-	public static class LongAccessor extends ColumnAccessor {
-		public LongAccessor(int index) {
-			super(index);
-		}
-
-		public ColumnType getType() { return ColumnType.LONG; }
-
-		public Object getValueFromRow(Row row) {
-			return row.longs[this.index];
+	private class LONG extends TypedRowAccessor.LONG {
+		@Override
+		public long getLongFromRow(Row row) {
+			return row.longs[index];
 		}
 	}
 
-	public static class FloatAccessor extends ColumnAccessor {
-		public FloatAccessor(int index) {
-			super(index);
-		}
-
-		public ColumnType getType() { return ColumnType.FLOAT; }
-
-		public Object getValueFromRow(Row row) {
-			return row.floats[this.index];
+	private class FLOAT extends TypedRowAccessor.FLOAT {
+		@Override
+		public float getFloatFromRow(Row row) {
+			return row.floats[index];
 		}
 	}
 
-	public static class DoubleAccessor extends ColumnAccessor {
-		public DoubleAccessor(int index) {
-			super(index);
-		}
-
-		public ColumnType getType() { return ColumnType.DOUBLE; }
-
-		public Object getValueFromRow(Row row) {
-			return row.doubles[this.index];
+	private class DOUBLE extends TypedRowAccessor.DOUBLE {
+		@Override
+		public double getDoubleFromRow(Row row) {
+			return row.doubles[index];
 		}
 	}
 
-	public static class StringAccessor extends ColumnAccessor {
-		public StringAccessor(int index) {
-			super(index);
-		}
-
-		public ColumnType getType() { return ColumnType.STRING; }
-
-		public Object getValueFromRow(Row row) {
-			return row.strings[this.index];
+	private class STRING extends TypedRowAccessor.STRING {
+		@Override
+		public String getStringFromRow(Row row) {
+			return row.strings[index];
 		}
 	}
 
-	public static class BoolAccessor extends ColumnAccessor {
-		public BoolAccessor(int index) {
-			super(index);
-		}
-
-		public ColumnType getType() { return ColumnType.BOOLEAN; }
-
-		public Object getValueFromRow(Row row) {
-			return row.bools[this.index];
+	private class BOOLEAN extends TypedRowAccessor.BOOLEAN {
+		@Override
+		public boolean getBoolFromRow(Row row) {
+			return row.bools[index];
 		}
 	}
+
 
 }
 
