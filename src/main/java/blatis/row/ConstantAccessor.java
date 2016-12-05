@@ -3,48 +3,105 @@ package blatis.row;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public class ConstantAccessor implements IRowAccessor {
+public class ConstantAccessor extends TypedRowAccessor {
 
-    Object value;
-    ColumnType type;
 
     public ConstantAccessor(int val) {
-        value = val;
-        type = ColumnType.INT;
+        super.type = ColumnType.INT;
+        super.innerAccessor = new INT(val);
     }
 
     public ConstantAccessor(long val) {
-        value = val;
-        type = ColumnType.LONG;
+        super.type = ColumnType.LONG;
+        super.innerAccessor = new LONG(val);
     }
 
     public ConstantAccessor(float val) {
-        value = val;
-        type = ColumnType.FLOAT;
+        super.type = ColumnType.FLOAT;
+        super.innerAccessor = new FLOAT(val);
     }
 
     public ConstantAccessor(double val) {
-        value = val;
-        type = ColumnType.DOUBLE;
+        super.type = ColumnType.DOUBLE;
+        super.innerAccessor = new DOUBLE(val);
     }
 
     public ConstantAccessor(String val) {
-        value = val;
-        type = ColumnType.STRING;
+        super.type = ColumnType.STRING;
+        super.innerAccessor = new STRING(val);
     }
 
     public ConstantAccessor(boolean val) {
-        value = val;
-        type = ColumnType.BOOLEAN;
+        super.type = ColumnType.BOOLEAN;
+        super.innerAccessor = new BOOLEAN(val);
     }
 
-    @Override
-    public Object getValueFromRow(Row row) {
-        return value;
+
+
+    private class INT extends TypedRowAccessor.INT {
+        private int val;
+
+        public INT(int val) {
+            this.val = val;
+        }
+
+        @Override
+        public int getIntFromRow(Row row) { return val; }
     }
 
-    @Override
-    public ColumnType getType() {
-        return type;
+    private class LONG extends TypedRowAccessor.LONG {
+        private long val;
+
+        public LONG(long val) {
+            this.val = val;
+        }
+
+        @Override
+        public long getLongFromRow(Row row) { return val; }
     }
+
+    private class FLOAT extends TypedRowAccessor.FLOAT {
+        private float val;
+
+        public FLOAT(float val) {
+            this.val = val;
+        }
+
+        @Override
+        public float getFloatFromRow(Row row) { return val; }
+    }
+
+    private class DOUBLE extends TypedRowAccessor.DOUBLE {
+        private double val;
+
+        public DOUBLE(double val) {
+            this.val = val;
+        }
+
+        @Override
+        public double getDoubleFromRow(Row row) { return val; }
+    }
+
+    private class STRING extends TypedRowAccessor.STRING {
+        private String val;
+
+        public STRING(String val) {
+            this.val = val;
+        }
+
+        @Override
+        public String getStringFromRow(Row row) { return val; }
+    }
+
+    private class BOOLEAN extends TypedRowAccessor.BOOLEAN {
+        private boolean val;
+
+        public BOOLEAN(boolean val) {
+            this.val = val;
+        }
+
+        @Override
+        public boolean getBoolFromRow(Row row) { return val; }
+    }
+
 }

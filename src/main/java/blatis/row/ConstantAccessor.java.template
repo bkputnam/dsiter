@@ -1,0 +1,27 @@
+package blatis.row;
+
+/**
+ * Created by bkputnam on 12/3/16.
+ */
+public class ConstantAccessor extends TypedRowAccessor {
+
+<% ColumnTypes.each { type -> %>
+    public ConstantAccessor(${type.nativeType} val) {
+        super.type = ColumnType.${type.type};
+        super.innerAccessor = new ${type.type}(val);
+    }
+<% } %>
+
+<% ColumnTypes.each { type -> %>
+    private class ${type.type} extends TypedRowAccessor.${type.type} {
+        private ${type.nativeType} val;
+
+        public ${type.type}(${type.nativeType} val) {
+            this.val = val;
+        }
+
+        @Override
+        public ${type.nativeType} get${type.capitalized}FromRow(Row row) { return val; }
+    }
+<% } %>
+}
