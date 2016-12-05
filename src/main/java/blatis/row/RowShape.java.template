@@ -1,5 +1,7 @@
 package blatis.row;
 
+${Disclaimer}
+
 public class RowShape {
 <% ColumnTypes.each { type -> %>
 	private int num${type.capitalized}s;<% } %>

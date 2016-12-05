@@ -1,8 +1,7 @@
 package blatis.row;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
+${Disclaimer}
+
 public enum ColumnType {
 <% ColumnTypes.eachWithIndex { type, index ->
     print "\t" + type.type

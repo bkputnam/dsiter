@@ -1,8 +1,11 @@
 package blatis.row;
 
-/**
- * Created by bkputnam on 12/4/16.
- */
+///////////////////////////////////////////
+//	DO NOT EDIT!!!
+//
+//	This is generated code. Edit the template instead.
+///////////////////////////////////////////
+
 public abstract class TypedRowAccessor implements IRowAccessor {
 
     protected ColumnType type;

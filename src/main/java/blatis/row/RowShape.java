@@ -1,5 +1,11 @@
 package blatis.row;
 
+///////////////////////////////////////////
+//	DO NOT EDIT!!!
+//
+//	This is generated code. Edit the template instead.
+///////////////////////////////////////////
+
 public class RowShape {
 
 	private int numInts;

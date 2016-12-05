@@ -1,5 +1,7 @@
 package blatis.row;
 
+${Disclaimer}
+
 public class Row {
 <% ColumnTypes.each { type -> %>
 	public ${type.nativeType}[] ${type.rowArray};<% } %>

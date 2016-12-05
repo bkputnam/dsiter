@@ -1,8 +1,11 @@
 package blatis.row;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
+///////////////////////////////////////////
+//	DO NOT EDIT!!!
+//
+//	This is generated code. Edit the template instead.
+///////////////////////////////////////////
+
 public enum ColumnType {
 	INT,
 	LONG,
