@@ -1,6 +1,7 @@
 package blatis.row;
 
 public class Row {
+
 	public int[] ints;
 	public long[] longs;
 	public float[] floats;
@@ -10,6 +11,7 @@ public class Row {
 
 	public Row() { }
 
+
 	public Row(int... vals) { this.ints = vals.clone(); }
 	public Row(long... vals) { this.longs = vals.clone(); }
 	public Row(float... vals) { this.floats = vals.clone(); }
@@ -18,6 +20,7 @@ public class Row {
 	public Row(boolean... vals) { this.bools = vals.clone(); }
 
 	public Row(RowShape shape) {
+
 		if(shape.getNumInts() > 0) {
 			ints = new int[shape.getNumInts()];
 		}
@@ -41,6 +44,7 @@ public class Row {
 	public Row clone() {
 		Row result = new Row();
 
+
 		if( ints != null ) { result.ints = ints.clone(); }
 		if( longs != null ) { result.longs = longs.clone(); }
 		if( floats != null ) { result.floats = floats.clone(); }
@@ -50,5 +54,5 @@ public class Row {
 
 		return result;
 	}
-	
+
 }
