@@ -3,15 +3,16 @@ package blatis.operator;
 import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.Row;
+import blatis.row.TypedRowAccessor;
 
 /**
  * Created by bkputnam on 12/3/16.
  */
-public class NotOperator implements IRowAccessor {
+public class NotOperator extends TypedRowAccessor.BOOLEAN {
 
-    private IRowAccessor src;
+    private TypedRowAccessor.BOOLEAN src;
 
-    public NotOperator(IRowAccessor src) {
+	public NotOperator(TypedRowAccessor src) {
         if(src == null) {
             throw new IllegalArgumentException("src cannot be null");
         }
@@ -19,13 +20,13 @@ public class NotOperator implements IRowAccessor {
             throw new IllegalArgumentException("src must have type ColumnType.BOOLEAN");
         }
 
-        this.src = src;
+        this.src = src.asBoolAccessor();
     }
 
-    @Override
-    public Object getValueFromRow(Row row) {
-        return !(boolean)src.getValueFromRow(row);
-    }
+	@Override
+	public boolean getBoolFromRow(Row row) {
+		return !src.getBoolFromRow(row);
+	}
 
     @Override
     public ColumnType getType() {
