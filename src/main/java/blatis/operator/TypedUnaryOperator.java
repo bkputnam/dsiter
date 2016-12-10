@@ -22,12 +22,12 @@ public abstract class TypedUnaryOperator extends TypedRowAccessor {
 
 		ColumnType srcType = src.getType();
 
-        if(!testTypeCompatibility(srcType)) {
-            throw new IllegalArgumentException("Incompatible type: " + srcType);
-        }
+		if(!testTypeCompatibility(srcType)) {
+			throw new IllegalArgumentException("Incompatible type: " + srcType);
+		}
 
 		ColumnType returnType = super.type = this.getReturnType(srcType);
-		super.innerAccessor = getInnerAccessor(src, srcType);
+		super.innerAccessor = getInnerAccessor(src, returnType);
 	}
 
 	protected abstract ColumnType getReturnType(ColumnType srcType);
