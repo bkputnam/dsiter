@@ -17,9 +17,9 @@ public class CaretOperator extends TypedBinaryOperator {
 	public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
 		return
 			super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
-				eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
-					eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
-						ColumnType.INT;
+			eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
+			eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
+			ColumnType.INT;
 	}
 
 	@Override
