@@ -20,6 +20,9 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 		this.lhs = lhs;
 		this.rhs = rhs;
 
+		if(lhs == null) { throw new IllegalArgumentException("lhs cannot be null"); }
+		if(rhs == null) { throw new IllegalArgumentException("rhs cannot be null"); }
+
 		ColumnType lhsType = lhs.getType();
 		ColumnType rhsType = rhs.getType();
 
