@@ -49,16 +49,18 @@ public class Row {
 
 	public Row clone() {
 		Row result = new Row();
-
-
-		if( ints != null ) { result.ints = ints.clone(); }
-		if( longs != null ) { result.longs = longs.clone(); }
-		if( floats != null ) { result.floats = floats.clone(); }
-		if( doubles != null ) { result.doubles = doubles.clone(); }
-		if( strings != null ) { result.strings = strings.clone(); }
-		if( bools != null ) { result.bools = bools.clone(); }
-
+		Row.copyTo(this, result);
 		return result;
+	}
+
+	public static void copyTo(Row src, Row dest) {
+		
+		if( src.ints != null ) { dest.ints = src.ints.clone(); }
+		if( src.longs != null ) { dest.longs = src.longs.clone(); }
+		if( src.floats != null ) { dest.floats = src.floats.clone(); }
+		if( src.doubles != null ) { dest.doubles = src.doubles.clone(); }
+		if( src.strings != null ) { dest.strings = src.strings.clone(); }
+		if( src.bools != null ) { dest.bools = src.bools.clone(); }
 	}
 
 }

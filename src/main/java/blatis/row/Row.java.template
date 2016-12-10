@@ -20,11 +20,13 @@ public class Row {
 
 	public Row clone() {
 		Row result = new Row();
-
-<% ColumnTypes.each { type -> %>
-		if( ${type.rowArray} != null ) { result.${type.rowArray} = ${type.rowArray}.clone(); }<% } %>
-
+		Row.copyTo(this, result);
 		return result;
+	}
+
+	public static void copyTo(Row src, Row dest) {
+		<% ColumnTypes.each { type -> %>
+		if( src.${type.rowArray} != null ) { dest.${type.rowArray} = src.${type.rowArray}.clone(); }<% } %>
 	}
 
 }

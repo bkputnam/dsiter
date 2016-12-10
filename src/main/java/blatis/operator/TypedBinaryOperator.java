@@ -47,27 +47,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			if(rhsType == ColumnType.INT) {
 				if(returnType == ColumnType.INT) {
 					return new INT_INT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new INT_INT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new INT_INT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new INT_INT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new INT_INT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new INT_INT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -76,27 +70,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.LONG) {
 				if(returnType == ColumnType.INT) {
 					return new INT_LONG_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new INT_LONG_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new INT_LONG_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new INT_LONG_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new INT_LONG_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new INT_LONG_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -105,27 +93,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.FLOAT) {
 				if(returnType == ColumnType.INT) {
 					return new INT_FLOAT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new INT_FLOAT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new INT_FLOAT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new INT_FLOAT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new INT_FLOAT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new INT_FLOAT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -134,27 +116,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.DOUBLE) {
 				if(returnType == ColumnType.INT) {
 					return new INT_DOUBLE_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new INT_DOUBLE_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new INT_DOUBLE_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new INT_DOUBLE_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new INT_DOUBLE_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new INT_DOUBLE_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -163,27 +139,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.STRING) {
 				if(returnType == ColumnType.INT) {
 					return new INT_STRING_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new INT_STRING_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new INT_STRING_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new INT_STRING_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new INT_STRING_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new INT_STRING_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -192,27 +162,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.BOOLEAN) {
 				if(returnType == ColumnType.INT) {
 					return new INT_BOOLEAN_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new INT_BOOLEAN_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new INT_BOOLEAN_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new INT_BOOLEAN_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new INT_BOOLEAN_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new INT_BOOLEAN_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -226,27 +190,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			if(rhsType == ColumnType.INT) {
 				if(returnType == ColumnType.INT) {
 					return new LONG_INT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new LONG_INT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new LONG_INT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new LONG_INT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new LONG_INT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new LONG_INT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -255,27 +213,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.LONG) {
 				if(returnType == ColumnType.INT) {
 					return new LONG_LONG_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new LONG_LONG_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new LONG_LONG_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new LONG_LONG_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new LONG_LONG_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new LONG_LONG_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -284,27 +236,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.FLOAT) {
 				if(returnType == ColumnType.INT) {
 					return new LONG_FLOAT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new LONG_FLOAT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new LONG_FLOAT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new LONG_FLOAT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new LONG_FLOAT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new LONG_FLOAT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -313,27 +259,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.DOUBLE) {
 				if(returnType == ColumnType.INT) {
 					return new LONG_DOUBLE_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new LONG_DOUBLE_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new LONG_DOUBLE_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new LONG_DOUBLE_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new LONG_DOUBLE_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new LONG_DOUBLE_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -342,27 +282,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.STRING) {
 				if(returnType == ColumnType.INT) {
 					return new LONG_STRING_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new LONG_STRING_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new LONG_STRING_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new LONG_STRING_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new LONG_STRING_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new LONG_STRING_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -371,27 +305,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.BOOLEAN) {
 				if(returnType == ColumnType.INT) {
 					return new LONG_BOOLEAN_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new LONG_BOOLEAN_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new LONG_BOOLEAN_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new LONG_BOOLEAN_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new LONG_BOOLEAN_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new LONG_BOOLEAN_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -405,27 +333,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			if(rhsType == ColumnType.INT) {
 				if(returnType == ColumnType.INT) {
 					return new FLOAT_INT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new FLOAT_INT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new FLOAT_INT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new FLOAT_INT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new FLOAT_INT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new FLOAT_INT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -434,27 +356,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.LONG) {
 				if(returnType == ColumnType.INT) {
 					return new FLOAT_LONG_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new FLOAT_LONG_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new FLOAT_LONG_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new FLOAT_LONG_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new FLOAT_LONG_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new FLOAT_LONG_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -463,27 +379,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.FLOAT) {
 				if(returnType == ColumnType.INT) {
 					return new FLOAT_FLOAT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new FLOAT_FLOAT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new FLOAT_FLOAT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new FLOAT_FLOAT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new FLOAT_FLOAT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new FLOAT_FLOAT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -492,27 +402,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.DOUBLE) {
 				if(returnType == ColumnType.INT) {
 					return new FLOAT_DOUBLE_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new FLOAT_DOUBLE_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new FLOAT_DOUBLE_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new FLOAT_DOUBLE_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new FLOAT_DOUBLE_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new FLOAT_DOUBLE_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -521,27 +425,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.STRING) {
 				if(returnType == ColumnType.INT) {
 					return new FLOAT_STRING_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new FLOAT_STRING_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new FLOAT_STRING_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new FLOAT_STRING_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new FLOAT_STRING_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new FLOAT_STRING_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -550,27 +448,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.BOOLEAN) {
 				if(returnType == ColumnType.INT) {
 					return new FLOAT_BOOLEAN_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new FLOAT_BOOLEAN_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new FLOAT_BOOLEAN_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new FLOAT_BOOLEAN_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new FLOAT_BOOLEAN_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new FLOAT_BOOLEAN_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -584,27 +476,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			if(rhsType == ColumnType.INT) {
 				if(returnType == ColumnType.INT) {
 					return new DOUBLE_INT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new DOUBLE_INT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new DOUBLE_INT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new DOUBLE_INT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new DOUBLE_INT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new DOUBLE_INT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -613,27 +499,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.LONG) {
 				if(returnType == ColumnType.INT) {
 					return new DOUBLE_LONG_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new DOUBLE_LONG_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new DOUBLE_LONG_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new DOUBLE_LONG_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new DOUBLE_LONG_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new DOUBLE_LONG_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -642,27 +522,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.FLOAT) {
 				if(returnType == ColumnType.INT) {
 					return new DOUBLE_FLOAT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new DOUBLE_FLOAT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new DOUBLE_FLOAT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new DOUBLE_FLOAT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new DOUBLE_FLOAT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new DOUBLE_FLOAT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -671,27 +545,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.DOUBLE) {
 				if(returnType == ColumnType.INT) {
 					return new DOUBLE_DOUBLE_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new DOUBLE_DOUBLE_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new DOUBLE_DOUBLE_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new DOUBLE_DOUBLE_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new DOUBLE_DOUBLE_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new DOUBLE_DOUBLE_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -700,27 +568,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.STRING) {
 				if(returnType == ColumnType.INT) {
 					return new DOUBLE_STRING_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new DOUBLE_STRING_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new DOUBLE_STRING_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new DOUBLE_STRING_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new DOUBLE_STRING_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new DOUBLE_STRING_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -729,27 +591,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.BOOLEAN) {
 				if(returnType == ColumnType.INT) {
 					return new DOUBLE_BOOLEAN_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new DOUBLE_BOOLEAN_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new DOUBLE_BOOLEAN_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new DOUBLE_BOOLEAN_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new DOUBLE_BOOLEAN_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new DOUBLE_BOOLEAN_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -763,27 +619,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			if(rhsType == ColumnType.INT) {
 				if(returnType == ColumnType.INT) {
 					return new STRING_INT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new STRING_INT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new STRING_INT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new STRING_INT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new STRING_INT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new STRING_INT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -792,27 +642,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.LONG) {
 				if(returnType == ColumnType.INT) {
 					return new STRING_LONG_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new STRING_LONG_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new STRING_LONG_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new STRING_LONG_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new STRING_LONG_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new STRING_LONG_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -821,27 +665,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.FLOAT) {
 				if(returnType == ColumnType.INT) {
 					return new STRING_FLOAT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new STRING_FLOAT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new STRING_FLOAT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new STRING_FLOAT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new STRING_FLOAT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new STRING_FLOAT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -850,27 +688,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.DOUBLE) {
 				if(returnType == ColumnType.INT) {
 					return new STRING_DOUBLE_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new STRING_DOUBLE_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new STRING_DOUBLE_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new STRING_DOUBLE_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new STRING_DOUBLE_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new STRING_DOUBLE_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -879,27 +711,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.STRING) {
 				if(returnType == ColumnType.INT) {
 					return new STRING_STRING_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new STRING_STRING_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new STRING_STRING_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new STRING_STRING_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new STRING_STRING_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new STRING_STRING_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -908,27 +734,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.BOOLEAN) {
 				if(returnType == ColumnType.INT) {
 					return new STRING_BOOLEAN_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new STRING_BOOLEAN_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new STRING_BOOLEAN_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new STRING_BOOLEAN_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new STRING_BOOLEAN_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new STRING_BOOLEAN_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -942,27 +762,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			if(rhsType == ColumnType.INT) {
 				if(returnType == ColumnType.INT) {
 					return new BOOLEAN_INT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new BOOLEAN_INT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new BOOLEAN_INT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new BOOLEAN_INT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new BOOLEAN_INT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new BOOLEAN_INT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -971,27 +785,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.LONG) {
 				if(returnType == ColumnType.INT) {
 					return new BOOLEAN_LONG_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new BOOLEAN_LONG_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new BOOLEAN_LONG_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new BOOLEAN_LONG_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new BOOLEAN_LONG_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new BOOLEAN_LONG_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -1000,27 +808,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.FLOAT) {
 				if(returnType == ColumnType.INT) {
 					return new BOOLEAN_FLOAT_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new BOOLEAN_FLOAT_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new BOOLEAN_FLOAT_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new BOOLEAN_FLOAT_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new BOOLEAN_FLOAT_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new BOOLEAN_FLOAT_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -1029,27 +831,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.DOUBLE) {
 				if(returnType == ColumnType.INT) {
 					return new BOOLEAN_DOUBLE_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new BOOLEAN_DOUBLE_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new BOOLEAN_DOUBLE_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new BOOLEAN_DOUBLE_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new BOOLEAN_DOUBLE_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new BOOLEAN_DOUBLE_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -1058,27 +854,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.STRING) {
 				if(returnType == ColumnType.INT) {
 					return new BOOLEAN_STRING_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new BOOLEAN_STRING_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new BOOLEAN_STRING_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new BOOLEAN_STRING_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new BOOLEAN_STRING_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new BOOLEAN_STRING_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");
@@ -1087,27 +877,21 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
 			else if(rhsType == ColumnType.BOOLEAN) {
 				if(returnType == ColumnType.INT) {
 					return new BOOLEAN_BOOLEAN_INT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.LONG) {
 					return new BOOLEAN_BOOLEAN_LONG(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.FLOAT) {
 					return new BOOLEAN_BOOLEAN_FLOAT(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.DOUBLE) {
 					return new BOOLEAN_BOOLEAN_DOUBLE(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.STRING) {
 					return new BOOLEAN_BOOLEAN_STRING(lhs, rhs);
-
 				}
 				else if(returnType == ColumnType.BOOLEAN) {
 					return new BOOLEAN_BOOLEAN_BOOLEAN(lhs, rhs);
-
 				}
 				else {
 					throw new Error("This should be impossible");

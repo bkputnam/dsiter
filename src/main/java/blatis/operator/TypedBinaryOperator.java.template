@@ -57,7 +57,7 @@ def typeSwitch(indent, varName, bodyGenerator) {
 		typeSwitch(indent1, "rhsType") { indent2, rhsType ->
 			typeSwitch(indent2, "returnType") { indent3, returnType ->
 				def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
-				println "${indent3}return new ${lhsType.type}_${rhsType.type}_${returnType.type}(lhs, rhs);"
+				print "${indent3}return new ${lhsType.type}_${rhsType.type}_${returnType.type}(lhs, rhs);"
 			}
 		}
 	}
