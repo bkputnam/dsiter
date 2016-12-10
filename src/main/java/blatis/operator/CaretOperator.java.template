@@ -1,0 +1,40 @@
+package blatis.operator;
+
+import blatis.row.ColumnType;
+import blatis.row.IRowAccessor;
+import blatis.row.TypedRowAccessor;
+
+/**
+ * Created by bkputnam on 12/3/16.
+ */
+public class CaretOperator extends TypedBinaryOperator {
+
+	public CaretOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+		super(lhs, rhs);
+	}
+
+	@Override
+	public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
+		return
+			super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
+				eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
+					eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
+						ColumnType.INT;
+	}
+
+	@Override
+	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
+		return lhsType.isNumeric() && rhsType.isNumeric();
+	}
+
+	<% def numberTypes = ["int", "long", "float", "double"] %>
+	<%
+		numberTypes.eachWithIndex { lhs, lhsIndex ->
+			numberTypes.eachWithIndex { rhs, rhsIndex ->
+				def returnType = lhsIndex >= rhsIndex ? lhs : rhs;
+	%>
+	@Override
+	protected ${returnType} handle_${lhs}_${rhs}_${returnType}(${lhs} lhs, ${rhs} rhs) { return (${returnType})Math.pow(lhs, rhs); }
+	<% } } %>
+
+}
