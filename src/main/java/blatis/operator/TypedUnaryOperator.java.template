@@ -1,0 +1,84 @@
+package blatis.operator;
+
+${Disclaimer}
+
+import blatis.row.ColumnType;
+import blatis.row.IRowAccessor;
+import blatis.row.Row;
+import blatis.row.TypedRowAccessor;
+
+public abstract class TypedUnaryOperator extends TypedRowAccessor {
+
+	TypedRowAccessor src;
+
+	public TypedUnaryOperator(TypedRowAccessor src) {
+		this.src = src;
+
+		if(src == null) { throw new IllegalArgumentException("src cannot be null"); }
+
+		ColumnType srcType = src.getType();
+
+        if(!testTypeCompatibility(srcType)) {
+            throw new IllegalArgumentException("Incompatible type: " + srcType);
+        }
+
+		ColumnType returnType = super.type = this.getReturnType(srcType);
+		super.innerAccessor = getInnerAccessor(src, srcType);
+	}
+
+	protected abstract ColumnType getReturnType(ColumnType srcType);
+	protected abstract boolean testTypeCompatibility(ColumnType srcType);
+
+<%
+def typeSwitch(indent, varName, bodyGenerator) {
+	ColumnTypes.eachWithIndex { type, index ->
+//		println ""
+		if(index == 0) { print "${indent}if" } else { print "\n${indent}else if" }
+		println "(" + varName + " == ColumnType." + type.type + ") {"
+		bodyGenerator(indent + "\t", type)
+		print "\n" + indent + "}"
+	}
+	println "\n" + indent + "else {"
+	println indent + "\tthrow new Error(\"This should be impossible\");"
+	print indent + "}"
+}
+%>
+
+	private IRowAccessor getInnerAccessor(TypedRowAccessor src, ColumnType returnType) {
+		ColumnType srcType = src.getType();
+
+<%
+	typeSwitch("\t\t", "srcType") { indent1, srcType ->
+		typeSwitch(indent1, "returnType") { indent2, returnType ->
+			def methodName = "handle_${srcType.nativeType}_${returnType.nativeType}"
+			print "${indent2}return new ${srcType.type}_${returnType.type}(src);"
+		}
+	}
+%>
+	}
+
+	<%
+		ColumnTypes.each { srcType -> ColumnTypes.each { returnType ->
+		def methodName = "handle_" + srcType.nativeType + "_" + returnType.nativeType;
+	%>
+	protected ${returnType.nativeType} ${methodName}( ${srcType.nativeType} src )  { throw new Error("Programmer error: ${methodName} must be overridden by subclass"); }<% }} %>
+
+<%
+ColumnTypes.each { srcType ->
+	ColumnTypes.each { returnType ->
+		def methodName = "handle_" + srcType.nativeType + "_" + returnType.nativeType;
+%>
+	private class ${srcType.type}_${returnType.type} extends TypedRowAccessor.${returnType.type} {
+
+		private TypedRowAccessor.${srcType.type} src;
+
+		private ${srcType.type}_${returnType.type}(TypedRowAccessor src) {
+			this.src = src.as${srcType.capitalized}Accessor();
+		}
+
+		public ${returnType.nativeType} get${returnType.capitalized}FromRow(Row row) {
+			return ${methodName}(src.get${srcType.capitalized}FromRow(row));
+		}
+	}
+<% }} %>
+}

@@ -8,28 +8,22 @@ import blatis.row.TypedRowAccessor;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public class NotOperator extends TypedRowAccessor.BOOLEAN {
-
-    private TypedRowAccessor.BOOLEAN src;
+public class NotOperator extends TypedUnaryOperator {
 
 	public NotOperator(TypedRowAccessor src) {
-        if(src == null) {
-            throw new IllegalArgumentException("src cannot be null");
-        }
-        if(src.getType() != ColumnType.BOOLEAN) {
-            throw new IllegalArgumentException("src must have type ColumnType.BOOLEAN");
-        }
-
-        this.src = src.asBoolAccessor();
+		super(src);
     }
 
 	@Override
-	public boolean getBoolFromRow(Row row) {
-		return !src.getBoolFromRow(row);
+	protected ColumnType getReturnType(ColumnType srcType) {
+		return ColumnType.BOOLEAN;
 	}
 
-    @Override
-    public ColumnType getType() {
-        return ColumnType.BOOLEAN;
-    }
+	@Override
+	protected boolean testTypeCompatibility(ColumnType srcType) {
+		return srcType == ColumnType.BOOLEAN;
+	}
+
+	@Override
+	public boolean handle_boolean_boolean(boolean src) { return !src; }
 }
