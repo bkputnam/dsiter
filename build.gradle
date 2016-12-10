@@ -15,30 +15,43 @@ sourceCompatibility = 1.8
 task wrapper(type: Wrapper) { gradleVersion = '2.12' }
 
 task applyTemplates(type: Copy) {
-    def templateConfigFile = "src/build/resources/templateConfig.json"
-    inputs.file templateConfigFile
+	def templateConfigFile = "src/build/resources/templateConfig.json"
+	inputs.file templateConfigFile
 
-    from "src/main/java"
-    into "src/main/java"
-    include "**/*.java.template"
+	from "src/main/java"
+	into "src/main/java"
+	include "**/*.java.template"
 
-    rename { filename -> filename - ~/\.template$/ }
-    expand new JsonSlurper().parse(new File(templateConfigFile))
+	rename { filename -> filename - ~/\.template$/ }
+	expand new JsonSlurper().parse(new File(templateConfigFile))
+}
+
+task applyTestTemplates(type: Copy) {
+	def templateConfigFile = "src/build/resources/templateConfig.json"
+	inputs.file templateConfigFile
+
+	from "src/test/java"
+	into "src/test/java"
+	include "**/*.java.template"
+
+	rename { filename -> filename - ~/\.template$/ }
+	expand new JsonSlurper().parse(new File(templateConfigFile))
 }
 
 compileJava.dependsOn applyTemplates
+compileTestJava.dependsOn applyTestTemplates
 
 tasks.withType(JavaCompile){
     options.compilerArgs += '-Xlint:unchecked'
 }
 
 test {
-    testLogging {
-        afterSuite { desc, result ->
-            if (!desc.parent) { // will match the outermost suite
-                println "\nResults: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
-            }
-        }
-    }
+	testLogging {
+		afterSuite { desc, result ->
+			if (!desc.parent) { // will match the outermost suite
+				println "\nResults: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+			}
+		}
+	}
 }
 
