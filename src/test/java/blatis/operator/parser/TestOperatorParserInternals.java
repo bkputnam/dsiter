@@ -11,24 +11,6 @@ import static org.junit.Assert.*;
 public class TestOperatorParserInternals {
 
 	@Test
-	public void testTokenizer1() {
-		String[] tokens = OperatorParser.tokenize("foo||bar");
-		assertArrayEquals(new String[] { "foo", "||", "bar"}, tokens);
-	}
-
-	@Test
-	public void testTokenizer2() {
-		String[] tokens = OperatorParser.tokenize("foo || bar");
-		assertArrayEquals(new String[] { "foo", "||", "bar"}, tokens);
-	}
-
-	@Test
-	public void testTokenizer3() {
-		String[] tokens = OperatorParser.tokenize("sqrt(foo)");
-		assertArrayEquals(new String[] { "sqrt(", "foo", ")"}, tokens);
-	}
-
-	@Test
 	public void testNumberParser_int() {
 		OperatorParser.AccessorContainer receiver = new OperatorParser.AccessorContainer();
 		boolean success = OperatorParser.tryParseNumber("1", receiver);

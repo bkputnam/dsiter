@@ -51,7 +51,7 @@ public class OperatorParser {
 
 	private static TypedRowAccessor parseOperatorHelper(String string, ParserState state) {
 
-		String[] tokens = tokenize(string);
+		String[] tokens = Tokenizer.tokenize(string);
 
 		// The following is a simple implementation of the Shunting Yard algorithm
 		// https://en.wikipedia.org/wiki/Shunting-yard_algorithm
@@ -127,6 +127,10 @@ public class OperatorParser {
 				boolean done = false;
 				while(!state.operatorStack.empty() && !done) {
 					String o2 = state.operatorStack.peek();
+					if(!isOperator(o2)) {
+						done = true;
+						continue;
+					}
 					int o1Precedence = OperatorInfo.getPrecedence(o1);
 					int o2Precedence = OperatorInfo.getPrecedence(o2);
 					boolean doPop = OperatorInfo.isLeftAssociative(o1)
@@ -161,7 +165,7 @@ public class OperatorParser {
 			else if(token.equals(")")) {
 				boolean foundLParenOrFunction = false;
 				String topOperator = "";
-				while(!state.operatorStack.empty()) {
+				while(!state.operatorStack.empty() && !foundLParenOrFunction) {
 					topOperator = state.operatorStack.peek();
 					if(!topOperator.equals("(") && !isFunction(topOperator)) {
 						popOperator(state);
@@ -209,34 +213,6 @@ public class OperatorParser {
 		}
 
 		return state.outputStack.pop();
-	}
-
-	static String[] tokenize(String input) {
-		List<String> chunks = Arrays.asList(input.split("\\b"));
-		List<String> result = new ArrayList<String>(chunks.size());
-
-		String lastChunk = "";
-		for(int i=0; i<chunks.size(); i++) {
-			String chunk = chunks.get(i).trim();
-
-			// Functions should be tokenized as "foo(" rather than "foo", "("
-			// but parenthesis should be respected by themselves. Functions
-			// will be preceded by an identifier, while parenthesis will be
-			// preceded by another operator.
-			//
-			// Note: isColumn is useful here because it only checks whether
-			// a name is "alphanumeric with underscores", which is good enough
-			// for this test.
-			if(chunk.equals("(") && isAlphanumericWithUnderscores(lastChunk)) {
-				int lastIndex = result.size()-1;
-				result.set(lastIndex, result.get(lastIndex) + "(");
-			}
-			else {
-				result.add(chunk);
-			}
-			lastChunk = chunk;
-		}
-		return result.toArray(new String[0]);
 	}
 
 	static boolean isColumn(String token) {

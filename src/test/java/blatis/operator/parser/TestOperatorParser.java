@@ -134,4 +134,34 @@ public class TestOperatorParser {
 		// 2^(3^2) == 512
 		assertEquals(512, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
+
+	@Test
+	public void testPrecedence() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i2+i3*i4");
+		assertTrue(iter.tryMoveNext());
+		// (2+3)*4 == 20
+		// 2+(3*4) == 14
+		assertEquals(14, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testParenthesis() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "(i2+i3)*i4");
+		assertTrue(iter.tryMoveNext());
+		// (2+3)*4 == 20
+		// 2+(3*4) == 14
+		assertEquals(20, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testSpaces() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), " ( i2 + i3    ) * i4 ");
+		assertTrue(iter.tryMoveNext());
+		// (2+3)*4 == 20
+		// 2+(3*4) == 14
+		assertEquals(20, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
 }
