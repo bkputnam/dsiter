@@ -129,10 +129,11 @@ public class OperatorParser {
 					String o2 = state.operatorStack.peek();
 					int o1Precedence = OperatorInfo.getPrecedence(o1);
 					int o2Precedence = OperatorInfo.getPrecedence(o2);
-					done = OperatorInfo.isLeftAssociative(o1)
+					boolean doPop = OperatorInfo.isLeftAssociative(o1)
 						? (o1Precedence <= o2Precedence)
 						: (o1Precedence < o2Precedence);
-					if(!done) {
+					done = !doPop;
+					if(doPop) {
 						popOperator(state); // pop o2
 					}
 				}

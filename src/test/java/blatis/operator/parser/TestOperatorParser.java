@@ -16,7 +16,7 @@ public class TestOperatorParser {
 
 	private static AbstractDatasetIterator dummyIterator() {
 		return new ZipIterator(
-			new ArrayIterator(new int[] { 1 }).pipe(new RenamePipe("value", "i")),
+			new ArrayIterator(new int[] { 1 }).pipe(new RenamePipe("value", "i1")),
 			new ArrayIterator(new int[] { 2 }).pipe(new RenamePipe("value", "i2")),
 			new ArrayIterator(new int[] { 3 }).pipe(new RenamePipe("value", "i3")),
 			new ArrayIterator(new int[] { 4 }).pipe(new RenamePipe("value", "i4")),
@@ -32,7 +32,7 @@ public class TestOperatorParser {
 	@Test
 	public void testPlusOperator() {
 		AbstractDatasetIterator iter = dummyIterator();
-		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i+l");
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1+l");
 		assertTrue(iter.tryMoveNext());
 		assertEquals(1234567890123456790L, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
@@ -59,6 +59,14 @@ public class TestOperatorParser {
 		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4/i2");
 		assertTrue(iter.tryMoveNext());
 		assertEquals(2, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testDivideOperatorReals() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "d/f");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(2.71/3.14, (double)parsed.getValueFromRow(iter.getCurrentRow()), 0.0001);
 	}
 
 	@Test
@@ -99,5 +107,21 @@ public class TestOperatorParser {
 		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "bt||bf");
 		assertTrue(iter.tryMoveNext());
 		assertEquals(true, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testRepeatedPluses() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1+i1+i1+i1");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(4, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testRepeatedDivides() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "d/f/f");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(2.71/3.14/3.14, (double)parsed.getValueFromRow(iter.getCurrentRow()), 0.0000001);
 	}
 }
