@@ -1,8 +1,10 @@
 package blatis.operator.parser;
 
+import blatis.operator.*;
 import blatis.row.*;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
+import javax.swing.text.html.parser.Parser;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -11,95 +13,285 @@ import java.util.*;
  */
 public class OperatorParser {
 
-	// Higher first index means higher precedence (grouped tighter)
-	static String[][] operatorPrecedences = new String[][]{
-		{"||", "&&"},
-		{"%"},
-		{"+", "-"},
-		{"*", "/"},
-		{"!"}
-	};
+	// This class is effectively static: neither abstract nor instantiable
+	private OperatorParser() { throw new Error("Programmer Error: OperatorParser should never be instantiated"); }
 
-	static Set<String> operatorStrings;
-	static Map<String, Integer> operatorPrecedenceLookup;
+	public static TypedRowAccessor parseOperator(ColumnDescriptor[] metadata, String string) {
+		ParserState state = new ParserState(metadata);
+		return parseOperatorHelper(string, state);
+	}
 
-	static {
-		operatorStrings = new HashSet<>();
-		operatorPrecedenceLookup = new HashMap<>();
+	// The API exposed by this class is effectively stateless: no state is really
+	// needed to parse these expressions. However, in the interest of code
+	// readability it's convenient to break the parser function up into several
+	// smaller functions. Many of those functions need to access/modify the same
+	// variables over and over again, so to avoid passing half-a-dozen parameters
+	// each time, we bundle them up in this object.
+	//
+	// There are plenty of other ways we could have designed this, but this
+	// method forces us to specify which helper functions need access to the
+	// "state variables" and which ones are "even more stateless" than the
+	// rest.
+	private static class ParserState {
+		public Stack<String> operatorStack;
+		public Stack<TypedRowAccessor> outputStack;
+		public HashMap<String, ColumnAccessor> accessorLookup;
 
-		for(int precedence=0; precedence<operatorPrecedences.length; precedence++) {
-			for(int i=0; i<operatorPrecedences[precedence].length; i++) {
-				String operatorStr = operatorPrecedences[precedence][i];
-				operatorStrings.add(operatorStr);
-				operatorPrecedenceLookup.put(operatorStr, precedence);
+		public ParserState(ColumnDescriptor[] metadata) {
+			operatorStack = new Stack<>();
+			outputStack = new Stack<>();
 
+			accessorLookup = new HashMap<>();
+			for(int i=0; i<metadata.length; i++) {
+				ColumnDescriptor cd = metadata[i];
+				accessorLookup.put(cd.getName(), cd.getAccessor());
 			}
 		}
 	}
 
-	public static TypedRowAccessor parseOperator(ColumnDescriptor[] metadata, String string) {
-
-		HashMap<String, ColumnAccessor> accessorLookup = new HashMap<>();
-		for(int i=0; i<metadata.length; i++) {
-			ColumnDescriptor cd = metadata[i];
-			accessorLookup.put(cd.getName(), cd.getAccessor());
-		}
+	private static TypedRowAccessor parseOperatorHelper(String string, ParserState state) {
 
 		String[] tokens = tokenize(string);
 
 		// The following is a simple implementation of the Shunting Yard algorithm
 		// https://en.wikipedia.org/wiki/Shunting-yard_algorithm
 		//
-		// The one modification made to the wikipedia algorithm, is that operators
-		// are combined upon being sent to the output. Hence, output is a stack
-		// instead of a queue, because we'll be popping things off the stack as
-		// we go. At the end, there should only be one item on the stack; a single
-		// operator representing the whole expression.
+		// A few minor modifications have been made to the algorithm:
+		//	* The output queue is actually a stack, and operators are combined
+		//		as they are added to the stack. This is equivalent to evaluating
+		//		the reverse-polish-notation as it is generated. At the end of the
+		//		algorithm there should only be one value on the stack; a single
+		//		operator instance representing the entire expression.
 
-		Stack<TypedRowAccessor> operatorStack = new Stack<TypedRowAccessor>();
-		Stack<TypedRowAccessor> outputStack = new Stack<TypedRowAccessor>();
+		AccessorContainer receiver = new AccessorContainer();
 
+		// "While there are tokens to be read:"
 		for(int tokenIndex=0; tokenIndex<tokens.length; tokenIndex++) {
-			String token = tokens[tokenIndex];
-			if(isColumn(token)) {
-				ColumnAccessor ca = accessorLookup.get(token);
-				if(ca == null) { throw new IllegalArgumentException("Unable to find column \"" + token + "\""); }
-				outputStack.push(ca);
-			}
-			else if(isOperator(token)) {
 
+			// "Read a token."
+			String token = tokens[tokenIndex];
+
+			// "If the token is a number, then push it to the output queue."
+			// Note: for us, this applies equally to number literals and
+			// column names.
+			if(tryParseNumber(token, receiver)) {
+				state.outputStack.push(receiver.accessor);
 			}
+			else if(isColumn(token)) {
+				ColumnAccessor ca = state.accessorLookup.get(token);
+				if(ca == null) {
+					throw new IllegalArgumentException("Unable to find column \"" + token + "\"");
+				}
+				state.outputStack.push(ca);
+			}
+
+			// "If the token is a function token, then push it onto the stack."
+			else if(isFunction(token)) {
+				state.operatorStack.push(token);
+			}
+
+			// """
+			//	* If the token is a function argument separator (e.g., a comma):
+			//		* Until the token at the top of the stack is a left parenthesis,
+			// 			pop operators off the stack onto the output queue. If no left
+			//			parentheses are encountered, either the separator was misplaced
+			//			or parentheses were mismatched.
+			// """
+			// Note: for this implementation, left parenthesis are included in the
+			// function token (e.g. "sqrt(") so we'll actually pop until we see a
+			// function token.
+			else if(token.equals(",")) {
+				boolean foundFunction = false;
+				do {
+					String topOperator = state.operatorStack.peek();
+					if(isFunction(token)) {
+						foundFunction = true;
+						continue;
+					}
+					else {
+						popOperator(state);
+					}
+				} while(!foundFunction);
+			}
+
+			// """
+			//	* If the token is an operator, o1, then:
+			//		* while there is an operator token o2, at the top of the operator stack and either
+			//				? o1 is left-associative and its precedence is less than or equal to that of o2, or
+			//				? o1 is right associative, and has precedence less than that of o2,
+			//			* pop o2 off the operator stack, onto the output queue;
+			//		* at the end of iteration push o1 onto the operator stack.
+			// """
+			else if(isOperator(token)) {
+				String o1 = token;
+				boolean done = false;
+				while(!state.operatorStack.empty() && !done) {
+					String o2 = state.operatorStack.peek();
+					int o1Precedence = OperatorInfo.getPrecedence(o1);
+					int o2Precedence = OperatorInfo.getPrecedence(o2);
+					done = OperatorInfo.isLeftAssociative(o1)
+						? (o1Precedence <= o2Precedence)
+						: (o1Precedence < o2Precedence);
+					if(!done) {
+						popOperator(state); // pop o2
+					}
+				}
+				state.operatorStack.push(o1);
+			}
+
+			// "If the token is a left parenthesis (i.e. "("), then push it onto the stack."
+			else if(token.equals("(")) {
+				state.operatorStack.push(token);
+			}
+
+			// """
+			//	* If the token is a right parenthesis (i.e. ")"):
+			//		* Until the token at the top of the stack is a left parenthesis,
+			//			pop operators off the stack onto the output queue.
+			//		* Pop the left parenthesis from the stack, but not onto the
+			//			output queue.
+			//		* If the token at the top of the stack is a function token, pop
+			//			it onto the output queue.
+			//		* If the stack runs out without finding a left parenthesis, then
+			//			there are mismatched parentheses.
+			// """
+			// Note: since our function tokens include left parenthesis (e.g. "sqrt(")
+			// we need to also check for that when popping things from the stack.
+			else if(token.equals(")")) {
+				boolean foundLParenOrFunction = false;
+				String topOperator = "";
+				while(!state.operatorStack.empty()) {
+					topOperator = state.operatorStack.peek();
+					if(!topOperator.equals("(") && !isFunction(topOperator)) {
+						popOperator(state);
+					}
+					else {
+						foundLParenOrFunction = true;
+					}
+				}
+				if(!foundLParenOrFunction) {
+					throw new IllegalArgumentException("Mismatched parenthesis in operator string: \"" + string + "\" (extra ')')");
+				}
+				if(topOperator.equals("(")) {
+					// pop the left parenthesis, but not onto the output queue
+					// i.e. don't use popOperator()
+					state.operatorStack.pop();
+				}
+				else {
+					// top operator is a function: pop both the operator and the
+					// left paren simultaneously
+					popOperator(state);
+				}
+			}
+
 			else {
 				throw new IllegalArgumentException("Unrecognized token: \"" + token + "\"");
 			}
+		} // end foreach token loop
+
+		//	* When there are no more tokens to read:
+		//		* While there are still operator tokens in the stack:
+		//			* If the operator token on the top of the stack is a parenthesis, then there are mismatched parentheses.
+		//			* Pop the operator onto the output queue.
+		while(!state.operatorStack.empty()) {
+			String topOperator = state.operatorStack.peek();
+			if(topOperator.equals("(")) {
+				throw new IllegalArgumentException("Mismatched parenthesis in operator string: \"" + string + "\" (extra '(')");
+			}
+			popOperator(state);
 		}
 
-		return null;
+		if(state.outputStack.size() != 1) {
+			// I'm too braindead to know what causes this right now, but if we get
+			// here then clearly something went wrong.
+			throw new IllegalArgumentException("Programmer Error: THERE CAN ONLY BE ONE!!");
+		}
+
+		return state.outputStack.pop();
 	}
 
 	static String[] tokenize(String input) {
-		String[] chunks = input.split("\\b");
-		String[] result = new String[chunks.length];
-		for(int i=0; i<chunks.length; i++) {
-			result[i] = chunks[i].trim();
+		List<String> chunks = Arrays.asList(input.split("\\b"));
+		List<String> result = new ArrayList<String>(chunks.size());
+
+		String lastChunk = "";
+		for(int i=0; i<chunks.size(); i++) {
+			String chunk = chunks.get(i).trim();
+
+			// Functions should be tokenized as "foo(" rather than "foo", "("
+			// but parenthesis should be respected by themselves. Functions
+			// will be preceded by an identifier, while parenthesis will be
+			// preceded by another operator.
+			//
+			// Note: isColumn is useful here because it only checks whether
+			// a name is "alphanumeric with underscores", which is good enough
+			// for this test.
+			if(chunk.equals("(") && isAlphanumericWithUnderscores(lastChunk)) {
+				int lastIndex = result.size()-1;
+				result.set(lastIndex, result.get(lastIndex) + "(");
+			}
+			else {
+				result.add(chunk);
+			}
+			lastChunk = chunk;
 		}
-		return result;
+		return result.toArray(new String[0]);
 	}
 
 	static boolean isColumn(String token) {
-		char firstChar = token.charAt(0);
-		return ((firstChar > 'a' && firstChar < 'z') || (firstChar > 'A' && firstChar < 'Z'));
+		// Good enough for now.
+		return isAlphanumericWithUnderscores(token);
+	}
+
+	static boolean isAlphanumericWithUnderscores(String token) {
+		int len = token.length();
+
+		// Speed optimization: check the characters in
+		// reverse order. Function tokens look a lot
+		// like column tokens but they always have a
+		// '(' as the last character. If we check that
+		// first it should allow us to return false
+		// sooner in those cases.
+		for(int i=len-1; i>=0; i--) {
+			char c = token.charAt(i);
+			boolean isIdentifierChar = (
+				(c > 'a' && c < 'z') ||
+				(c > 'A' && c < 'Z') ||
+				c == '_'
+			);
+			if(!isIdentifierChar) {
+				return false;
+			}
+		}
+		return len > 0;
+	}
+
+	static boolean isFunction(String token) {
+		char lastChar = token.charAt(token.length()-1);
+		if(lastChar != '(') {
+			return false;
+		}
+		else {
+			// Strip off the trailing '(' and check if the remainder exists
+			// in our functionNames set
+			return OperatorInfo.isFunction(token.substring(0, token.length()-1));
+		}
 	}
 
 	static boolean isOperator(String token) {
-		return operatorStrings.contains(token);
+		return OperatorInfo.isOperator(token);
 	}
 
 	static class AccessorContainer {
-		public IRowAccessor accessor;
+		public TypedRowAccessor accessor;
 	}
 
 	static boolean tryParseNumber(String token, AccessorContainer accessorReceiver) {
+
+		// Speed optimization: checking just the first character manually should
+		// save us from the big, slow, ugly try-catch mess below, most of the time.
+		// Since tryParseNumber is one of the first things we try to parse, we're
+		// expecting a high "failure" rate here.
 		char firstChar = token.charAt(0);
 		boolean isNumeric = (firstChar >= '0' && firstChar <= '9') || (firstChar == '-');
 		if(!isNumeric) {
@@ -133,6 +325,68 @@ public class OperatorParser {
 					return false;
 				}
 			}
+		}
+	}
+
+	static void popOperator(ParserState state) {
+		String opStr = state.operatorStack.pop();
+		TypedRowAccessor opInst = operatorTokenToInstance(opStr, state);
+		state.outputStack.push(opInst);
+	}
+
+	static TypedRowAccessor operatorTokenToInstance(String operator, ParserState state) {
+
+		if(OperatorInfo.getNumParams(operator) == 2) {
+			TypedRowAccessor lhs = state.outputStack.pop();
+			TypedRowAccessor rhs = state.outputStack.pop();
+
+			// "||", "&&", "%", "+", "-", "*", "/"
+			if(operator.equals("||")) {
+				throw new Error("Programmer Error: OrOperator not yet implemented");
+			}
+			else if(operator.equals("&&")) {
+				throw new Error("Programmer Error: AndOperator not yet implemented");
+			}
+			else if(operator.equals("%")) {
+				return new ModuloOperator(lhs, rhs);
+			}
+			else if(operator.equals("+")) {
+				return new PlusOperator(lhs, rhs);
+			}
+			else if(operator.equals("-")) {
+				return new MinusOperator(lhs, rhs);
+			}
+			else if(operator.equals("*")) {
+				return new DivideOperator(lhs, rhs);
+			}
+			else if(operator.equals("nroot(")) {
+				return new NthRootOperator(lhs, rhs);
+			}
+			else if(operator.equals("^")) {
+				return new CaretOperator(lhs, rhs);
+			}
+			else {
+				throw new Error("Programmer Error: unrecognized binary operator token: \"" + operator + "\"");
+			}
+		}
+		else if(OperatorInfo.getNumParams(operator) == 1) {
+			TypedRowAccessor src = state.outputStack.pop();
+
+			if(operator.equals("!")) {
+				return new NotOperator(src);
+			}
+			else if(operator.equals("sqrt(")) {
+				return new SqrtOperator(src);
+			}
+			else {
+				throw new Error("Programmer Error: unrecognized unary operator token: \"" + operator + "\"");
+			}
+		}
+		else {
+			throw new Error(
+				"Programmer Error: Unable to determine type of \"" + operator + "\" operator." +
+				" This should be impossible."
+			);
 		}
 	}
 
