@@ -43,4 +43,12 @@ public class TestOperatorParser {
 		assertTrue(iter.tryMoveNext());
 		assertEquals(2, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
+
+	@Test
+	public void testDivideOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4/i2");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(2, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
 }

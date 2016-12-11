@@ -369,6 +369,9 @@ public class OperatorParser {
 				return new MinusOperator(lhs, rhs);
 			}
 			else if(operator.equals("*")) {
+				return new TimesOperator(lhs, rhs);
+			}
+			else if(operator.equals("/")) {
 				return new DivideOperator(lhs, rhs);
 			}
 			else if(operator.equals("nroot(")) {
