@@ -59,4 +59,28 @@ public class TestOperatorParser {
 		assertTrue(iter.tryMoveNext());
 		assertEquals(2, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
+
+	@Test
+	public void testModuloOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i3/i2");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(1, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testNotOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "!b");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testCaretOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i3^i4");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(81, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
 }
