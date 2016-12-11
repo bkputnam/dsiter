@@ -124,4 +124,14 @@ public class TestOperatorParser {
 		assertTrue(iter.tryMoveNext());
 		assertEquals(2.71/3.14/3.14, (double)parsed.getValueFromRow(iter.getCurrentRow()), 0.0000001);
 	}
+
+	@Test
+	public void testRepeatedExponents() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i2^i3^i2");
+		assertTrue(iter.tryMoveNext());
+		// (2^3)^2 == 64
+		// 2^(3^2) == 512
+		assertEquals(512, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
 }
