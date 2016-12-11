@@ -18,15 +18,15 @@ public class TestCsvWriter {
 
     @Test
     public void testCsv() {
-        Integer[] vals1 = new Integer[] { 1, 2, 3, 4, 5, };
-        Float[] vals2 = new Float[] { 3.142f, 2.718f, 0f, 1f, -1f };
-        Boolean[] vals3 = new Boolean[] { true, true, false, false, false };
+        int[] vals1 = new int[] { 1, 2, 3, 4, 5, };
+        float[] vals2 = new float[] { 3.142f, 2.718f, 0f, 1f, -1f };
+        boolean[] vals3 = new boolean[] { true, true, false, false, false };
         String[] vals4 = new String[] { "hello", "world", "foo", "bar", "baz" };
 
-        AbstractDatasetIterator it1 = new RenameIterator(new ArrayIterator<Integer>(vals1), "value", "a");
-        AbstractDatasetIterator it2 = new RenameIterator(new ArrayIterator<Float>(vals2), "value", "b");
-        AbstractDatasetIterator it3 = new RenameIterator(new ArrayIterator<Boolean>(vals3), "value", "c");
-        AbstractDatasetIterator it4 = new RenameIterator(new ArrayIterator<String>(vals4), "value", "d");
+        AbstractDatasetIterator it1 = new RenameIterator(new ArrayIterator(vals1), "value", "a");
+        AbstractDatasetIterator it2 = new RenameIterator(new ArrayIterator(vals2), "value", "b");
+        AbstractDatasetIterator it3 = new RenameIterator(new ArrayIterator(vals3), "value", "c");
+        AbstractDatasetIterator it4 = new RenameIterator(new ArrayIterator(vals4), "value", "d");
 
         ZipIterator it = new ZipIterator(it1, it2, it3, it4);
 

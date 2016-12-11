@@ -73,7 +73,7 @@ public class TestPipes {
         AbstractDatasetIterator it = new RangeIterator(5)
             .pipe(
                 new ZipPipe(
-                    new ArrayIterator<Integer>(1, 3, 5, 7, 9)
+                    new ArrayIterator(1, 3, 5, 7, 9)
                         .pipe(new RenamePipe("value", "a"))
                 )
             );
