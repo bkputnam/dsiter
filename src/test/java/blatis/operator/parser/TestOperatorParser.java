@@ -164,4 +164,12 @@ public class TestOperatorParser {
 		// 2+(3*4) == 14
 		assertEquals(20, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
+
+	@Test
+	public void testSqrtOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "(i2+i3)*i4+sqrt(i4)");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(22.0, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
 }

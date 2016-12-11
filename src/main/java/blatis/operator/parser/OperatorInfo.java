@@ -5,7 +5,18 @@ import java.util.*;
 class OperatorInfo {
 
 	public static int getNumParams(String opStr) {
-		return operatorLookup.get(opStr).numParams;
+
+		OperatorInfoItem opInfo = operatorLookup.get(opStr);
+		if(opInfo != null) {
+			return opInfo.numParams;
+		}
+
+		FunctionInfoItem fInfo = functionLookup.get(opStr);
+		if(fInfo != null) {
+			return fInfo.numParams;
+		}
+
+		throw new IllegalArgumentException("Unable to find opStr: \"" + opStr + "\"");
 	}
 
 	public static boolean isLeftAssociative(String opStr) {
@@ -17,7 +28,7 @@ class OperatorInfo {
 	}
 
 	public static boolean isFunction(String opStr) {
-		return functionNames.contains(opStr);
+		return functionLookup.containsKey(opStr);
 	}
 
 	public static boolean isOperator(String opStr) {
@@ -48,9 +59,12 @@ class OperatorInfo {
 		new OperatorInfoItem("^", 2, false)
 	));
 
-	private static Set<String> functionNames = new HashSet<>(Arrays.asList(
-		"sqrt"
+	private static Set<FunctionInfoItem> functionSet = new HashSet<>(Arrays.asList(
+		new FunctionInfoItem("sqrt(", 1),
+		new FunctionInfoItem("nroot(", 2)
 	));
+
+	private static Map<String, FunctionInfoItem> functionLookup;
 
 	private static Map<String, OperatorInfoItem> operatorLookup;
 	private static Map<String, Integer> precedenceLookup;
@@ -78,6 +92,11 @@ class OperatorInfo {
 		for(Map.Entry<String, Integer> kvp : precedenceLookup.entrySet()) {
 			assert(operatorLookup.containsKey(kvp.getKey()));
 		}
+
+		functionLookup = new HashMap<>();
+		for(FunctionInfoItem fInfo : functionSet) {
+			functionLookup.put(fInfo.str, fInfo);
+		}
 	}
 
 
@@ -94,6 +113,16 @@ class OperatorInfo {
 			this.str = str;
 			this.numParams = numParams;
 			this.isLeftAssociative = isLeftAssociative;
+		}
+	}
+
+	private static class FunctionInfoItem {
+		public String str;
+		public int numParams;
+
+		public FunctionInfoItem(String str, int numParams) {
+			this.str = str;
+			this.numParams = numParams;
 		}
 	}
 }

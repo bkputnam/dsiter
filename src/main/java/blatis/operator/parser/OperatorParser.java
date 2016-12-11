@@ -260,7 +260,7 @@ public class OperatorParser {
 		else {
 			// Strip off the trailing '(' and check if the remainder exists
 			// in our functionNames set
-			return OperatorInfo.isFunction(token.substring(0, token.length()-1));
+			return OperatorInfo.isFunction(token);
 		}
 	}
 
@@ -325,7 +325,7 @@ public class OperatorParser {
 		if(OperatorInfo.getNumParams(operator) == 2) {
 
 			// Remember: these are backwards because we're dealing with a stack
-			// (lhs is first, so got push onto stack sooner)
+			// (lhs is first, so got pushed onto stack sooner)
 			TypedRowAccessor rhs = state.outputStack.pop();
 			TypedRowAccessor lhs = state.outputStack.pop();
 
