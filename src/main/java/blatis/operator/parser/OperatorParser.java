@@ -354,10 +354,10 @@ public class OperatorParser {
 
 			// "||", "&&", "%", "+", "-", "*", "/"
 			if(operator.equals("||")) {
-				throw new Error("Programmer Error: OrOperator not yet implemented");
+				return new OrOperator(lhs, rhs);
 			}
 			else if(operator.equals("&&")) {
-				throw new Error("Programmer Error: AndOperator not yet implemented");
+				return new AndOperator(lhs, rhs);
 			}
 			else if(operator.equals("%")) {
 				return new ModuloOperator(lhs, rhs);

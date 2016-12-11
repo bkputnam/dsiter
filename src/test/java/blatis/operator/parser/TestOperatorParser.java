@@ -24,7 +24,8 @@ public class TestOperatorParser {
 			new ArrayIterator(new float[] { 3.14F }).pipe(new RenamePipe("value", "f")),
 			new ArrayIterator(new double[] { 2.71 }).pipe(new RenamePipe("value", "d")),
 			new ArrayIterator(new String[] { "hello world" }).pipe(new RenamePipe("value", "s")),
-			new ArrayIterator(new boolean[] { true }).pipe(new RenamePipe("value", "b"))
+			new ArrayIterator(new boolean[] { true }).pipe(new RenamePipe("value", "bt")),
+			new ArrayIterator(new boolean[] { false }).pipe(new RenamePipe("value", "bf"))
 		);
 	}
 
@@ -71,7 +72,7 @@ public class TestOperatorParser {
 	@Test
 	public void testNotOperator() {
 		AbstractDatasetIterator iter = dummyIterator();
-		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "!b");
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "!bt");
 		assertTrue(iter.tryMoveNext());
 		assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
@@ -82,5 +83,21 @@ public class TestOperatorParser {
 		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i3^i4");
 		assertTrue(iter.tryMoveNext());
 		assertEquals(81, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testAndOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "bt&&bf");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testOrOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "bt||bf");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(true, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
 }
