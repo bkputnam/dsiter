@@ -17,6 +17,9 @@ public class TestOperatorParser {
 	private static AbstractDatasetIterator dummyIterator() {
 		return new ZipIterator(
 			new ArrayIterator(new int[] { 1 }).pipe(new RenamePipe("value", "i")),
+			new ArrayIterator(new int[] { 2 }).pipe(new RenamePipe("value", "i2")),
+			new ArrayIterator(new int[] { 3 }).pipe(new RenamePipe("value", "i3")),
+			new ArrayIterator(new int[] { 4 }).pipe(new RenamePipe("value", "i4")),
 			new ArrayIterator(new long[] { 1234567890123456789L }).pipe(new RenamePipe("value", "l")),
 			new ArrayIterator(new float[] { 3.14F }).pipe(new RenamePipe("value", "f")),
 			new ArrayIterator(new double[] { 2.71 }).pipe(new RenamePipe("value", "d")),
@@ -31,5 +34,13 @@ public class TestOperatorParser {
 		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i+l");
 		assertTrue(iter.tryMoveNext());
 		assertEquals(1234567890123456790L, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testMinusOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4-i2");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(2, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
 }

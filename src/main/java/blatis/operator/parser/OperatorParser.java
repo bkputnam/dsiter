@@ -240,7 +240,22 @@ public class OperatorParser {
 
 	static boolean isColumn(String token) {
 		// Good enough for now.
-		return isAlphanumericWithUnderscores(token);
+		return isAlphaOrUnderscore(token.charAt(0)) && isAlphanumericWithUnderscores(token);
+	}
+
+	static boolean isAlphaOrUnderscore(char c) {
+		return
+			(c >= 'a' && c <= 'z') ||
+			(c >= 'A' && c <= 'Z') ||
+			c == '_';
+	}
+
+	static boolean isAlphanumericOrUnderscore(char c) {
+		return
+			(c >= 'a' && c <= 'z') ||
+			(c >= 'A' && c <= 'Z') ||
+			(c >= '0' && c <= '9') ||
+			c == '_';
 	}
 
 	static boolean isAlphanumericWithUnderscores(String token) {
@@ -253,13 +268,7 @@ public class OperatorParser {
 		// first it should allow us to return false
 		// sooner in those cases.
 		for(int i=len-1; i>=0; i--) {
-			char c = token.charAt(i);
-			boolean isIdentifierChar = (
-				(c > 'a' && c < 'z') ||
-				(c > 'A' && c < 'Z') ||
-				c == '_'
-			);
-			if(!isIdentifierChar) {
+			if(!isAlphanumericOrUnderscore(token.charAt(i))) {
 				return false;
 			}
 		}
@@ -337,8 +346,11 @@ public class OperatorParser {
 	static TypedRowAccessor operatorTokenToInstance(String operator, ParserState state) {
 
 		if(OperatorInfo.getNumParams(operator) == 2) {
-			TypedRowAccessor lhs = state.outputStack.pop();
+
+			// Remember: these are backwards because we're dealing with a stack
+			// (lhs is first, so got push onto stack sooner)
 			TypedRowAccessor rhs = state.outputStack.pop();
+			TypedRowAccessor lhs = state.outputStack.pop();
 
 			// "||", "&&", "%", "+", "-", "*", "/"
 			if(operator.equals("||")) {
