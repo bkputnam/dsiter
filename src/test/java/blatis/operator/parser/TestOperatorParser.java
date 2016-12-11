@@ -45,6 +45,14 @@ public class TestOperatorParser {
 	}
 
 	@Test
+	public void testTimesOperator() {
+		AbstractDatasetIterator iter = dummyIterator();
+		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4*i2");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(8, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
 	public void testDivideOperator() {
 		AbstractDatasetIterator iter = dummyIterator();
 		TypedRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4/i2");
