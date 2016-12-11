@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class TestNotOperator {
 
     @Test
