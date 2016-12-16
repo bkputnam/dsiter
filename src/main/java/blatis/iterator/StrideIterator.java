@@ -8,24 +8,16 @@ public class StrideIterator extends AbstractDatasetIterator {
 	private AbstractDatasetIterator src;
 	private int stride;
 	private boolean isFirstTime = true;
-	private Row currentRow;
 
 	public StrideIterator(AbstractDatasetIterator src, int stride) {
 		this.src = src;
 		this.stride = stride;
-		this.currentRow = null;
 	}
 
 	public boolean tryMoveNext() {
 		if( isFirstTime ) {
 			isFirstTime = false;
-			if( src.tryMoveNext() ) {
-				currentRow = src.getCurrentRow();
-				return true;
-			}
-			else {
-				return false;
-			}
+			return src.tryMoveNext();
 		}
 		else {
 			for( int i=0; i<stride; i++) {
@@ -33,13 +25,12 @@ public class StrideIterator extends AbstractDatasetIterator {
 					return false;
 				}
 			}
-			currentRow = this.src.getCurrentRow().clone();
 			return true;
 		}
 	}
 
 	public Row getCurrentRow() {
-		return currentRow;
+		return src.getCurrentRow();
 	}
 
 	public ColumnDescriptor[] getColumnDescriptors() {
