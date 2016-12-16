@@ -1,16 +1,13 @@
 package blatis.iterator;
 
+import blatis.operator.EqualsOperator;
+import blatis.operator.GreaterThanOperator;
 import blatis.operator.ModuloOperator;
-import blatis.predicate.EqualsPredicate;
-import blatis.predicate.GreaterThanPredicate;
 import blatis.row.ColumnAccessor;
 import blatis.row.ConstantAccessor;
 import org.junit.Test;
 import org.junit.Assert.*;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class TestFilterIterator {
 
     @Test
@@ -21,10 +18,10 @@ public class TestFilterIterator {
 
         FilterIterator it = new FilterIterator(
             range,
-            new GreaterThanPredicate(
+            new GreaterThanOperator(
                 ca,
                 new ConstantAccessor(5)
-            )
+            ).asBoolAccessor()
         );
 
         IterUtils.assertValues(it, "value", new Integer[] { 6, 7, 8, 9 });
@@ -38,13 +35,13 @@ public class TestFilterIterator {
 
         FilterIterator it = new FilterIterator(
             range,
-            new EqualsPredicate(
+            new EqualsOperator(
                 new ModuloOperator(
                     ca,
                     new ConstantAccessor(2)
                 ),
                 new ConstantAccessor(0)
-            )
+            ).asBoolAccessor()
         );
 
         IterUtils.assertValues(it, "value", new Integer[] { 0, 2, 4, 6, 8 });

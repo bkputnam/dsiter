@@ -1,8 +1,8 @@
 package blatis.iterator;
 
-import blatis.predicate.IPredicate;
 import blatis.row.ColumnDescriptor;
 import blatis.row.Row;
+import blatis.row.TypedRowAccessor;
 
 /**
  * Created by bkputnam on 12/3/16.
@@ -10,10 +10,10 @@ import blatis.row.Row;
 public class FilterIterator extends AbstractDatasetIterator {
 
     private AbstractDatasetIterator src;
-    private IPredicate predicate;
+    private TypedRowAccessor.BOOLEAN predicate;
     private Row currentRow;
 
-    public FilterIterator(AbstractDatasetIterator src, IPredicate predicate) {
+    public FilterIterator(AbstractDatasetIterator src, TypedRowAccessor.BOOLEAN predicate) {
         this.src = src;
         this.predicate = predicate;
     }
@@ -24,7 +24,7 @@ public class FilterIterator extends AbstractDatasetIterator {
         boolean foundPassingRow = false;
         while(src.tryMoveNext()) {
             row = src.getCurrentRow();
-            if(predicate.testRow(row)) {
+            if(predicate.getBoolFromRow(row)) {
                 currentRow = row;
                 return true;
             }

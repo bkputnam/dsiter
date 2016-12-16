@@ -4,17 +4,13 @@ import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.ArrayIterator;
 import blatis.iterator.IterUtils;
 import blatis.iterator.RangeIterator;
+import blatis.operator.EqualsOperator;
 import blatis.operator.ModuloOperator;
-import blatis.predicate.EqualsPredicate;
-import blatis.predicate.IPredicate;
 import blatis.row.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class TestPipes {
 
     @Test
@@ -36,13 +32,13 @@ public class TestPipes {
     @Test
     public void testFilterPipe() {
 
-        IPredicate isEvenPredicate = new EqualsPredicate(
+		TypedRowAccessor.BOOLEAN isEvenPredicate = new EqualsOperator(
                 new ModuloOperator(
                         new ColumnAccessor(ColumnType.INT, 0),
                         new ConstantAccessor(2)
                 ),
                 new ConstantAccessor(0)
-        );
+        ).asBoolAccessor();
 
         AbstractDatasetIterator it = new RangeIterator(10)
                 .pipe(new FilterPipe(isEvenPredicate));
