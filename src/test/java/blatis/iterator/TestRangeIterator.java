@@ -29,7 +29,7 @@ public class TestRangeIterator {
 	@Test
 	public void testShape() {
 
-		RowShape shape = (new RangeIterator(1)).getShape();
+		RowShape shape = (new RangeIterator(1)).computeShape();
 
 		assertEquals(1, shape.getNumInts());
 		assertEquals(0, shape.getNumLongs());
@@ -42,7 +42,7 @@ public class TestRangeIterator {
 	@Test
 	public void testShape0() {
 
-		RowShape shape = (new RangeIterator(0)).getShape();
+		RowShape shape = (new RangeIterator(0)).computeShape();
 
 		assertEquals(1, shape.getNumInts());
 		assertEquals(0, shape.getNumLongs());

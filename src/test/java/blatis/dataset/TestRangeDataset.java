@@ -49,7 +49,7 @@ public class TestRangeDataset {
 	@Test
 	public void testShape() {
 
-		RowShape shape = (new RangeDataset(1)).getIterator().getShape();
+		RowShape shape = (new RangeDataset(1)).getIterator().computeShape();
 
 		assertEquals(1, shape.getNumInts());
 		assertEquals(0, shape.getNumLongs());
