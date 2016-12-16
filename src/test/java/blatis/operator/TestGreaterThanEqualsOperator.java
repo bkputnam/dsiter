@@ -1,8 +1,13 @@
 package blatis.operator;
 
+import blatis.iterator.AbstractDatasetIterator;
+import blatis.iterator.IterUtils;
+import blatis.iterator.RangeIterator;
 import blatis.row.ConstantAccessor;
 import blatis.row.Row;
 import org.junit.Test;
+
+import static blatis.StdPipes.filter;
 import static org.junit.Assert.*;
 
 /**
@@ -68,5 +73,12 @@ public class TestGreaterThanEqualsOperator {
 		);
 
 		assertEquals(true, gte.getValueFromRow(new Row()));
+	}
+
+	@Test
+	public void testParser() {
+		AbstractDatasetIterator iter = new RangeIterator(20)
+			.pipe(filter("value>=15"));
+		IterUtils.assertValues(iter, "value", new Integer[] { 15, 16, 17, 18, 19 });
 	}
 }

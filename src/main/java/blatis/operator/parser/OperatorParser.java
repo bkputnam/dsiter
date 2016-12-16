@@ -329,8 +329,23 @@ public class OperatorParser {
 			TypedRowAccessor rhs = state.outputStack.pop();
 			TypedRowAccessor lhs = state.outputStack.pop();
 
-			// "||", "&&", "%", "+", "-", "*", "/"
-			if(operator.equals("||")) {
+			// This is probably a silly way to implement an operator lookup.
+			if(operator.equals("=")) {
+				return new EqualsOperator(lhs, rhs);
+			}
+			else if(operator.equals("<")) {
+				return new LessThanOperator(lhs, rhs);
+			}
+			else if(operator.equals(">")) {
+				return new GreaterThanOperator(lhs, rhs);
+			}
+			else if(operator.equals("<=")) {
+				return new LessThanEqualsOperator(lhs, rhs);
+			}
+			else if(operator.equals(">=")) {
+				return new GreaterThanEqualsOperator(lhs, rhs);
+			}
+			else if(operator.equals("||")) {
 				return new OrOperator(lhs, rhs);
 			}
 			else if(operator.equals("&&")) {
