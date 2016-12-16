@@ -11,7 +11,6 @@ public class FilterIterator extends AbstractDatasetIterator {
 
     private AbstractDatasetIterator src;
     private TypedRowAccessor.BOOLEAN predicate;
-    private Row currentRow;
 
     public FilterIterator(AbstractDatasetIterator src, TypedRowAccessor.BOOLEAN predicate) {
         this.src = src;
@@ -20,12 +19,9 @@ public class FilterIterator extends AbstractDatasetIterator {
 
     @Override
     public boolean tryMoveNext() {
-        Row row;
         boolean foundPassingRow = false;
         while(src.tryMoveNext()) {
-            row = src.getCurrentRow();
-            if(predicate.getBoolFromRow(row)) {
-                currentRow = row;
+            if(predicate.getBoolFromRow(src.getCurrentRow())) {
                 return true;
             }
         }
@@ -34,7 +30,7 @@ public class FilterIterator extends AbstractDatasetIterator {
 
     @Override
     public Row getCurrentRow() {
-        return currentRow;
+        return src.getCurrentRow();
     }
 
     @Override
