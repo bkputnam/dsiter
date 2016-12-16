@@ -1,10 +1,6 @@
 package blatis.iterator;
 
-///////////////////////////////////////////
-//	DO NOT EDIT!!!
-//
-//	This is generated code. Edit the template instead.
-///////////////////////////////////////////
+${Disclaimer}
 
 import blatis.pipe.IPipe;
 import blatis.row.ColumnType;
@@ -34,13 +30,8 @@ public abstract class AbstractDatasetIterator {
 	}
 
 	public RowShape getShape() {
-		
-		int numInts = 0;
-		int numLongs = 0;
-		int numFloats = 0;
-		int numDoubles = 0;
-		int numStrings = 0;
-		int numBools = 0;
+		<% ColumnTypes.each { type -> %>
+		int num${type.capitalized}s = 0;<% } %>
 
 		ColumnDescriptor[] cds = this.getColumnDescriptors();
 		for(int i=0; i<cds.length; i++) {
@@ -49,13 +40,8 @@ public abstract class AbstractDatasetIterator {
 
 
 			switch(type) {
-				
-				case INT: numInts++; break;
-				case LONG: numLongs++; break;
-				case FLOAT: numFloats++; break;
-				case DOUBLE: numDoubles++; break;
-				case STRING: numStrings++; break;
-				case BOOLEAN: numBools++; break;
+				<% ColumnTypes.each { type -> %>
+				case ${type.type}: num${type.capitalized}s++; break;<% } %>
 				default: throw new Error("This should be impossible");
 			}
 		}
