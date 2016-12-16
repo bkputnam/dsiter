@@ -1,0 +1,33 @@
+package blatis.operator;
+
+${Disclaimer}
+
+import blatis.row.ColumnType;
+import blatis.row.IRowAccessor;
+import blatis.row.TypedRowAccessor;
+
+public class GreaterThanEqualsOperator extends TypedBinaryOperator {
+
+	public GreaterThanEqualsOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+		super(lhs, rhs);
+	}
+
+	@Override
+	public ColumnType getReturnType(ColumnType lhsType, ColumnType rhsType) {
+		return ColumnType.BOOLEAN;
+	}
+
+	@Override
+	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
+		return (lhsType.isNumeric() && rhsType.isNumeric());
+	}
+
+	<%
+		def numberTypes = ["int", "long", "float", "double"]
+		numberTypes.each { lhsType ->
+			numberTypes.each { rhsType ->
+	%>
+	@Override
+	protected boolean handle_${lhsType}_${rhsType}_boolean(${lhsType} lhs, ${rhsType} rhs) { return lhs >= rhs; }
+	<% }} %>
+}

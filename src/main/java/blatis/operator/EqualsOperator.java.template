@@ -6,9 +6,6 @@ import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.TypedRowAccessor;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class EqualsOperator extends TypedBinaryOperator {
 
 	public EqualsOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
