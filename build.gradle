@@ -15,7 +15,7 @@ sourceCompatibility = 1.8
 task wrapper(type: Wrapper) { gradleVersion = '2.12' }
 
 task applyTemplates(type: Copy) {
-	def templateConfigFile = "src/build/resources/templateConfig.json"
+	def templateConfigFile = file("src/build/resources/templateConfig.json").absolutePath
 	inputs.file templateConfigFile
 
 	from "src/main/java"
@@ -29,7 +29,7 @@ task applyTemplates(type: Copy) {
 }
 
 task applyTestTemplates(type: Copy) {
-	def templateConfigFile = "src/build/resources/templateConfig.json"
+	def templateConfigFile = file("src/build/resources/templateConfig.json").absolutePath
 	inputs.file templateConfigFile
 
 	from "src/test/java"
