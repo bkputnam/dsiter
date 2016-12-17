@@ -1,5 +1,6 @@
 package blatis.dataset;
 
+import blatis.IteratorExpectations;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.IterUtils;
 import blatis.reader.FileReaderFactory;
@@ -36,13 +37,14 @@ public class TestLineReaderDataset {
 			new FileReaderFactory(filename)
 		);
 
-		String[] expectedLines = new String[] {
+		IteratorExpectations e = new IteratorExpectations();
+		e.expectStrings("line",
 			"foo	bar	baz",
 			"1	1.5	frib",
 			"2	2.5	frob",
 			"3	3.5	fraz"
-		};
+		);
 
-		IterUtils.assertValues(lrd.getIterator(), "line", expectedLines);
+		e.checkIterator(lrd.getIterator());
 	}
 }
