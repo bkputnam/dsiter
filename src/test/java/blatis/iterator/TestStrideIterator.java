@@ -1,12 +1,12 @@
 package blatis.pipe;
 
+import blatis.IterUtils;
 import org.junit.Test;
 
 import blatis.dataset.RangeDataset;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.StrideIterator;
 import blatis.iterator.LastIterator;
-import blatis.iterator.IterUtils;
 
 public class TestStrideIterator {
 

@@ -2,6 +2,7 @@ package blatis.iterator;
 
 import static org.junit.Assert.*;
 
+import blatis.IterUtils;
 import org.junit.Test;
 
 import blatis.row.RowShape;

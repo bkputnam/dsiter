@@ -1,7 +1,7 @@
 package blatis.operator;
 
+import blatis.IterUtils;
 import blatis.iterator.AbstractDatasetIterator;
-import blatis.iterator.IterUtils;
 import blatis.iterator.RangeIterator;
 import blatis.row.ConstantAccessor;
 import blatis.row.Row;

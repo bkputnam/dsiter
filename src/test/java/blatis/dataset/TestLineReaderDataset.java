@@ -1,8 +1,8 @@
 package blatis.dataset;
 
+import blatis.IterUtils;
 import blatis.IteratorExpectations;
 import blatis.iterator.AbstractDatasetIterator;
-import blatis.iterator.IterUtils;
 import blatis.reader.FileReaderFactory;
 import blatis.reader.StringReaderFactory;
 import blatis.row.Row;

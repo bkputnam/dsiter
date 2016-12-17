@@ -2,13 +2,13 @@ package blatis.pipe;
 
 import static org.junit.Assert.*;
 
+import blatis.IterUtils;
 import org.junit.Test;
 
 import blatis.dataset.RangeDataset;
 import blatis.row.ColumnDescriptor;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.RenameIterator;
-import blatis.iterator.IterUtils;
 
 public class TestRenameIterator {
 

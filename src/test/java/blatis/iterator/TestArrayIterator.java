@@ -1,10 +1,8 @@
 package blatis.iterator;
 
+import blatis.IterUtils;
 import org.junit.Test;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class TestArrayIterator {
 
     @Test

@@ -1,7 +1,7 @@
 package blatis.operator;
 
+import blatis.IterUtils;
 import blatis.iterator.AbstractDatasetIterator;
-import blatis.iterator.IterUtils;
 import blatis.iterator.RangeIterator;
 import blatis.row.ConstantAccessor;
 import blatis.row.Row;
@@ -10,9 +10,6 @@ import org.junit.Test;
 import static blatis.StdPipes.filter;
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by bkputnam on 12/15/16.
- */
 public class TestLessThanEqualsOperator {
 
 	@Test

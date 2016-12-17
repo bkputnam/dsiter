@@ -2,6 +2,7 @@ package blatis.dataset;
 
 import static org.junit.Assert.*;
 
+import blatis.IterUtils;
 import blatis.row.ColumnAccessor;
 import blatis.row.ColumnDescriptor;
 import blatis.row.RowShape;
@@ -14,36 +15,14 @@ public class TestRangeDataset {
 
 	@Test
 	public void testRange5() {
-		int[] expected = new int[] { 0, 1, 2, 3, 4 };
-
-		RangeDataset rd = new RangeDataset(5);
-		AbstractDatasetIterator it = rd.getIterator();
-
-		ColumnDescriptor cd = it.getColumnDescriptor("value");
-		ColumnAccessor colAccessor = cd.getAccessor();
-
-		int index = 0;
-		while( it.tryMoveNext() ) {
-			Row row = it.getCurrentRow();
-			int val = (int)colAccessor.getValueFromRow(row);
-			assertEquals(expected[index], val);
-			index++;
-		}
+		AbstractDatasetIterator it = new RangeDataset(5).getIterator();
+		IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4 });
 	}
 
 	@Test
 	public void testRange0() {
-		RangeDataset rd = new RangeDataset(0);
-		AbstractDatasetIterator it = rd.getIterator();
-
-		ColumnDescriptor cd = it.getColumnDescriptor("value");
-		ColumnAccessor colAccessor = cd.getAccessor();
-
-		int count = 0;
-		while( it.tryMoveNext() ) {
-			count++;
-		}
-		assertEquals(0, count);
+		AbstractDatasetIterator it = new RangeDataset(0).getIterator();
+		IterUtils.assertValues(it, "value", new Integer[0]);
 	}
 
 	@Test

@@ -1,8 +1,9 @@
-package blatis.iterator;
+package blatis;
 
 import java.util.List;
 import java.util.ArrayList;
 
+import blatis.iterator.AbstractDatasetIterator;
 import blatis.row.ColumnAccessor;
 import blatis.row.Row;
 

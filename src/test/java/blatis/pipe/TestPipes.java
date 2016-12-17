@@ -1,8 +1,8 @@
 package blatis.pipe;
 
+import blatis.IterUtils;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.ArrayIterator;
-import blatis.iterator.IterUtils;
 import blatis.iterator.RangeIterator;
 import blatis.operator.EqualsOperator;
 import blatis.operator.ModuloOperator;
