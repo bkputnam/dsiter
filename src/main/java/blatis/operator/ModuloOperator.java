@@ -12,14 +12,28 @@ public class ModuloOperator extends TypedBinaryOperator {
 
 	@Override
 	protected ColumnType getReturnType(ColumnType lhsType, ColumnType rhsType) {
-		return ColumnType.INT;
+		return eitherTypeIs(ColumnType.LONG)
+			? ColumnType.LONG
+			: ColumnType.INT;
 	}
 
     @Override
     protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
-        return bothTypesAre(ColumnType.INT);
+        return (
+			(lhsType == ColumnType.INT || lhsType == ColumnType.LONG) &&
+			(rhsType == ColumnType.INT || rhsType == ColumnType.LONG)
+		);
     }
 
 	@Override
-    protected int handle_int_int_int(int lhs, int rhs) { return lhs % rhs; }
+	protected int handle_int_int_int(int lhs, int rhs) { return lhs % rhs; }
+
+	@Override
+	protected long handle_int_long_long(int lhs, long rhs) { return lhs % rhs; }
+
+	@Override
+	protected long handle_long_int_long(long lhs, int rhs) { return lhs % rhs; }
+
+	@Override
+	protected long handle_long_long_long(long lhs, long rhs) { return lhs % rhs; }
 }
