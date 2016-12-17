@@ -12,13 +12,6 @@ public class FileReaderFactory implements IReaderFactory {
 		this.filename = filename;
 	}
 
-//	public static FileReaderFactory fromResource(String resourceName) {
-//		ClassLoader cl = FileReaderFactory.class.getClassLoader();
-//		URL url = cl.getResource(resourceName);
-//		String fullName = cl.getResource(resourceName).getPath();
-//		return new FileReaderFactory(fullName);
-//	}
-
 	@Override
 	public Reader getReader() throws Exception {
 		return new FileReader(filename);

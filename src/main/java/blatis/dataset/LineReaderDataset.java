@@ -1,7 +1,9 @@
 package blatis.dataset;
 
+import blatis.reader.FileReaderFactory;
 import blatis.reader.IReaderFactory;
 import blatis.iterator.AbstractDatasetIterator;
+import blatis.reader.StringReaderFactory;
 import blatis.row.ColumnDescriptor;
 import blatis.row.ColumnType;
 import blatis.row.Row;
@@ -16,6 +18,14 @@ public class LineReaderDataset extends AbstractDataset {
 
 	public LineReaderDataset(IReaderFactory IReaderFactory) {
 		this.IReaderFactory = IReaderFactory;
+	}
+
+	public static LineReaderDataset fromString(String src) {
+		return new LineReaderDataset(new StringReaderFactory(src));
+	}
+
+	public static LineReaderDataset fromFilename(String filename) {
+		return new LineReaderDataset(new FileReaderFactory(filename));
 	}
 
 	@Override
