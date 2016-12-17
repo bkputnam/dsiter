@@ -16,6 +16,8 @@ public class ColumnAccessor extends TypedRowAccessor {
 		super.innerAccessor = getInnerAccessor();
 	}
 
+	public int getIndex() { return index; }
+
 	private IRowAccessor getInnerAccessor() {
 		IRowAccessor result =
 			type == ColumnType.INT ? new INT() :

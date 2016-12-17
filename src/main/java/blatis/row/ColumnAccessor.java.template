@@ -12,6 +12,8 @@ public class ColumnAccessor extends TypedRowAccessor {
 		super.innerAccessor = getInnerAccessor();
 	}
 
+	public int getIndex() { return index; }
+
 	private IRowAccessor getInnerAccessor() {
 		IRowAccessor result =
 <% ColumnTypes.each{ type -> %>			type == ColumnType.${type.type} ? new ${type.type}() :
