@@ -1,0 +1,48 @@
+package blatis.row;
+
+import java.util.DoubleSummaryStatistics;
+
+<%
+	def numberTypes = ["int", "long", "float", "double"].collect {
+		nativeType -> ColumnTypes.find { it.nativeType.equals(nativeType) }
+	}
+%>
+
+public class ParserMutator {
+
+	protected int index;
+
+	public static IParserMutator getInstance(ColumnType type, int index) {
+		ParserMutator base = new ParserMutator(index);
+
+		switch (type) {
+			<% numberTypes.each { type -> %>
+			case ${type.type}: return base.new ${type.type}();<% } %>
+
+			default:
+				throw new IllegalArgumentException("Unsupported ColumnType: " + type);
+		}
+	}
+
+	private ParserMutator(int index) {
+		this.index = index;
+	}
+
+	<%
+		def parserFns = [
+			"int": "Integer.parseInt",
+			"long": "Long.parseLong",
+			"float": "Float.parseFloat",
+			"double": "Double.parseDouble"
+		]
+		numberTypes.each { type ->
+			def parserFn = parserFns[type.nativeType]
+	%>
+	protected class ${type.type} implements IParserMutator {
+		@Override
+		public void parseAndMutate(String value, Row row) {
+			row.${type.rowArray}[index] = ${parserFn}(value);
+		}
+	}
+	<% } %>
+}
