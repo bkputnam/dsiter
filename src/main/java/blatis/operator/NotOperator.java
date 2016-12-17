@@ -5,9 +5,6 @@ import blatis.row.IRowAccessor;
 import blatis.row.Row;
 import blatis.row.TypedRowAccessor;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class NotOperator extends TypedUnaryOperator {
 
 	public NotOperator(TypedRowAccessor src) {

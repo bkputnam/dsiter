@@ -1,11 +1,11 @@
 package blatis.operator;
 
-${Disclaimer}
-
 import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.Row;
 import blatis.row.TypedRowAccessor;
+
+${Disclaimer}
 
 public abstract class TypedBinaryOperator extends TypedRowAccessor {
 

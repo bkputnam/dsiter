@@ -4,6 +4,12 @@ import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.TypedRowAccessor;
 
+///////////////////////////////////////////
+//	DO NOT EDIT!!!
+//
+//	This is generated code. Edit the template instead.
+///////////////////////////////////////////
+
 public class NthRootOperator extends TypedBinaryOperator {
 
 	public NthRootOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {

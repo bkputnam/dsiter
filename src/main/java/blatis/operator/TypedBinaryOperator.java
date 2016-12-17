@@ -1,15 +1,15 @@
 package blatis.operator;
 
+import blatis.row.ColumnType;
+import blatis.row.IRowAccessor;
+import blatis.row.Row;
+import blatis.row.TypedRowAccessor;
+
 ///////////////////////////////////////////
 //	DO NOT EDIT!!!
 //
 //	This is generated code. Edit the template instead.
 ///////////////////////////////////////////
-
-import blatis.row.ColumnType;
-import blatis.row.IRowAccessor;
-import blatis.row.Row;
-import blatis.row.TypedRowAccessor;
 
 public abstract class TypedBinaryOperator extends TypedRowAccessor {
 

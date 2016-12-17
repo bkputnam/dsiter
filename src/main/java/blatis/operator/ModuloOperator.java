@@ -4,9 +4,6 @@ import blatis.row.ColumnType;
 import blatis.row.IRowAccessor;
 import blatis.row.TypedRowAccessor;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class ModuloOperator extends TypedBinaryOperator {
 
     public ModuloOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
