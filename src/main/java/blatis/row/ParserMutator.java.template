@@ -1,13 +1,5 @@
 package blatis.row;
 
-import java.util.DoubleSummaryStatistics;
-
-<%
-	def numberTypes = ["int", "long", "float", "double"].collect {
-		nativeType -> ColumnTypes.find { it.nativeType.equals(nativeType) }
-	}
-%>
-
 public class ParserMutator {
 
 	protected int index;
@@ -16,7 +8,7 @@ public class ParserMutator {
 		ParserMutator base = new ParserMutator(index);
 
 		switch (type) {
-			<% numberTypes.each { type -> %>
+			<% ColumnTypes.each { type -> %>
 			case ${type.type}: return base.new ${type.type}();<% } %>
 
 			default:
@@ -33,9 +25,11 @@ public class ParserMutator {
 			"int": "Integer.parseInt",
 			"long": "Long.parseLong",
 			"float": "Float.parseFloat",
-			"double": "Double.parseDouble"
+			"double": "Double.parseDouble",
+			"boolean": "Boolean.parseBoolean",
+			"String": ""
 		]
-		numberTypes.each { type ->
+		ColumnTypes.each { type ->
 			def parserFn = parserFns[type.nativeType]
 	%>
 	protected class ${type.type} implements IParserMutator {

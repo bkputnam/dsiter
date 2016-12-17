@@ -48,4 +48,26 @@ public class TestParserMutator {
 
 		assertEquals(3.1415926, row.doubles[0], 0.000000001);
 	}
+
+	@Test
+	public void testStringParser() {
+		IParserMutator pm = ParserMutator.getInstance(ColumnType.STRING, 0);
+
+		Row row = new Row(new String[1]);
+
+		pm.parseAndMutate("3.1415926", row);
+
+		assertEquals("3.1415926", row.strings[0]);
+	}
+
+	@Test
+	public void testBoolParser() {
+		IParserMutator pm = ParserMutator.getInstance(ColumnType.BOOLEAN, 0);
+
+		Row row = new Row(new boolean[1]);
+
+		pm.parseAndMutate("True", row);
+
+		assertEquals(true, row.bools[0]);
+	}
 }

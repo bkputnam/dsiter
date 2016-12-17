@@ -1,9 +1,5 @@
 /* GENERATED CODE */package blatis.row;
 /* GENERATED CODE */
-/* GENERATED CODE */import java.util.DoubleSummaryStatistics;
-/* GENERATED CODE */
-/* GENERATED CODE */
-/* GENERATED CODE */
 /* GENERATED CODE */public class ParserMutator {
 /* GENERATED CODE */
 /* GENERATED CODE */	protected int index;
@@ -17,6 +13,8 @@
 /* GENERATED CODE */			case LONG: return base.new LONG();
 /* GENERATED CODE */			case FLOAT: return base.new FLOAT();
 /* GENERATED CODE */			case DOUBLE: return base.new DOUBLE();
+/* GENERATED CODE */			case STRING: return base.new STRING();
+/* GENERATED CODE */			case BOOLEAN: return base.new BOOLEAN();
 /* GENERATED CODE */
 /* GENERATED CODE */			default:
 /* GENERATED CODE */				throw new IllegalArgumentException("Unsupported ColumnType: " + type);
@@ -53,6 +51,20 @@
 /* GENERATED CODE */		@Override
 /* GENERATED CODE */		public void parseAndMutate(String value, Row row) {
 /* GENERATED CODE */			row.doubles[index] = Double.parseDouble(value);
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
+/* GENERATED CODE */	protected class STRING implements IParserMutator {
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		public void parseAndMutate(String value, Row row) {
+/* GENERATED CODE */			row.strings[index] = (value);
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
+/* GENERATED CODE */	protected class BOOLEAN implements IParserMutator {
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		public void parseAndMutate(String value, Row row) {
+/* GENERATED CODE */			row.bools[index] = Boolean.parseBoolean(value);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
