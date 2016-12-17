@@ -4,9 +4,6 @@ import blatis.dataset.AbstractDataset;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.ZipIterator;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class ZipPipe implements IPipe {
 
     AbstractDatasetIterator[] iters;

@@ -1,138 +1,138 @@
-package blatis.row;
-
-///////////////////////////////////////////
-//	DO NOT EDIT!!!
-//
-//	This is generated code. Edit the template instead.
-///////////////////////////////////////////
-
-public class RowShape {
-	
-	private int numInts;
-	private int numLongs;
-	private int numFloats;
-	private int numDoubles;
-	private int numStrings;
-	private int numBools;
-
-	public RowShape() {
-		this(0, 0, 0, 0, 0, 0);
-	}
-
-	public RowShape(int numInts, int numLongs, int numFloats, int numDoubles, int numStrings, int numBools) {
-		
-		this.numInts = numInts;
-		this.numLongs = numLongs;
-		this.numFloats = numFloats;
-		this.numDoubles = numDoubles;
-		this.numStrings = numStrings;
-		this.numBools = numBools;
-	}
-
-	public RowShape(ColumnDescriptor[] cds) {
-		for(int i=0; i<cds.length; i++) {
-			incrNum(cds[i].getType());
-		}
-	}
-
-	
-	public int getNumInts() { return numInts; }
-	public int getNumLongs() { return numLongs; }
-	public int getNumFloats() { return numFloats; }
-	public int getNumDoubles() { return numDoubles; }
-	public int getNumStrings() { return numStrings; }
-	public int getNumBools() { return numBools; }
-
-	
-
-	public int getNum(ColumnType type) {
-		
-		if(type == ColumnType.INT) {
-			return getNumInts();
-		}
-		else if(type == ColumnType.LONG) {
-			return getNumLongs();
-		}
-		else if(type == ColumnType.FLOAT) {
-			return getNumFloats();
-		}
-		else if(type == ColumnType.DOUBLE) {
-			return getNumDoubles();
-		}
-		else if(type == ColumnType.STRING) {
-			return getNumStrings();
-		}
-		else if(type == ColumnType.BOOLEAN) {
-			return getNumBools();
-		}
-		else {
-			throw new Error("This should be impossible");
-		}
-	}
-
-	public void setNum(ColumnType type, int num) {
-		
-		if(type == ColumnType.INT) {
-			numInts = num;
-		}
-		else if(type == ColumnType.LONG) {
-			numLongs = num;
-		}
-		else if(type == ColumnType.FLOAT) {
-			numFloats = num;
-		}
-		else if(type == ColumnType.DOUBLE) {
-			numDoubles = num;
-		}
-		else if(type == ColumnType.STRING) {
-			numStrings = num;
-		}
-		else if(type == ColumnType.BOOLEAN) {
-			numBools = num;
-		}
-		else {
-			throw new Error("This should be impossible");
-		}
-	}
-
-	public void incrNum(ColumnType type) {
-		
-		if(type == ColumnType.INT) {
-			numInts++;
-		}
-		else if(type == ColumnType.LONG) {
-			numLongs++;
-		}
-		else if(type == ColumnType.FLOAT) {
-			numFloats++;
-		}
-		else if(type == ColumnType.DOUBLE) {
-			numDoubles++;
-		}
-		else if(type == ColumnType.STRING) {
-			numStrings++;
-		}
-		else if(type == ColumnType.BOOLEAN) {
-			numBools++;
-		}
-		else {
-			throw new Error("This should be impossible");
-		}
-	}
-
-	public static RowShape add(RowShape shape1, RowShape shape2) {
-		return new RowShape(
-			
-			shape1.numInts + shape2.numInts,
-			shape1.numLongs + shape2.numLongs,
-			shape1.numFloats + shape2.numFloats,
-			shape1.numDoubles + shape2.numDoubles,
-			shape1.numStrings + shape2.numStrings,
-			shape1.numBools + shape2.numBools
-		);
-	}
-
-	public RowShape add(RowShape other) {
-		return RowShape.add(this, other);
-	}
-}
+/* GENERATED CODE */package blatis.row;
+/* GENERATED CODE */
+/* GENERATED CODE *////////////////////////////////////////////
+/* GENERATED CODE *///	DO NOT EDIT!!!
+/* GENERATED CODE *///
+/* GENERATED CODE *///	This is generated code. Edit the template instead.
+/* GENERATED CODE *////////////////////////////////////////////
+/* GENERATED CODE */
+/* GENERATED CODE */public class RowShape {
+/* GENERATED CODE */	
+/* GENERATED CODE */	private int numInts;
+/* GENERATED CODE */	private int numLongs;
+/* GENERATED CODE */	private int numFloats;
+/* GENERATED CODE */	private int numDoubles;
+/* GENERATED CODE */	private int numStrings;
+/* GENERATED CODE */	private int numBools;
+/* GENERATED CODE */
+/* GENERATED CODE */	public RowShape() {
+/* GENERATED CODE */		this(0, 0, 0, 0, 0, 0);
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	public RowShape(int numInts, int numLongs, int numFloats, int numDoubles, int numStrings, int numBools) {
+/* GENERATED CODE */		
+/* GENERATED CODE */		this.numInts = numInts;
+/* GENERATED CODE */		this.numLongs = numLongs;
+/* GENERATED CODE */		this.numFloats = numFloats;
+/* GENERATED CODE */		this.numDoubles = numDoubles;
+/* GENERATED CODE */		this.numStrings = numStrings;
+/* GENERATED CODE */		this.numBools = numBools;
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	public RowShape(ColumnDescriptor[] cds) {
+/* GENERATED CODE */		for(int i=0; i<cds.length; i++) {
+/* GENERATED CODE */			incrNum(cds[i].getType());
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	
+/* GENERATED CODE */	public int getNumInts() { return numInts; }
+/* GENERATED CODE */	public int getNumLongs() { return numLongs; }
+/* GENERATED CODE */	public int getNumFloats() { return numFloats; }
+/* GENERATED CODE */	public int getNumDoubles() { return numDoubles; }
+/* GENERATED CODE */	public int getNumStrings() { return numStrings; }
+/* GENERATED CODE */	public int getNumBools() { return numBools; }
+/* GENERATED CODE */
+/* GENERATED CODE */	
+/* GENERATED CODE */
+/* GENERATED CODE */	public int getNum(ColumnType type) {
+/* GENERATED CODE */		
+/* GENERATED CODE */		if(type == ColumnType.INT) {
+/* GENERATED CODE */			return getNumInts();
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.LONG) {
+/* GENERATED CODE */			return getNumLongs();
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.FLOAT) {
+/* GENERATED CODE */			return getNumFloats();
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.DOUBLE) {
+/* GENERATED CODE */			return getNumDoubles();
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.STRING) {
+/* GENERATED CODE */			return getNumStrings();
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.BOOLEAN) {
+/* GENERATED CODE */			return getNumBools();
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else {
+/* GENERATED CODE */			throw new Error("This should be impossible");
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	public void setNum(ColumnType type, int num) {
+/* GENERATED CODE */		
+/* GENERATED CODE */		if(type == ColumnType.INT) {
+/* GENERATED CODE */			numInts = num;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.LONG) {
+/* GENERATED CODE */			numLongs = num;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.FLOAT) {
+/* GENERATED CODE */			numFloats = num;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.DOUBLE) {
+/* GENERATED CODE */			numDoubles = num;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.STRING) {
+/* GENERATED CODE */			numStrings = num;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.BOOLEAN) {
+/* GENERATED CODE */			numBools = num;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else {
+/* GENERATED CODE */			throw new Error("This should be impossible");
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	public void incrNum(ColumnType type) {
+/* GENERATED CODE */		
+/* GENERATED CODE */		if(type == ColumnType.INT) {
+/* GENERATED CODE */			numInts++;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.LONG) {
+/* GENERATED CODE */			numLongs++;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.FLOAT) {
+/* GENERATED CODE */			numFloats++;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.DOUBLE) {
+/* GENERATED CODE */			numDoubles++;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.STRING) {
+/* GENERATED CODE */			numStrings++;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.BOOLEAN) {
+/* GENERATED CODE */			numBools++;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else {
+/* GENERATED CODE */			throw new Error("This should be impossible");
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	public static RowShape add(RowShape shape1, RowShape shape2) {
+/* GENERATED CODE */		return new RowShape(
+/* GENERATED CODE */			
+/* GENERATED CODE */			shape1.numInts + shape2.numInts,
+/* GENERATED CODE */			shape1.numLongs + shape2.numLongs,
+/* GENERATED CODE */			shape1.numFloats + shape2.numFloats,
+/* GENERATED CODE */			shape1.numDoubles + shape2.numDoubles,
+/* GENERATED CODE */			shape1.numStrings + shape2.numStrings,
+/* GENERATED CODE */			shape1.numBools + shape2.numBools
+/* GENERATED CODE */		);
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	public RowShape add(RowShape other) {
+/* GENERATED CODE */		return RowShape.add(this, other);
+/* GENERATED CODE */	}
+/* GENERATED CODE */}

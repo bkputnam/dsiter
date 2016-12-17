@@ -2,9 +2,6 @@ package blatis.iterator;
 
 import blatis.row.*;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class ArrayIterator extends AbstractDatasetIterator {
 
 	private int index;

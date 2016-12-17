@@ -3,9 +3,6 @@ package blatis.pipe;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.SkipIterator;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class SkipPipe implements IPipe {
 
     private int howMany;

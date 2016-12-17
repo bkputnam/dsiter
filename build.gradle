@@ -24,6 +24,8 @@ task applyTemplates(type: Copy) {
 
 	rename { filename -> filename - ~/\.template$/ }
 	expand new JsonSlurper().parse(new File(templateConfigFile))
+
+	filter { line -> "/* GENERATED CODE */" + line }
 }
 
 task applyTestTemplates(type: Copy) {
@@ -36,6 +38,8 @@ task applyTestTemplates(type: Copy) {
 
 	rename { filename -> filename - ~/\.template$/ }
 	expand new JsonSlurper().parse(new File(templateConfigFile))
+
+	filter { line -> "/* GENERATED CODE */" + line }
 }
 
 compileJava.dependsOn applyTemplates

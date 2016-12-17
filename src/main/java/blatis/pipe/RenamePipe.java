@@ -3,9 +3,6 @@ package blatis.pipe;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.RenameIterator;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class RenamePipe implements IPipe {
 
     private String from;

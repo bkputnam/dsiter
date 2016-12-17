@@ -5,9 +5,6 @@ import blatis.iterator.FilterIterator;
 import blatis.operator.parser.OperatorParser;
 import blatis.row.TypedRowAccessor;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class FilterPipe implements IPipe {
 
 	TypedRowAccessor.BOOLEAN predicate;
