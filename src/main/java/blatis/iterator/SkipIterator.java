@@ -3,9 +3,6 @@ package blatis.iterator;
 import blatis.row.ColumnDescriptor;
 import blatis.row.Row;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class SkipIterator extends AbstractDatasetIterator {
 
     private AbstractDatasetIterator src;
