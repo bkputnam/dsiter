@@ -18,25 +18,4 @@ public class Row {
 		}<% } %>
 	}
 
-	public Row clone() {
-		Row result = new Row();
-		Row.copyTo(this, result);
-		return result;
-	}
-
-	public static void copyTo(Row src, Row dest) {
-		<% ColumnTypes.each { type -> %>
-		if( src.${type.rowArray} == null ) {
-			dest.${type.rowArray} = null;
-		}
-		else {
-			if( dest.${type.rowArray} != null && dest.${type.rowArray}.length == src.${type.rowArray}.length ) {
-				System.arraycopy(src.${type.rowArray}, 0, dest.${type.rowArray}, 0, src.${type.rowArray}.length);
-			}
-			else {
-				dest.${type.rowArray} = src.${type.rowArray}.clone(); }
-			}
-		<% } %>
-	}
-
 }
