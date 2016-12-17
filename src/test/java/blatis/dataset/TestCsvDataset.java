@@ -4,6 +4,8 @@ import blatis.iterator.AbstractDatasetIterator;
 import blatis.row.ColumnDescriptor;
 import blatis.row.ColumnType;
 import blatis.row.Row;
+import static blatis.StdPipes.*;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -14,7 +16,7 @@ import java.net.URISyntaxException;
 public class TestCsvDataset {
 
 	@Test
-	public void testSimpleCsv() throws IOException, URISyntaxException {
+	public void testSimpleCsv() throws IOException {
 		String filename = this.getClass().getResource("simple.csv").getFile();
 		CsvDataset ds = new CsvDataset(filename);
 
@@ -49,5 +51,30 @@ public class TestCsvDataset {
 		}
 
 		assertEquals(3, index);
+	}
+
+	@Test
+	public void testDatasetPipes() throws IOException {
+		String filename = this.getClass().getResource("simple.csv").getFile();
+		CsvDataset ds = new CsvDataset(filename);
+
+		AbstractDatasetIterator iter = ds.getIterator().pipe(filter("foo%2=1"));
+
+		long[] expectedLongs = new long[] { 1, 3 };
+		double[] expectedDoubles = new double[] { 1.5, 3.5 };
+		String[] expectedStrings = new String[] { "frib", "fraz" };
+
+		int index = 0;
+		while(iter.tryMoveNext()) {
+			Row row = iter.getCurrentRow();
+
+			assertEquals(expectedLongs[index], row.longs[0]);
+			assertEquals(expectedDoubles[index], row.doubles[0], 0.000001);
+			assertEquals(expectedStrings[index], row.strings[0]);
+
+			index++;
+		}
+
+		assertEquals(2, index);
 	}
 }
