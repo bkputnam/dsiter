@@ -10,7 +10,6 @@
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */
 /* GENERATED CODE */	@Override
 /* GENERATED CODE */	public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
 /* GENERATED CODE */		return
