@@ -2,6 +2,7 @@ package blatis.pipe;
 
 import static org.junit.Assert.*;
 
+import blatis.IteratorExpectations;
 import blatis.iterator.*;
 import org.junit.Test;
 
@@ -16,13 +17,13 @@ public class TestZipIterator {
 	public void testZipIterator() {
 
 		AbstractDatasetIterator leftIter = new RenameIterator(
-			(new RangeDataset(5)).getIterator(),
+			new RangeIterator(5),
 			"value",
 			"a"
 		);
 		AbstractDatasetIterator rightIter = new RenameIterator(
 			new StrideIterator(
-				(new RangeDataset(10)).getIterator(),
+				new RangeIterator(10),
 				2
 			),
 			"value",
@@ -41,24 +42,11 @@ public class TestZipIterator {
 			cds[1].getAccessor(),
 		};
 
-		int[][] expectedVals = new int[][] {
-			{0, 0},
-			{1, 2},
-			{2, 4},
-			{3, 6},
-			{4, 8}
-		};
+		IteratorExpectations e = new IteratorExpectations();
+		e.expectInts("a", 0, 1, 2, 3, 4);
+		e.expectInts("b", 0, 2, 4, 6, 8);
 
-		int count = 0;
-		while(it.tryMoveNext()) {
-			Row row = it.getCurrentRow();
-
-			assertEquals(expectedVals[count][0], cas[0].getValueFromRow(row));
-			assertEquals(expectedVals[count][1], cas[1].getValueFromRow(row));
-			count++;
-		}
-
-		assertEquals(5, count);
+		e.checkIterator(it);
 	}
 
 	@Test
@@ -76,22 +64,12 @@ public class TestZipIterator {
 
 		ZipIterator it = new ZipIterator(it1, it2, it3, it4);
 
-		ColumnDescriptor[] cds = it.getColumnDescriptors();
-		ColumnAccessor ca1 = cds[0].getAccessor();
-		ColumnAccessor ca2 = cds[1].getAccessor();
-		ColumnAccessor ca3 = cds[2].getAccessor();
-		ColumnAccessor ca4 = cds[3].getAccessor();
+		IteratorExpectations e = new IteratorExpectations();
+		e.expectInts("a", vals1);
+		e.expectFloats("b", vals2);
+		e.expectBools("c", vals3);
+		e.expectStrings("d", vals4);
 
-		int index = 0;
-		while(it.tryMoveNext()) {
-			Row row = it.getCurrentRow();
-
-			assertEquals(vals1[index], ca1.getValueFromRow(row));
-			assertEquals(vals2[index], ca2.getValueFromRow(row));
-			assertEquals(vals3[index], ca3.getValueFromRow(row));
-			assertEquals(vals4[index], ca4.getValueFromRow(row));
-
-			index++;
-		}
+		e.checkIterator(it);
 	}
 }

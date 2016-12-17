@@ -8,9 +8,6 @@ import static org.junit.Assert.*;
 
 import static blatis.StdPipes.*;
 
-/**
- * Created by bkputnam on 12/15/16.
- */
 public class TestStdPipes {
 
 	@Test
@@ -64,18 +61,9 @@ public class TestStdPipes {
 
 		AbstractDatasetIterator zi = iter1.pipe(zip(iter2));
 
-		ColumnAccessor indexAccessor = zi.getColumnDescriptor("value").getAccessor();
-		ColumnAccessor sAccessor = zi.getColumnDescriptor("s").getAccessor();
-
-
-		int index = 0;
-		while(zi.tryMoveNext()) {
-			Row r = zi.getCurrentRow();
-
-			assertEquals(intVals[index], indexAccessor.getValueFromRow(r));
-			assertEquals(strVals[index], sAccessor.getValueFromRow(r));
-
-			index++;
-		}
+		IteratorExpectations e = new IteratorExpectations();
+		e.expectInts("value", intVals);
+		e.expectStrings("s", strVals);
+		e.checkIterator(zi);
 	}
 }

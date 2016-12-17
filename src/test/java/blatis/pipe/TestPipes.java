@@ -1,6 +1,7 @@
 package blatis.pipe;
 
 import blatis.IterUtils;
+import blatis.IteratorExpectations;
 import blatis.iterator.AbstractDatasetIterator;
 import blatis.iterator.ArrayIterator;
 import blatis.iterator.RangeIterator;
@@ -74,25 +75,9 @@ public class TestPipes {
                 )
             );
 
-        ColumnAccessor ca1 = it.getColumnDescriptor("value").getAccessor();
-        ColumnAccessor ca2 = it.getColumnDescriptor("a").getAccessor();
-
-        int[][] expected = new int[][] {
-            {0, 1},
-            {1, 3},
-            {2, 5},
-            {3, 7},
-            {4, 9}
-        };
-
-        int count = 0;
-        while(it.tryMoveNext()) {
-            Row row = it.getCurrentRow();
-
-            assertEquals(expected[count][0], ca1.getValueFromRow(row));
-            assertEquals(expected[count][1], ca2.getValueFromRow(row));
-            count++;
-        }
-        assertEquals(5, count);
+		IteratorExpectations e = new IteratorExpectations();
+		e.expectInts("value", 0, 1, 2, 3, 4);
+		e.expectInts("a", 1, 3, 5, 7, 9);
+		e.checkIterator(it);
     }
 }

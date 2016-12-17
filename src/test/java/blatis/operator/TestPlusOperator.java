@@ -7,9 +7,6 @@ import blatis.row.ConstantAccessor;
 import blatis.row.Row;
 import blatis.operator.PlusOperator;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class TestPlusOperator {
 
     @Test

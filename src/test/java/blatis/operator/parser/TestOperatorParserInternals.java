@@ -5,9 +5,6 @@ import blatis.row.Row;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- * Created by bkputnam on 12/9/16.
- */
 public class TestOperatorParserInternals {
 
 	@Test

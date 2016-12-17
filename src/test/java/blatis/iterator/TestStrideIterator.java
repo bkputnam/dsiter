@@ -1,6 +1,7 @@
 package blatis.pipe;
 
 import blatis.IterUtils;
+import blatis.iterator.RangeIterator;
 import org.junit.Test;
 
 import blatis.dataset.RangeDataset;
@@ -14,7 +15,7 @@ public class TestStrideIterator {
 	public void testStride4() {
 
 		AbstractDatasetIterator it = new StrideIterator(
-			(new RangeDataset(10)).getIterator(),
+			new RangeIterator(10),
 			4
 		);
 
@@ -30,7 +31,7 @@ public class TestStrideIterator {
 
 		AbstractDatasetIterator it = new LastIterator(
 			new StrideIterator(
-				(new RangeDataset(10)).getIterator(),
+				new RangeIterator(10),
 				4
 			)
 		);

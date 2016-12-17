@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by bkputnam on 12/9/16.
- */
 public class TestSqrtOperator {
 	@Test
 	public void testInt() {

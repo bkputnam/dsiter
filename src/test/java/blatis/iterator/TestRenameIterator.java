@@ -3,6 +3,7 @@ package blatis.pipe;
 import static org.junit.Assert.*;
 
 import blatis.IterUtils;
+import blatis.iterator.RangeIterator;
 import org.junit.Test;
 
 import blatis.dataset.RangeDataset;
@@ -16,7 +17,7 @@ public class TestRenameIterator {
 	public void testRename() {
 
 		AbstractDatasetIterator it = new RenameIterator(
-			(new RangeDataset(10)).getIterator(),
+			new RangeIterator(10),
 			"value",
 			"a"
 		);

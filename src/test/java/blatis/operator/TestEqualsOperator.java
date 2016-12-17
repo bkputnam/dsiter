@@ -9,9 +9,6 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by bkputnam on 12/15/16.
- */
 public class TestEqualsOperator {
 
 	@Test

@@ -11,9 +11,6 @@ import java.io.OutputStream;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by bkputnam on 12/3/16.
- */
 public class TestCsvWriter {
 
     @Test
