@@ -1,0 +1,97 @@
+package dsiter.operator;
+
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+import dsiter.row.TypedRowAccessor;
+
+${Disclaimer}
+
+public abstract class TypedBinaryOperator extends TypedRowAccessor {
+
+	TypedRowAccessor lhs;
+	TypedRowAccessor rhs;
+
+	public TypedBinaryOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+		this.lhs = lhs;
+		this.rhs = rhs;
+
+		if(lhs == null) { throw new IllegalArgumentException("lhs cannot be null"); }
+		if(rhs == null) { throw new IllegalArgumentException("rhs cannot be null"); }
+
+		ColumnType lhsType = lhs.getType();
+		ColumnType rhsType = rhs.getType();
+
+        if(!testTypeCompatibility(lhsType, rhsType)) {
+            throw new IllegalArgumentException("Incompatible types: " + lhsType + ", " + rhsType);
+        }
+
+		ColumnType returnType = super.type = this.getReturnType(lhsType, rhsType);
+		super.innerAccessor = getInnerAccessor(lhs, rhs, returnType);
+	}
+
+	protected abstract ColumnType getReturnType(ColumnType lhsType, ColumnType rhsType);
+	protected abstract boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType);
+
+    protected boolean eitherTypeIs(ColumnType type) { return lhs.getType() == type || rhs.getType() == type; }
+    protected boolean bothTypesAre(ColumnType type) { return lhs.getType() == type && rhs.getType() == type; }
+
+<%
+def typeSwitch(indent, varName, bodyGenerator) {
+	ColumnTypes.eachWithIndex { type, index ->
+//		println ""
+		if(index == 0) { print "${indent}if" } else { print "\n${indent}else if" }
+		println "(" + varName + " == ColumnType." + type.type + ") {"
+		bodyGenerator(indent + "\t", type)
+		print "\n" + indent + "}"
+	}
+	println "\n" + indent + "else {"
+	println indent + "\tthrow new Error(\"This should be impossible\");"
+	print indent + "}"
+}
+%>
+
+	private IRowAccessor getInnerAccessor(TypedRowAccessor lhs, TypedRowAccessor rhs, ColumnType returnType) {
+		ColumnType lhsType = lhs.getType();
+		ColumnType rhsType = rhs.getType();
+
+<%
+	typeSwitch("\t\t", "lhsType") { indent1, lhsType ->
+		typeSwitch(indent1, "rhsType") { indent2, rhsType ->
+			typeSwitch(indent2, "returnType") { indent3, returnType ->
+				def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
+				print "${indent3}return new ${lhsType.type}_${rhsType.type}_${returnType.type}(lhs, rhs);"
+			}
+		}
+	}
+%>
+	}
+
+	<%
+		ColumnTypes.each { lhsType -> ColumnTypes.each { rhsType -> ColumnTypes.each { returnType ->
+		def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
+	%>
+	protected ${returnType.nativeType} ${methodName}( ${lhsType.nativeType} lhs, ${rhsType.nativeType} rhs )  { throw new Error("Programmer error: ${methodName} must be overridden by subclass"); }<% }}} %>
+
+<%
+ColumnTypes.each { lhsType ->
+	ColumnTypes.each { rhsType ->
+		ColumnTypes.each { returnType ->
+			def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
+%>
+	private class ${lhsType.type}_${rhsType.type}_${returnType.type} extends TypedRowAccessor.${returnType.type} {
+
+		private TypedRowAccessor.${lhsType.type} lhs;
+		private TypedRowAccessor.${rhsType.type} rhs;
+
+		private ${lhsType.type}_${rhsType.type}_${returnType.type}(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+			this.lhs = lhs.as${lhsType.capitalized}Accessor();
+			this.rhs = rhs.as${rhsType.capitalized}Accessor();
+		}
+
+		public ${returnType.nativeType} get${returnType.capitalized}FromRow(Row row) {
+			return ${methodName}(lhs.get${lhsType.capitalized}FromRow(row), rhs.get${rhsType.capitalized}FromRow(row));
+		}
+	}
+<% }}} %>
+}

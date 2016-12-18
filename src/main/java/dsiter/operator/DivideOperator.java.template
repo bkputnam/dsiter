@@ -1,0 +1,39 @@
+package dsiter.operator;
+
+${Disclaimer}
+
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+import dsiter.row.TypedRowAccessor;
+
+public class DivideOperator extends TypedBinaryOperator {
+
+    public DivideOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+        super(lhs, rhs);
+    }
+
+    @Override
+    public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
+        return
+            super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
+            eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
+            eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
+            ColumnType.INT;
+    }
+
+    @Override
+    protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
+        return lhsType.isNumeric() && rhsType.isNumeric();
+    }
+
+	<%
+		def numberTypes = ["int", "long", "float", "double"]
+
+		numberTypes.eachWithIndex { lhs, lhsIndex ->
+			numberTypes.eachWithIndex { rhs, rhsIndex ->
+				def returnType = lhsIndex >= rhsIndex ? lhs : rhs;
+	%>
+	@Override
+	protected ${returnType} handle_${lhs}_${rhs}_${returnType}(${lhs} lhs, ${rhs} rhs) { return lhs / rhs; }
+	<% }} %>
+}

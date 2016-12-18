@@ -1,0 +1,67 @@
+package dsiter.row;
+
+${Disclaimer}
+
+public class RowCopier {
+
+	<% ColumnTypes.each { type -> %>
+	private int[] src${type.capitalized}Indexes;<% } %>
+
+	private RowShape shape;
+	private ColumnDescriptor[] destCds;
+
+	public RowCopier(ColumnDescriptor[] srcCds) {
+
+		shape = new RowShape();
+
+		for(int i=0; i<srcCds.length; i++) {
+			shape.incrNum(srcCds[i].getType());
+		}
+
+		<% ColumnTypes.each { type -> %>
+		src${type.capitalized}Indexes = new int[shape.getNum${type.capitalized}s()];<% } %>
+
+		destCds = new ColumnDescriptor[srcCds.length];
+
+		shape = new RowShape(); // reset to all 0's
+		for(int i=0; i<srcCds.length; i++) {
+			ColumnDescriptor cd = srcCds[i];
+			ColumnAccessor ca = cd.getAccessor();
+			ColumnType type = ca.getType();
+			shape.incrNum(type);
+			int index = shape.getNum(type) - 1;
+
+			destCds[i] = new ColumnDescriptor(
+				cd.getName(),
+				cd.getType(),
+				index
+			);
+
+			switch(type) {
+				<% ColumnTypes.each { type -> %>
+				case ${type.type}: src${type.capitalized}Indexes[index] = ca.getIndex(); break;<% } %>
+				default:
+					throw new Error("This should be impossible");
+			}
+		}
+	}
+
+	public RowShape getDestShape() {
+		return new RowShape().add(shape);
+	}
+
+	public ColumnDescriptor[] getDestColumnDescriptors() {
+		return destCds;
+	}
+
+	public void copyTo(Row src, Row dest) {
+		<%
+		    ColumnTypes.each { type ->
+				def array = "src${type.capitalized}Indexes";
+		%>
+		for(int i=0; i<${array}.length; i++) {
+			dest.${type.rowArray}[i] = src.${type.rowArray}[${array}[i]];
+		}
+		<% } %>
+	}
+}

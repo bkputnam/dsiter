@@ -1,0 +1,98 @@
+package dsiter;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.row.ColumnType;
+import dsiter.row.*;
+
+import static org.junit.Assert.*;
+
+public class IteratorExpectations {
+
+    List<ColumnExpectation> expectations;
+    int expectedLength = -1;
+
+    public IteratorExpectations() {
+        expectations = new ArrayList<ColumnExpectation>();
+    }
+
+    public void checkIterator(AbstractDatasetIterator iter) {
+
+        ColumnDescriptor[] cds = iter.getColumnDescriptors();
+
+        assertEquals(expectations.size(), cds.length);
+
+        ColumnAccessor[] cas = new ColumnAccessor[cds.length];
+
+        for(int i=0; i<cds.length; i++) {
+            ColumnDescriptor cd = cds[i];
+            ColumnExpectation e = expectations.get(i);
+            assertEquals(e.name, cd.getName());
+            assertEquals(e.type, cd.getType());
+
+            cas[i] = cd.getAccessor();
+        }
+
+        int count = 0;
+        while(iter.tryMoveNext()) {
+            Row row = iter.getCurrentRow();
+
+            for(int i=0; i<cas.length; i++) {
+                ColumnAccessor ca = cas[i];
+                ColumnExpectation e = expectations.get(i);
+
+                assertEquals(e.values[count], ca.getValueFromRow(row));
+            }
+
+            count++;
+        }
+
+        assertEquals(count, expectedLength);
+    }
+
+    private void checkLength(Object[] values) {
+        if (expectedLength == -1) {
+            expectedLength = values.length;
+        }
+        else {
+            assertEquals(expectedLength, values.length);
+        }
+    }
+
+    <%
+        def boxTypes = [
+                "INT": "Integer",
+                "LONG": "Long",
+                "FLOAT": "Float",
+                "DOUBLE": "Double",
+                "STRING": "String",
+                "BOOLEAN": "Boolean"
+        ]
+        ColumnTypes.each { type ->
+    %>
+    public void expect${type.capitalized}s(String name, ${type.nativeType}... values) {
+        Object[] boxedVals = new Object[values.length];
+        for(int i=0; i<values.length; i++) {
+            boxedVals[i] = new ${boxTypes[type.type]}(values[i]);
+        }
+
+        checkLength(boxedVals);
+
+        ColumnExpectation e = new ColumnExpectation();
+        e.name = name;
+        e.type = ColumnType.${type.type};
+        e.values = boxedVals;
+
+        expectations.add(e);
+    }
+    <% } %>
+
+
+    private static class ColumnExpectation {
+        public String name;
+        public ColumnType type;
+        public Object[] values;
+    }
+}

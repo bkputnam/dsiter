@@ -1,0 +1,45 @@
+package dsiter.operator;
+
+${Disclaimer}
+
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+import dsiter.row.TypedRowAccessor;
+
+public class EqualsOperator extends TypedBinaryOperator {
+
+	public EqualsOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+		super(lhs, rhs);
+	}
+
+	@Override
+	public ColumnType getReturnType(ColumnType lhsType, ColumnType rhsType) {
+		return ColumnType.BOOLEAN;
+	}
+
+	@Override
+	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
+		return lhsType == rhsType || (lhsType.isNumeric() && rhsType.isNumeric());
+	}
+
+	@Override
+	protected boolean handle_String_String_boolean(String lhs, String rhs) { return lhs.equals(rhs); }
+
+	<%
+	    ColumnTypes.each { type ->
+			if( type.type == "STRING") { return } // strings are handled separately using .equals()
+	%>
+	@Override
+	protected boolean handle_${type.nativeType}_${type.nativeType}_boolean(${type.nativeType} lhs, ${type.nativeType} rhs) { return lhs == rhs; }
+	<% } %>
+
+	<%
+	    def numberTypes = ["int", "long", "float", "double"]
+		numberTypes.each { lhsType ->
+			numberTypes.each { rhsType ->
+				if( lhsType.equals(rhsType) ) { return; } // already done same-same comparisons above
+	%>
+	@Override
+	protected boolean handle_${lhsType}_${rhsType}_boolean(${lhsType} lhs, ${rhsType} rhs) { return lhs == rhs; }
+	<% }} %>
+}

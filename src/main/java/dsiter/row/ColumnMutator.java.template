@@ -1,0 +1,64 @@
+package dsiter.row;
+
+${Disclaimer}
+
+public class ColumnMutator implements IRowMutator {
+
+    protected int index;
+    protected IRowMutator innerMutator;
+
+<%
+def typeSwitch(indent, varName, bodyGenerator) {
+    ColumnTypes.eachWithIndex { type, index ->
+        println ""
+        print indent;
+        if(index == 0) { print "if" } else { print "else if" }
+        println "(" + varName + " == ColumnType." + type.type + ") {"
+        bodyGenerator(indent + "\t", type)
+        print "\n" + indent + "}"
+    }
+    println "\n" + indent + "else {"
+    println indent + "\tthrow new Error(\"This should be impossible\");"
+    print indent + "}"
+}
+%>
+
+    public ColumnMutator(ColumnType type, int index) {
+<% typeSwitch("\t\t", "type") { indent, type ->
+        print indent + "innerMutator = new " + type.type + "(index);"
+} %>
+    }
+
+    public void setValueInRow(Row row, Object value) {
+        innerMutator.setValueInRow(row, value);
+    }
+
+    public ColumnType getType() {
+        return innerMutator.getType();
+    }
+
+<% ColumnTypes.each { type -> %>
+    public ${type.type} as${type.capitalized}Mutator() { return (${type.type})innerMutator; }<% } %>
+
+<% ColumnTypes.each { type -> %>
+    public static class ${type.type} implements IRowMutator {
+        private int index;
+
+        public ${type.type}(int index) {
+            this.index = index;
+        }
+
+        public void set${type.capitalized}InRow(Row row, ${type.nativeType} val) {
+            row.${type.rowArray}[index] = val;
+        }
+
+        @Override
+        public void setValueInRow(Row row, Object value) {
+            set${type.capitalized}InRow(row, (${type.nativeType})value);
+        }
+
+        public ColumnType getType() { return ColumnType.${type.type}; }
+    }
+<% } %>
+
+}

@@ -1,0 +1,35 @@
+package dsiter.row;
+
+${Disclaimer}
+
+public abstract class TypedRowAccessor implements IRowAccessor {
+
+    protected ColumnType type;
+    protected IRowAccessor innerAccessor;
+
+    @Override
+    public Object getValueFromRow(Row row) {
+        return innerAccessor.getValueFromRow(row);
+    }
+
+    @Override
+    public ColumnType getType() {
+        return innerAccessor.getType();
+    }
+
+<% ColumnTypes.each { type -> %>
+    public ${type.type} as${type.capitalized}Accessor() { return (${type.type})innerAccessor; }<% } %>
+
+<% ColumnTypes.each { type -> %>
+    public abstract static class ${type.type} implements IRowAccessor {
+        @Override
+        public Object getValueFromRow(Row row) { return get${type.capitalized}FromRow(row); }
+
+        @Override
+        public ColumnType getType() { return ColumnType.${type.type}; }
+
+        public abstract ${type.nativeType} get${type.capitalized}FromRow(Row row);
+    }
+<% } %>
+
+}
