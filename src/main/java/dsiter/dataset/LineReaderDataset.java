@@ -12,6 +12,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
+/**
+ * Dataset that uses a BufferedReader to read lines from
+ * a Reader. Returned rows will have a single column of
+ * type `ColumnType.STRING`, named `"line"`.
+ *
+ * Since a new Reader must be instantiated for each created
+ * iterator, the constructor takes in an IReaderFactory
+ *
+ * Instances can also be created via the static methods
+ * `LineReaderDataset.fromString(String src)` and
+ * `LineReaderDataset.fromFilename(String filename)`
+ * without requiring an IReaderFactory instance.
+ */
 public class LineReaderDataset implements IDataset {
 
 	IReaderFactory IReaderFactory;
