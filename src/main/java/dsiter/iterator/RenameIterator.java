@@ -3,12 +3,12 @@ package dsiter.iterator;
 import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
 
-public class RenameIterator extends AbstractDatasetIterator {
+public class RenameIterator implements IDatasetIterator {
 
-	private AbstractDatasetIterator src;
+	private IDatasetIterator src;
 	private ColumnDescriptor[] cds;
 
-	public RenameIterator(AbstractDatasetIterator src, String from, String to) {
+	public RenameIterator(IDatasetIterator src, String from, String to) {
 		this.src = src;
 
 		ColumnDescriptor[] srcCds = src.getColumnDescriptors();

@@ -4,13 +4,13 @@ import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.RowCopier;
 
-public class LastIterator extends AbstractDatasetIterator {
+public class LastIterator implements IDatasetIterator {
 
-	private AbstractDatasetIterator src;
+	private IDatasetIterator src;
 	private Row row;
 	private RowCopier copier;
 
-	public LastIterator(AbstractDatasetIterator src) {
+	public LastIterator(IDatasetIterator src) {
 		this.src = src;
 
 		copier = new RowCopier(src.getColumnDescriptors());

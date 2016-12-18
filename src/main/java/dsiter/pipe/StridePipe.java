@@ -1,7 +1,7 @@
 package dsiter.pipe;
 
 import dsiter.iterator.StrideIterator;
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 
 public class StridePipe implements IPipe {
 
@@ -11,7 +11,7 @@ public class StridePipe implements IPipe {
 		this.stride = stride;
 	}
 
-	public AbstractDatasetIterator applyTo(AbstractDatasetIterator src) {
+	public IDatasetIterator applyTo(IDatasetIterator src) {
 		return new StrideIterator( src, stride );
 	}
 

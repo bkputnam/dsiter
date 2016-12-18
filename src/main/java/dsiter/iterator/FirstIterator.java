@@ -6,12 +6,12 @@ import dsiter.row.Row;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public class FirstIterator extends AbstractDatasetIterator {
+public class FirstIterator implements IDatasetIterator {
 
     boolean hasMovedNext = false;
-    AbstractDatasetIterator src;
+    IDatasetIterator src;
 
-    public FirstIterator(AbstractDatasetIterator src) {
+    public FirstIterator(IDatasetIterator src) {
         this.src = src;
     }
 

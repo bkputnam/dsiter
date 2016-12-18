@@ -7,10 +7,9 @@ import java.util.HashSet;
 
 import dsiter.row.*;
 
-public class ZipIterator extends AbstractDatasetIterator {
+public class ZipIterator implements IDatasetIterator {
 
-
-	private AbstractDatasetIterator[] srcIters;
+	private IDatasetIterator[] srcIters;
 	private int[] srcIterColumnCounts;
 
 	private ColumnDescriptor[] combinedColumnDescriptors;
@@ -18,7 +17,7 @@ public class ZipIterator extends AbstractDatasetIterator {
 	private ColumnAccessor[] accessors;
 	private Row combinedRow;
 
-	public ZipIterator(AbstractDatasetIterator... srcIters) {
+	public ZipIterator(IDatasetIterator... srcIters) {
 		this.srcIters = srcIters;
 
 		RowShape shape = new RowShape();
@@ -29,7 +28,7 @@ public class ZipIterator extends AbstractDatasetIterator {
 		srcIterColumnCounts = new int[srcIters.length];
 
 		for(int i=0; i<srcIters.length; i++) {
-			AbstractDatasetIterator it = srcIters[i];
+			IDatasetIterator it = srcIters[i];
 			ColumnDescriptor[] itCds = it.getColumnDescriptors();
 			srcIterColumnCounts[i] = itCds.length;
 
@@ -76,7 +75,7 @@ public class ZipIterator extends AbstractDatasetIterator {
 	public Row getCurrentRow() {
 		int combinedIndex = 0;
 		for(int iterIndex=0; iterIndex<srcIters.length; iterIndex++) {
-			AbstractDatasetIterator it = srcIters[iterIndex];
+			IDatasetIterator it = srcIters[iterIndex];
 			int itColCount = srcIterColumnCounts[iterIndex];
 			Row itRow = it.getCurrentRow();
 

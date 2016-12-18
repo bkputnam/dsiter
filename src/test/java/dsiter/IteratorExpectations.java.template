@@ -3,7 +3,7 @@ package dsiter;
 import java.util.List;
 import java.util.ArrayList;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.row.ColumnType;
 import dsiter.row.*;
 
@@ -18,7 +18,7 @@ public class IteratorExpectations {
         expectations = new ArrayList<ColumnExpectation>();
     }
 
-    public void checkIterator(AbstractDatasetIterator iter) {
+    public void checkIterator(IDatasetIterator iter) {
 
         ColumnDescriptor[] cds = iter.getColumnDescriptors();
 

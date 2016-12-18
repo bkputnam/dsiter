@@ -2,7 +2,7 @@ package dsiter.pipe;
 
 import dsiter.IterUtils;
 import dsiter.IteratorExpectations;
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.RangeIterator;
 import dsiter.operator.EqualsOperator;
@@ -17,7 +17,7 @@ public class TestPipes {
     @Test
     public void testStride5() {
 
-        AbstractDatasetIterator it = new RangeIterator(25)
+        IDatasetIterator it = new RangeIterator(25)
                 .pipe(new StridePipe(5));
         IterUtils.assertValues(it, "value", new Integer[] {0, 5, 10, 15, 20});
     }
@@ -25,7 +25,7 @@ public class TestPipes {
     @Test
     public void testLastPipe() {
 
-        AbstractDatasetIterator it = new RangeIterator(25)
+        IDatasetIterator it = new RangeIterator(25)
                 .pipe(new LastPipe());
         IterUtils.assertValues(it, "value", new Integer[] {24});
     }
@@ -41,7 +41,7 @@ public class TestPipes {
                 new ConstantAccessor(0)
         ).asBoolAccessor();
 
-        AbstractDatasetIterator it = new RangeIterator(10)
+        IDatasetIterator it = new RangeIterator(10)
                 .pipe(new FilterPipe(isEvenPredicate));
         IterUtils.assertValues(it, "value", new Integer[] {0, 2, 4, 6, 8});
     }
@@ -49,7 +49,7 @@ public class TestPipes {
     @Test
     public void testFirstAndSkipPipes() {
 
-        AbstractDatasetIterator it = new RangeIterator(10)
+        IDatasetIterator it = new RangeIterator(10)
                 .pipe(new SkipPipe(5))
                 .pipe(new FirstPipe());
         IterUtils.assertValues(it, "value", new Integer[] {5});
@@ -58,7 +58,7 @@ public class TestPipes {
     @Test
     public void testRenamePipe() {
 
-        AbstractDatasetIterator it = new RangeIterator(5)
+        IDatasetIterator it = new RangeIterator(5)
                 .pipe(new RenamePipe("value", "a"));
 
         IterUtils.assertValues(it, "a", new Integer[] {0, 1, 2, 3, 4});
@@ -67,7 +67,7 @@ public class TestPipes {
     @Test
     public void testZipPipe() {
 
-        AbstractDatasetIterator it = new RangeIterator(5)
+        IDatasetIterator it = new RangeIterator(5)
             .pipe(
                 new ZipPipe(
                     new ArrayIterator(1, 3, 5, 7, 9)

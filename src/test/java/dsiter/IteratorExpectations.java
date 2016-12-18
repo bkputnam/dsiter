@@ -3,7 +3,7 @@
 /* GENERATED CODE */import java.util.List;
 /* GENERATED CODE */import java.util.ArrayList;
 /* GENERATED CODE */
-/* GENERATED CODE */import dsiter.iterator.AbstractDatasetIterator;
+/* GENERATED CODE */import dsiter.iterator.IDatasetIterator;
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.*;
 /* GENERATED CODE */
@@ -18,7 +18,7 @@
 /* GENERATED CODE */        expectations = new ArrayList<ColumnExpectation>();
 /* GENERATED CODE */    }
 /* GENERATED CODE */
-/* GENERATED CODE */    public void checkIterator(AbstractDatasetIterator iter) {
+/* GENERATED CODE */    public void checkIterator(IDatasetIterator iter) {
 /* GENERATED CODE */
 /* GENERATED CODE */        ColumnDescriptor[] cds = iter.getColumnDescriptors();
 /* GENERATED CODE */

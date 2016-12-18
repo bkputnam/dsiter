@@ -1,6 +1,6 @@
 package dsiter;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.pipe.*;
 
 public class StdPipes {
@@ -28,7 +28,7 @@ public class StdPipes {
 		return new StridePipe(stride);
 	}
 
-	public static IPipe zip(AbstractDatasetIterator... iters) {
+	public static IPipe zip(IDatasetIterator... iters) {
 		return new ZipPipe(iters);
 	}
 }

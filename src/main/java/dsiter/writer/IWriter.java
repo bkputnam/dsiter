@@ -1,6 +1,6 @@
 package dsiter.writer;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 
 import java.io.OutputStream;
 
@@ -8,5 +8,5 @@ import java.io.OutputStream;
  * Created by bkputnam on 12/3/16.
  */
 public interface IWriter {
-    public void writeTo(AbstractDatasetIterator it, OutputStream outStream);
+    public void writeTo(IDatasetIterator it, OutputStream outStream);
 }

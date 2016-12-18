@@ -1,11 +1,11 @@
 package dsiter.pipe;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.FirstIterator;
 
 public class FirstPipe implements IPipe {
     @Override
-    public AbstractDatasetIterator applyTo(AbstractDatasetIterator src) {
+    public IDatasetIterator applyTo(IDatasetIterator src) {
         return new FirstIterator(src);
     }
 }

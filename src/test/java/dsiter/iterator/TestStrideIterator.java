@@ -1,10 +1,10 @@
 package dsiter.pipe;
 
 import dsiter.IterUtils;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.RangeIterator;
 import org.junit.Test;
 
-import dsiter.iterator.AbstractDatasetIterator;
 import dsiter.iterator.StrideIterator;
 import dsiter.iterator.LastIterator;
 
@@ -13,7 +13,7 @@ public class TestStrideIterator {
 	@Test
 	public void testStride4() {
 
-		AbstractDatasetIterator it = new StrideIterator(
+		IDatasetIterator it = new StrideIterator(
 			new RangeIterator(10),
 			4
 		);
@@ -28,7 +28,7 @@ public class TestStrideIterator {
 	@Test
 	public void testStrideLast() {
 
-		AbstractDatasetIterator it = new LastIterator(
+		IDatasetIterator it = new LastIterator(
 			new StrideIterator(
 				new RangeIterator(10),
 				4

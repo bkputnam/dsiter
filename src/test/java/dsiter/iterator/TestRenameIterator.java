@@ -7,7 +7,7 @@ import dsiter.iterator.RangeIterator;
 import org.junit.Test;
 
 import dsiter.row.ColumnDescriptor;
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.RenameIterator;
 
 public class TestRenameIterator {
@@ -15,7 +15,7 @@ public class TestRenameIterator {
 	@Test
 	public void testRename() {
 
-		AbstractDatasetIterator it = new RenameIterator(
+		IDatasetIterator it = new RenameIterator(
 			new RangeIterator(10),
 			"value",
 			"a"

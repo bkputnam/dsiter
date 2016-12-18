@@ -1,7 +1,7 @@
 package dsiter.operator;
 
 import dsiter.IterUtils;
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.RangeIterator;
 import dsiter.row.ConstantAccessor;
 import dsiter.row.Row;
@@ -74,7 +74,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void testParser() {
-		AbstractDatasetIterator iter = new RangeIterator(20)
+		IDatasetIterator iter = new RangeIterator(20)
 			.pipe(filter("value<5"));
 		IterUtils.assertValues(iter, "value", new Integer[] { 0, 1, 2, 3, 4 });
 	}

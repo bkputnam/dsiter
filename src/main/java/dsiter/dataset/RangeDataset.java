@@ -1,7 +1,7 @@
 package dsiter.dataset;
 
 import dsiter.iterator.RangeIterator;
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 
 public class RangeDataset implements IDataset {
 
@@ -11,7 +11,7 @@ public class RangeDataset implements IDataset {
 		this.numVals = numVals;
 	}
 
-	public AbstractDatasetIterator getIterator() {
+	public IDatasetIterator getIterator() {
 		return new RangeIterator(this.numVals);
 	}
 

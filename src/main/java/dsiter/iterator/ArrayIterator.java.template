@@ -2,7 +2,7 @@ package dsiter.iterator;
 
 import dsiter.row.*;
 
-public class ArrayIterator extends AbstractDatasetIterator {
+public class ArrayIterator implements IDatasetIterator {
 
 	private int index;
 	private int length;

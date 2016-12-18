@@ -3,22 +3,21 @@ package dsiter.dataset;
 import static org.junit.Assert.*;
 
 import dsiter.IterUtils;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.row.RowShape;
 import org.junit.Test;
-
-import dsiter.iterator.AbstractDatasetIterator;
 
 public class TestRangeDataset {
 
 	@Test
 	public void testRange5() {
-		AbstractDatasetIterator it = new RangeDataset(5).getIterator();
+		IDatasetIterator it = new RangeDataset(5).getIterator();
 		IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4 });
 	}
 
 	@Test
 	public void testRange0() {
-		AbstractDatasetIterator it = new RangeDataset(0).getIterator();
+		IDatasetIterator it = new RangeDataset(0).getIterator();
 		IterUtils.assertValues(it, "value", new Integer[0]);
 	}
 

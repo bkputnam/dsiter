@@ -1,9 +1,9 @@
 package dsiter.pipe;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 
 public interface IPipe {
 	
-	public AbstractDatasetIterator applyTo(AbstractDatasetIterator src);
+	public IDatasetIterator applyTo(IDatasetIterator src);
 
 }

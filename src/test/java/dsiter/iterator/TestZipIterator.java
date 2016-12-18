@@ -14,12 +14,12 @@ public class TestZipIterator {
 	@Test
 	public void testZipIterator() {
 
-		AbstractDatasetIterator leftIter = new RenameIterator(
+		IDatasetIterator leftIter = new RenameIterator(
 			new RangeIterator(5),
 			"value",
 			"a"
 		);
-		AbstractDatasetIterator rightIter = new RenameIterator(
+		IDatasetIterator rightIter = new RenameIterator(
 			new StrideIterator(
 				new RangeIterator(10),
 				2
@@ -28,7 +28,7 @@ public class TestZipIterator {
 			"b"
 		);
 
-		AbstractDatasetIterator it = new ZipIterator(leftIter, rightIter);
+		IDatasetIterator it = new ZipIterator(leftIter, rightIter);
 
 		ColumnDescriptor[] cds = it.getColumnDescriptors();
 		assertEquals(2, cds.length);
@@ -55,10 +55,10 @@ public class TestZipIterator {
 		boolean[] vals3 = new boolean[] { true, true, false, false, false };
 		String[] vals4 = new String[] { "hello", "world", "foo", "bar", "baz" };
 
-		AbstractDatasetIterator it1 = new RenameIterator(new ArrayIterator(vals1), "value", "a");
-		AbstractDatasetIterator it2 = new RenameIterator(new ArrayIterator(vals2), "value", "b");
-		AbstractDatasetIterator it3 = new RenameIterator(new ArrayIterator(vals3), "value", "c");
-		AbstractDatasetIterator it4 = new RenameIterator(new ArrayIterator(vals4), "value", "d");
+		IDatasetIterator it1 = new RenameIterator(new ArrayIterator(vals1), "value", "a");
+		IDatasetIterator it2 = new RenameIterator(new ArrayIterator(vals2), "value", "b");
+		IDatasetIterator it3 = new RenameIterator(new ArrayIterator(vals3), "value", "c");
+		IDatasetIterator it4 = new RenameIterator(new ArrayIterator(vals4), "value", "d");
 
 		ZipIterator it = new ZipIterator(it1, it2, it3, it4);
 

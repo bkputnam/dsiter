@@ -3,13 +3,13 @@ package dsiter.iterator;
 import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
 
-public class StrideIterator extends AbstractDatasetIterator {
+public class StrideIterator implements IDatasetIterator {
 
-	private AbstractDatasetIterator src;
+	private IDatasetIterator src;
 	private int stride;
 	private boolean isFirstTime = true;
 
-	public StrideIterator(AbstractDatasetIterator src, int stride) {
+	public StrideIterator(IDatasetIterator src, int stride) {
 		this.src = src;
 		this.stride = stride;
 	}

@@ -1,9 +1,9 @@
 package dsiter.dataset;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 
 public interface IDataset {
 
-	public AbstractDatasetIterator getIterator() throws Exception;
+	public IDatasetIterator getIterator() throws Exception;
 
 }

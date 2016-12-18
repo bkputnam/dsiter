@@ -5,13 +5,13 @@ import dsiter.row.Row;
 import dsiter.row.RowShape;
 import dsiter.row.ColumnDescriptor;
 
-public abstract class AbstractDatasetIterator {
+public interface IDatasetIterator {
 
 	public abstract boolean tryMoveNext();
 	public abstract Row getCurrentRow();
 	public abstract ColumnDescriptor[] getColumnDescriptors();
 
-	public ColumnDescriptor getColumnDescriptor(String name) {
+	default public ColumnDescriptor getColumnDescriptor(String name) {
 		ColumnDescriptor[] cds = this.getColumnDescriptors();
 
 		for( int i=0; i<cds.length; i++ ) {
@@ -23,11 +23,11 @@ public abstract class AbstractDatasetIterator {
 		throw new RuntimeException("Failed to find column descriptor '" + name + "'");
 	}
 
-	public RowShape computeShape() {
+	default public RowShape computeShape() {
 		return new RowShape(this.getColumnDescriptors());
 	}
 
-	public AbstractDatasetIterator pipe(IPipe pipe) {
+	default public IDatasetIterator pipe(IPipe pipe) {
 		return pipe.applyTo(this);
 	}
 }

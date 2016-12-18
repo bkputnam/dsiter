@@ -4,7 +4,7 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.Row;
 
-public class RangeIterator extends AbstractDatasetIterator {
+public class RangeIterator implements IDatasetIterator {
 
 	private int curVal = -1;
 	private int numVals;

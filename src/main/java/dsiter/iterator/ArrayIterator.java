@@ -2,7 +2,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.*;
 /* GENERATED CODE */
-/* GENERATED CODE */public class ArrayIterator extends AbstractDatasetIterator {
+/* GENERATED CODE */public class ArrayIterator implements IDatasetIterator {
 /* GENERATED CODE */
 /* GENERATED CODE */	private int index;
 /* GENERATED CODE */	private int length;

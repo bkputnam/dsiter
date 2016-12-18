@@ -3,13 +3,13 @@ package dsiter;
 import java.util.List;
 import java.util.ArrayList;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.row.ColumnAccessor;
 import dsiter.row.Row;
 
 public class IterUtils {
 
-	public static List<Object> getColumn(AbstractDatasetIterator it, String colName) {
+	public static List<Object> getColumn(IDatasetIterator it, String colName) {
 
 		ColumnAccessor ca = it.getColumnDescriptor(colName).getAccessor();
 
@@ -22,7 +22,7 @@ public class IterUtils {
 		return values;
 	}
 
-	public static <T> void assertValues(AbstractDatasetIterator it, String colName, T[] expectedValues) {
+	public static <T> void assertValues(IDatasetIterator it, String colName, T[] expectedValues) {
 
 		ColumnAccessor ca = it.getColumnDescriptor(colName).getAccessor();
 

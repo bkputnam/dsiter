@@ -1,6 +1,6 @@
 package dsiter.writer;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.RenameIterator;
 import dsiter.iterator.ZipIterator;
@@ -20,10 +20,10 @@ public class TestCsvWriter {
         boolean[] vals3 = new boolean[] { true, true, false, false, false };
         String[] vals4 = new String[] { "hello", "world", "foo", "bar", "baz" };
 
-        AbstractDatasetIterator it1 = new RenameIterator(new ArrayIterator(vals1), "value", "a");
-        AbstractDatasetIterator it2 = new RenameIterator(new ArrayIterator(vals2), "value", "b");
-        AbstractDatasetIterator it3 = new RenameIterator(new ArrayIterator(vals3), "value", "c");
-        AbstractDatasetIterator it4 = new RenameIterator(new ArrayIterator(vals4), "value", "d");
+        IDatasetIterator it1 = new RenameIterator(new ArrayIterator(vals1), "value", "a");
+        IDatasetIterator it2 = new RenameIterator(new ArrayIterator(vals2), "value", "b");
+        IDatasetIterator it3 = new RenameIterator(new ArrayIterator(vals3), "value", "c");
+        IDatasetIterator it4 = new RenameIterator(new ArrayIterator(vals4), "value", "d");
 
         ZipIterator it = new ZipIterator(it1, it2, it3, it4);
 

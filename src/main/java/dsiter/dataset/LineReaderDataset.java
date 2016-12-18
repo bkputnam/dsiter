@@ -1,8 +1,8 @@
 package dsiter.dataset;
 
+import dsiter.iterator.IDatasetIterator;
 import dsiter.reader.FileReaderFactory;
 import dsiter.reader.IReaderFactory;
-import dsiter.iterator.AbstractDatasetIterator;
 import dsiter.reader.StringReaderFactory;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
@@ -29,11 +29,11 @@ public class LineReaderDataset implements IDataset {
 	}
 
 	@Override
-	public AbstractDatasetIterator getIterator() throws Exception {
+	public IDatasetIterator getIterator() throws Exception {
 		return new LineReaderIterator(IReaderFactory.getReader());
 	}
 
-	private class LineReaderIterator extends AbstractDatasetIterator {
+	private class LineReaderIterator implements IDatasetIterator {
 
 		Row row;
 		BufferedReader reader;

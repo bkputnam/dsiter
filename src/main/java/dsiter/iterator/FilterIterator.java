@@ -7,12 +7,12 @@ import dsiter.row.TypedRowAccessor;
 /**
  * Created by bkputnam on 12/3/16.
  */
-public class FilterIterator extends AbstractDatasetIterator {
+public class FilterIterator implements IDatasetIterator {
 
-    private AbstractDatasetIterator src;
+    private IDatasetIterator src;
     private TypedRowAccessor.BOOLEAN predicate;
 
-    public FilterIterator(AbstractDatasetIterator src, TypedRowAccessor.BOOLEAN predicate) {
+    public FilterIterator(IDatasetIterator src, TypedRowAccessor.BOOLEAN predicate) {
         this.src = src;
         this.predicate = predicate;
     }

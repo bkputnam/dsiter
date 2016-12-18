@@ -3,12 +3,12 @@ package dsiter.iterator;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.Row;
 
-public class SkipIterator extends AbstractDatasetIterator {
+public class SkipIterator implements IDatasetIterator {
 
-    private AbstractDatasetIterator src;
+    private IDatasetIterator src;
     private int remainingSkips;
 
-    public SkipIterator(AbstractDatasetIterator src, int howMany) {
+    public SkipIterator(IDatasetIterator src, int howMany) {
         this.src = src;
         this.remainingSkips = howMany;
     }

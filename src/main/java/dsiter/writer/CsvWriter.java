@@ -1,6 +1,6 @@
 package dsiter.writer;
 
-import dsiter.iterator.AbstractDatasetIterator;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.row.ColumnAccessor;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
@@ -29,7 +29,7 @@ public class CsvWriter implements IWriter {
     }
 
     @Override
-    public void writeTo(AbstractDatasetIterator it, OutputStream outStream) {
+    public void writeTo(IDatasetIterator it, OutputStream outStream) {
 
         PrintWriter out = new PrintWriter(outStream);
 
