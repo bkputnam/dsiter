@@ -15,28 +15,53 @@ import java.io.Reader;
 /**
  * Dataset that uses a BufferedReader to read lines from
  * a Reader. Returned rows will have a single column of
- * type `ColumnType.STRING`, named `"line"`.
+ * type {@code ColumnType.STRING}, named {@code "line"}.
  *
- * Since a new Reader must be instantiated for each created
- * iterator, the constructor takes in an IReaderFactory
+ * <p>
+ *     Since a new Reader must be instantiated for each create
+ *     iterator, the constructor takes in an IReaderFactory
+ * </p>
  *
- * Instances can also be created via the static methods
- * `LineReaderDataset.fromString(String src)` and
- * `LineReaderDataset.fromFilename(String filename)`
- * without requiring an IReaderFactory instance.
+ * <p>
+ *     Instances can also be created via the static methods
+ *     {@code LineReaderDataset.fromString(String src)} and
+ *     {@code LineReaderDataset.fromFilename(String filename)}
+ *     without requiring an IReaderFactory instance.
+ * </p>
  */
 public class LineReaderDataset implements IDataset {
 
-	IReaderFactory IReaderFactory;
+	private IReaderFactory IReaderFactory;
 
+	/**
+	 * Construct a LineReaderDataset from an IReaderFactory
+	 *
+	 * @param IReaderFactory this factory will be used to construct a
+	 *                       new reader whenever getIterator() is
+	 *                       called
+	 */
 	public LineReaderDataset(IReaderFactory IReaderFactory) {
 		this.IReaderFactory = IReaderFactory;
 	}
 
+	/**
+	 * Shorthand to construct a LineReaderDataset that reads
+	 * lines from a string
+	 *
+	 * @param src the string to be iterated over as lines
+	 * @return a new LineReaderDataset instance
+	 */
 	public static LineReaderDataset fromString(String src) {
 		return new LineReaderDataset(new StringReaderFactory(src));
 	}
 
+	/**
+	 * Shorthand to construct a LineReaderDataset that reads
+	 * lines from a file.
+	 *
+	 * @param filename the filename, including the full path
+	 * @return a new LineReaderDataset instance
+	 */
 	public static LineReaderDataset fromFilename(String filename) {
 		return new LineReaderDataset(new FileReaderFactory(filename));
 	}
