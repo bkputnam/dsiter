@@ -17,7 +17,7 @@ public interface IDatasetIterator {
 	 *     simply update a pointer or an index
 	 *     without actually constructing anything.
 	 *     Other implementations will need to
-	 *     do more work to determin whether or
+	 *     do more work to determine whether or
 	 *     not another {@code Row} is available.
 	 * </p>
 	 *
@@ -27,7 +27,17 @@ public interface IDatasetIterator {
 	 *     {@code tryMoveNext()} returns false. If
 	 *     {@code tryMoveNext()} returns false, the
 	 *     value returned from {@code getCurrentRow()}
-	 *     is not guaranteed to be valid.
+	 *     is not guaranteed to be valid. Similarly,
+	 *     because most iterator implementations
+	 *     reuse {@code Row} objects, the same
+	 *     caveats apply to {@code Row} objects that
+	 *     have been saved off from previous calls
+	 *     to {@code getCurrentRow()}. If another class
+	 *     requires a {@code Row} instance that
+	 *     doesn't mutate between calls to
+	 *     {@code tryMoveNext()}, it is responsible
+	 *     for creating its own copy of that {@code Row}
+	 *     (e.g. via {@link dsiter.row.RowCopier})
 	 * </p>
 	 *
 	 * @return {@code true} if the cursor was
@@ -49,7 +59,8 @@ public interface IDatasetIterator {
 	 * </p>
 	 *
 	 * <p>
-	 *     Calling {@code getCurrentRow()} repeatedly should
+	 *     Calling {@code getCurrentRow()} more than once
+	 *     per call to {@code tryMoveNext()} should
 	 *     be valid for all implementations (it should
 	 *     return an identical {@code Row} every time,
 	 *     perhaps even the same instance). However,
@@ -91,8 +102,9 @@ public interface IDatasetIterator {
 	 *     The default implementation of this method simply
 	 *     iterates over {@code getColumnDescriptors()} and
 	 *     returns the first column whose name matches.
-	 *     Implementations of the IDatasetIterator interface
-	 *     may provide a more efficient lookup mechanism
+	 *     Implementations of this interface may override
+	 *     this method to
+	 *     provide a more efficient lookup mechanism
 	 *     (e.g. a HashMap) if they so desire.
 	 * </p>
 	 *

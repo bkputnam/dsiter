@@ -4,14 +4,15 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.Row;
 
 /**
- * Created by bkputnam on 12/3/16.
+ * An iterator that returns only the first element of
+ * another source iterator.
  */
 public class FirstIterator implements IDatasetIterator {
 
-    boolean hasMovedNext = false;
-    IDatasetIterator src;
+    private boolean hasMovedNext = false;
+    private IDatasetIterator src;
 
-    public FirstIterator(IDatasetIterator src) {
+	public FirstIterator(IDatasetIterator src) {
         this.src = src;
     }
 

@@ -4,6 +4,33 @@ import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.RowCopier;
 
+/**
+ * An iterator that only returns the last element of
+ * another source iterator
+ *
+ * <p>
+ *     Note: this implementation can be fairly slow,
+ *     because it must necessarily read and copy
+ *     every {@code Row} in the source iterator.
+ *     This is because of two things:
+ * </p>
+ * <ol>
+ *     <li>
+ *         This iterator cannot know whether a
+ *         {@code Row} is the last one until
+ *         the next call to {@code src.tryMoveNext()}
+ *         returns false.
+ *     </li>
+ *     <li>
+ *         Calling {@code src.tryMoveNext()} may
+ *         change the value of
+ *         {@code src.getCurrentRow()}, even if it
+ *         returns {@code false}
+ *     </li>
+ * </ol>
+ *
+ * @see IDatasetIterator#tryMoveNext()
+ */
 public class LastIterator implements IDatasetIterator {
 
 	private IDatasetIterator src;
