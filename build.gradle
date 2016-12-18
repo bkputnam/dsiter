@@ -25,7 +25,22 @@ task applyTemplates(type: Copy) {
 	rename { filename -> filename - ~/\.template$/ }
 	expand new JsonSlurper().parse(new File(templateConfigFile))
 
-	filter { line -> "/* GENERATED CODE */" + line }
+	def isInComment = false
+	def prefix = "/* GENERATED CODE */"
+	filter { line ->
+		if(line.indexOf("/*") > -1) {
+			isInComment = true
+		}
+		if(isInComment) {
+			if(line.indexOf("*/") > -1) {
+				isInComment = false
+			}
+			return (" " * prefix.length()) + line;
+		}
+		else {
+			return prefix + line;
+		}
+	}
 }
 
 task applyTestTemplates(type: Copy) {
@@ -38,8 +53,6 @@ task applyTestTemplates(type: Copy) {
 
 	rename { filename -> filename - ~/\.template$/ }
 	expand new JsonSlurper().parse(new File(templateConfigFile))
-
-	filter { line -> "/* GENERATED CODE */" + line }
 }
 
 compileJava.dependsOn applyTemplates

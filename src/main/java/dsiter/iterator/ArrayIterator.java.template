@@ -2,6 +2,12 @@ package dsiter.iterator;
 
 import dsiter.row.*;
 
+/**
+ * An iterator over an array. The array may be
+ * of any type in {@code ColumnTypes}. The returned
+ * Rows will have one value of that type, named
+ * {@code value}.
+ */
 public class ArrayIterator implements IDatasetIterator {
 
 	private int index;
@@ -16,6 +22,10 @@ public class ArrayIterator implements IDatasetIterator {
 	}
 
 	<% ColumnTypes.each { type -> %>
+	/**
+	 * Construct a new ArrayIterator with type {@code ColumnType.${type.type}}
+	 * @param values the values to iterator over
+	 */
 	public ArrayIterator(${type.nativeType}... values) {
 		this();
 		row.${type.rowArray} = new ${type.nativeType}[1];

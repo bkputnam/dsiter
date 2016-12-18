@@ -2,6 +2,12 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.*;
 /* GENERATED CODE */
+                    /**
+                     * An iterator over an array. The array may be
+                     * of any type in {@code ColumnTypes}. The returned
+                     * Rows will have one value of that type, named
+                     * {@code value}.
+                     */
 /* GENERATED CODE */public class ArrayIterator implements IDatasetIterator {
 /* GENERATED CODE */
 /* GENERATED CODE */	private int index;
@@ -16,6 +22,10 @@
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/**
+                    	 * Construct a new ArrayIterator with type {@code ColumnType.INT}
+                    	 * @param values the values to iterator over
+                    	 */
 /* GENERATED CODE */	public ArrayIterator(int... values) {
 /* GENERATED CODE */		this();
 /* GENERATED CODE */		row.ints = new int[1];
@@ -24,6 +34,10 @@
 /* GENERATED CODE */		writer = new INT(values);
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Construct a new ArrayIterator with type {@code ColumnType.LONG}
+                    	 * @param values the values to iterator over
+                    	 */
 /* GENERATED CODE */	public ArrayIterator(long... values) {
 /* GENERATED CODE */		this();
 /* GENERATED CODE */		row.longs = new long[1];
@@ -32,6 +46,10 @@
 /* GENERATED CODE */		writer = new LONG(values);
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Construct a new ArrayIterator with type {@code ColumnType.FLOAT}
+                    	 * @param values the values to iterator over
+                    	 */
 /* GENERATED CODE */	public ArrayIterator(float... values) {
 /* GENERATED CODE */		this();
 /* GENERATED CODE */		row.floats = new float[1];
@@ -40,6 +58,10 @@
 /* GENERATED CODE */		writer = new FLOAT(values);
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Construct a new ArrayIterator with type {@code ColumnType.DOUBLE}
+                    	 * @param values the values to iterator over
+                    	 */
 /* GENERATED CODE */	public ArrayIterator(double... values) {
 /* GENERATED CODE */		this();
 /* GENERATED CODE */		row.doubles = new double[1];
@@ -48,6 +70,10 @@
 /* GENERATED CODE */		writer = new DOUBLE(values);
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Construct a new ArrayIterator with type {@code ColumnType.STRING}
+                    	 * @param values the values to iterator over
+                    	 */
 /* GENERATED CODE */	public ArrayIterator(String... values) {
 /* GENERATED CODE */		this();
 /* GENERATED CODE */		row.strings = new String[1];
@@ -56,6 +82,10 @@
 /* GENERATED CODE */		writer = new STRING(values);
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Construct a new ArrayIterator with type {@code ColumnType.BOOLEAN}
+                    	 * @param values the values to iterator over
+                    	 */
 /* GENERATED CODE */	public ArrayIterator(boolean... values) {
 /* GENERATED CODE */		this();
 /* GENERATED CODE */		row.bools = new boolean[1];
