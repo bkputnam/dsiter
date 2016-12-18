@@ -16,6 +16,12 @@ public class TestRangeDataset {
 	}
 
 	@Test
+	public void testRange5To10() {
+		IDatasetIterator it = new RangeDataset(5, 10).getIterator();
+		IterUtils.assertValues(it, "value", new Integer[] { 5, 6, 7, 8, 9 });
+	}
+
+	@Test
 	public void testRange0() {
 		IDatasetIterator it = new RangeDataset(0).getIterator();
 		IterUtils.assertValues(it, "value", new Integer[0]);

@@ -5,14 +5,20 @@ import dsiter.iterator.IDatasetIterator;
 
 public class RangeDataset implements IDataset {
 
-	private int numVals;
+	private int minVal;
+	private int maxVal;
 
-	public RangeDataset(int numVals) {
-		this.numVals = numVals;
+	public RangeDataset(int minVal, int maxVal) {
+		this.minVal = minVal;
+		this.maxVal = maxVal;
+	}
+
+	public RangeDataset(int maxVal) {
+		this(0, maxVal);
 	}
 
 	public IDatasetIterator getIterator() {
-		return new RangeIterator(this.numVals);
+		return new RangeIterator(minVal, maxVal);
 	}
 
 }

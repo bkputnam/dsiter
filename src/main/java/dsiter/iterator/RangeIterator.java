@@ -6,34 +6,38 @@ import dsiter.row.Row;
 
 public class RangeIterator implements IDatasetIterator {
 
-	private int curVal = -1;
-	private int numVals;
-
-	private static ColumnDescriptor[] columns = {
-		new ColumnDescriptor("value", ColumnType.INT, 0)
-	};
+	private int curVal;
+	private int maxVal;
+	private boolean isFirst = true;
 
 	private Row row;
 
-	public RangeIterator(int numVals) {
-		this.numVals = numVals;
+	public RangeIterator(int minVal, int maxVal) {
+
+		// Note: don't have to worry about underflow here because
+		// vm will do it silently, and then will overflow right
+		// back to where we want to be when we do curVal++ in
+		// tryMoveNext()
+		this.curVal = minVal-1;
+		this.maxVal = maxVal;
 
 		row = new Row();
-		row.ints = new int[] { -1 };
+		row.ints = new int[1];
+	}
+
+	public RangeIterator(int maxVal) {
+		this(0, maxVal);
 	}
 
 	public ColumnDescriptor[] getColumnDescriptors() {
-		return columns.clone();
+		return new ColumnDescriptor[]{
+			new ColumnDescriptor("value", ColumnType.INT, 0)
+		};
 	}
 
 	public boolean tryMoveNext() {
-		if( curVal < numVals - 1 ) {
-			curVal++;
-			return true;
-		}
-		else {
-			return false;
-		}
+		curVal++;
+		return curVal < maxVal;
 	}
 
 	public Row getCurrentRow() {
