@@ -3,7 +3,7 @@ package dsiter.dataset;
 import dsiter.iterator.RangeIterator;
 import dsiter.iterator.AbstractDatasetIterator;
 
-public class RangeDataset extends AbstractDataset {
+public class RangeDataset implements IDataset {
 
 	private int numVals;
 
