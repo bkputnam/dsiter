@@ -18,6 +18,7 @@ public class FilterIterator implements IDatasetIterator {
 
     private IDatasetIterator src;
     private TypedRowAccessor.BOOLEAN predicate;
+    private Row row;
 
 	/**
 	 * Create a new FilterIterator
@@ -35,7 +36,8 @@ public class FilterIterator implements IDatasetIterator {
     public boolean tryMoveNext() {
         boolean foundPassingRow = false;
         while(src.tryMoveNext()) {
-            if(predicate.getBoolFromRow(src.getCurrentRow())) {
+        	row = src.getCurrentRow();
+            if(predicate.getBoolFromRow(row)) {
                 return true;
             }
         }
@@ -44,7 +46,7 @@ public class FilterIterator implements IDatasetIterator {
 
     @Override
     public Row getCurrentRow() {
-        return src.getCurrentRow();
+        return row;
     }
 
 	@Override
