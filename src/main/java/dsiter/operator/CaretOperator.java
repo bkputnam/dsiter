@@ -4,25 +4,35 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.TypedRowAccessor;
 /* GENERATED CODE */
+                    /**
+                     * Binary operator that computes the exponent of {@code lhs}
+                     * raised to the power of {@code rhs}
+                     *
+                     * <p>
+                     *     You probably won't ever want to use this class directly;
+                     *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+                     *     directly. However, I certainly won't tell you you can't!
+                     * </p>
+                     */
 /* GENERATED CODE */public class CaretOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */	public CaretOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
-/* GENERATED CODE */		super(lhs, rhs);
-/* GENERATED CODE */	}
+/* GENERATED CODE */   public CaretOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */       super(lhs, rhs);
+/* GENERATED CODE */   }
 /* GENERATED CODE */
-/* GENERATED CODE */	@Override
-/* GENERATED CODE */	public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
-/* GENERATED CODE */		return
-/* GENERATED CODE */			super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
-/* GENERATED CODE */			eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
-/* GENERATED CODE */			eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
-/* GENERATED CODE */			ColumnType.INT;
-/* GENERATED CODE */	}
+/* GENERATED CODE */   @Override
+/* GENERATED CODE */   public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
+/* GENERATED CODE */       return
+/* GENERATED CODE */           super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
+/* GENERATED CODE */           eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
+/* GENERATED CODE */           eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
+/* GENERATED CODE */           ColumnType.INT;
+/* GENERATED CODE */   }
 /* GENERATED CODE */
-/* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
-/* GENERATED CODE */		return lhsType.isNumeric() && rhsType.isNumeric();
-/* GENERATED CODE */	}
+/* GENERATED CODE */   @Override
+/* GENERATED CODE */   protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
+/* GENERATED CODE */       return lhsType.isNumeric() && rhsType.isNumeric();
+/* GENERATED CODE */   }
 /* GENERATED CODE */
 /* GENERATED CODE */	
 /* GENERATED CODE */	

@@ -10,6 +10,15 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.TypedRowAccessor;
 /* GENERATED CODE */
+                    /**
+                     * Binary operator that tests whether {@code lhs} is equal to {@code rhs}
+                     *
+                     * <p>
+                     *     You probably won't ever want to use this class directly;
+                     *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+                     *     directly. However, I certainly won't tell you you can't!
+                     * </p>
+                     */
 /* GENERATED CODE */public class EqualsOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
 /* GENERATED CODE */	public EqualsOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {

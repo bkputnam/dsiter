@@ -10,6 +10,16 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.TypedRowAccessor;
 /* GENERATED CODE */
+                    /**
+                     * Binary operator that tests whether {@code lhs} is less than or equal
+                     * to {@code rhs}
+                     *
+                     * <p>
+                     *     You probably won't ever want to use this class directly;
+                     *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+                     *     directly. However, I certainly won't tell you you can't!
+                     * </p>
+                     */
 /* GENERATED CODE */public class LessThanEqualsOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
 /* GENERATED CODE */	public LessThanEqualsOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {

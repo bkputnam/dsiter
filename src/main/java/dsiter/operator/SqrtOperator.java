@@ -4,6 +4,15 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.TypedRowAccessor;
 /* GENERATED CODE */
+                    /**
+                     * Unary operator that computes the square root of {@code src}
+                     *
+                     * <p>
+                     *     You probably won't ever want to use this class directly;
+                     *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+                     *     directly. However, I certainly won't tell you you can't!
+                     * </p>
+                     */
 /* GENERATED CODE */public class SqrtOperator extends TypedUnaryOperator {
 /* GENERATED CODE */
 /* GENERATED CODE */	public SqrtOperator(TypedRowAccessor src) {

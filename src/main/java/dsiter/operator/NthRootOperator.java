@@ -4,12 +4,16 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.TypedRowAccessor;
 /* GENERATED CODE */
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE *///	DO NOT EDIT!!!
-/* GENERATED CODE *///
-/* GENERATED CODE *///	This is generated code. Edit the template instead.
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE */
+                    /**
+                     * Binary operator that computes the {@code rhs}-th root of
+                     * {@code lhs}
+                     *
+                     * <p>
+                     *     You probably won't ever want to use this class directly;
+                     *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+                     *     directly. However, I certainly won't tell you you can't!
+                     * </p>
+                     */
 /* GENERATED CODE */public class NthRootOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
 /* GENERATED CODE */	public NthRootOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {

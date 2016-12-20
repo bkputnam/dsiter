@@ -11,6 +11,29 @@
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */import dsiter.row.TypedRowAccessor;
 /* GENERATED CODE */
+                    /**
+                     * Abstract class for use in creating unary operators. Not all unary operators
+                     * need to use this class, but it's almost certainly easier to implement if you
+                     * do.
+                     * 
+                     * <p>
+                     * 		Subclasses must override the {@link #getReturnType} and {@link #testTypeCompatibility}
+                     *		methods. This class can then use that information to determine how best to process
+                     *		the source operator.
+                     * </p>
+                     *
+                     * <p>
+                     * 		This class provides overrideable methods for every possible type combination
+                     *		of {@code source} and {@code returnValue} (which means there are
+                     *		{@code (# of types)^2} overridable methods available). Subclasses only
+                     *		need to override the methods which they will actually support. So, for example,
+                     *		a logical boolean operator only needs to override {@link #handle_boolean_boolean}
+                     *		and a numeric operator will only need to override the appropriate numeric
+                     *		{@code handle_x_y} method(s). This superclass will use the information from
+                     *		{@link #getReturnType} and {@link #testTypeCompatibility} to efficiently determine
+                     *		which method to call.
+                     * </p>
+                     */
 /* GENERATED CODE */public abstract class TypedUnaryOperator extends TypedRowAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */	TypedRowAccessor src;

@@ -10,6 +10,16 @@
 /* GENERATED CODE *///	This is generated code. Edit the template instead.
 /* GENERATED CODE *////////////////////////////////////////////
 /* GENERATED CODE */
+                    /**
+                     * Binary operator that computes the value of {@code rhs} substracted
+                     * from {@code lhs}
+                     *
+                     * <p>
+                     *     You probably won't ever want to use this class directly;
+                     *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+                     *     directly. However, I certainly won't tell you you can't!
+                     * </p>
+                     */
 /* GENERATED CODE */public class MinusOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
 /* GENERATED CODE */	public MinusOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
