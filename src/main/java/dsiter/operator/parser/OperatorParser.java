@@ -6,13 +6,32 @@ import dsiter.row.*;
 import java.util.*;
 
 /**
- * Created by bkputnam on 12/9/16.
+ * Class for parsing strings to operator
+ * <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">ASTs</a>.
+ * This class is non-instantiable, and only publicly provides
+ * the static method {@link #parseOperator(ColumnDescriptor[], String)}
  */
 public class OperatorParser {
 
 	// This class is effectively static: neither abstract nor instantiable
 	private OperatorParser() { throw new Error("Programmer Error: OperatorParser should never be instantiated"); }
 
+	/**
+	 * Parse an operator string representing an expression to an operator
+	 * tree that knows how to extract and compute that expression from
+	 * a Row. Besides the expression to be parsed, this method also
+	 * requires a description (in the form of a {@code ColumnDescriptor[]})
+	 * of the rows that the returned operator will be operating on
+	 * (e.g. for the expression {@code "foo>5"} we need to know how to
+	 * extract the column {@code "foo"})
+	 *
+	 * @param metadata ColumnDescriptors that describe the shape of the
+	 *                 Rows that the returned operator will be operating
+	 *                 on
+	 * @param string   The expression to be parsed
+	 * @return An operator that can compute the given expression from a
+	 * Row of the expected shape.
+	 */
 	public static TypedRowAccessor parseOperator(ColumnDescriptor[] metadata, String string) {
 		ParserState state = new ParserState(metadata);
 		return parseOperatorHelper(string, state);

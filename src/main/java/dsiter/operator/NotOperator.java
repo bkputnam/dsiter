@@ -3,6 +3,15 @@ package dsiter.operator;
 import dsiter.row.ColumnType;
 import dsiter.row.TypedRowAccessor;
 
+/**
+ * Unary operator that computes the logical NOT of {@code src}
+ *
+ * <p>
+ *     You probably won't ever want to use this class directly;
+ *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+ *     directly. However, I certainly won't tell you you can't!
+ * </p>
+ */
 public class NotOperator extends TypedUnaryOperator {
 
 	public NotOperator(TypedRowAccessor src) {

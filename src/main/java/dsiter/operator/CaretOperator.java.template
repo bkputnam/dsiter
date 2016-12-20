@@ -4,25 +4,35 @@ import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.row.TypedRowAccessor;
 
+/**
+ * Binary operator that computes the exponent of {@code lhs}
+ * raised to the power of {@code rhs}
+ *
+ * <p>
+ *     You probably won't ever want to use this class directly;
+ *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+ *     directly. However, I certainly won't tell you you can't!
+ * </p>
+ */
 public class CaretOperator extends TypedBinaryOperator {
 
-	public CaretOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
-		super(lhs, rhs);
-	}
+   public CaretOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+       super(lhs, rhs);
+   }
 
-	@Override
-	public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
-		return
-			super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
-			eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
-			eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
-			ColumnType.INT;
-	}
+   @Override
+   public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
+       return
+           super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
+           eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
+           eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
+           ColumnType.INT;
+   }
 
-	@Override
-	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
-		return lhsType.isNumeric() && rhsType.isNumeric();
-	}
+   @Override
+   protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
+       return lhsType.isNumeric() && rhsType.isNumeric();
+   }
 
 	<% def numberTypes = ["int", "long", "float", "double"] %>
 	<%

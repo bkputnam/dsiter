@@ -2,6 +2,13 @@ package dsiter.operator.parser;
 
 import java.util.*;
 
+/**
+ * Private class that encapsulates information about the various
+ * operations supported by the OperatorParser. The intention is
+ * to separate the static knowledge of the operators from the
+ * parsing logic itself. This class is not intended to be used
+ * outside of the OperatorParser.
+ */
 class OperatorInfo {
 
 	public static int getNumParams(String opStr) {

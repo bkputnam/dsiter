@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by bkputnam on 12/10/16.
+ * Private class that tokenizes expression for the OperatorParser.
+ * There's no great magic here - just a lot of heuristics to chop
+ * up the expression correctly. It's a minor miracle it works as
+ * well as it does...
  */
-public class Tokenizer {
+class Tokenizer {
 
 	public static String[] tokenize(String input) {
 		List<String> chunks = Arrays.asList(input.split("\\b"));

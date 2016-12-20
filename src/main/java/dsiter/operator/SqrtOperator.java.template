@@ -4,6 +4,15 @@ import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.row.TypedRowAccessor;
 
+/**
+ * Unary operator that computes the square root of {@code src}
+ *
+ * <p>
+ *     You probably won't ever want to use this class directly;
+ *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+ *     directly. However, I certainly won't tell you you can't!
+ * </p>
+ */
 public class SqrtOperator extends TypedUnaryOperator {
 
 	public SqrtOperator(TypedRowAccessor src) {

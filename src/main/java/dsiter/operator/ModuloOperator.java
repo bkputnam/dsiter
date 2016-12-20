@@ -3,6 +3,15 @@ package dsiter.operator;
 import dsiter.row.ColumnType;
 import dsiter.row.TypedRowAccessor;
 
+/**
+ * Binary operator that computes {@code lhs modulo rhs}
+ *
+ * <p>
+ *     You probably won't ever want to use this class directly;
+ *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+ *     directly. However, I certainly won't tell you you can't!
+ * </p>
+ */
 public class ModuloOperator extends TypedBinaryOperator {
 
     public ModuloOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {

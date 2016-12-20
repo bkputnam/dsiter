@@ -3,8 +3,16 @@ package dsiter.operator;
 import dsiter.row.ColumnType;
 import dsiter.row.TypedRowAccessor;
 
-${Disclaimer}
-
+/**
+ * Binary operator that computes the multiplicative product of {@code lhs}
+ * and {@code rhs}
+ *
+ * <p>
+ *     You probably won't ever want to use this class directly;
+ *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+ *     directly. However, I certainly won't tell you you can't!
+ * </p>
+ */
 public class TimesOperator extends TypedBinaryOperator {
 
     public TimesOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {

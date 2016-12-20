@@ -4,7 +4,15 @@ import dsiter.row.ColumnType;
 import dsiter.row.TypedRowAccessor;
 
 /**
- * Created by bkputnam on 12/3/16.
+ * Binary operator that computes the sum of {@code lhs} and {@code rhs} for
+ * numeric values, and the concatenation of {@code lhs} and {@code rhs} for
+ * string values.
+ *
+ * <p>
+ *     You probably won't ever want to use this class directly;
+ *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+ *     directly. However, I certainly won't tell you you can't!
+ * </p>
  */
 public class PlusOperator extends TypedBinaryOperator {
 
