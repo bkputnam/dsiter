@@ -40,6 +40,7 @@ public class StrideIterator implements IDatasetIterator {
 		}
 	}
 
+	@Override
 	public boolean tryMoveNext() {
 		if( isFirstTime ) {
 			isFirstTime = false;
@@ -55,10 +56,12 @@ public class StrideIterator implements IDatasetIterator {
 		}
 	}
 
+	@Override
 	public Row getCurrentRow() {
 		return src.getCurrentRow();
 	}
 
+	@Override
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return this.src.getColumnDescriptors();
 	}

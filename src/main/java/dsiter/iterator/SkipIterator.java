@@ -3,13 +3,24 @@ package dsiter.iterator;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.Row;
 
+/**
+ * An iterator that skips the first {@code howMany} elements
+ * of its source iterator, and then returns the rest.
+ */
 public class SkipIterator implements IDatasetIterator {
 
     private IDatasetIterator src;
     private long numSkips;
     private long remainingSkips;
 
-    public SkipIterator(IDatasetIterator src, long howMany) {
+	/**
+	 * Construct a SkipIterator that skips the first {@code howMany}
+	 * elements of {@code src}
+	 *
+	 * @param src     The source iterator
+	 * @param howMany The number of elements of {@code src} to be skipped
+	 */
+	public SkipIterator(IDatasetIterator src, long howMany) {
         this.src = src;
         numSkips = remainingSkips = howMany;
     }

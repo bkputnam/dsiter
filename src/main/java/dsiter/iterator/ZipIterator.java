@@ -7,6 +7,12 @@ import java.util.HashSet;
 
 import dsiter.row.*;
 
+/**
+ * An iterator that combines the output of multiple source iterators
+ * into one. Names are preserved during the transformation, but a
+ * RuntimeException will be thrown if two columns with the same name
+ * are zipped together.
+ */
 public class ZipIterator implements IDatasetIterator {
 
 	private IDatasetIterator[] srcIters;
@@ -17,6 +23,12 @@ public class ZipIterator implements IDatasetIterator {
 	private ColumnAccessor[] accessors;
 	private Row combinedRow;
 
+	/**
+	 * Construct a new ZipIterator that zips together all of
+	 * {@code srcIters}
+	 *
+	 * @param srcIters The iterators to be zipped together
+	 */
 	public ZipIterator(IDatasetIterator... srcIters) {
 		this.srcIters = srcIters;
 
@@ -79,6 +91,7 @@ public class ZipIterator implements IDatasetIterator {
 		return minLength;
 	}
 
+	@Override
 	public boolean tryMoveNext() {
 		for(int i=0; i<srcIters.length; i++) {
 			if(!srcIters[i].tryMoveNext()) {
@@ -88,6 +101,7 @@ public class ZipIterator implements IDatasetIterator {
 		return true;
 	}
 
+	@Override
 	public Row getCurrentRow() {
 		int combinedIndex = 0;
 		for(int iterIndex=0; iterIndex<srcIters.length; iterIndex++) {
@@ -108,6 +122,7 @@ public class ZipIterator implements IDatasetIterator {
 		return combinedRow;
 	}
 
+	@Override
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return combinedColumnDescriptors;
 	}
