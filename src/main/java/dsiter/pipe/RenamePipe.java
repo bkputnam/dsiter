@@ -3,6 +3,9 @@ package dsiter.pipe;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.RenameIterator;
 
+/**
+ * Pipe class for {@link RenameIterator}
+ */
 public class RenamePipe implements IPipe {
 
     private String from;
@@ -14,7 +17,7 @@ public class RenamePipe implements IPipe {
     }
 
     @Override
-    public IDatasetIterator applyTo(IDatasetIterator src) {
+    public IDatasetIterator attachTo(IDatasetIterator src) {
         return new RenameIterator(src, from, to);
     }
 }

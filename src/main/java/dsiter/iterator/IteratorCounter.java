@@ -22,7 +22,7 @@ public class IteratorCounter {
 
 	private class CountPipe implements IPipe {
 		@Override
-		public IDatasetIterator applyTo(IDatasetIterator src) {
+		public IDatasetIterator attachTo(IDatasetIterator src) {
 			return new CountIterator(src);
 		}
 	}

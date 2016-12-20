@@ -3,6 +3,9 @@ package dsiter.pipe;
 import dsiter.iterator.StrideIterator;
 import dsiter.iterator.IDatasetIterator;
 
+/**
+ * Pipe class for {@link StrideIterator}
+ */
 public class StridePipe implements IPipe {
 
 	private int stride;
@@ -11,7 +14,7 @@ public class StridePipe implements IPipe {
 		this.stride = stride;
 	}
 
-	public IDatasetIterator applyTo(IDatasetIterator src) {
+	public IDatasetIterator attachTo(IDatasetIterator src) {
 		return new StrideIterator( src, stride );
 	}
 

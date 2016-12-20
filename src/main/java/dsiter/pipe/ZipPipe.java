@@ -3,6 +3,9 @@ package dsiter.pipe;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.ZipIterator;
 
+/**
+ * Pipe class for {@link ZipIterator}
+ */
 public class ZipPipe implements IPipe {
 
     IDatasetIterator[] iters;
@@ -12,7 +15,7 @@ public class ZipPipe implements IPipe {
     }
 
     @Override
-    public IDatasetIterator applyTo(IDatasetIterator src) {
+    public IDatasetIterator attachTo(IDatasetIterator src) {
 
         // add space for src, shift everything else up one index
         IDatasetIterator[] args = new IDatasetIterator[iters.length+1];

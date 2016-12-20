@@ -3,6 +3,9 @@ package dsiter.pipe;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.SkipIterator;
 
+/**
+ * Pipe class for {@link SkipIterator}
+ */
 public class SkipPipe implements IPipe {
 
     private long howMany;
@@ -12,7 +15,7 @@ public class SkipPipe implements IPipe {
     }
 
     @Override
-    public IDatasetIterator applyTo(IDatasetIterator src) {
+    public IDatasetIterator attachTo(IDatasetIterator src) {
         return new SkipIterator(src, howMany);
     }
 }

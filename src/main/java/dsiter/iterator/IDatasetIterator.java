@@ -157,6 +157,6 @@ public interface IDatasetIterator {
 	 * @return An iterator that represents this iterator with the pipe attached
 	 */
 	default public IDatasetIterator pipe(IPipe pipe) {
-		return pipe.applyTo(this);
+		return pipe.attachTo(this);
 	}
 }
