@@ -31,4 +31,8 @@ public class StdPipes {
 	public static IPipe zip(IDatasetIterator... iters) {
 		return new ZipPipe(iters);
 	}
+
+	public static IPipe take(long howMany) {
+		return new TakePipe(howMany);
+	}
 }

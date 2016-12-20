@@ -63,4 +63,10 @@ public class TestStdPipes {
 		e.expectStrings("s", strVals);
 		e.checkIterator(zi);
 	}
+
+	@Test
+	public void testTake() {
+		IDatasetIterator it = new RangeIterator(10).pipe(take(5));
+		IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4 });
+	}
 }
