@@ -27,7 +27,14 @@ public class FirstIterator implements IDatasetIterator {
         }
     }
 
-    @Override
+	@Override
+	public long tryGetLength() {
+		// length is either 0 or 1, but we don't know
+		// which ahead of time.
+		return -1;
+	}
+
+	@Override
     public Row getCurrentRow() {
         return src.getCurrentRow();
     }

@@ -29,6 +29,11 @@ public class RenameIterator implements IDatasetIterator {
 		return src.getCurrentRow();
 	}
 
+	@Override
+	public long tryGetLength() {
+		return src.tryGetLength();
+	}
+
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return cds;
 	}

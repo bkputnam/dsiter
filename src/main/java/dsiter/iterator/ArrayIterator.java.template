@@ -53,6 +53,11 @@ public class ArrayIterator implements IDatasetIterator {
 	}
 
 	@Override
+	public long tryGetLength() {
+		return length;
+	}
+
+	@Override
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return new ColumnDescriptor[] {
 			new ColumnDescriptor("value", type, 0)

@@ -63,6 +63,22 @@ public class ZipIterator implements IDatasetIterator {
 		combinedRow = new Row(shape);
 	}
 
+	@Override
+	public long tryGetLength() {
+		long minLength = Long.MAX_VALUE;
+		for(int i=0; i<srcIters.length; i++) {
+			IDatasetIterator srcIter = srcIters[i];
+			long len = srcIter.tryGetLength();
+			if (len == -1) {
+				return -1;
+			}
+			else if (len < minLength) {
+				minLength = len;
+			}
+		}
+		return minLength;
+	}
+
 	public boolean tryMoveNext() {
 		for(int i=0; i<srcIters.length; i++) {
 			if(!srcIters[i].tryMoveNext()) {

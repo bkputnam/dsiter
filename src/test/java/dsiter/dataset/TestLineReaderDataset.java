@@ -5,6 +5,7 @@ import dsiter.IteratorExpectations;
 import dsiter.reader.FileReaderFactory;
 import dsiter.reader.StringReaderFactory;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class TestLineReaderDataset {
 
@@ -44,5 +45,11 @@ public class TestLineReaderDataset {
 		);
 
 		e.checkIterator(lrd.getIterator());
+	}
+
+	@Test
+	public void testLength() throws Exception {
+		LineReaderDataset lrd = LineReaderDataset.fromString("a\nb\nc");
+		assertEquals(-1, lrd.getIterator().tryGetLength());
 	}
 }

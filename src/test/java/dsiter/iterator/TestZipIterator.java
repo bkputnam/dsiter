@@ -1,4 +1,4 @@
-package dsiter.pipe;
+package dsiter.iterator;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnAccessor;
+import static dsiter.StdPipes.*;
 
 public class TestZipIterator {
 
@@ -69,5 +70,29 @@ public class TestZipIterator {
 		e.expectStrings("d", vals4);
 
 		e.checkIterator(it);
+	}
+
+	@Test
+	public void testLength() {
+
+		IDatasetIterator zi = new ZipIterator(
+			new RangeIterator(3).pipe(rename("value", "i1")),
+			new RangeIterator(5).pipe(rename("value", "i2")),
+			new RangeIterator(10).pipe(rename("value", "i3"))
+		);
+
+		assertEquals(3, zi.tryGetLength());
+	}
+
+	@Test
+	public void testLengthNegOne() {
+
+		IDatasetIterator zi = new ZipIterator(
+			new RangeIterator(3).pipe(rename("value", "i1")),
+			new RangeIterator(5).pipe(rename("value", "i2")),
+			new RangeIterator(10).pipe(rename("value", "i3")).pipe(filter("i3<5"))
+		);
+
+		assertEquals(-1, zi.tryGetLength());
 	}
 }

@@ -32,4 +32,16 @@ public class TestRenameIterator {
 		);
 	}
 
+	@Test
+	public void testLength() {
+
+		IDatasetIterator it = new RenameIterator(
+			new RangeIterator(10),
+			"value",
+			"a"
+		);
+
+		assertEquals(10, it.tryGetLength());
+	}
+
 }

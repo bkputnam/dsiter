@@ -47,7 +47,12 @@ public class FilterIterator implements IDatasetIterator {
         return src.getCurrentRow();
     }
 
-    @Override
+	@Override
+	public long tryGetLength() {
+		return -1;
+	}
+
+	@Override
     public ColumnDescriptor[] getColumnDescriptors() {
         return src.getColumnDescriptors();
     }

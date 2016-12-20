@@ -115,4 +115,11 @@ public class TestRangeIterator {
 		assertEquals(0, shape.getNumStrings());
 		assertEquals(0, shape.getNumBools());
 	}
+
+	@Test
+	public void testLength() {
+		IDatasetIterator it = new RangeIterator(5, 10);
+		IterUtils.assertValues(it, "value", new Integer[] { 5, 6, 7, 8, 9 });
+		assertEquals(5, it.tryGetLength());
+	}
 }

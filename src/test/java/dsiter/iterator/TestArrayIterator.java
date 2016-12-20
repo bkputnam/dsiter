@@ -2,6 +2,7 @@ package dsiter.iterator;
 
 import dsiter.IterUtils;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class TestArrayIterator {
 
@@ -40,4 +41,10 @@ public class TestArrayIterator {
         ArrayIterator it = new ArrayIterator(true, false, false, true);
         IterUtils.assertValues(it, "value", new Boolean[] { true, false, false, true });
     }
+
+    @Test
+	public void testLength() {
+		ArrayIterator it = new ArrayIterator(true, false, false, true);
+		assertEquals(4, it.tryGetLength());
+	}
 }

@@ -113,6 +113,11 @@
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
+/* GENERATED CODE */	public long tryGetLength() {
+/* GENERATED CODE */		return length;
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
 /* GENERATED CODE */	public ColumnDescriptor[] getColumnDescriptors() {
 /* GENERATED CODE */		return new ColumnDescriptor[] {
 /* GENERATED CODE */			new ColumnDescriptor("value", type, 0)

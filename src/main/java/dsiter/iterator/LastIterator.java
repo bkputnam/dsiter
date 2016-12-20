@@ -64,6 +64,13 @@ public class LastIterator implements IDatasetIterator {
 		return row;
 	}
 
+	@Override
+	public long tryGetLength() {
+		// length is either 0 or 1, but we don't know
+		// which ahead of time.
+		return -1;
+	}
+
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return copier.getDestColumnDescriptors();
 	}

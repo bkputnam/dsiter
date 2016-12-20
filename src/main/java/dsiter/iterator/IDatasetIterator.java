@@ -73,6 +73,18 @@ public interface IDatasetIterator {
 	public Row getCurrentRow();
 
 	/**
+	 * Return the iterator's length, if known, or -1 if
+	 * the length is not known. Regardless, this will
+	 * not cause any change in the state of the iterator
+	 * (i.e. no calls to tryMoveNext() will be made)
+	 *
+	 * @return The length of the iterator, or -1 if unknown
+	 */
+	// Note: no default method to force implementors to
+	// think about this
+	public long tryGetLength();
+
+	/**
 	 * Return descriptions of all columns supported by this
 	 * iterator.
 	 *

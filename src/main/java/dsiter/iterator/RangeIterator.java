@@ -8,6 +8,7 @@ public class RangeIterator implements IDatasetIterator {
 
 	private int curVal;
 	private int maxVal;
+	private int length;
 	private boolean isFirst = true;
 
 	private Row row;
@@ -20,6 +21,7 @@ public class RangeIterator implements IDatasetIterator {
 		// tryMoveNext()
 		this.curVal = minVal-1;
 		this.maxVal = maxVal;
+		length = (maxVal - minVal);
 
 		row = new Row();
 		row.ints = new int[1];
@@ -38,6 +40,11 @@ public class RangeIterator implements IDatasetIterator {
 	public boolean tryMoveNext() {
 		curVal++;
 		return curVal < maxVal;
+	}
+
+	@Override
+	public long tryGetLength() {
+		return length;
 	}
 
 	public Row getCurrentRow() {

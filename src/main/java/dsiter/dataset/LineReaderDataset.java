@@ -85,6 +85,11 @@ public class LineReaderDataset implements IDataset {
 		}
 
 		@Override
+		public long tryGetLength() {
+			return -1;
+		}
+
+		@Override
 		public boolean tryMoveNext() {
 			if (done) {
 				return false;

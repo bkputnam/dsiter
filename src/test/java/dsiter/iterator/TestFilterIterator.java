@@ -4,6 +4,7 @@ import dsiter.IterUtils;
 import dsiter.operator.parser.OperatorParser;
 import dsiter.row.ColumnAccessor;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class TestFilterIterator {
 
@@ -33,4 +34,16 @@ public class TestFilterIterator {
 
         IterUtils.assertValues(it, "value", new Integer[] { 0, 2, 4, 6, 8 });
     }
+
+    @Test
+	public void testLength() {
+		RangeIterator range = new RangeIterator(10);
+
+		FilterIterator it = new FilterIterator(
+			range,
+			OperatorParser.parseOperator(range.getColumnDescriptors(), "value>5").asBoolAccessor()
+		);
+
+		assertEquals(-1, it.tryGetLength());
+	}
 }

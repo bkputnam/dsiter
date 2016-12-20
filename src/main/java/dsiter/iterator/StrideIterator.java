@@ -14,6 +14,17 @@ public class StrideIterator implements IDatasetIterator {
 		this.stride = stride;
 	}
 
+	@Override
+	public long tryGetLength() {
+		long srcLen = src.tryGetLength();
+		if (srcLen == -1) {
+			return -1;
+		}
+		else {
+			return (long)Math.ceil((double)srcLen / stride);
+		}
+	}
+
 	public boolean tryMoveNext() {
 		if( isFirstTime ) {
 			isFirstTime = false;
