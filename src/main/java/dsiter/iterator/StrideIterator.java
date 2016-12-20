@@ -3,6 +3,21 @@ package dsiter.iterator;
 import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
 
+/**
+ * Construct an iterator that only returns 1 in every
+ * {@code stride} rows from its source iterator. Returned
+ * rows will begin with the first, then the {@code stride}-th,
+ * and the {@code (stride*2)}-th, and so on.
+ *
+ * <p>For example, this iterator</p>
+ * <pre><code>{@code
+ * new StrideIterator(
+ *     new RangeIterator(10),
+ *     4
+ * )
+ * }</code></pre>
+ * <p>will return the values {@code 0, 4, 8}</p>
+ */
 public class StrideIterator implements IDatasetIterator {
 
 	private IDatasetIterator src;

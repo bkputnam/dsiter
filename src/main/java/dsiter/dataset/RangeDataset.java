@@ -8,6 +8,8 @@ import dsiter.iterator.IDatasetIterator;
  * Returned rows will have a single column of
  * type {@code ColumnType.INT}, named
  * {@code "value"}.
+ *
+ * @see RangeIterator
  */
 public class RangeDataset implements IDataset {
 
