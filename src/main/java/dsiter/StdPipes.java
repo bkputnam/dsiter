@@ -20,7 +20,7 @@ public class StdPipes {
 		return new RenamePipe(from, to);
 	}
 
-	public static IPipe skip(int howMany) {
+	public static IPipe skip(long howMany) {
 		return new SkipPipe(howMany);
 	}
 

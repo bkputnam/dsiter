@@ -6,10 +6,10 @@ import dsiter.row.Row;
 public class SkipIterator implements IDatasetIterator {
 
     private IDatasetIterator src;
-    private int numSkips;
-    private int remainingSkips;
+    private long numSkips;
+    private long remainingSkips;
 
-    public SkipIterator(IDatasetIterator src, int howMany) {
+    public SkipIterator(IDatasetIterator src, long howMany) {
         this.src = src;
         numSkips = remainingSkips = howMany;
     }

@@ -5,9 +5,9 @@ import dsiter.iterator.SkipIterator;
 
 public class SkipPipe implements IPipe {
 
-    private int howMany;
+    private long howMany;
 
-    public SkipPipe(int howMany) {
+    public SkipPipe(long howMany) {
         this.howMany = howMany;
     }
 
