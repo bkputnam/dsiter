@@ -29,9 +29,13 @@ public class FirstIterator implements IDatasetIterator {
 
 	@Override
 	public long tryGetLength() {
-		// length is either 0 or 1, but we don't know
-		// which ahead of time.
-		return -1;
+		long srcLen = src.tryGetLength();
+		if (srcLen == -1 || srcLen == 0) {
+			return srcLen;
+		}
+		else {
+			return 1;
+		}
 	}
 
 	@Override
