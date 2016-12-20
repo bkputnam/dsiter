@@ -10,12 +10,12 @@ import dsiter.row.ColumnDescriptor;
  * and the {@code (stride*2)}-th, and so on.
  *
  * <p>For example, this iterator</p>
- * <pre><code>{@code
+ * <pre>{@code
  * new StrideIterator(
  *     new RangeIterator(10),
  *     4
  * )
- * }</code></pre>
+ * }</pre>
  * <p>will return the values {@code 0, 4, 8}</p>
  */
 public class StrideIterator implements IDatasetIterator {
