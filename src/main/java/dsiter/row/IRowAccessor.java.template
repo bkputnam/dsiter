@@ -1,7 +1,52 @@
 package dsiter.row;
 
+/**
+ * An interface representing objects that return values from {@link Row}s. The returned
+ * values may be simple column reads (see: {@link IColumnAccessor}), computed
+ * values (see: everything in <a href="../operator/package-summary.html">dsiter.operator</a>),
+ * or static values that
+ * have nothing at all to do with the passed {@code Row} (see: {@link ConstantAccessor}).
+ *
+ * <p>
+ *     A plain {@code IRowAccessor} will return its value as an {@link Object}, but there
+ *     are also type-specific inner interfaces, like {@link IRowAccessor.INT}, that can
+ *     return the same value as a strongly-typed {@code int}. Plain {@code IRowAccessors}
+ *     can be converted to their typed counterparts via methods like {@link #asIntAccessor()}.
+ *     The default implementations of these methods perform a simple cast operation on
+ *     {@code this}, but some implementations override this with more sophisticated
+ *     behavior. For example some implementations override these
+ *     methods to return an inner accessor of the correct type (see:
+ *     {@link dsiter.operator.TypedBinaryOperator}, {@link dsiter.operator.TypedUnaryOperator}).
+ * </p>
+ *
+ * <p>
+ *     All {@code as[Type]Accessor()} methods will throw an Exception (usually a
+ *     {@link ClassCastException}) if the accessor is not actually of that type.
+ *     In general though, if {@link #getType()} returns {@link ColumnType#INT}, then
+ *     {@link #asIntAccessor()} should not throw.
+ * </p>
+ */
 public interface IRowAccessor {
+	/**
+	 * Compute and return this Accessor's value, using the
+	 * passed {@link Row} if/as appropriate.
+	 *
+	 * @param row The Row from which to compute the value (if needed)
+	 * @return		This Accessor's value with respect to the passed row
+	 */
 	Object getValueFromRow(Row row);
+
+	/**
+	 * Return this Accessor's type.
+	 *
+	 * <p>
+	 * 	Note: If this method returns, e.g., {@link ColumnType#INT}, then
+	 * 	{@link #asIntAccessor()} should return a valid
+	 * {@link IRowAccessor.INT} and not throw.
+	 * </p>
+	 *
+	 * @return		This Accessor's value with respect to the passed row
+	 */
 	ColumnType getType();
 
 	<% ColumnTypes.each { type -> %>
@@ -13,6 +58,10 @@ public interface IRowAccessor {
 	 * implementations, e.g. by casting and returning an inner
 	 * accessor to the approriate type.
 	 *
+	 * <p>
+	 * 	Note: this method will throw if {@link #getType} does not
+	 * 	return {@link ColumnType#${type.type}}.
+	 * </p>
 	 * @return An {@code IRowAccessor.${type.type}} representation
 	 * of this instance
 	 */
@@ -20,6 +69,10 @@ public interface IRowAccessor {
 	<% } %>
 	
 	<% ColumnTypes.each { type -> %>
+	/**
+	 * An {@link IRowAccessor} that returns a value of type ${type.nativeType}
+	 * (i.e.&nbsp;{@code getType() == ColumnType.${type.type}}).
+	 */
 	public interface ${type.type} extends IRowAccessor {
 		public ${type.nativeType} get${type.capitalized}FromRow(Row row);
 
