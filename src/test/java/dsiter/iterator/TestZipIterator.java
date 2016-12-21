@@ -3,7 +3,6 @@ package dsiter.iterator;
 import static org.junit.Assert.*;
 
 import dsiter.IteratorExpectations;
-import dsiter.iterator.*;
 import org.junit.Test;
 
 import dsiter.row.ColumnDescriptor;

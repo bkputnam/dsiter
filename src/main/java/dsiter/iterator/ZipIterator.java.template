@@ -1,0 +1,145 @@
+package dsiter.iterator;
+
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.ColumnType;
+import dsiter.row.Row;
+import dsiter.row.RowShape;
+
+public class ZipIterator implements IDatasetIterator {
+
+	private IDatasetIterator[] srcIters;
+	private Row[] srcRows;
+
+	private RowShape combinedShape;
+	private Row row;
+	private ColumnDescriptor[] combinedColumnDescriptors;
+
+	<% ColumnTypes.each { type -> %>
+	private IndexPair[][] indexMap${type.capitalized};<% } %>
+
+	public ZipIterator(IDatasetIterator... srcIters) {
+		this.srcIters = srcIters;
+		srcRows = new Row[srcIters.length];
+
+		<% ColumnTypes.each { type -> %>
+		indexMap${type.capitalized} = new IndexPair[srcIters.length][];<% } %>
+
+		int numColumns = 0;
+		for(int i=0; i<srcIters.length; i++) {
+			numColumns += srcIters[i].getColumnDescriptors().length;
+		}
+		combinedColumnDescriptors = new ColumnDescriptor[numColumns];
+
+		combinedShape = new RowShape();
+		int combinedColumnIndex = 0;
+		for(int iterIndex=0; iterIndex<srcIters.length; iterIndex++) {
+			IDatasetIterator srcIt = srcIters[iterIndex];
+			ColumnDescriptor[] cds = srcIt.getColumnDescriptors();
+			RowShape iterShape = srcIt.computeShape();
+
+			<% ColumnTypes.each { type -> %>
+			indexMap${type.capitalized}[iterIndex] = new IndexPair[iterShape.getNum${type.capitalized}s()];<% } %>
+
+			iterShape = new RowShape(); // reset to 0's
+
+			for(int columnIndex=0; columnIndex<cds.length; columnIndex++) {
+				ColumnDescriptor cd = cds[columnIndex];
+				ColumnType type = cd.getType();
+				iterShape.incrNum(type);
+				combinedShape.incrNum(type);
+
+				int srcIndex = iterShape.getNum(type) - 1;
+				int destIndex = combinedShape.getNum(type) - 1;
+
+				combinedColumnDescriptors[combinedColumnIndex] = new ColumnDescriptor(
+					cd.getName(),
+					type,
+					destIndex
+				);
+
+				switch (type) {
+					<% ColumnTypes.each { type -> %>
+					case ${type.type}:
+						indexMap${type.capitalized}[iterIndex][columnIndex] = new IndexPair(srcIndex, destIndex);
+						break;
+					<% } %>
+					default:
+						throw new Error("Programmer Error: this should be impossible");
+				}
+
+				combinedColumnIndex++;
+			}
+
+			row = new Row(combinedShape);
+		}
+
+	}
+
+	@Override
+	public boolean tryMoveNext() {
+		for(int i=0; i<srcIters.length; i++) {
+			if (!srcIters[i].tryMoveNext()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public Row getCurrentRow() {
+
+		for(int i=0; i<srcIters.length; i++) {
+			srcRows[i] = srcIters[i].getCurrentRow();
+		}
+
+		<% ColumnTypes.each { type -> %>
+		for(int iterIndex=0; iterIndex<srcIters.length; iterIndex++) {
+			IndexPair[] columnMap = indexMap${type.capitalized}[iterIndex];
+
+			for(int colIndex=0; colIndex<columnMap.length; colIndex++) {
+				IndexPair map = columnMap[colIndex];
+				row.${type.rowArray}[map.destIndex] = srcRows[iterIndex].${type.rowArray}[map.srcIndex];
+			}
+		}
+		<% } %>
+
+		// Null out srcRows. May allow them to be garbage collected,
+		// depending on the implementation of the srcIter
+		for(int i=0; i<srcIters.length; i++) {
+			srcRows[i] = null;
+		}
+
+		return row;
+
+	}
+
+	@Override
+	public long tryGetLength() {
+		long minLen = Long.MAX_VALUE;
+		for(int i=0; i<srcIters.length; i++) {
+			long len = srcIters[i].tryGetLength();
+			if (len==-1) {
+				return -1;
+			}
+			else if (len<minLen) {
+				minLen = len;
+			}
+		}
+		return minLen;
+	}
+
+	@Override
+	public ColumnDescriptor[] getColumnDescriptors() {
+		return combinedColumnDescriptors;
+	}
+
+	private static class IndexPair {
+		int srcIndex;
+		int destIndex;
+
+		public IndexPair(int srcIndex, int destIndex) {
+			this.srcIndex = srcIndex;
+			this.destIndex = destIndex;
+		}
+	}
+}
