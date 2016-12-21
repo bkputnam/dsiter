@@ -1,18 +1,66 @@
 package dsiter.row;
 
-${Disclaimer}
-
+/**
+ * A {@code Row} represents a piece of data returned from an
+ * {@link dsiter.dataset.IDataset}. All {@link dsiter.iterator.IDatasetIterator}s
+ * iterate over {@code Row} objects of some description. Rows are intended to
+ * model a fairly generic row that you might see in a CSV file or a database
+ * table: any number of named, strongly typed 'primitive' values, but no
+ * variable-length arrays.
+ *
+ * <p>
+ *     Note that Rows are not self-describing: a Row does not know the names
+ *     or order of its columns, or even if every value within the Row is used
+ *     (sometimes a column will be "deleted" by simply failing to provide a
+ *     {@link ColumnDescriptor} for it - this will cause Rows to contain
+ *     extraneous values that do not represent a true column).
+ *     This is mostly a memory
+ *     optimization, and not a philosophical design feature. Since every Row
+ *     returned by an {@link dsiter.iterator.IDatasetIterator} will have the
+ *     same structure, the {@code IDatasetIterator} itself is responsible for
+ *     describing that structure, not the (potentially numerous) individual Row
+ *     instances.
+ * </p>
+ * <p>
+ *     Values are usually not read directly from Rows, and are instead accessed
+ *     via {@link IRowAccessor} instances (see also: {@link IColumnAccessor}). This
+ *     is not a hard requirement, however, and direct access is occasionally used
+ *     for speed or convenience reasons.
+ * </p>
+ */
 public class Row {
-<% ColumnTypes.each { type -> %>
-	public ${type.nativeType}[] ${type.rowArray};<% } %>
+	<% ColumnTypes.each { type -> %>
+	/**
+	 * The Row's ${type.nativeType} values
+	 */
+	public ${type.nativeType}[] ${type.rowArray};
+	<% } %>
 
+	/**
+	 * Construct a new Row with 0 of every type.
+	 */
 	public Row() { }
 
-<% ColumnTypes.each { type -> %>
-	public Row(${type.nativeType}... vals) { this.${type.rowArray} = vals.clone(); }<% } %>
+	<% ColumnTypes.each { type -> %>
+	/**
+	 * Construct a Row with {@code vals} as values. (Row
+	 * will only contain values of type ${type.nativeType})
+	 *
+	 * @param vals	The {@code ${type.nativeType}} values to populate
+	 * 				the Row with.
+	 */
+	public Row(${type.nativeType}... vals) { this.${type.rowArray} = vals.clone(); }
+	<% } %>
 
+	/**
+	 * Construct a Row with the specified shape. Initial
+	 * values will be whatever the default value for that
+	 * type is (usually {@code 0} or {@code null}).
+	 *
+	 * @param shape	The shape of the row to be built.
+	 */
 	public Row(RowShape shape) {
-<% ColumnTypes.each { type -> %>
+	<% ColumnTypes.each { type -> %>
 		if(shape.getNum${type.capitalized}s() > 0) {
 			${type.rowArray} = new ${type.nativeType}[shape.getNum${type.capitalized}s()];
 		}<% } %>
