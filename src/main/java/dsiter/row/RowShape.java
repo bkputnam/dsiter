@@ -1,11 +1,10 @@
 /* GENERATED CODE */package dsiter.row;
 /* GENERATED CODE */
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE *///	DO NOT EDIT!!!
-/* GENERATED CODE *///
-/* GENERATED CODE *///	This is generated code. Edit the template instead.
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE */
+                    /**
+                     * Class that describes the "shape" of a {@link Row}. The shape of a {@code Row}
+                     * is simply the size of each array in the row (i.e. the number of ints, the
+                     * number of longs, the number of floats, etc).
+                     */
 /* GENERATED CODE */public class RowShape {
 /* GENERATED CODE */	
 /* GENERATED CODE */	private int numInts;
@@ -15,10 +14,24 @@
 /* GENERATED CODE */	private int numStrings;
 /* GENERATED CODE */	private int numBools;
 /* GENERATED CODE */
+                    	/**
+                    	 * Construct a new RowShape with all dimensions set to {@code 0}
+                    	 */
 /* GENERATED CODE */	public RowShape() {
 /* GENERATED CODE */		this(0, 0, 0, 0, 0, 0);
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Construct a new RowShape of the specified dimensions.
+                    	 *
+                    	 * 
+                    	 * @param numInts		The number of ints
+                    	 * @param numLongs		The number of longs
+                    	 * @param numFloats		The number of floats
+                    	 * @param numDoubles		The number of doubles
+                    	 * @param numStrings		The number of Strings
+                    	 * @param numBools		The number of booleans
+                    	 */
 /* GENERATED CODE */	public RowShape(int numInts, int numLongs, int numFloats, int numDoubles, int numStrings, int numBools) {
 /* GENERATED CODE */		
 /* GENERATED CODE */		this.numInts = numInts;
@@ -29,6 +42,21 @@
 /* GENERATED CODE */		this.numBools = numBools;
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Construct a new RowShape from a set of
+                    	 * {@link ColumnDescriptor}s (counts the number
+                    	 * of columns of each type)
+                    	 *
+                    	 * <p>
+                    	 *     Note: this will fail to construct an accurate
+                    	 *     RowShape if the Rows in question contain
+                    	 *     "deleted" values that are not described by
+                    	 *     any of the passed {@link ColumnDescriptor}s.
+                    	 * </p>
+                    	 *
+                    	 * @param cds The columns that describe the Row
+                    	 *            in question
+                    	 */
 /* GENERATED CODE */	public RowShape(ColumnDescriptor[] cds) {
 /* GENERATED CODE */		for(int i=0; i<cds.length; i++) {
 /* GENERATED CODE */			incrNum(cds[i].getType());
@@ -36,15 +64,62 @@
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/**
+                    	 * Return the number of ints in the current shape
+                    	 *
+                    	 * @return The number of ints in the current shape
+                    	 */
 /* GENERATED CODE */	public int getNumInts() { return numInts; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Return the number of longs in the current shape
+                    	 *
+                    	 * @return The number of longs in the current shape
+                    	 */
 /* GENERATED CODE */	public int getNumLongs() { return numLongs; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Return the number of floats in the current shape
+                    	 *
+                    	 * @return The number of floats in the current shape
+                    	 */
 /* GENERATED CODE */	public int getNumFloats() { return numFloats; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Return the number of doubles in the current shape
+                    	 *
+                    	 * @return The number of doubles in the current shape
+                    	 */
 /* GENERATED CODE */	public int getNumDoubles() { return numDoubles; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Return the number of Strings in the current shape
+                    	 *
+                    	 * @return The number of Strings in the current shape
+                    	 */
 /* GENERATED CODE */	public int getNumStrings() { return numStrings; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Return the number of booleans in the current shape
+                    	 *
+                    	 * @return The number of booleans in the current shape
+                    	 */
 /* GENERATED CODE */	public int getNumBools() { return numBools; }
+/* GENERATED CODE */	
 /* GENERATED CODE */
 /* GENERATED CODE */	
 /* GENERATED CODE */
+                    	/**
+                    	 * Get the number of values of the specified type in this shape.
+                    	 *
+                    	 * <p>
+                    	 * 	For example, if {@code type == ColumnType.INT}, this is equivalent
+                    	 * 	to calling {@link #getNumInts()}
+                    	 * </p>
+                    	 *
+                    	 * @param type	The type whose count is to be returned
+                    	 * @return The number of {@code type} values in the current shape
+                    	 */
 /* GENERATED CODE */	public int getNum(ColumnType type) {
 /* GENERATED CODE */		
 /* GENERATED CODE */		if(type == ColumnType.INT) {
@@ -70,6 +145,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Set the number of values of the specified type in this shape.
+                    	 *
+                    	 * @param type	The type whose count is to be modified
+                    	 * @param num	The new count of {@code type} values
+                    	 */
 /* GENERATED CODE */	public void setNum(ColumnType type, int num) {
 /* GENERATED CODE */		
 /* GENERATED CODE */		if(type == ColumnType.INT) {
@@ -95,6 +176,16 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Increment the number of values of the specified type in this shape.
+                    	 *
+                    	 * <p>
+                    	 * 	This is equivalent to (but more efficient than) calling
+                    	 * 	{@code setNum(type, getNum(type)+1)}
+                    	 * </p>
+                    	 *
+                    	 * @param type	The type whose count is to be incremented
+                    	 */
 /* GENERATED CODE */	public void incrNum(ColumnType type) {
 /* GENERATED CODE */		
 /* GENERATED CODE */		if(type == ColumnType.INT) {
@@ -120,6 +211,16 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Return a new RowShape instance whose counts are the sums of the
+                    	 * counts of the passed RowShapes. Will not modify either
+                    	 * {@code shape1} or {@code shape2}.
+                    	 *
+                    	 * @param shape1	One shape to be summed
+                    	 * @param shape2	The other shape to be summed
+                    	 * @return			A new RowShape instance representing the sum
+                    	 *					of the two parameters
+                    	 */
 /* GENERATED CODE */	public static RowShape add(RowShape shape1, RowShape shape2) {
 /* GENERATED CODE */		return new RowShape(
 /* GENERATED CODE */			
@@ -132,6 +233,18 @@
 /* GENERATED CODE */		);
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Return a new RowShape instance whose counts are the sums of the
+                    	 * current RowShape and the passed RowShape. Will not modify either
+                    	 * the current RowShape or the passed RowShape.
+                    	 *
+                    	 * <p>
+                    	 * 	{@code shapeA.add(shapeB)} is equivalent to {@code RowShape.add(shapeA, shapeB)}
+                    	 * </p>
+                    	 *
+                    	 * @param other	The RowShape to be summed with the current RowShape
+                    	 * @return		A new RowShape instance representing the sum of the two RowShapes
+                    	 */
 /* GENERATED CODE */	public RowShape add(RowShape other) {
 /* GENERATED CODE */		return RowShape.add(this, other);
 /* GENERATED CODE */	}
