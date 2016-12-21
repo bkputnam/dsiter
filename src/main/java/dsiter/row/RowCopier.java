@@ -1,11 +1,22 @@
 /* GENERATED CODE */package dsiter.row;
 /* GENERATED CODE */
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE *///	DO NOT EDIT!!!
-/* GENERATED CODE *///
-/* GENERATED CODE *///	This is generated code. Edit the template instead.
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE */
+                    /**
+                     * Class that manages copying data from one {@link Row} to another.
+                     *
+                     * <p>
+                     *     Since it's moderately common for Rows to contain values not linked to
+                     *     actual columns (not all values in the Row are described by a
+                     *     {@link ColumnDescriptor} instance), this class requires a
+                     *     {@code ColumnDescriptor[]} and will
+                     *     only copy over the described columns. This means that the destination
+                     *     Row may have a different shape than the source Row (always
+                     *     less-than-or-equal to the source shape in every dimension). It also means
+                     *     that the {@link ColumnDescriptor#getRowArrayIndex()} values for a
+                     *     given column may change, and that the destination Row must therefore
+                     *     be descibed by a different {@code ColumnDescriptor[]} than the source
+                     *     Row. This class provides functionality to handle all of that.
+                     * </p>
+                     */
 /* GENERATED CODE */public class RowCopier {
 /* GENERATED CODE */
 /* GENERATED CODE */	
@@ -19,6 +30,13 @@
 /* GENERATED CODE */	private RowShape shape;
 /* GENERATED CODE */	private ColumnDescriptor[] destCds;
 /* GENERATED CODE */
+                    	/**
+                    	 * Construct a RowCopier that copies the specified columns
+                    	 * to a new, potentially compacted Row
+                    	 *
+                    	 * @param srcCds Descriptors of the columns to be copied to
+                    	 *               a new Row
+                    	 */
 /* GENERATED CODE */	public RowCopier(ColumnDescriptor[] srcCds) {
 /* GENERATED CODE */
 /* GENERATED CODE */		shape = new RowShape();
@@ -65,14 +83,33 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Get the shape of the destination Row. This shape will
+                    	 * be less-than-or-equal-to the source Row's shape in every
+                    	 * dimension.
+                    	 *
+                    	 * @return	The shape of the destination row
+                    	 */
 /* GENERATED CODE */	public RowShape getDestShape() {
 /* GENERATED CODE */		return new RowShape().add(shape);
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Get column descriptors that describe the destination Row
+                    	 *
+                    	 * @return Descriptions of every column in the destination Row
+                    	 */
 /* GENERATED CODE */	public ColumnDescriptor[] getDestColumnDescriptors() {
 /* GENERATED CODE */		return destCds;
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Copy the source Row to the destination Row, using the previously
+                    	 * configured {@link ColumnDescriptor}s as a guide.
+                    	 *
+                    	 * @param src  The Row to be copied from
+                    	 * @param dest The Row to be copied to
+                    	 */
 /* GENERATED CODE */	public void copyTo(Row src, Row dest) {
 /* GENERATED CODE */		
 /* GENERATED CODE */		for(int i=0; i<srcIntIndexes.length; i++) {
