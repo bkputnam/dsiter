@@ -3,17 +3,17 @@ package dsiter.pipe;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.FilterIterator;
 import dsiter.operator.parser.OperatorParser;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Pipe class for {@link FilterIterator}
  */
 public class FilterPipe implements IPipe {
 
-	TypedRowAccessor.BOOLEAN predicate;
+	IRowAccessor.BOOLEAN predicate;
 	String filterStr;
 
-	public FilterPipe(TypedRowAccessor.BOOLEAN predicate) {
+	public FilterPipe(IRowAccessor.BOOLEAN predicate) {
 		this.predicate = predicate;
 	}
 

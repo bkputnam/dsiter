@@ -1,0 +1,37 @@
+package dsiter.row;
+
+public interface IRowAccessor {
+	Object getValueFromRow(Row row);
+	ColumnType getType();
+
+	<% ColumnTypes.each { type -> %>
+	/**
+	 * Convert this IRowAccessor to an {@code IRowAccessor.${type.type}}.
+	 * The default implementation of this method simply casts
+	 * {@code this} to {@code IRowAccessor.${type.type}}, but some
+	 * subclasses may wish to provide more sophisticated
+	 * implementations, e.g. by casting and returning an inner
+	 * accessor to the approriate type.
+	 *
+	 * @return An {@code IRowAccessor.${type.type}} representation
+	 * of this instance
+	 */
+	default ${type.type} as${type.capitalized}Accessor() { return (${type.type})this; }
+	<% } %>
+	
+	<% ColumnTypes.each { type -> %>
+	public interface ${type.type} extends IRowAccessor {
+		public ${type.nativeType} get${type.capitalized}FromRow(Row row);
+
+		@Override
+		default Object getValueFromRow(Row row) {
+			return get${type.capitalized}FromRow(row);
+		}
+
+		@Override
+		default ColumnType getType() {
+			return ColumnType.${type.type};
+		}
+	}
+	<% } %>
+}

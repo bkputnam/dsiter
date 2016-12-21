@@ -2,9 +2,7 @@ package dsiter.operator;
 
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.row.TypedRowAccessor;
-
-${Disclaimer}
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes the value of {@code rhs} substracted
@@ -18,7 +16,7 @@ ${Disclaimer}
  */
 public class MinusOperator extends TypedBinaryOperator {
 
-	public MinusOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+	public MinusOperator(IRowAccessor lhs, IRowAccessor rhs) {
         super(lhs, rhs);
     }
 

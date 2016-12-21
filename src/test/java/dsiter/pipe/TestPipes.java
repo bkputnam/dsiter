@@ -33,12 +33,12 @@ public class TestPipes {
     @Test
     public void testFilterPipe() {
 
-		TypedRowAccessor.BOOLEAN isEvenPredicate = new EqualsOperator(
+		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsOperator(
                 new ModuloOperator(
-                        new ColumnAccessor(ColumnType.INT, 0),
-                        new ConstantAccessor(2)
+					IColumnAccessor.getInstance(ColumnType.INT, 0),
+                        ConstantAccessor.getInstance(2)
                 ),
-                new ConstantAccessor(0)
+                ConstantAccessor.getInstance(0)
         ).asBoolAccessor();
 
         IDatasetIterator it = new RangeIterator(10)

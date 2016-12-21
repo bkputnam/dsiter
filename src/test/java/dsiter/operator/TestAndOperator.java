@@ -11,8 +11,8 @@ public class TestAndOperator {
 	@Test
 	public void testTrueTrue() {
 		AndOperator ao = new AndOperator(
-			new ConstantAccessor(true),
-			new ConstantAccessor(true)
+			ConstantAccessor.getInstance(true),
+			ConstantAccessor.getInstance(true)
 		);
 
 		assertEquals(true, ao.getValueFromRow(new Row()));
@@ -21,8 +21,8 @@ public class TestAndOperator {
 	@Test
 	public void testTrueFalse() {
 		AndOperator ao = new AndOperator(
-			new ConstantAccessor(true),
-			new ConstantAccessor(false)
+			ConstantAccessor.getInstance(true),
+			ConstantAccessor.getInstance(false)
 		);
 
 		assertEquals(false, ao.getValueFromRow(new Row()));
@@ -31,8 +31,8 @@ public class TestAndOperator {
 	@Test
 	public void testFalseTrue() {
 		AndOperator ao = new AndOperator(
-			new ConstantAccessor(false),
-			new ConstantAccessor(true)
+			ConstantAccessor.getInstance(false),
+			ConstantAccessor.getInstance(true)
 		);
 
 		assertEquals(false, ao.getValueFromRow(new Row()));
@@ -41,8 +41,8 @@ public class TestAndOperator {
 	@Test
 	public void testFalseFalse() {
 		AndOperator ao = new AndOperator(
-			new ConstantAccessor(false),
-			new ConstantAccessor(false)
+			ConstantAccessor.getInstance(false),
+			ConstantAccessor.getInstance(false)
 		);
 
 		assertEquals(false, ao.getValueFromRow(new Row()));

@@ -2,7 +2,7 @@ package dsiter.iterator;
 
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.Row;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * An iterator which uses a {@code TypedRowAccessor.BOOLEAN}
@@ -17,7 +17,7 @@ import dsiter.row.TypedRowAccessor;
 public class FilterIterator implements IDatasetIterator {
 
     private IDatasetIterator src;
-    private TypedRowAccessor.BOOLEAN predicate;
+    private IRowAccessor.BOOLEAN predicate;
     private Row row;
 
 	/**
@@ -27,7 +27,7 @@ public class FilterIterator implements IDatasetIterator {
 	 *                  returns {@code true}, that row will be returned
 	 *                  from this FilterIterator, else it will be skipped
 	 */
-	public FilterIterator(IDatasetIterator src, TypedRowAccessor.BOOLEAN predicate) {
+	public FilterIterator(IDatasetIterator src, IRowAccessor.BOOLEAN predicate) {
         this.src = src;
         this.predicate = predicate;
     }

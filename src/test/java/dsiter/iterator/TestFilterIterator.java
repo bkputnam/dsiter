@@ -2,7 +2,7 @@ package dsiter.iterator;
 
 import dsiter.IterUtils;
 import dsiter.operator.parser.OperatorParser;
-import dsiter.row.ColumnAccessor;
+import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class TestFilterIterator {
     public void testEvens() {
 
         RangeIterator range = new RangeIterator(10);
-        ColumnAccessor ca = range.getColumnDescriptor("value").getAccessor();
+        IRowAccessor ca = range.getColumnDescriptor("value").getAccessor();
 
         FilterIterator it = new FilterIterator(
             range,

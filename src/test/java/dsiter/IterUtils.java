@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 import dsiter.iterator.IDatasetIterator;
-import dsiter.row.ColumnAccessor;
+import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
 public class IterUtils {
 
 	public static List<Object> getColumn(IDatasetIterator it, String colName) {
 
-		ColumnAccessor ca = it.getColumnDescriptor(colName).getAccessor();
+		IRowAccessor ca = it.getColumnDescriptor(colName).getAccessor();
 
 		List<Object> values = new ArrayList<Object>();
 		while( it.tryMoveNext() ) {
@@ -24,7 +24,7 @@ public class IterUtils {
 
 	public static <T> void assertValues(IDatasetIterator it, String colName, T[] expectedValues) {
 
-		ColumnAccessor ca = it.getColumnDescriptor(colName).getAccessor();
+		IRowAccessor ca = it.getColumnDescriptor(colName).getAccessor();
 
 		int rowCount = 0;
 		while( it.tryMoveNext() ) {

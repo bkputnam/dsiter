@@ -2,7 +2,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that computes the {@code rhs}-th root of
@@ -16,7 +16,7 @@
                      */
 /* GENERATED CODE */public class NthRootOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */	public NthRootOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */	public NthRootOperator(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

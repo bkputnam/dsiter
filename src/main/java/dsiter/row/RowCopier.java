@@ -40,7 +40,7 @@
 /* GENERATED CODE */		shape = new RowShape(); // reset to all 0's
 /* GENERATED CODE */		for(int i=0; i<srcCds.length; i++) {
 /* GENERATED CODE */			ColumnDescriptor cd = srcCds[i];
-/* GENERATED CODE */			ColumnAccessor ca = cd.getAccessor();
+/* GENERATED CODE */			IColumnAccessor ca = cd.getAccessor();
 /* GENERATED CODE */			ColumnType type = ca.getType();
 /* GENERATED CODE */			shape.incrNum(type);
 /* GENERATED CODE */			int index = shape.getNum(type) - 1;

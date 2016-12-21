@@ -7,7 +7,7 @@ import dsiter.iterator.*;
 import org.junit.Test;
 
 import dsiter.row.ColumnDescriptor;
-import dsiter.row.ColumnAccessor;
+import dsiter.row.IRowAccessor;
 import static dsiter.StdPipes.*;
 
 public class TestZipIterator {
@@ -36,7 +36,7 @@ public class TestZipIterator {
 		assertEquals("a", cds[0].getName());
 		assertEquals("b", cds[1].getName());
 
-		ColumnAccessor[] cas = new ColumnAccessor[] {
+		IRowAccessor[] cas = new IRowAccessor[] {
 			cds[0].getAccessor(),
 			cds[1].getAccessor(),
 		};

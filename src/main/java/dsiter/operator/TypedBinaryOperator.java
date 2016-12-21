@@ -3,7 +3,7 @@
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Abstract class for use in creating binary operators. Not all binary operators
@@ -30,28 +30,30 @@
                      * 
                      * @see TypedUnaryOperator
                      */
-/* GENERATED CODE */public abstract class TypedBinaryOperator extends TypedRowAccessor {
+/* GENERATED CODE */public abstract class TypedBinaryOperator implements IRowAccessor {
 /* GENERATED CODE */
                     	/**
                     	 * Left Hand Side
                     	 */
-/* GENERATED CODE */	private TypedRowAccessor lhs;
+/* GENERATED CODE */	private IRowAccessor lhs;
 /* GENERATED CODE */
                     	/**
                     	 * Right Hand Side
                     	 */
-/* GENERATED CODE */	private TypedRowAccessor rhs;
+/* GENERATED CODE */	private IRowAccessor rhs;
+/* GENERATED CODE */
+/* GENERATED CODE */	private IRowAccessor innerAccessor;
 /* GENERATED CODE */
                     	/**
                     	 * Construct a TypedBinaryOperator with {@code lhs} and {@code rhs} as
                     	 * its left- and right-hand sides, respectively.
                     	 * 
-                    	 * @param lhs	The {@code TypedRowAccessor} that will provide the left
+                    	 * @param lhs	The {@code IRowAccessor} that will provide the left
                     	 *				hand side of the operation
-                    	 * @param rhs	The {@code TypedRowAccessor} that will provide the right
+                    	 * @param rhs	The {@code IRowAccessor} that will provide the right
                     	 *				hand side of the operation
                     	 */
-/* GENERATED CODE */	public TypedBinaryOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */	public TypedBinaryOperator(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		this.lhs = lhs;
 /* GENERATED CODE */		this.rhs = rhs;
 /* GENERATED CODE */
@@ -65,9 +67,81 @@
 /* GENERATED CODE */            throw new IllegalArgumentException("Incompatible types: " + lhsType + ", " + rhsType);
 /* GENERATED CODE */        }
 /* GENERATED CODE */
-/* GENERATED CODE */		ColumnType returnType = super.type = this.getReturnType(lhsType, rhsType);
-/* GENERATED CODE */		super.innerAccessor = getInnerAccessor(lhs, rhs, returnType);
+/* GENERATED CODE */		ColumnType returnType = this.getReturnType(lhsType, rhsType);
+/* GENERATED CODE */		innerAccessor = getInnerAccessor(lhs, rhs, returnType);
 /* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public ColumnType getType() {
+/* GENERATED CODE */		return innerAccessor.getType();
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public Object getValueFromRow(Row row) {
+/* GENERATED CODE */		return innerAccessor.getValueFromRow(row);
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	
+                    	/**
+                    	 * Convert this IRowAccessor to an {@code IRowAccessor.INT}
+                    	 * by casting and returning the hidden {@code innerAccessor}
+                    	 *
+                    	 * @return An {@code IRowAccessor.INT} representation
+                    	 * of this instance
+                    	 */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public IRowAccessor.INT asIntAccessor() { return (IRowAccessor.INT)innerAccessor; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Convert this IRowAccessor to an {@code IRowAccessor.LONG}
+                    	 * by casting and returning the hidden {@code innerAccessor}
+                    	 *
+                    	 * @return An {@code IRowAccessor.LONG} representation
+                    	 * of this instance
+                    	 */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public IRowAccessor.LONG asLongAccessor() { return (IRowAccessor.LONG)innerAccessor; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Convert this IRowAccessor to an {@code IRowAccessor.FLOAT}
+                    	 * by casting and returning the hidden {@code innerAccessor}
+                    	 *
+                    	 * @return An {@code IRowAccessor.FLOAT} representation
+                    	 * of this instance
+                    	 */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public IRowAccessor.FLOAT asFloatAccessor() { return (IRowAccessor.FLOAT)innerAccessor; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Convert this IRowAccessor to an {@code IRowAccessor.DOUBLE}
+                    	 * by casting and returning the hidden {@code innerAccessor}
+                    	 *
+                    	 * @return An {@code IRowAccessor.DOUBLE} representation
+                    	 * of this instance
+                    	 */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public IRowAccessor.DOUBLE asDoubleAccessor() { return (IRowAccessor.DOUBLE)innerAccessor; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Convert this IRowAccessor to an {@code IRowAccessor.STRING}
+                    	 * by casting and returning the hidden {@code innerAccessor}
+                    	 *
+                    	 * @return An {@code IRowAccessor.STRING} representation
+                    	 * of this instance
+                    	 */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public IRowAccessor.STRING asStringAccessor() { return (IRowAccessor.STRING)innerAccessor; }
+/* GENERATED CODE */	
+                    	/**
+                    	 * Convert this IRowAccessor to an {@code IRowAccessor.BOOLEAN}
+                    	 * by casting and returning the hidden {@code innerAccessor}
+                    	 *
+                    	 * @return An {@code IRowAccessor.BOOLEAN} representation
+                    	 * of this instance
+                    	 */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public IRowAccessor.BOOLEAN asBoolAccessor() { return (IRowAccessor.BOOLEAN)innerAccessor; }
+/* GENERATED CODE */	
 /* GENERATED CODE */
                     	/**
                     	 * Subclasses must implement this method to let the superclass know the return type
@@ -108,7 +182,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
 /* GENERATED CODE */
-/* GENERATED CODE */	private IRowAccessor getInnerAccessor(TypedRowAccessor lhs, TypedRowAccessor rhs, ColumnType returnType) {
+/* GENERATED CODE */	private IRowAccessor getInnerAccessor(IRowAccessor lhs, IRowAccessor rhs, ColumnType returnType) {
 /* GENERATED CODE */		ColumnType lhsType = lhs.getType();
 /* GENERATED CODE */		ColumnType rhsType = rhs.getType();
 /* GENERATED CODE */
@@ -2706,12 +2780,12 @@
 /* GENERATED CODE */	protected boolean handle_boolean_boolean_boolean( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_boolean_boolean_boolean must be overridden by subclass"); }
 /* GENERATED CODE */
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_INT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class INT_INT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_INT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_INT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -2721,12 +2795,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_INT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class INT_INT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_INT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_INT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -2736,12 +2810,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_INT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class INT_INT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_INT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_INT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -2751,12 +2825,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_INT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class INT_INT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_INT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_INT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -2766,12 +2840,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_INT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class INT_INT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_INT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_INT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -2781,12 +2855,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_INT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class INT_INT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_INT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_INT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -2796,12 +2870,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_LONG_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class INT_LONG_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_LONG_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_LONG_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -2811,12 +2885,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_LONG_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class INT_LONG_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_LONG_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_LONG_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -2826,12 +2900,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_LONG_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class INT_LONG_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_LONG_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_LONG_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -2841,12 +2915,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_LONG_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class INT_LONG_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_LONG_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_LONG_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -2856,12 +2930,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_LONG_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class INT_LONG_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_LONG_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_LONG_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -2871,12 +2945,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_LONG_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class INT_LONG_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_LONG_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_LONG_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -2886,12 +2960,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_FLOAT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class INT_FLOAT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_FLOAT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_FLOAT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -2901,12 +2975,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_FLOAT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class INT_FLOAT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_FLOAT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_FLOAT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -2916,12 +2990,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_FLOAT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class INT_FLOAT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_FLOAT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_FLOAT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -2931,12 +3005,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_FLOAT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class INT_FLOAT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_FLOAT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_FLOAT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -2946,12 +3020,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_FLOAT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class INT_FLOAT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_FLOAT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_FLOAT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -2961,12 +3035,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_FLOAT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class INT_FLOAT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_FLOAT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_FLOAT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -2976,12 +3050,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_DOUBLE_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class INT_DOUBLE_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_DOUBLE_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_DOUBLE_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -2991,12 +3065,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_DOUBLE_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class INT_DOUBLE_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_DOUBLE_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_DOUBLE_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3006,12 +3080,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_DOUBLE_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class INT_DOUBLE_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_DOUBLE_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_DOUBLE_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3021,12 +3095,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_DOUBLE_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class INT_DOUBLE_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_DOUBLE_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_DOUBLE_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3036,12 +3110,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_DOUBLE_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class INT_DOUBLE_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_DOUBLE_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_DOUBLE_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3051,12 +3125,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_DOUBLE_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class INT_DOUBLE_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_DOUBLE_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_DOUBLE_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3066,12 +3140,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_STRING_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class INT_STRING_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_STRING_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_STRING_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3081,12 +3155,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_STRING_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class INT_STRING_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_STRING_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_STRING_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3096,12 +3170,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_STRING_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class INT_STRING_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_STRING_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_STRING_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3111,12 +3185,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_STRING_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class INT_STRING_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_STRING_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_STRING_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3126,12 +3200,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_STRING_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class INT_STRING_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_STRING_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_STRING_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3141,12 +3215,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_STRING_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class INT_STRING_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_STRING_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_STRING_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3156,12 +3230,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_BOOLEAN_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class INT_BOOLEAN_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_BOOLEAN_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_BOOLEAN_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3171,12 +3245,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_BOOLEAN_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class INT_BOOLEAN_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_BOOLEAN_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_BOOLEAN_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3186,12 +3260,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_BOOLEAN_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class INT_BOOLEAN_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_BOOLEAN_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_BOOLEAN_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3201,12 +3275,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_BOOLEAN_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class INT_BOOLEAN_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_BOOLEAN_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_BOOLEAN_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3216,12 +3290,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_BOOLEAN_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class INT_BOOLEAN_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_BOOLEAN_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_BOOLEAN_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3231,12 +3305,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class INT_BOOLEAN_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class INT_BOOLEAN_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.INT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.INT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private INT_BOOLEAN_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private INT_BOOLEAN_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asIntAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3246,12 +3320,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_INT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class LONG_INT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_INT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_INT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3261,12 +3335,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_INT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class LONG_INT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_INT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_INT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3276,12 +3350,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_INT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class LONG_INT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_INT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_INT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3291,12 +3365,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_INT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class LONG_INT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_INT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_INT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3306,12 +3380,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_INT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class LONG_INT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_INT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_INT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3321,12 +3395,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_INT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class LONG_INT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_INT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_INT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3336,12 +3410,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_LONG_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class LONG_LONG_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_LONG_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_LONG_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3351,12 +3425,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_LONG_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class LONG_LONG_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_LONG_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_LONG_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3366,12 +3440,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_LONG_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class LONG_LONG_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_LONG_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_LONG_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3381,12 +3455,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_LONG_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class LONG_LONG_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_LONG_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_LONG_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3396,12 +3470,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_LONG_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class LONG_LONG_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_LONG_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_LONG_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3411,12 +3485,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_LONG_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class LONG_LONG_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_LONG_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_LONG_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3426,12 +3500,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_FLOAT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class LONG_FLOAT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_FLOAT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_FLOAT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3441,12 +3515,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_FLOAT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class LONG_FLOAT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_FLOAT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_FLOAT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3456,12 +3530,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_FLOAT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class LONG_FLOAT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_FLOAT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_FLOAT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3471,12 +3545,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_FLOAT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class LONG_FLOAT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_FLOAT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_FLOAT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3486,12 +3560,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_FLOAT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class LONG_FLOAT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_FLOAT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_FLOAT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3501,12 +3575,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_FLOAT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class LONG_FLOAT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_FLOAT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_FLOAT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3516,12 +3590,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_DOUBLE_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class LONG_DOUBLE_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_DOUBLE_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_DOUBLE_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3531,12 +3605,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_DOUBLE_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class LONG_DOUBLE_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_DOUBLE_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_DOUBLE_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3546,12 +3620,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_DOUBLE_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class LONG_DOUBLE_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_DOUBLE_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_DOUBLE_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3561,12 +3635,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_DOUBLE_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class LONG_DOUBLE_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_DOUBLE_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_DOUBLE_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3576,12 +3650,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_DOUBLE_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class LONG_DOUBLE_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_DOUBLE_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_DOUBLE_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3591,12 +3665,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_DOUBLE_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class LONG_DOUBLE_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_DOUBLE_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_DOUBLE_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -3606,12 +3680,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_STRING_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class LONG_STRING_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_STRING_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_STRING_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3621,12 +3695,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_STRING_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class LONG_STRING_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_STRING_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_STRING_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3636,12 +3710,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_STRING_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class LONG_STRING_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_STRING_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_STRING_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3651,12 +3725,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_STRING_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class LONG_STRING_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_STRING_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_STRING_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3666,12 +3740,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_STRING_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class LONG_STRING_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_STRING_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_STRING_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3681,12 +3755,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_STRING_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class LONG_STRING_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_STRING_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_STRING_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -3696,12 +3770,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_BOOLEAN_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class LONG_BOOLEAN_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_BOOLEAN_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_BOOLEAN_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3711,12 +3785,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_BOOLEAN_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class LONG_BOOLEAN_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_BOOLEAN_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_BOOLEAN_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3726,12 +3800,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_BOOLEAN_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class LONG_BOOLEAN_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_BOOLEAN_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_BOOLEAN_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3741,12 +3815,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_BOOLEAN_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class LONG_BOOLEAN_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_BOOLEAN_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_BOOLEAN_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3756,12 +3830,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_BOOLEAN_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class LONG_BOOLEAN_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_BOOLEAN_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_BOOLEAN_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3771,12 +3845,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class LONG_BOOLEAN_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class LONG_BOOLEAN_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.LONG lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.LONG lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private LONG_BOOLEAN_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private LONG_BOOLEAN_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asLongAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -3786,12 +3860,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_INT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class FLOAT_INT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_INT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_INT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3801,12 +3875,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_INT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class FLOAT_INT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_INT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_INT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3816,12 +3890,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_INT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class FLOAT_INT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_INT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_INT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3831,12 +3905,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_INT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class FLOAT_INT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_INT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_INT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3846,12 +3920,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_INT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class FLOAT_INT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_INT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_INT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3861,12 +3935,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_INT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class FLOAT_INT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_INT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_INT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -3876,12 +3950,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_LONG_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class FLOAT_LONG_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_LONG_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_LONG_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3891,12 +3965,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_LONG_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class FLOAT_LONG_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_LONG_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_LONG_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3906,12 +3980,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_LONG_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class FLOAT_LONG_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_LONG_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_LONG_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3921,12 +3995,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_LONG_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class FLOAT_LONG_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_LONG_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_LONG_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3936,12 +4010,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_LONG_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class FLOAT_LONG_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_LONG_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_LONG_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3951,12 +4025,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_LONG_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class FLOAT_LONG_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_LONG_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_LONG_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -3966,12 +4040,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_FLOAT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class FLOAT_FLOAT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_FLOAT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_FLOAT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3981,12 +4055,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_FLOAT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class FLOAT_FLOAT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_FLOAT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_FLOAT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -3996,12 +4070,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_FLOAT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class FLOAT_FLOAT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_FLOAT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_FLOAT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4011,12 +4085,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_FLOAT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class FLOAT_FLOAT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_FLOAT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_FLOAT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4026,12 +4100,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_FLOAT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class FLOAT_FLOAT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_FLOAT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_FLOAT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4041,12 +4115,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_FLOAT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class FLOAT_FLOAT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_FLOAT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_FLOAT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4056,12 +4130,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_DOUBLE_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class FLOAT_DOUBLE_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_DOUBLE_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_DOUBLE_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4071,12 +4145,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_DOUBLE_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class FLOAT_DOUBLE_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_DOUBLE_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_DOUBLE_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4086,12 +4160,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_DOUBLE_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class FLOAT_DOUBLE_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_DOUBLE_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_DOUBLE_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4101,12 +4175,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_DOUBLE_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class FLOAT_DOUBLE_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_DOUBLE_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_DOUBLE_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4116,12 +4190,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_DOUBLE_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class FLOAT_DOUBLE_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_DOUBLE_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_DOUBLE_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4131,12 +4205,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_DOUBLE_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class FLOAT_DOUBLE_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_DOUBLE_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_DOUBLE_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4146,12 +4220,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_STRING_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class FLOAT_STRING_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_STRING_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_STRING_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4161,12 +4235,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_STRING_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class FLOAT_STRING_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_STRING_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_STRING_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4176,12 +4250,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_STRING_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class FLOAT_STRING_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_STRING_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_STRING_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4191,12 +4265,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_STRING_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class FLOAT_STRING_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_STRING_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_STRING_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4206,12 +4280,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_STRING_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class FLOAT_STRING_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_STRING_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_STRING_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4221,12 +4295,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_STRING_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class FLOAT_STRING_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_STRING_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_STRING_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4236,12 +4310,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_BOOLEAN_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class FLOAT_BOOLEAN_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_BOOLEAN_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_BOOLEAN_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4251,12 +4325,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_BOOLEAN_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class FLOAT_BOOLEAN_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_BOOLEAN_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_BOOLEAN_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4266,12 +4340,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_BOOLEAN_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class FLOAT_BOOLEAN_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_BOOLEAN_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_BOOLEAN_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4281,12 +4355,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_BOOLEAN_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class FLOAT_BOOLEAN_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_BOOLEAN_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_BOOLEAN_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4296,12 +4370,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_BOOLEAN_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class FLOAT_BOOLEAN_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_BOOLEAN_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_BOOLEAN_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4311,12 +4385,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class FLOAT_BOOLEAN_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class FLOAT_BOOLEAN_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private FLOAT_BOOLEAN_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private FLOAT_BOOLEAN_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asFloatAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4326,12 +4400,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_INT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class DOUBLE_INT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_INT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_INT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4341,12 +4415,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_INT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class DOUBLE_INT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_INT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_INT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4356,12 +4430,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_INT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class DOUBLE_INT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_INT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_INT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4371,12 +4445,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_INT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class DOUBLE_INT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_INT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_INT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4386,12 +4460,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_INT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class DOUBLE_INT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_INT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_INT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4401,12 +4475,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_INT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class DOUBLE_INT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_INT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_INT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4416,12 +4490,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_LONG_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class DOUBLE_LONG_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_LONG_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_LONG_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4431,12 +4505,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_LONG_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class DOUBLE_LONG_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_LONG_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_LONG_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4446,12 +4520,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_LONG_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class DOUBLE_LONG_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_LONG_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_LONG_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4461,12 +4535,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_LONG_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class DOUBLE_LONG_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_LONG_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_LONG_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4476,12 +4550,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_LONG_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class DOUBLE_LONG_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_LONG_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_LONG_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4491,12 +4565,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_LONG_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class DOUBLE_LONG_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_LONG_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_LONG_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4506,12 +4580,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_FLOAT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class DOUBLE_FLOAT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_FLOAT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_FLOAT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4521,12 +4595,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_FLOAT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class DOUBLE_FLOAT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_FLOAT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_FLOAT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4536,12 +4610,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_FLOAT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class DOUBLE_FLOAT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_FLOAT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_FLOAT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4551,12 +4625,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_FLOAT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class DOUBLE_FLOAT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_FLOAT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_FLOAT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4566,12 +4640,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_FLOAT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class DOUBLE_FLOAT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_FLOAT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_FLOAT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4581,12 +4655,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_FLOAT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class DOUBLE_FLOAT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_FLOAT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_FLOAT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -4596,12 +4670,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_DOUBLE_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class DOUBLE_DOUBLE_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_DOUBLE_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_DOUBLE_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4611,12 +4685,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_DOUBLE_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class DOUBLE_DOUBLE_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_DOUBLE_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_DOUBLE_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4626,12 +4700,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_DOUBLE_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class DOUBLE_DOUBLE_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_DOUBLE_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_DOUBLE_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4641,12 +4715,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_DOUBLE_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class DOUBLE_DOUBLE_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_DOUBLE_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_DOUBLE_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4656,12 +4730,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_DOUBLE_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class DOUBLE_DOUBLE_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_DOUBLE_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_DOUBLE_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4671,12 +4745,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_DOUBLE_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class DOUBLE_DOUBLE_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_DOUBLE_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_DOUBLE_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -4686,12 +4760,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_STRING_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class DOUBLE_STRING_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_STRING_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_STRING_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4701,12 +4775,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_STRING_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class DOUBLE_STRING_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_STRING_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_STRING_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4716,12 +4790,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_STRING_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class DOUBLE_STRING_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_STRING_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_STRING_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4731,12 +4805,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_STRING_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class DOUBLE_STRING_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_STRING_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_STRING_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4746,12 +4820,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_STRING_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class DOUBLE_STRING_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_STRING_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_STRING_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4761,12 +4835,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_STRING_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class DOUBLE_STRING_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_STRING_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_STRING_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -4776,12 +4850,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_BOOLEAN_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class DOUBLE_BOOLEAN_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_BOOLEAN_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_BOOLEAN_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4791,12 +4865,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_BOOLEAN_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class DOUBLE_BOOLEAN_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_BOOLEAN_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_BOOLEAN_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4806,12 +4880,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_BOOLEAN_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class DOUBLE_BOOLEAN_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_BOOLEAN_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_BOOLEAN_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4821,12 +4895,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_BOOLEAN_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class DOUBLE_BOOLEAN_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_BOOLEAN_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_BOOLEAN_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4836,12 +4910,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_BOOLEAN_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class DOUBLE_BOOLEAN_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_BOOLEAN_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_BOOLEAN_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4851,12 +4925,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class DOUBLE_BOOLEAN_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class DOUBLE_BOOLEAN_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private DOUBLE_BOOLEAN_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private DOUBLE_BOOLEAN_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asDoubleAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -4866,12 +4940,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_INT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class STRING_INT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_INT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_INT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4881,12 +4955,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_INT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class STRING_INT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_INT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_INT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4896,12 +4970,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_INT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class STRING_INT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_INT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_INT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4911,12 +4985,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_INT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class STRING_INT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_INT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_INT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4926,12 +5000,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_INT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class STRING_INT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_INT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_INT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4941,12 +5015,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_INT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class STRING_INT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_INT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_INT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -4956,12 +5030,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_LONG_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class STRING_LONG_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_LONG_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_LONG_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4971,12 +5045,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_LONG_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class STRING_LONG_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_LONG_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_LONG_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -4986,12 +5060,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_LONG_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class STRING_LONG_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_LONG_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_LONG_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5001,12 +5075,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_LONG_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class STRING_LONG_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_LONG_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_LONG_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5016,12 +5090,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_LONG_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class STRING_LONG_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_LONG_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_LONG_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5031,12 +5105,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_LONG_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class STRING_LONG_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_LONG_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_LONG_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5046,12 +5120,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_FLOAT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class STRING_FLOAT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_FLOAT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_FLOAT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5061,12 +5135,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_FLOAT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class STRING_FLOAT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_FLOAT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_FLOAT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5076,12 +5150,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_FLOAT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class STRING_FLOAT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_FLOAT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_FLOAT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5091,12 +5165,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_FLOAT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class STRING_FLOAT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_FLOAT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_FLOAT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5106,12 +5180,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_FLOAT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class STRING_FLOAT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_FLOAT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_FLOAT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5121,12 +5195,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_FLOAT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class STRING_FLOAT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_FLOAT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_FLOAT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5136,12 +5210,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_DOUBLE_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class STRING_DOUBLE_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_DOUBLE_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_DOUBLE_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5151,12 +5225,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_DOUBLE_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class STRING_DOUBLE_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_DOUBLE_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_DOUBLE_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5166,12 +5240,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_DOUBLE_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class STRING_DOUBLE_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_DOUBLE_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_DOUBLE_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5181,12 +5255,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_DOUBLE_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class STRING_DOUBLE_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_DOUBLE_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_DOUBLE_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5196,12 +5270,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_DOUBLE_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class STRING_DOUBLE_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_DOUBLE_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_DOUBLE_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5211,12 +5285,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_DOUBLE_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class STRING_DOUBLE_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_DOUBLE_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_DOUBLE_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5226,12 +5300,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_STRING_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class STRING_STRING_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_STRING_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_STRING_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5241,12 +5315,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_STRING_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class STRING_STRING_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_STRING_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_STRING_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5256,12 +5330,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_STRING_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class STRING_STRING_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_STRING_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_STRING_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5271,12 +5345,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_STRING_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class STRING_STRING_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_STRING_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_STRING_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5286,12 +5360,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_STRING_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class STRING_STRING_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_STRING_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_STRING_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5301,12 +5375,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_STRING_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class STRING_STRING_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_STRING_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_STRING_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5316,12 +5390,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_BOOLEAN_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class STRING_BOOLEAN_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_BOOLEAN_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_BOOLEAN_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5331,12 +5405,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_BOOLEAN_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class STRING_BOOLEAN_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_BOOLEAN_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_BOOLEAN_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5346,12 +5420,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_BOOLEAN_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class STRING_BOOLEAN_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_BOOLEAN_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_BOOLEAN_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5361,12 +5435,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_BOOLEAN_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class STRING_BOOLEAN_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_BOOLEAN_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_BOOLEAN_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5376,12 +5450,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_BOOLEAN_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class STRING_BOOLEAN_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_BOOLEAN_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_BOOLEAN_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5391,12 +5465,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class STRING_BOOLEAN_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class STRING_BOOLEAN_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.STRING lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.STRING lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private STRING_BOOLEAN_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private STRING_BOOLEAN_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asStringAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5406,12 +5480,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_INT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class BOOLEAN_INT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_INT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_INT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -5421,12 +5495,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_INT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class BOOLEAN_INT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_INT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_INT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -5436,12 +5510,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_INT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class BOOLEAN_INT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_INT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_INT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -5451,12 +5525,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_INT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class BOOLEAN_INT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_INT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_INT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -5466,12 +5540,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_INT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class BOOLEAN_INT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_INT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_INT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -5481,12 +5555,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_INT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class BOOLEAN_INT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.INT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.INT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_INT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_INT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asIntAccessor();
 /* GENERATED CODE */		}
@@ -5496,12 +5570,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_LONG_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class BOOLEAN_LONG_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_LONG_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_LONG_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5511,12 +5585,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_LONG_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class BOOLEAN_LONG_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_LONG_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_LONG_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5526,12 +5600,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_LONG_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class BOOLEAN_LONG_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_LONG_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_LONG_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5541,12 +5615,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_LONG_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class BOOLEAN_LONG_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_LONG_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_LONG_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5556,12 +5630,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_LONG_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class BOOLEAN_LONG_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_LONG_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_LONG_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5571,12 +5645,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_LONG_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class BOOLEAN_LONG_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.LONG rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.LONG rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_LONG_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_LONG_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asLongAccessor();
 /* GENERATED CODE */		}
@@ -5586,12 +5660,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_FLOAT_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class BOOLEAN_FLOAT_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_FLOAT_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_FLOAT_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5601,12 +5675,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_FLOAT_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class BOOLEAN_FLOAT_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_FLOAT_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_FLOAT_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5616,12 +5690,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_FLOAT_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class BOOLEAN_FLOAT_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_FLOAT_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_FLOAT_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5631,12 +5705,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_FLOAT_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class BOOLEAN_FLOAT_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_FLOAT_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_FLOAT_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5646,12 +5720,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_FLOAT_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class BOOLEAN_FLOAT_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_FLOAT_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_FLOAT_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5661,12 +5735,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_FLOAT_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class BOOLEAN_FLOAT_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.FLOAT rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_FLOAT_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_FLOAT_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asFloatAccessor();
 /* GENERATED CODE */		}
@@ -5676,12 +5750,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_DOUBLE_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class BOOLEAN_DOUBLE_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_DOUBLE_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_DOUBLE_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5691,12 +5765,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_DOUBLE_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class BOOLEAN_DOUBLE_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_DOUBLE_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_DOUBLE_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5706,12 +5780,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_DOUBLE_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class BOOLEAN_DOUBLE_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_DOUBLE_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_DOUBLE_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5721,12 +5795,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_DOUBLE_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class BOOLEAN_DOUBLE_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_DOUBLE_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_DOUBLE_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5736,12 +5810,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_DOUBLE_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class BOOLEAN_DOUBLE_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_DOUBLE_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_DOUBLE_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5751,12 +5825,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_DOUBLE_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class BOOLEAN_DOUBLE_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.DOUBLE rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_DOUBLE_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_DOUBLE_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asDoubleAccessor();
 /* GENERATED CODE */		}
@@ -5766,12 +5840,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_STRING_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class BOOLEAN_STRING_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_STRING_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_STRING_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5781,12 +5855,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_STRING_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class BOOLEAN_STRING_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_STRING_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_STRING_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5796,12 +5870,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_STRING_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class BOOLEAN_STRING_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_STRING_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_STRING_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5811,12 +5885,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_STRING_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class BOOLEAN_STRING_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_STRING_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_STRING_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5826,12 +5900,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_STRING_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class BOOLEAN_STRING_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_STRING_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_STRING_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5841,12 +5915,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_STRING_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class BOOLEAN_STRING_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.STRING rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.STRING rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_STRING_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_STRING_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asStringAccessor();
 /* GENERATED CODE */		}
@@ -5856,12 +5930,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_INT extends TypedRowAccessor.INT {
+/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_INT implements IRowAccessor.INT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_BOOLEAN_INT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_BOOLEAN_INT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5871,12 +5945,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_LONG extends TypedRowAccessor.LONG {
+/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_LONG implements IRowAccessor.LONG {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_BOOLEAN_LONG(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_BOOLEAN_LONG(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5886,12 +5960,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_FLOAT extends TypedRowAccessor.FLOAT {
+/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_FLOAT implements IRowAccessor.FLOAT {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_BOOLEAN_FLOAT(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_BOOLEAN_FLOAT(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5901,12 +5975,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_DOUBLE extends TypedRowAccessor.DOUBLE {
+/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_DOUBLE implements IRowAccessor.DOUBLE {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_BOOLEAN_DOUBLE(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_BOOLEAN_DOUBLE(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5916,12 +5990,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_STRING extends TypedRowAccessor.STRING {
+/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_STRING implements IRowAccessor.STRING {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_BOOLEAN_STRING(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_BOOLEAN_STRING(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}
@@ -5931,12 +6005,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
-/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_BOOLEAN extends TypedRowAccessor.BOOLEAN {
+/* GENERATED CODE */	private class BOOLEAN_BOOLEAN_BOOLEAN implements IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN lhs;
-/* GENERATED CODE */		private TypedRowAccessor.BOOLEAN rhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
+/* GENERATED CODE */		private IRowAccessor.BOOLEAN rhs;
 /* GENERATED CODE */
-/* GENERATED CODE */		private BOOLEAN_BOOLEAN_BOOLEAN(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */		private BOOLEAN_BOOLEAN_BOOLEAN(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */			this.lhs = lhs.asBoolAccessor();
 /* GENERATED CODE */			this.rhs = rhs.asBoolAccessor();
 /* GENERATED CODE */		}

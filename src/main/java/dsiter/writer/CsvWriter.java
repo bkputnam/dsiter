@@ -1,7 +1,7 @@
 package dsiter.writer;
 
 import dsiter.iterator.IDatasetIterator;
-import dsiter.row.ColumnAccessor;
+import dsiter.row.IColumnAccessor;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.Row;
@@ -45,7 +45,7 @@ public class CsvWriter implements IWriter {
             out.print(lineSeparator);
         }
 
-        ColumnAccessor[] cas = new ColumnAccessor[cds.length];
+        IColumnAccessor[] cas = new IColumnAccessor[cds.length];
         for(int i=0; i<cds.length; i++) {
             cas[i] = cds[i].getAccessor();
         }
@@ -54,7 +54,7 @@ public class CsvWriter implements IWriter {
             Row row = it.getCurrentRow();
 
             for(int i=0; i<cas.length; i++) {
-                ColumnAccessor ca = cas[i];
+                IColumnAccessor ca = cas[i];
                 ColumnType type = ca.getType();
 
                 if(type == ColumnType.STRING) {

@@ -1,7 +1,7 @@
 package dsiter.operator;
 
 import dsiter.row.ColumnType;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes {@code lhs modulo rhs}
@@ -14,7 +14,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class ModuloOperator extends TypedBinaryOperator {
 
-    public ModuloOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+    public ModuloOperator(IRowAccessor lhs, IRowAccessor rhs) {
         super(lhs, rhs);
     }
 

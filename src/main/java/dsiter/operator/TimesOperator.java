@@ -1,7 +1,7 @@
 /* GENERATED CODE */package dsiter.operator;
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that computes the multiplicative product of {@code lhs}
@@ -15,7 +15,7 @@
                      */
 /* GENERATED CODE */public class TimesOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */    public TimesOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */    public TimesOperator(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */        super(lhs, rhs);
 /* GENERATED CODE */    }
 /* GENERATED CODE */

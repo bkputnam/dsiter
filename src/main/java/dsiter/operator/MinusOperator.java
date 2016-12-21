@@ -2,13 +2,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
-/* GENERATED CODE */
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE *///	DO NOT EDIT!!!
-/* GENERATED CODE *///
-/* GENERATED CODE *///	This is generated code. Edit the template instead.
-/* GENERATED CODE *////////////////////////////////////////////
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that computes the value of {@code rhs} substracted
@@ -22,7 +16,7 @@
                      */
 /* GENERATED CODE */public class MinusOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */	public MinusOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */	public MinusOperator(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */        super(lhs, rhs);
 /* GENERATED CODE */    }
 /* GENERATED CODE */

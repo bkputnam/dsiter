@@ -2,7 +2,6 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Unary operator that computes the square root of {@code src}
@@ -15,7 +14,7 @@
                      */
 /* GENERATED CODE */public class SqrtOperator extends TypedUnaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */	public SqrtOperator(TypedRowAccessor src) {
+/* GENERATED CODE */	public SqrtOperator(IRowAccessor src) {
 /* GENERATED CODE */		super(src);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

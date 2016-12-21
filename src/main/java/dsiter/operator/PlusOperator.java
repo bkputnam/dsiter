@@ -1,7 +1,7 @@
 package dsiter.operator;
 
 import dsiter.row.ColumnType;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes the sum of {@code lhs} and {@code rhs} for
@@ -18,7 +18,7 @@ public class PlusOperator extends TypedBinaryOperator {
 
     private ColumnType type;
 
-    public PlusOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+    public PlusOperator(IRowAccessor lhs, IRowAccessor rhs) {
         super(lhs, rhs);
     }
 

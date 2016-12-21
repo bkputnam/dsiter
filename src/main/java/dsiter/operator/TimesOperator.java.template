@@ -1,7 +1,7 @@
 package dsiter.operator;
 
 import dsiter.row.ColumnType;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes the multiplicative product of {@code lhs}
@@ -15,7 +15,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class TimesOperator extends TypedBinaryOperator {
 
-    public TimesOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+    public TimesOperator(IRowAccessor lhs, IRowAccessor rhs) {
         super(lhs, rhs);
     }
 

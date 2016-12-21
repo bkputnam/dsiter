@@ -1,14 +1,8 @@
 /* GENERATED CODE */package dsiter.operator;
 /* GENERATED CODE */
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE *///	DO NOT EDIT!!!
-/* GENERATED CODE *///
-/* GENERATED CODE *///	This is generated code. Edit the template instead.
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that tests whether {@code lhs} is less than or equal
@@ -22,7 +16,7 @@
                      */
 /* GENERATED CODE */public class LessThanEqualsOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */	public LessThanEqualsOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */	public LessThanEqualsOperator(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

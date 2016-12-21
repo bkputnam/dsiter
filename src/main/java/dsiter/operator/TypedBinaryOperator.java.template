@@ -3,7 +3,7 @@ package dsiter.operator;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Abstract class for use in creating binary operators. Not all binary operators
@@ -30,28 +30,30 @@ import dsiter.row.TypedRowAccessor;
  * 
  * @see TypedUnaryOperator
  */
-public abstract class TypedBinaryOperator extends TypedRowAccessor {
+public abstract class TypedBinaryOperator implements IRowAccessor {
 
 	/**
 	 * Left Hand Side
 	 */
-	private TypedRowAccessor lhs;
+	private IRowAccessor lhs;
 
 	/**
 	 * Right Hand Side
 	 */
-	private TypedRowAccessor rhs;
+	private IRowAccessor rhs;
+
+	private IRowAccessor innerAccessor;
 
 	/**
 	 * Construct a TypedBinaryOperator with {@code lhs} and {@code rhs} as
 	 * its left- and right-hand sides, respectively.
 	 * 
-	 * @param lhs	The {@code TypedRowAccessor} that will provide the left
+	 * @param lhs	The {@code IRowAccessor} that will provide the left
 	 *				hand side of the operation
-	 * @param rhs	The {@code TypedRowAccessor} that will provide the right
+	 * @param rhs	The {@code IRowAccessor} that will provide the right
 	 *				hand side of the operation
 	 */
-	public TypedBinaryOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+	public TypedBinaryOperator(IRowAccessor lhs, IRowAccessor rhs) {
 		this.lhs = lhs;
 		this.rhs = rhs;
 
@@ -65,9 +67,31 @@ public abstract class TypedBinaryOperator extends TypedRowAccessor {
             throw new IllegalArgumentException("Incompatible types: " + lhsType + ", " + rhsType);
         }
 
-		ColumnType returnType = super.type = this.getReturnType(lhsType, rhsType);
-		super.innerAccessor = getInnerAccessor(lhs, rhs, returnType);
+		ColumnType returnType = this.getReturnType(lhsType, rhsType);
+		innerAccessor = getInnerAccessor(lhs, rhs, returnType);
 	}
+
+	@Override
+	public ColumnType getType() {
+		return innerAccessor.getType();
+	}
+
+	@Override
+	public Object getValueFromRow(Row row) {
+		return innerAccessor.getValueFromRow(row);
+	}
+
+	<% ColumnTypes.each { type -> %>
+	/**
+	 * Convert this IRowAccessor to an {@code IRowAccessor.${type.type}}
+	 * by casting and returning the hidden {@code innerAccessor}
+	 *
+	 * @return An {@code IRowAccessor.${type.type}} representation
+	 * of this instance
+	 */
+	@Override
+	public IRowAccessor.${type.type} as${type.capitalized}Accessor() { return (IRowAccessor.${type.type})innerAccessor; }
+	<% } %>
 
 	/**
 	 * Subclasses must implement this method to let the superclass know the return type
@@ -121,7 +145,7 @@ def typeSwitch(indent, varName, bodyGenerator) {
 }
 %>
 
-	private IRowAccessor getInnerAccessor(TypedRowAccessor lhs, TypedRowAccessor rhs, ColumnType returnType) {
+	private IRowAccessor getInnerAccessor(IRowAccessor lhs, IRowAccessor rhs, ColumnType returnType) {
 		ColumnType lhsType = lhs.getType();
 		ColumnType rhsType = rhs.getType();
 
@@ -156,12 +180,12 @@ ColumnTypes.each { lhsType ->
 		ColumnTypes.each { returnType ->
 			def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
 %>
-	private class ${lhsType.type}_${rhsType.type}_${returnType.type} extends TypedRowAccessor.${returnType.type} {
+	private class ${lhsType.type}_${rhsType.type}_${returnType.type} implements IRowAccessor.${returnType.type} {
 
-		private TypedRowAccessor.${lhsType.type} lhs;
-		private TypedRowAccessor.${rhsType.type} rhs;
+		private IRowAccessor.${lhsType.type} lhs;
+		private IRowAccessor.${rhsType.type} rhs;
 
-		private ${lhsType.type}_${rhsType.type}_${returnType.type}(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+		private ${lhsType.type}_${rhsType.type}_${returnType.type}(IRowAccessor lhs, IRowAccessor rhs) {
 			this.lhs = lhs.as${lhsType.capitalized}Accessor();
 			this.rhs = rhs.as${rhsType.capitalized}Accessor();
 		}

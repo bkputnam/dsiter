@@ -8,7 +8,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that tests whether {@code lhs} is greater than {@code rhs}
@@ -21,7 +21,7 @@
                      */
 /* GENERATED CODE */public class GreaterThanOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */	public GreaterThanOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */	public GreaterThanOperator(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

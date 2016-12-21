@@ -13,8 +13,8 @@ public class TestEqualsOperator {
 	@Test
 	public void testIntTrue() {
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(2),
-			new ConstantAccessor(2)
+			ConstantAccessor.getInstance(2),
+			ConstantAccessor.getInstance(2)
 		);
 
 		assertEquals(true, eq.getValueFromRow(new Row()));
@@ -23,8 +23,8 @@ public class TestEqualsOperator {
 	@Test
 	public void testIntFalse() {
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(2),
-			new ConstantAccessor(3)
+			ConstantAccessor.getInstance(2),
+			ConstantAccessor.getInstance(3)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));
@@ -33,8 +33,8 @@ public class TestEqualsOperator {
 	@Test
 	public void testLongTrue() {
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(2L),
-			new ConstantAccessor(2L)
+			ConstantAccessor.getInstance(2L),
+			ConstantAccessor.getInstance(2L)
 		);
 
 		assertEquals(true, eq.getValueFromRow(new Row()));
@@ -43,8 +43,8 @@ public class TestEqualsOperator {
 	@Test
 	public void testLongFalse() {
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(2L),
-			new ConstantAccessor(3L)
+			ConstantAccessor.getInstance(2L),
+			ConstantAccessor.getInstance(3L)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));
@@ -60,8 +60,8 @@ public class TestEqualsOperator {
 		assertTrue(s1.equals(s2)); // Make sure I didn't mess up the string manipulation
 
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(s1),
-			new ConstantAccessor(s2)
+			ConstantAccessor.getInstance(s1),
+			ConstantAccessor.getInstance(s2)
 		);
 
 		assertEquals(true, eq.getValueFromRow(new Row()));
@@ -77,8 +77,8 @@ public class TestEqualsOperator {
 		assertFalse(s1.equals(s2)); // Make sure I didn't mess up the string manipulation
 
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(s1),
-			new ConstantAccessor(s2)
+			ConstantAccessor.getInstance(s1),
+			ConstantAccessor.getInstance(s2)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));
@@ -87,8 +87,8 @@ public class TestEqualsOperator {
 	@Test
 	public void testLongFloatTrue() {
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(2L),
-			new ConstantAccessor(2.0F)
+			ConstantAccessor.getInstance(2L),
+			ConstantAccessor.getInstance(2.0F)
 		);
 
 		assertEquals(true, eq.getValueFromRow(new Row()));
@@ -97,8 +97,8 @@ public class TestEqualsOperator {
 	@Test
 	public void testLongFloatFalse() {
 		EqualsOperator eq = new EqualsOperator(
-			new ConstantAccessor(2L),
-			new ConstantAccessor(3.0F)
+			ConstantAccessor.getInstance(2L),
+			ConstantAccessor.getInstance(3.0F)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));

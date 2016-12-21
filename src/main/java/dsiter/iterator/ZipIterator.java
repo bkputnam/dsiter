@@ -20,7 +20,7 @@ public class ZipIterator implements IDatasetIterator {
 
 	private ColumnDescriptor[] combinedColumnDescriptors;
 	private ColumnMutator[] mutators;
-	private ColumnAccessor[] accessors;
+	private IColumnAccessor[] accessors;
 	private Row combinedRow;
 
 	/**
@@ -34,7 +34,7 @@ public class ZipIterator implements IDatasetIterator {
 
 		RowShape shape = new RowShape();
 		List<ColumnMutator> mutatorList = new ArrayList<ColumnMutator>();
-		List<ColumnAccessor> accessorList = new ArrayList<ColumnAccessor>();
+		List<IColumnAccessor> accessorList = new ArrayList<IColumnAccessor>();
 		List<ColumnDescriptor> columnDescriptorList = new ArrayList<ColumnDescriptor>();
 		Set<String> names = new HashSet<String>();
 		srcIterColumnCounts = new int[srcIters.length];
@@ -70,7 +70,7 @@ public class ZipIterator implements IDatasetIterator {
 		}
 
 		mutators = mutatorList.toArray(new ColumnMutator[0]);
-		accessors = accessorList.toArray(new ColumnAccessor[0]);
+		accessors = accessorList.toArray(new IColumnAccessor[0]);
 		combinedColumnDescriptors = columnDescriptorList.toArray(new ColumnDescriptor[0]);
 		combinedRow = new Row(shape);
 	}

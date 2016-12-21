@@ -1,7 +1,7 @@
 package dsiter.operator;
 
 import dsiter.row.ColumnType;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Unary operator that computes the logical NOT of {@code src}
@@ -14,7 +14,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class NotOperator extends TypedUnaryOperator {
 
-	public NotOperator(TypedRowAccessor src) {
+	public NotOperator(IRowAccessor src) {
 		super(src);
     }
 

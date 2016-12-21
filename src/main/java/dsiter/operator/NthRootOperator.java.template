@@ -2,7 +2,7 @@ package dsiter.operator;
 
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes the {@code rhs}-th root of
@@ -16,7 +16,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class NthRootOperator extends TypedBinaryOperator {
 
-	public NthRootOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+	public NthRootOperator(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 

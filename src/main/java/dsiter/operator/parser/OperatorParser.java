@@ -32,7 +32,7 @@ public class OperatorParser {
 	 * @return An operator that can compute the given expression from a
 	 * Row of the expected shape.
 	 */
-	public static TypedRowAccessor parseOperator(ColumnDescriptor[] metadata, String string) {
+	public static IRowAccessor parseOperator(ColumnDescriptor[] metadata, String string) {
 		ParserState state = new ParserState(metadata);
 		return parseOperatorHelper(string, state);
 	}
@@ -50,8 +50,8 @@ public class OperatorParser {
 	// rest.
 	private static class ParserState {
 		public Stack<String> operatorStack;
-		public Stack<TypedRowAccessor> outputStack;
-		public HashMap<String, ColumnAccessor> accessorLookup;
+		public Stack<IRowAccessor> outputStack;
+		public HashMap<String, IColumnAccessor> accessorLookup;
 
 		public ParserState(ColumnDescriptor[] metadata) {
 			operatorStack = new Stack<>();
@@ -65,7 +65,7 @@ public class OperatorParser {
 		}
 	}
 
-	private static TypedRowAccessor parseOperatorHelper(String string, ParserState state) {
+	private static IRowAccessor parseOperatorHelper(String string, ParserState state) {
 
 		String[] tokens = Tokenizer.tokenize(string);
 
@@ -94,7 +94,7 @@ public class OperatorParser {
 				state.outputStack.push(receiver.accessor);
 			}
 			else if(isColumn(token)) {
-				ColumnAccessor ca = state.accessorLookup.get(token);
+				IColumnAccessor ca = state.accessorLookup.get(token);
 				if(ca == null) {
 					throw new IllegalArgumentException("Unable to find column \"" + token + "\"");
 				}
@@ -285,7 +285,7 @@ public class OperatorParser {
 	}
 
 	static class AccessorContainer {
-		public TypedRowAccessor accessor;
+		public IRowAccessor accessor;
 	}
 
 	static boolean tryParseNumber(String token, AccessorContainer accessorReceiver) {
@@ -308,19 +308,19 @@ public class OperatorParser {
 		// all doubles (that seems to be the usual practice in most Java code, anyway)
 		try {
 			int intVal = Integer.parseInt(token);
-			accessorReceiver.accessor = new ConstantAccessor(intVal);
+			accessorReceiver.accessor = ConstantAccessor.getInstance(intVal);
 			return true;
 		}
 		catch (NumberFormatException e1) {
 			try {
 				long longVal = Long.parseLong(token);
-				accessorReceiver.accessor = new ConstantAccessor(longVal);
+				accessorReceiver.accessor = ConstantAccessor.getInstance(longVal);
 				return true;
 			}
 			catch (NumberFormatException e2) {
 				try {
 					double doubleVal = Double.parseDouble(token);
-					accessorReceiver.accessor = new ConstantAccessor(doubleVal);
+					accessorReceiver.accessor = ConstantAccessor.getInstance(doubleVal);
 					return true;
 				}
 				catch (NumberFormatException e3) {
@@ -332,18 +332,18 @@ public class OperatorParser {
 
 	static void popOperator(ParserState state) {
 		String opStr = state.operatorStack.pop();
-		TypedRowAccessor opInst = operatorTokenToInstance(opStr, state);
+		IRowAccessor opInst = operatorTokenToInstance(opStr, state);
 		state.outputStack.push(opInst);
 	}
 
-	static TypedRowAccessor operatorTokenToInstance(String operator, ParserState state) {
+	static IRowAccessor operatorTokenToInstance(String operator, ParserState state) {
 
 		if(OperatorInfo.getNumParams(operator) == 2) {
 
 			// Remember: these are backwards because we're dealing with a stack
 			// (lhs is first, so got pushed onto stack sooner)
-			TypedRowAccessor rhs = state.outputStack.pop();
-			TypedRowAccessor lhs = state.outputStack.pop();
+			IRowAccessor rhs = state.outputStack.pop();
+			IRowAccessor lhs = state.outputStack.pop();
 
 			// This is probably a silly way to implement an operator lookup.
 			if(operator.equals("=")) {
@@ -393,7 +393,7 @@ public class OperatorParser {
 			}
 		}
 		else if(OperatorInfo.getNumParams(operator) == 1) {
-			TypedRowAccessor src = state.outputStack.pop();
+			IRowAccessor src = state.outputStack.pop();
 
 			if(operator.equals("!")) {
 				return new NotOperator(src);

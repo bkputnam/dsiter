@@ -1,6 +1,6 @@
 package dsiter.iterator;
 
-import dsiter.row.ColumnAccessor;
+import dsiter.row.IRowAccessor;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import org.junit.Test;

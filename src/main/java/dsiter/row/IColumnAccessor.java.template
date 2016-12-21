@@ -1,0 +1,29 @@
+package dsiter.row;
+
+public interface IColumnAccessor extends IRowAccessor {
+
+	int getIndex();
+
+	<% ColumnTypes.each { type -> %>
+	interface ${type.type} extends IColumnAccessor, IRowAccessor.${type.type} {
+		@Override
+		default ${type.nativeType} get${type.capitalized}FromRow(Row row) {
+			return row.${type.rowArray}[getIndex()];
+		}
+	}
+	<% } %>
+
+	static IColumnAccessor getInstance(ColumnType type, int index) {
+		switch (type) {
+			<% ColumnTypes.each { type -> %>
+			case ${type.type}: return new ${type.type}() {
+				@Override
+				public int getIndex() { return index; }
+			};
+			<% } %>
+			default:
+				throw new Error("Programmer Error: this should be impossible");
+		}
+	}
+}
+

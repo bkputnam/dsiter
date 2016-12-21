@@ -2,7 +2,6 @@ package dsiter.operator;
 
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.row.TypedRowAccessor;
 
 /**
  * Unary operator that computes the square root of {@code src}
@@ -15,7 +14,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class SqrtOperator extends TypedUnaryOperator {
 
-	public SqrtOperator(TypedRowAccessor src) {
+	public SqrtOperator(IRowAccessor src) {
 		super(src);
 	}
 

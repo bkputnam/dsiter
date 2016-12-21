@@ -1,10 +1,7 @@
 package dsiter.operator;
 
-${Disclaimer}
-
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.row.TypedRowAccessor;
 
 /**
  * Binary operator that tests whether {@code lhs} is less than {@code rhs}
@@ -17,7 +14,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class LessThanOperator extends TypedBinaryOperator {
 
-	public LessThanOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+	public LessThanOperator(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 

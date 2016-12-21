@@ -26,7 +26,7 @@ public class RowCopier {
 		shape = new RowShape(); // reset to all 0's
 		for(int i=0; i<srcCds.length; i++) {
 			ColumnDescriptor cd = srcCds[i];
-			ColumnAccessor ca = cd.getAccessor();
+			IColumnAccessor ca = cd.getAccessor();
 			ColumnType type = ca.getType();
 			shape.incrNum(type);
 			int index = shape.getNum(type) - 1;

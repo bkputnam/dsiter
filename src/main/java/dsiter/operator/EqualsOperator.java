@@ -8,7 +8,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */import dsiter.row.TypedRowAccessor;
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that tests whether {@code lhs} is equal to {@code rhs}
@@ -21,7 +21,7 @@
                      */
 /* GENERATED CODE */public class EqualsOperator extends TypedBinaryOperator {
 /* GENERATED CODE */
-/* GENERATED CODE */	public EqualsOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+/* GENERATED CODE */	public EqualsOperator(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

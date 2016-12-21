@@ -5,7 +5,7 @@ ${Disclaimer}
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Abstract class for use in creating unary operators. Not all unary operators
@@ -30,11 +30,12 @@ import dsiter.row.TypedRowAccessor;
  *		which method to call.
  * </p>
  */
-public abstract class TypedUnaryOperator extends TypedRowAccessor {
+public abstract class TypedUnaryOperator implements IRowAccessor {
 
-	TypedRowAccessor src;
+	private IRowAccessor src;
+	private IRowAccessor innerAccessor;
 
-	public TypedUnaryOperator(TypedRowAccessor src) {
+	public TypedUnaryOperator(IRowAccessor src) {
 		this.src = src;
 
 		if(src == null) { throw new IllegalArgumentException("src cannot be null"); }
@@ -45,12 +46,34 @@ public abstract class TypedUnaryOperator extends TypedRowAccessor {
 			throw new IllegalArgumentException("Incompatible type: " + srcType);
 		}
 
-		ColumnType returnType = super.type = this.getReturnType(srcType);
-		super.innerAccessor = getInnerAccessor(src, returnType);
+		ColumnType returnType = this.getReturnType(srcType);
+		innerAccessor = getInnerAccessor(src, returnType);
 	}
 
 	protected abstract ColumnType getReturnType(ColumnType srcType);
 	protected abstract boolean testTypeCompatibility(ColumnType srcType);
+
+	@Override
+	public ColumnType getType() {
+		return innerAccessor.getType();
+	}
+
+	@Override
+	public Object getValueFromRow(Row row) {
+		return innerAccessor.getValueFromRow(row);
+	}
+
+<% ColumnTypes.each { type -> %>
+/**
+ * Convert this IRowAccessor to an {@code IRowAccessor.${type.type}}
+	 * by casting and returning the hidden {@code innerAccessor}
+	 *
+	 * @return An {@code IRowAccessor.${type.type}} representation
+	 * of this instance
+	 */
+	@Override
+	public IRowAccessor.${type.type} as${type.capitalized}Accessor() { return (IRowAccessor.${type.type})innerAccessor; }
+<% } %>
 
 <%
 def typeSwitch(indent, varName, bodyGenerator) {
@@ -67,7 +90,7 @@ def typeSwitch(indent, varName, bodyGenerator) {
 }
 %>
 
-	private IRowAccessor getInnerAccessor(TypedRowAccessor src, ColumnType returnType) {
+	private IRowAccessor getInnerAccessor(IRowAccessor src, ColumnType returnType) {
 		ColumnType srcType = src.getType();
 
 <%
@@ -91,11 +114,11 @@ ColumnTypes.each { srcType ->
 	ColumnTypes.each { returnType ->
 		def methodName = "handle_" + srcType.nativeType + "_" + returnType.nativeType;
 %>
-	private class ${srcType.type}_${returnType.type} extends TypedRowAccessor.${returnType.type} {
+	private class ${srcType.type}_${returnType.type} implements IRowAccessor.${returnType.type} {
 
-		private TypedRowAccessor.${srcType.type} src;
+		private IRowAccessor.${srcType.type} src;
 
-		private ${srcType.type}_${returnType.type}(TypedRowAccessor src) {
+		private ${srcType.type}_${returnType.type}(IRowAccessor src) {
 			this.src = src.as${srcType.capitalized}Accessor();
 		}
 

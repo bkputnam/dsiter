@@ -10,28 +10,28 @@ public class TestSqrtOperator {
 	@Test
 	public void testInt() {
 		SqrtOperator so = new SqrtOperator(
-			new ConstantAccessor(4)
+			ConstantAccessor.getInstance(4)
 		);
 		assertEquals(2D, so.getValueFromRow(new Row()));
 	}
 	@Test
 	public void testLong() {
 		SqrtOperator so = new SqrtOperator(
-			new ConstantAccessor(4L)
+			ConstantAccessor.getInstance(4L)
 		);
 		assertEquals(2D, so.getValueFromRow(new Row()));
 	}
 	@Test
 	public void testFloat() {
 		SqrtOperator so = new SqrtOperator(
-			new ConstantAccessor(4F)
+			ConstantAccessor.getInstance(4F)
 		);
 		assertEquals(2D, so.getValueFromRow(new Row()));
 	}
 	@Test
 	public void testDouble() {
 		SqrtOperator so = new SqrtOperator(
-			new ConstantAccessor(4D)
+			ConstantAccessor.getInstance(4D)
 		);
 		assertEquals(2D, so.getValueFromRow(new Row()));
 	}

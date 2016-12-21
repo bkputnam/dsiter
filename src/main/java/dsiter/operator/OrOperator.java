@@ -1,7 +1,7 @@
 package dsiter.operator;
 
 import dsiter.row.ColumnType;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes the logical OR of {@code lhs} and {@code rhs}
@@ -14,7 +14,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class OrOperator extends TypedBinaryOperator {
 
-	public OrOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+	public OrOperator(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 

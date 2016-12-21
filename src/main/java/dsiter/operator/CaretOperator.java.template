@@ -2,7 +2,7 @@ package dsiter.operator;
 
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes the exponent of {@code lhs}
@@ -16,7 +16,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class CaretOperator extends TypedBinaryOperator {
 
-   public CaretOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+   public CaretOperator(IRowAccessor lhs, IRowAccessor rhs) {
        super(lhs, rhs);
    }
 

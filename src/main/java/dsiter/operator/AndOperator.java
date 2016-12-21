@@ -1,7 +1,7 @@
 package dsiter.operator;
 
 import dsiter.row.ColumnType;
-import dsiter.row.TypedRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
  * Binary operator that computes a logical AND operation.
@@ -14,7 +14,7 @@ import dsiter.row.TypedRowAccessor;
  */
 public class AndOperator extends TypedBinaryOperator {
 
-	public AndOperator(TypedRowAccessor lhs, TypedRowAccessor rhs) {
+	public AndOperator(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 
