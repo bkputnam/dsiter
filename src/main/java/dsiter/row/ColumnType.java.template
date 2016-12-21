@@ -1,19 +1,27 @@
 package dsiter.row;
 
-${Disclaimer}
-
+/**
+ * Enum that lists the various "primitive" types supported by {@link Row}
+ */
 public enum ColumnType {
-<% ColumnTypes.eachWithIndex { type, index ->
-    print "\t" + type.type
-    if( index < ColumnTypes.size()-1 ) {
-        println ","
-    }
-    else {
-        print ";"
-    }
-} %>
+	<% ColumnTypes.eachWithIndex { type, index ->
+		print "\t" + type.type
+		if( index < ColumnTypes.size()-1 ) {
+			println ","
+		}
+		else {
+			print ";"
+		}
+	} %>
 
-    public boolean isNumeric() {
-        return this == INT || this == LONG || this == FLOAT || this == DOUBLE;
-    }
+	/**
+	 * Returns {@code true} if the current value represents a numeric type.
+	 * Numeric types are defined to be {@code INT}, {@code LONG}, {@code FLOAT},
+	 * and {@code DOUBLE}
+	 *
+	 * @return {@code true} if value is numeric
+	 */
+	public boolean isNumeric() {
+		return this == INT || this == LONG || this == FLOAT || this == DOUBLE;
+	}
 }
