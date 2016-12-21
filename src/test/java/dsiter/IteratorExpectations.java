@@ -24,7 +24,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */        assertEquals(expectations.size(), cds.length);
 /* GENERATED CODE */
-/* GENERATED CODE */        IColumnAccessor[] cas = new IColumnAccessor[cds.length];
+/* GENERATED CODE */        IRowAccessor[] cas = new IRowAccessor[cds.length];
 /* GENERATED CODE */
 /* GENERATED CODE */        for(int i=0; i<cds.length; i++) {
 /* GENERATED CODE */            ColumnDescriptor cd = cds[i];
@@ -40,7 +40,7 @@
 /* GENERATED CODE */            Row row = iter.getCurrentRow();
 /* GENERATED CODE */
 /* GENERATED CODE */            for(int i=0; i<cas.length; i++) {
-/* GENERATED CODE */                IColumnAccessor ca = cas[i];
+/* GENERATED CODE */                IRowAccessor ca = cas[i];
 /* GENERATED CODE */                ColumnExpectation e = expectations.get(i);
 /* GENERATED CODE */
 /* GENERATED CODE */                assertEquals(e.values[count], ca.getValueFromRow(row));

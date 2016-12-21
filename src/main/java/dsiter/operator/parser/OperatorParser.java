@@ -94,7 +94,7 @@ public class OperatorParser {
 				state.outputStack.push(receiver.accessor);
 			}
 			else if(isColumn(token)) {
-				IColumnAccessor ca = state.accessorLookup.get(token);
+				IRowAccessor ca = state.accessorLookup.get(token);
 				if(ca == null) {
 					throw new IllegalArgumentException("Unable to find column \"" + token + "\"");
 				}
