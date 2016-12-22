@@ -1,0 +1,32 @@
+package dsiter.row;
+
+public interface IParserMutator {
+
+    void parseAndMutate(String value, Row row);
+
+    static IParserMutator getInstance(ColumnType type, int index) {
+        switch (type) {
+            <%
+                def parsers = [
+                    "INT": "Integer.parseInt",
+                    "LONG": "Long.parseLong",
+                    "FLOAT": "Float.parseFloat",
+                    "DOUBLE": "Double.parseDouble",
+                    "STRING": "",
+                    "BOOLEAN": "Boolean.parseBoolean"
+                ];
+                ColumnTypes.each { type ->
+                    parser = parsers[type.type]
+            %>
+            case ${type.type}: return new IParserMutator() {
+                @Override
+                public void parseAndMutate(String value, Row row) {
+                    row.${type.rowArray}[index] = ${parser}(value);
+                }
+            };
+            <% } %>
+            default:
+                throw new Error("Programmer Error: this should be impossible");
+        }
+    }
+}
