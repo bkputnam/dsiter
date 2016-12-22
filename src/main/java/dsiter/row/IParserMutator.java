@@ -1,9 +1,38 @@
 /* GENERATED CODE */package dsiter.row;
 /* GENERATED CODE */
+                    /**
+                     * Interface for classes that parse strings and insert them directly into
+                     * Rows.
+                     *
+                     * <p>
+                     *     You probably won't have to implement this interface yourself: it
+                     *     comes with default implementations for all the standard types
+                     *     (e.g. uses {@code Integer.parseInt} for ints, {@code Boolean.parseBoolean}
+                     *     for booleans, etc. The only reason to make a custom implementation
+                     *     is if you want to parse values in some other format.
+                     * </p>
+                     */
 /* GENERATED CODE */public interface IParserMutator {
 /* GENERATED CODE */
+                        /**
+                         * Parse a string value and insert it into the passed Row
+                         *
+                         * @param value The string value to be parsed
+                         * @param row   The Row to be modified
+                         */
 /* GENERATED CODE */    void parseAndMutate(String value, Row row);
 /* GENERATED CODE */
+                        /**
+                         * Given a ColumnType and an index, return an {@code IParserMutator}
+                         * instance that parses that type and inserts it into Rows at the
+                         * specified index.
+                         *
+                         * @param type  The type to be parsed
+                         * @param index The location at which the parsed values should be
+                         *              inserted
+                         * @return An {@code IParserMutator} instance that parses
+                         * {@code type} values and inserts them at {@code index}
+                         */
 /* GENERATED CODE */    static IParserMutator getInstance(ColumnType type, int index) {
 /* GENERATED CODE */        switch (type) {
 /* GENERATED CODE */            
