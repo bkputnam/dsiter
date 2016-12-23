@@ -18,7 +18,7 @@
 /* GENERATED CODE */        expectations = new ArrayList<ColumnExpectation>();
 /* GENERATED CODE */    }
 /* GENERATED CODE */
-/* GENERATED CODE */    public void checkIterator(IDatasetIterator iter) {
+/* GENERATED CODE */    public void checkIterator(IDatasetIterator iter) throws Exception {
 /* GENERATED CODE */
 /* GENERATED CODE */        ColumnDescriptor[] cds = iter.getColumnDescriptors();
 /* GENERATED CODE */

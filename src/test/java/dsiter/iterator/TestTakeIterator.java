@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class TestTakeIterator {
 
 	@Test
-	public void testTake5() {
+	public void testTake5() throws Exception {
 		TakeIterator ti = new TakeIterator(
 			new RangeIterator(10),
 			5

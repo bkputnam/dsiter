@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class TestFilterIterator {
 
     @Test
-    public void testGreaterThan() {
+    public void testGreaterThan() throws Exception {
 
         RangeIterator range = new RangeIterator(10);
 
@@ -25,7 +25,7 @@ public class TestFilterIterator {
     }
 
     @Test
-    public void testEvens() {
+    public void testEvens() throws Exception {
 
         RangeIterator range = new RangeIterator(10);
         IRowAccessor ca = range.getColumnDescriptor("value").getAccessor();
@@ -39,7 +39,7 @@ public class TestFilterIterator {
     }
 
     @Test
-	public void testLength() {
+	public void testLength() throws Exception {
 		RangeIterator range = new RangeIterator(10);
 
 		FilterIterator it = new FilterIterator(
@@ -51,7 +51,7 @@ public class TestFilterIterator {
 	}
 
 	@Test
-	public void testFilterDoesntDuplicateCallsToGetCurrentRow() {
+	public void testFilterDoesntDuplicateCallsToGetCurrentRow() throws Exception {
 		IteratorCounter counter1 = new IteratorCounter();
 		IteratorCounter counter2 = new IteratorCounter();
 

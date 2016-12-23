@@ -48,7 +48,7 @@ public class CsvWriter implements IWriter {
 	 * @param outStream The OutputStream to be written to
 	 */
 	@Override
-	public void writeTo(IDatasetIterator it, OutputStream outStream) {
+	public void writeTo(IDatasetIterator it, OutputStream outStream) throws Exception {
 
 		PrintWriter out = new PrintWriter(outStream);
 

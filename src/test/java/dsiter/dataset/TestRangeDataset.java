@@ -10,19 +10,19 @@ import org.junit.Test;
 public class TestRangeDataset {
 
 	@Test
-	public void testRange5() {
+	public void testRange5() throws Exception {
 		IDatasetIterator it = new RangeDataset(5).getIterator();
 		IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4 });
 	}
 
 	@Test
-	public void testRange5To10() {
+	public void testRange5To10() throws Exception {
 		IDatasetIterator it = new RangeDataset(5, 10).getIterator();
 		IterUtils.assertValues(it, "value", new Integer[] { 5, 6, 7, 8, 9 });
 	}
 
 	@Test
-	public void testRange0() {
+	public void testRange0() throws Exception {
 		IDatasetIterator it = new RangeDataset(0).getIterator();
 		IterUtils.assertValues(it, "value", new Integer[0]);
 	}

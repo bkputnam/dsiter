@@ -62,7 +62,16 @@ public class LastIterator implements IDatasetIterator {
 			row = new Row(copier.getDestShape());
 			while( src.tryMoveNext() ) {
 				foundAny = true;
-				copier.copyTo(src.getCurrentRow(), row);
+
+				Row srcRow;
+				try {
+					srcRow = src.getCurrentRow();
+				}
+				catch (Exception e) {
+					return false;
+				}
+
+				copier.copyTo(srcRow, row);
 			}
 			alreadyReadRow = foundAny;
 			return foundAny;
@@ -72,7 +81,7 @@ public class LastIterator implements IDatasetIterator {
 		}
 	}
 
-	public Row getCurrentRow() {
+	public Row getCurrentRow() throws Exception {
 		if (alreadyReadRow) {
 			return row;
 		}

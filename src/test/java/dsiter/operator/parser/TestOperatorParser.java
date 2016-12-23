@@ -29,7 +29,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testPlusOperator() {
+	public void testPlusOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1+l");
 		assertTrue(iter.tryMoveNext());
@@ -37,7 +37,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testMinusOperator() {
+	public void testMinusOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4-i2");
 		assertTrue(iter.tryMoveNext());
@@ -45,7 +45,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testTimesOperator() {
+	public void testTimesOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4*i2");
 		assertTrue(iter.tryMoveNext());
@@ -53,7 +53,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testDivideOperator() {
+	public void testDivideOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4/i2");
 		assertTrue(iter.tryMoveNext());
@@ -61,7 +61,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testDivideOperatorReals() {
+	public void testDivideOperatorReals() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "d/f");
 		assertTrue(iter.tryMoveNext());
@@ -69,7 +69,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testModuloOperator() {
+	public void testModuloOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i3/i2");
 		assertTrue(iter.tryMoveNext());
@@ -77,7 +77,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testNotOperator() {
+	public void testNotOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "!bt");
 		assertTrue(iter.tryMoveNext());
@@ -85,7 +85,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testCaretOperator() {
+	public void testCaretOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i3^i4");
 		assertTrue(iter.tryMoveNext());
@@ -93,7 +93,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testAndOperator() {
+	public void testAndOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "bt&&bf");
 		assertTrue(iter.tryMoveNext());
@@ -101,7 +101,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testOrOperator() {
+	public void testOrOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "bt||bf");
 		assertTrue(iter.tryMoveNext());
@@ -109,7 +109,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testRepeatedPluses() {
+	public void testRepeatedPluses() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1+i1+i1+i1");
 		assertTrue(iter.tryMoveNext());
@@ -117,7 +117,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testRepeatedDivides() {
+	public void testRepeatedDivides() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "d/f/f");
 		assertTrue(iter.tryMoveNext());
@@ -125,7 +125,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testRepeatedExponents() {
+	public void testRepeatedExponents() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i2^i3^i2");
 		assertTrue(iter.tryMoveNext());
@@ -135,7 +135,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testPrecedence() {
+	public void testPrecedence() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i2+i3*i4");
 		assertTrue(iter.tryMoveNext());
@@ -145,7 +145,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testParenthesis() {
+	public void testParenthesis() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "(i2+i3)*i4");
 		assertTrue(iter.tryMoveNext());
@@ -155,7 +155,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testSpaces() {
+	public void testSpaces() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), " ( i2 + i3    ) * i4 ");
 		assertTrue(iter.tryMoveNext());
@@ -165,7 +165,7 @@ public class TestOperatorParser {
 	}
 
 	@Test
-	public void testSqrtOperator() {
+	public void testSqrtOperator() throws Exception {
 		IDatasetIterator iter = dummyIterator();
 		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "(i2+i3)*i4+sqrt(i4)");
 		assertTrue(iter.tryMoveNext());

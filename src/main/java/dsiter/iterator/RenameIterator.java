@@ -44,7 +44,7 @@ public class RenameIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public Row getCurrentRow() {
+	public Row getCurrentRow() throws Exception {
 		return src.getCurrentRow();
 	}
 

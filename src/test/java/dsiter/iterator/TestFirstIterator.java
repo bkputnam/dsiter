@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class TestFirstIterator {
 
 	@Test
-	public void testFirstOf5() {
+	public void testFirstOf5() throws Exception {
 		IDatasetIterator it = new FirstIterator(
 			new RangeIterator(5)
 		);
@@ -16,7 +16,7 @@ public class TestFirstIterator {
 	}
 
 	@Test
-	public void testFirstOf0() {
+	public void testFirstOf0() throws Exception {
 		IDatasetIterator it = new FirstIterator(
 			new RangeIterator(0)
 		);
@@ -25,7 +25,7 @@ public class TestFirstIterator {
 	}
 
 	@Test
-	public void testLengthOf5() {
+	public void testLengthOf5() throws Exception {
 		IDatasetIterator it = new FirstIterator(
 			new RangeIterator(5)
 		);

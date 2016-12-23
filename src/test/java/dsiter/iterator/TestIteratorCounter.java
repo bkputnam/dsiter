@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TestIteratorCounter {
 
 	@Test
-	public void testIteratorCounter() {
+	public void testIteratorCounter() throws Exception {
 		IteratorCounter counter1 = new IteratorCounter();
 		IteratorCounter counter2 = new IteratorCounter();
 

@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 public class TestParserMutator {
 
     @Test
-    public void testInts() {
+    public void testInts() throws Exception {
         IParserMutator pm = IParserMutator.getInstance(ColumnType.INT, 0);
 
         Row dest = new Row();
@@ -18,7 +18,7 @@ public class TestParserMutator {
     }
 
     @Test
-    public void testLongs() {
+    public void testLongs() throws Exception {
         IParserMutator pm = IParserMutator.getInstance(ColumnType.LONG, 0);
 
         Row dest = new Row();
@@ -30,7 +30,7 @@ public class TestParserMutator {
     }
 
     @Test
-    public void testFloats() {
+    public void testFloats() throws Exception {
         IParserMutator pm = IParserMutator.getInstance(ColumnType.FLOAT, 0);
 
         Row dest = new Row();
@@ -42,7 +42,7 @@ public class TestParserMutator {
     }
 
     @Test
-    public void testDoubles() {
+    public void testDoubles() throws Exception {
         IParserMutator pm = IParserMutator.getInstance(ColumnType.DOUBLE, 0);
 
         Row dest = new Row();
@@ -54,7 +54,7 @@ public class TestParserMutator {
     }
 
     @Test
-    public void testStrings() {
+    public void testStrings() throws Exception {
         IParserMutator pm = IParserMutator.getInstance(ColumnType.STRING, 0);
 
         Row dest = new Row();
@@ -65,15 +65,27 @@ public class TestParserMutator {
         assertEquals("12345", dest.strings[0]);
     }
 
-    @Test
-    public void testBools() {
-        IParserMutator pm = IParserMutator.getInstance(ColumnType.BOOLEAN, 0);
+	@Test
+	public void testBools() throws Exception {
+		IParserMutator pm = IParserMutator.getInstance(ColumnType.BOOLEAN, 0);
 
-        Row dest = new Row();
-        dest.bools = new boolean[1];
+		Row dest = new Row();
+		dest.bools = new boolean[1];
 
-        pm.parseAndMutate("True", dest);
+		pm.parseAndMutate("True", dest);
 
-        assertEquals(true, dest.bools[0]);
-    }
+		assertEquals(true, dest.bools[0]);
+	}
+
+	@Test
+	public void testIntWithCommas() throws Exception {
+		IParserMutator pm = IParserMutator.getInstance(ColumnType.INT, 0);
+
+		Row dest = new Row();
+		dest.ints = new int[1];
+
+		pm.parseAndMutate("123,456", dest);
+
+		assertEquals(123456, dest.ints[0]);
+	}
 }

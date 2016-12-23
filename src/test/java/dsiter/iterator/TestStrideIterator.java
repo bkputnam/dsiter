@@ -12,7 +12,7 @@ import dsiter.iterator.LastIterator;
 public class TestStrideIterator {
 
 	@Test
-	public void testStride4() {
+	public void testStride4() throws Exception {
 
 		IDatasetIterator it = new StrideIterator(
 			new RangeIterator(10),
@@ -27,7 +27,7 @@ public class TestStrideIterator {
 	}
 
 	@Test
-	public void testStrideLast() {
+	public void testStrideLast() throws Exception {
 
 		IDatasetIterator it = new LastIterator(
 			new StrideIterator(

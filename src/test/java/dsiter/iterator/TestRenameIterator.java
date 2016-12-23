@@ -13,7 +13,7 @@ import dsiter.iterator.RenameIterator;
 public class TestRenameIterator {
 
 	@Test
-	public void testRename() {
+	public void testRename() throws Exception {
 
 		IDatasetIterator it = new RenameIterator(
 			new RangeIterator(10),
@@ -45,7 +45,7 @@ public class TestRenameIterator {
 	}
 
 	@Test
-	public void testStringEquals() {
+	public void testStringEquals() throws Exception {
 
 		String from = "__value__".substring(2, 7);
 

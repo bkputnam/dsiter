@@ -11,7 +11,7 @@ import dsiter.row.RowShape;
 public class TestRangeIterator {
 
 	@Test
-	public void testRange5() {
+	public void testRange5() throws Exception {
 		IterUtils.assertValues(
 			new RangeIterator(5),
 			"value",
@@ -20,7 +20,7 @@ public class TestRangeIterator {
 	}
 
 	@Test
-	public void testRange5To10() {
+	public void testRange5To10() throws Exception {
 		IterUtils.assertValues(
 			new RangeIterator(5, 10),
 			"value",
@@ -29,7 +29,7 @@ public class TestRangeIterator {
 	}
 
 	@Test
-	public void testMinInt() {
+	public void testMinInt() throws Exception {
 		IterUtils.assertValues(
 			new RangeIterator(Integer.MIN_VALUE, Integer.MIN_VALUE+5),
 			"value",
@@ -44,7 +44,7 @@ public class TestRangeIterator {
 	}
 
 	@Test
-	public void testMaxInt() {
+	public void testMaxInt() throws Exception {
 		IterUtils.assertValues(
 			new RangeIterator(Integer.MAX_VALUE-5, Integer.MAX_VALUE),
 			"value",
@@ -82,7 +82,7 @@ public class TestRangeIterator {
 	}
 
 	@Test
-	public void testRange0() {
+	public void testRange0() throws Exception {
 		IterUtils.assertValues(
 			new RangeIterator(0),
 			"value",
@@ -117,7 +117,7 @@ public class TestRangeIterator {
 	}
 
 	@Test
-	public void testLength() {
+	public void testLength() throws Exception {
 		IDatasetIterator it = new RangeIterator(5, 10);
 		IterUtils.assertValues(it, "value", new Integer[] { 5, 6, 7, 8, 9 });
 		assertEquals(5, it.tryGetLength());

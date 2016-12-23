@@ -43,7 +43,7 @@ public class IteratorCounter {
 		}
 
 		@Override
-		public Row getCurrentRow() {
+		public Row getCurrentRow() throws Exception {
 			getCurrentRowCount++;
 			return src.getCurrentRow();
 		}

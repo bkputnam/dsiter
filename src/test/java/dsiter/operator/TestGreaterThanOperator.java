@@ -76,7 +76,7 @@ public class TestGreaterThanOperator {
 	}
 
 	@Test
-	public void testParser() {
+	public void testParser() throws Exception {
 		IDatasetIterator iter = new RangeIterator(20)
 			.pipe(filter("value>15"));
 		IterUtils.assertValues(iter, "value", new Integer[] { 16, 17, 18, 19 });

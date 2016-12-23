@@ -17,5 +17,5 @@ public interface IWriter {
 	 * @param it        The iterator to be written
 	 * @param outStream The OutputStream to be written to
 	 */
-    public void writeTo(IDatasetIterator it, OutputStream outStream);
+    public void writeTo(IDatasetIterator it, OutputStream outStream) throws Exception;
 }

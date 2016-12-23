@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class TestCsvWriter {
 
     @Test
-    public void testCsv() {
+    public void testCsv() throws Exception {
         int[] vals1 = new int[] { 1, 2, 3, 4, 5, };
         float[] vals2 = new float[] { 3.142f, 2.718f, 0f, 1f, -1f };
         boolean[] vals3 = new boolean[] { true, true, false, false, false };

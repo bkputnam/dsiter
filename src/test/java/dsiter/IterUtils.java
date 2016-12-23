@@ -9,7 +9,7 @@ import dsiter.row.Row;
 
 public class IterUtils {
 
-	public static List<Object> getColumn(IDatasetIterator it, String colName) {
+	public static List<Object> getColumn(IDatasetIterator it, String colName) throws Exception {
 
 		IRowAccessor ca = it.getColumnDescriptor(colName).getAccessor();
 
@@ -22,7 +22,7 @@ public class IterUtils {
 		return values;
 	}
 
-	public static <T> void assertValues(IDatasetIterator it, String colName, T[] expectedValues) {
+	public static <T> void assertValues(IDatasetIterator it, String colName, T[] expectedValues) throws Exception {
 
 		IRowAccessor ca = it.getColumnDescriptor(colName).getAccessor();
 

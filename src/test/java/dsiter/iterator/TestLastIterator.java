@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TestLastIterator {
 
 	@Test
-	public void testLastOf5() {
+	public void testLastOf5() throws Exception {
 		IDatasetIterator it = new LastIterator(
 			new RangeIterator(5)
 		);
@@ -19,7 +19,7 @@ public class TestLastIterator {
 	}
 
 	@Test
-	public void testLastOf0() {
+	public void testLastOf0() throws Exception {
 		IDatasetIterator it = new LastIterator(
 			new RangeIterator(0)
 		);
@@ -46,7 +46,7 @@ public class TestLastIterator {
 	}
 
 	@Test
-	public void testLengthOptimization() {
+	public void testLengthOptimization() throws Exception {
 		IteratorCounter counter1 = new IteratorCounter();
 		IteratorCounter counter2 = new IteratorCounter();
 
@@ -66,7 +66,7 @@ public class TestLastIterator {
 	}
 
 	@Test
-	public void testLengthOptimization2() {
+	public void testLengthOptimization2() throws Exception {
 		IteratorCounter counter1 = new IteratorCounter();
 		IteratorCounter counter2 = new IteratorCounter();
 

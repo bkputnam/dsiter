@@ -121,7 +121,7 @@
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	public Row getCurrentRow() {
+/* GENERATED CODE */	public Row getCurrentRow() throws Exception {
 /* GENERATED CODE */
 /* GENERATED CODE */		for(int i=0; i<srcIters.length; i++) {
 /* GENERATED CODE */			srcRows[i] = srcIters[i].getCurrentRow();

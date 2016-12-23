@@ -73,7 +73,7 @@ public class TestLessThanEqualsOperator {
 	}
 
 	@Test
-	public void testParser() {
+	public void testParser() throws Exception {
 		IDatasetIterator iter = new RangeIterator(20)
 			.pipe(filter("value<=5"));
 		IterUtils.assertValues(iter, "value", new Integer[] { 0, 1, 2, 3, 4, 5 });

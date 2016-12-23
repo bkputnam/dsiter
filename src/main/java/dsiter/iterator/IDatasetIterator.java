@@ -70,7 +70,7 @@ public interface IDatasetIterator {
 	 * </p>
 	 * @return Row The current Row
 	 */
-	public Row getCurrentRow();
+	public Row getCurrentRow() throws Exception;
 
 	/**
 	 * Return the iterator's length, if known, or -1 if

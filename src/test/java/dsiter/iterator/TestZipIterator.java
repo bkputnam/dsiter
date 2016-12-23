@@ -12,7 +12,7 @@ import static dsiter.StdPipes.*;
 public class TestZipIterator {
 
 	@Test
-	public void testZipIterator() {
+	public void testZipIterator() throws Exception {
 
 		IDatasetIterator leftIter = new RenameIterator(
 			new RangeIterator(5),
@@ -48,7 +48,7 @@ public class TestZipIterator {
 	}
 
 	@Test
-	public void testMultiZip() {
+	public void testMultiZip() throws Exception {
 
 		int[] vals1 = new int[] { 1, 2, 3, 4, 5, };
 		float[] vals2 = new float[] { 3.142f, 2.718f, 0f, 1f, -1f };

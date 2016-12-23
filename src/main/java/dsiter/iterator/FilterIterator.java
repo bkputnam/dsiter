@@ -36,7 +36,12 @@ public class FilterIterator implements IDatasetIterator {
     public boolean tryMoveNext() {
         boolean foundPassingRow = false;
         while(src.tryMoveNext()) {
-        	row = src.getCurrentRow();
+            try {
+                row = src.getCurrentRow();
+            }
+        	catch (Exception e) {
+                return false;
+            }
             if(predicate.getBoolFromRow(row)) {
                 return true;
             }

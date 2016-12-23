@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class TestPipes {
 
     @Test
-    public void testStride5() {
+    public void testStride5() throws Exception {
 
         IDatasetIterator it = new RangeIterator(25)
                 .pipe(new StridePipe(5));
@@ -23,7 +23,7 @@ public class TestPipes {
     }
 
     @Test
-    public void testLastPipe() {
+    public void testLastPipe() throws Exception {
 
         IDatasetIterator it = new RangeIterator(25)
                 .pipe(new LastPipe());
@@ -31,7 +31,7 @@ public class TestPipes {
     }
 
     @Test
-    public void testFilterPipe() {
+    public void testFilterPipe() throws Exception {
 
 		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsOperator(
                 new ModuloOperator(
@@ -47,7 +47,7 @@ public class TestPipes {
     }
 
     @Test
-    public void testFirstAndSkipPipes() {
+    public void testFirstAndSkipPipes() throws Exception {
 
         IDatasetIterator it = new RangeIterator(10)
                 .pipe(new SkipPipe(5))
@@ -56,7 +56,7 @@ public class TestPipes {
     }
 
     @Test
-    public void testRenamePipe() {
+    public void testRenamePipe() throws Exception {
 
         IDatasetIterator it = new RangeIterator(5)
                 .pipe(new RenamePipe("value", "a"));
@@ -65,7 +65,7 @@ public class TestPipes {
     }
 
     @Test
-    public void testZipPipe() {
+    public void testZipPipe() throws Exception {
 
         IDatasetIterator it = new RangeIterator(5)
             .pipe(

@@ -8,49 +8,49 @@ import static dsiter.StdPipes.*;
 public class TestStdPipes {
 
 	@Test
-	public void testFilterPipe() {
+	public void testFilterPipe() throws Exception {
 		IDatasetIterator iter = new RangeIterator(20)
 			.pipe(filter("value%3=0"));
 		IterUtils.assertValues(iter, "value", new Integer[] { 0, 3, 6, 9, 12, 15, 18 });
 	}
 
 	@Test
-	public void testFirstPipe() {
+	public void testFirstPipe() throws Exception {
 		IDatasetIterator iter = new RangeIterator(20)
 			.pipe(first());
 		IterUtils.assertValues(iter, "value", new Integer[] { 0 });
 	}
 
 	@Test
-	public void testLastPipe() {
+	public void testLastPipe() throws Exception {
 		IDatasetIterator iter = new RangeIterator(20)
 			.pipe(last());
 		IterUtils.assertValues(iter, "value", new Integer[] { 19 });
 	}
 
 	@Test
-	public void testRenamePipe() {
+	public void testRenamePipe() throws Exception {
 		IDatasetIterator iter = new RangeIterator(5)
 			.pipe(rename("value", "i"));
 		IterUtils.assertValues(iter, "i", new Integer[] { 0, 1, 2, 3, 4 });
 	}
 
 	@Test
-	public void testSkipPipe() {
+	public void testSkipPipe() throws Exception {
 		IDatasetIterator iter = new RangeIterator(10)
 			.pipe(skip(5));
 		IterUtils.assertValues(iter, "value", new Integer[] { 5, 6, 7, 8, 9 });
 	}
 
 	@Test
-	public void testStridePipe() {
+	public void testStridePipe() throws Exception {
 		IDatasetIterator iter = new RangeIterator(10)
 			.pipe(stride(3));
 		IterUtils.assertValues(iter, "value", new Integer[] { 0, 3, 6, 9 });
 	}
 
 	@Test
-	public void testZipPipe() {
+	public void testZipPipe() throws Exception {
 		int[] intVals = new int[]{ 0, 1, 2, 3 };
 		String[] strVals = new String[]{ "0", "1", "2", "3" };
 		IDatasetIterator iter1 = new ArrayIterator(intVals);
@@ -65,7 +65,7 @@ public class TestStdPipes {
 	}
 
 	@Test
-	public void testTake() {
+	public void testTake() throws Exception {
 		IDatasetIterator it = new RangeIterator(10).pipe(take(5));
 		IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4 });
 	}
