@@ -2,6 +2,7 @@ package dsiter.writer;
 
 import dsiter.iterator.IDatasetIterator;
 
+import javax.activation.MimeType;
 import java.io.OutputStream;
 
 /**
@@ -17,5 +18,7 @@ public interface IWriter {
 	 * @param it        The iterator to be written
 	 * @param outStream The OutputStream to be written to
 	 */
-    public void writeTo(IDatasetIterator it, OutputStream outStream) throws Exception;
+    void writeTo(IDatasetIterator it, OutputStream outStream) throws Exception;
+
+    MimeType getMimeType();
 }

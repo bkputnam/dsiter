@@ -3,6 +3,8 @@ package dsiter.writer;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.row.*;
 
+import javax.activation.MimeType;
+import javax.activation.MimeTypeParseException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
@@ -39,6 +41,18 @@ public class CsvWriter implements IWriter {
 		this.columnSeparator = columnSeparator;
 		this.lineSeparator = lineSeparator;
 		this.writeHeader = writeHeader;
+	}
+
+	@Override
+	public MimeType getMimeType() {
+		try {
+			return new MimeType("text/plain");
+//			return new MimeType("text/csv");
+		}
+		catch (MimeTypeParseException e) {
+			// This should never happen
+			throw new Error("Programmer Error: failed to parse hardcoded mime type");
+		}
 	}
 
 	/**
