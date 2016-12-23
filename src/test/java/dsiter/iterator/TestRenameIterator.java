@@ -36,12 +36,30 @@ public class TestRenameIterator {
 	public void testLength() {
 
 		IDatasetIterator it = new RenameIterator(
-			new RangeIterator(10),
-			"value",
-			"a"
+				new RangeIterator(10),
+				"value",
+				"a"
 		);
 
 		assertEquals(10, it.tryGetLength());
+	}
+
+	@Test
+	public void testStringEquals() {
+
+		String from = "__value__".substring(2, 7);
+
+		IDatasetIterator it = new RenameIterator(
+				new RangeIterator(10),
+				from,
+				"a"
+		);
+
+		IterUtils.assertValues(
+				it,
+				"a",
+				new Integer[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+		);
 	}
 
 }

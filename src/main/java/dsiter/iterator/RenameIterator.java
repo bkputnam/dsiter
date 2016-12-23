@@ -32,7 +32,7 @@ public class RenameIterator implements IDatasetIterator {
 		cds = new ColumnDescriptor[srcCds.length];
 		for(int i=0; i<srcCds.length; i++) {
 			ColumnDescriptor srcCd = srcCds[i];
-			cds[i] = srcCd.getName() != from
+			cds[i] = (!srcCd.getName().equals(from))
 				? srcCd
 				: new ColumnDescriptor(to, srcCd.getType(), srcCd.getRowArrayIndex());
 		}
