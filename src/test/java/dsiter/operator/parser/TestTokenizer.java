@@ -41,4 +41,46 @@ public class TestTokenizer {
 		String[] tokens = Tokenizer.tokenize("  ( i2 +      i3   ) *   i4  ");
 		assertArrayEquals(new String[] { "(", "i2", "+", "i3", ")", "*", "i4"}, tokens);
 	}
+
+	@Test
+	public void testStringLiteral() {
+		String[] tokens = Tokenizer.tokenize("foo=\"hello world\"");
+		assertArrayEquals(new String[] { "foo", "=", "\"hello world\""}, tokens);
+	}
+
+	@Test
+	public void testStringLiteral2() {
+		String[] tokens = Tokenizer.tokenize("\"hello world\"");
+		assertArrayEquals(new String[] { "\"hello world\""}, tokens);
+	}
+
+	@Test
+	public void testStringLiteral3() {
+		String[] tokens = Tokenizer.tokenize("\"\"");
+		assertArrayEquals(new String[] { "\"\""}, tokens);
+	}
+
+	@Test
+	public void testIntLiteral() {
+		String[] tokens = Tokenizer.tokenize("foo=1");
+		assertArrayEquals(new String[] { "foo", "=", "1"}, tokens);
+	}
+
+	@Test
+	public void testNegIntLiteral() {
+		String[] tokens = Tokenizer.tokenize("foo=-1");
+		assertArrayEquals(new String[] { "foo", "=", "-1"}, tokens);
+	}
+
+	@Test
+	public void testFloatLiteral() {
+		String[] tokens = Tokenizer.tokenize("foo=1.2");
+		assertArrayEquals(new String[] { "foo", "=", "1.2"}, tokens);
+	}
+
+	@Test
+	public void testNegFloatLiteral() {
+		String[] tokens = Tokenizer.tokenize("foo=-1.2");
+		assertArrayEquals(new String[] { "foo", "=", "-1.2"}, tokens);
+	}
 }

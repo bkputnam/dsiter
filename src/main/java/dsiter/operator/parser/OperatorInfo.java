@@ -42,6 +42,22 @@ class OperatorInfo {
 		return operatorLookup.containsKey(opStr);
 	}
 
+	public static int operatorLengthAt(String input, int startIndex) {
+		for(String opStr : operatorsLongestToShortest) {
+			boolean foundMismatch = false;
+			for (int opCharIndex=0; opCharIndex<opStr.length() && !foundMismatch; opCharIndex++) {
+				int inputIndex = startIndex + opCharIndex;
+				if (input.charAt(inputIndex) != opStr.charAt(opCharIndex)) {
+					foundMismatch = true;
+				}
+			}
+			if (!foundMismatch) {
+				return opStr.length();
+			}
+		}
+		return -1;
+	}
+
 	//////////////////////////////////////////////////////////////////
 
 	// Higher first index means higher precedence (grouped tighter)
@@ -82,6 +98,8 @@ class OperatorInfo {
 	private static Map<String, OperatorInfoItem> operatorLookup;
 	private static Map<String, Integer> precedenceLookup;
 
+	private static String[] operatorsLongestToShortest;
+
 	static {
 		operatorLookup = new HashMap<>();
 		for(OperatorInfoItem opInfo : operatorSet) {
@@ -110,6 +128,14 @@ class OperatorInfo {
 		for(FunctionInfoItem fInfo : functionSet) {
 			functionLookup.put(fInfo.str, fInfo);
 		}
+
+		operatorsLongestToShortest = new String[operatorSet.size()];
+		int index = 0;
+		for(OperatorInfoItem opInfo : operatorSet) {
+			operatorsLongestToShortest[index] = opInfo.str;
+			index++;
+		}
+		Arrays.sort(operatorsLongestToShortest, new StringLengthComparator());
 	}
 
 
@@ -136,6 +162,17 @@ class OperatorInfo {
 		public FunctionInfoItem(String str, int numParams) {
 			this.str = str;
 			this.numParams = numParams;
+		}
+	}
+
+	private static class StringLengthComparator implements java.util.Comparator<String> {
+
+		public StringLengthComparator() {
+			super();
+		}
+
+		public int compare(String s1, String s2) {
+			return s2.length() - s1.length();
 		}
 	}
 }
