@@ -62,7 +62,7 @@ class OperatorInfo {
 
 	// Higher first index means higher precedence (grouped tighter)
 	private static String[][] operatorPrecedences = new String[][]{
-		{"=", "<", ">", "<=", ">="},
+		{"=", "!=", "<", ">", "<=", ">="},
 		{"||", "&&"},
 		{"%"},
 		{"+", "-"},
@@ -73,6 +73,7 @@ class OperatorInfo {
 
 	private static Set<OperatorInfoItem> operatorSet = new HashSet<>(Arrays.asList(
 		new OperatorInfoItem("=", 2),
+		new OperatorInfoItem("!=", 2),
 		new OperatorInfoItem("<", 2),
 		new OperatorInfoItem(">", 2),
 		new OperatorInfoItem("<=", 2),

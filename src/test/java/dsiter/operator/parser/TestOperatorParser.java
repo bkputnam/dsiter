@@ -187,4 +187,20 @@ public class TestOperatorParser {
 		assertTrue(iter.tryMoveNext());
 		assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
 	}
+
+	@Test
+	public void testNotEquals1() throws Exception {
+		IDatasetIterator iter = dummyIterator();
+		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1!=2");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(true, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
+
+	@Test
+	public void testNotEquals2() throws Exception {
+		IDatasetIterator iter = dummyIterator();
+		IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1!=1");
+		assertTrue(iter.tryMoveNext());
+		assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
+	}
 }

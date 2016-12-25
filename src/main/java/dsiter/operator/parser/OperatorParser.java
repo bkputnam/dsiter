@@ -356,6 +356,9 @@ public class OperatorParser {
 			if(operator.equals("=")) {
 				return new EqualsOperator(lhs, rhs);
 			}
+			else if(operator.equals("!=")) {
+				return new NotEqualsOperator(lhs, rhs);
+			}
 			else if(operator.equals("<")) {
 				return new LessThanOperator(lhs, rhs);
 			}
