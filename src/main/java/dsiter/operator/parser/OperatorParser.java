@@ -88,10 +88,17 @@ public class OperatorParser {
 			String token = tokens[tokenIndex];
 
 			// "If the token is a number, then push it to the output queue."
-			// Note: for us, this applies equally to number literals and
+			// Note: for us, this applies equally to number literals, string literals and
 			// column names.
 			if(tryParseNumber(token, receiver)) {
 				state.outputStack.push(receiver.accessor);
+			}
+			else if(token.startsWith("\"") && token.endsWith("\"")) {
+				state.outputStack.push(
+					ConstantAccessor.getInstance(
+						token.substring(1, token.length()-1)
+					)
+				);
 			}
 			else if(isColumn(token)) {
 				IRowAccessor ca = state.accessorLookup.get(token);
