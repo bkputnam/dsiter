@@ -2,6 +2,7 @@ package dsiter.dataset;
 
 import dsiter.IterUtils;
 import dsiter.IteratorExpectations;
+import dsiter.iterator.IDatasetIterator;
 import dsiter.reader.FileReaderFactory;
 import dsiter.reader.StringReaderFactory;
 import org.junit.Test;
@@ -24,7 +25,9 @@ public class TestLineReaderDataset {
 			""
 		};
 
-		IterUtils.assertValues(lrd.getIterator(), "line", expectedLines);
+		try (IDatasetIterator it = lrd.getIterator()) {
+			IterUtils.assertValues(it, "line", expectedLines);
+		}
 	}
 
 	@Test
@@ -44,12 +47,16 @@ public class TestLineReaderDataset {
 			"3	3.5	fraz"
 		);
 
-		e.checkIterator(lrd.getIterator());
+		try (IDatasetIterator it = lrd.getIterator()) {
+			e.checkIterator(it);
+		}
 	}
 
 	@Test
 	public void testLength() throws Exception {
 		LineReaderDataset lrd = LineReaderDataset.fromString("a\nb\nc");
-		assertEquals(-1, lrd.getIterator().tryGetLength());
+		try (IDatasetIterator it = lrd.getIterator()) {
+			assertEquals(-1, it.tryGetLength());
+		}
 	}
 }
