@@ -8,43 +8,50 @@ public class TestArrayIterator {
 
     @Test
     public void testIntIterator() throws Exception {
-        ArrayIterator it = new ArrayIterator(3, 1, 4, 1, 5, 9);
-        IterUtils.assertValues(it, "value", new Integer[] { 3, 1, 4, 1, 5, 9 });
+        try (ArrayIterator it = new ArrayIterator(3, 1, 4, 1, 5, 9)) {
+			IterUtils.assertValues(it, "value", new Integer[]{3, 1, 4, 1, 5, 9});
+		}
     }
 
     @Test
     public void testLongIterator() throws Exception {
-        ArrayIterator it = new ArrayIterator(3L, 1L, 4L, 1L, 5L, 9L);
-        IterUtils.assertValues(it, "value", new Long[] { 3L, 1L, 4L, 1L, 5L, 9L });
+        try (ArrayIterator it = new ArrayIterator(3L, 1L, 4L, 1L, 5L, 9L)) {
+			IterUtils.assertValues(it, "value", new Long[]{3L, 1L, 4L, 1L, 5L, 9L});
+		}
     }
 
     @Test
     public void testFloatIterator() throws Exception {
-        ArrayIterator it = new ArrayIterator(3F, 1F, 4F, 1F, 5F, 9F);
-        IterUtils.assertValues(it, "value", new Float[] { 3F, 1F, 4F, 1F, 5F, 9F });
+		try (ArrayIterator it = new ArrayIterator(3F, 1F, 4F, 1F, 5F, 9F)) {
+			IterUtils.assertValues(it, "value", new Float[]{3F, 1F, 4F, 1F, 5F, 9F});
+		}
     }
 
     @Test
     public void testDoubleIterator() throws Exception {
-        ArrayIterator it = new ArrayIterator(3D, 1D, 4D, 1D, 5D, 9D);
-        IterUtils.assertValues(it, "value", new Double[] { 3D, 1D, 4D, 1D, 5D, 9D });
+		try (ArrayIterator it = new ArrayIterator(3D, 1D, 4D, 1D, 5D, 9D)) {
+			IterUtils.assertValues(it, "value", new Double[]{3D, 1D, 4D, 1D, 5D, 9D});
+		}
     }
 
     @Test
     public void testStringIterator() throws Exception {
-        ArrayIterator it = new ArrayIterator("3", "1", "4", "1", "5", "9");
-        IterUtils.assertValues(it, "value", new String[] { "3", "1", "4", "1", "5", "9" });
+		try (ArrayIterator it = new ArrayIterator("3", "1", "4", "1", "5", "9")) {
+			IterUtils.assertValues(it, "value", new String[]{"3", "1", "4", "1", "5", "9"});
+		}
     }
 
     @Test
     public void testBoolIterator() throws Exception {
-        ArrayIterator it = new ArrayIterator(true, false, false, true);
-        IterUtils.assertValues(it, "value", new Boolean[] { true, false, false, true });
+		try (ArrayIterator it = new ArrayIterator(true, false, false, true)) {
+			IterUtils.assertValues(it, "value", new Boolean[]{true, false, false, true});
+		}
     }
 
     @Test
 	public void testLength() {
-		ArrayIterator it = new ArrayIterator(true, false, false, true);
-		assertEquals(4, it.tryGetLength());
+		try (ArrayIterator it = new ArrayIterator(true, false, false, true)) {
+			assertEquals(4, it.tryGetLength());
+		}
 	}
 }

@@ -5,7 +5,7 @@ import dsiter.row.Row;
 import dsiter.row.RowShape;
 import dsiter.row.ColumnDescriptor;
 
-public interface IDatasetIterator {
+public interface IDatasetIterator extends AutoCloseable {
 
 	/**
 	 * Attempt to move the iterator's cursor.

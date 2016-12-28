@@ -1,4 +1,4 @@
-package dsiter.pipe;
+package dsiter.iterator;
 
 import static org.junit.Assert.*;
 
@@ -15,33 +15,35 @@ public class TestRenameIterator {
 	@Test
 	public void testRename() throws Exception {
 
-		IDatasetIterator it = new RenameIterator(
+		try (IDatasetIterator it = new RenameIterator(
 			new RangeIterator(10),
 			"value",
 			"a"
-		);
+		)) {
 
-		ColumnDescriptor[] cds = it.getColumnDescriptors();
-		assertEquals(1, cds.length);
-		assertEquals("a", cds[0].getName());
+			ColumnDescriptor[] cds = it.getColumnDescriptors();
+			assertEquals(1, cds.length);
+			assertEquals("a", cds[0].getName());
 
-		IterUtils.assertValues(
-			it,
-			"a",
-			new Integer[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-		);
+			IterUtils.assertValues(
+				it,
+				"a",
+				new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+			);
+		}
 	}
 
 	@Test
-	public void testLength() {
+	public void testLength() throws Exception {
 
-		IDatasetIterator it = new RenameIterator(
+		try (IDatasetIterator it = new RenameIterator(
 				new RangeIterator(10),
 				"value",
 				"a"
-		);
+		)) {
 
-		assertEquals(10, it.tryGetLength());
+			assertEquals(10, it.tryGetLength());
+		}
 	}
 
 	@Test
@@ -49,17 +51,18 @@ public class TestRenameIterator {
 
 		String from = "__value__".substring(2, 7);
 
-		IDatasetIterator it = new RenameIterator(
+		try (IDatasetIterator it = new RenameIterator(
 				new RangeIterator(10),
 				from,
 				"a"
-		);
+		)) {
 
-		IterUtils.assertValues(
+			IterUtils.assertValues(
 				it,
 				"a",
-				new Integer[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-		);
+				new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+			);
+		}
 	}
 
 }

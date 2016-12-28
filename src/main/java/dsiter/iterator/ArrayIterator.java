@@ -124,6 +124,11 @@
 /* GENERATED CODE */		};
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public void close() {
+/* GENERATED CODE */		// do nothing
+/* GENERATED CODE */	}
+/* GENERATED CODE */
 /* GENERATED CODE */	private interface RowWriter {
 /* GENERATED CODE */		void writeToRow(Row row);
 /* GENERATED CODE */	}

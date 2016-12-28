@@ -80,4 +80,9 @@ public class RangeIterator implements IDatasetIterator {
 		row.ints[0] = this.curVal;
 		return row;
 	}
+
+	@Override
+	public void close() {
+		// do nothing
+	}
 }

@@ -58,4 +58,8 @@ public class RenameIterator implements IDatasetIterator {
 		return cds;
 	}
 
+	@Override
+	public void close() throws Exception {
+		src.close();
+	}
 }

@@ -14,40 +14,43 @@ public class TestFilterIterator {
     @Test
     public void testGreaterThan() throws Exception {
 
-        RangeIterator range = new RangeIterator(10);
+        try (RangeIterator range = new RangeIterator(10)) {
 
-        FilterIterator it = new FilterIterator(
-            range,
-			OperatorParser.parseOperator(range.getColumnDescriptors(), "value>5").asBoolAccessor()
-        );
+			FilterIterator it = new FilterIterator(
+				range,
+				OperatorParser.parseOperator(range.getColumnDescriptors(), "value>5").asBoolAccessor()
+			);
 
-        IterUtils.assertValues(it, "value", new Integer[] { 6, 7, 8, 9 });
+			IterUtils.assertValues(it, "value", new Integer[]{6, 7, 8, 9});
+		}
     }
 
     @Test
     public void testEvens() throws Exception {
 
-        RangeIterator range = new RangeIterator(10);
-        IRowAccessor ca = range.getColumnDescriptor("value").getAccessor();
+		try (RangeIterator range = new RangeIterator(10)) {
+			IRowAccessor ca = range.getColumnDescriptor("value").getAccessor();
 
-        FilterIterator it = new FilterIterator(
-            range,
-			OperatorParser.parseOperator(range.getColumnDescriptors(), "value%2=0").asBoolAccessor()
-        );
+			FilterIterator it = new FilterIterator(
+				range,
+				OperatorParser.parseOperator(range.getColumnDescriptors(), "value%2=0").asBoolAccessor()
+			);
 
-        IterUtils.assertValues(it, "value", new Integer[] { 0, 2, 4, 6, 8 });
+			IterUtils.assertValues(it, "value", new Integer[]{0, 2, 4, 6, 8});
+		}
     }
 
     @Test
 	public void testLength() throws Exception {
-		RangeIterator range = new RangeIterator(10);
+		try (RangeIterator range = new RangeIterator(10)) {
 
-		FilterIterator it = new FilterIterator(
-			range,
-			OperatorParser.parseOperator(range.getColumnDescriptors(), "value>5").asBoolAccessor()
-		);
+			FilterIterator it = new FilterIterator(
+				range,
+				OperatorParser.parseOperator(range.getColumnDescriptors(), "value>5").asBoolAccessor()
+			);
 
-		assertEquals(-1, it.tryGetLength());
+			assertEquals(-1, it.tryGetLength());
+		}
 	}
 
 	@Test
@@ -55,13 +58,15 @@ public class TestFilterIterator {
 		IteratorCounter counter1 = new IteratorCounter();
 		IteratorCounter counter2 = new IteratorCounter();
 
-		IDatasetIterator it = new RangeIterator(10)
+		try (IDatasetIterator it = new RangeIterator(10)
 			.pipe(counter1.getPipe())
 			.pipe(filter("value%2=0"))
-			.pipe(counter2.getPipe());
+			.pipe(counter2.getPipe())
+		) {
 
-		while(it.tryMoveNext()) {
-			Row row = it.getCurrentRow();
+			while (it.tryMoveNext()) {
+				Row row = it.getCurrentRow();
+			}
 		}
 
 		// counter1 should be 10 because filter iterator needs to check

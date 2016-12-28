@@ -118,5 +118,10 @@ public class LineReaderDataset implements IDataset {
 				new ColumnDescriptor("line", ColumnType.STRING, 0)
 			};
 		}
+
+		@Override
+		public void close() throws Exception {
+			reader.close();
+		}
 	}
 }

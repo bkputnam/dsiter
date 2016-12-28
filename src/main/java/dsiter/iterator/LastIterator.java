@@ -101,8 +101,14 @@ public class LastIterator implements IDatasetIterator {
 		}
 	}
 
+	@Override
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return copier.getDestColumnDescriptors();
+	}
+
+	@Override
+	public void close() throws Exception {
+		src.close();
 	}
 
 }

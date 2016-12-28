@@ -45,4 +45,9 @@ public class TakeIterator implements IDatasetIterator {
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return src.getColumnDescriptors();
 	}
+
+	@Override
+	public void close() throws Exception {
+		src.close();
+	}
 }

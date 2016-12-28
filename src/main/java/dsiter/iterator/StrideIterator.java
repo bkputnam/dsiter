@@ -66,4 +66,8 @@ public class StrideIterator implements IDatasetIterator {
 		return this.src.getColumnDescriptors();
 	}
 
+	@Override
+	public void close() throws Exception {
+		src.close();
+	}
 }

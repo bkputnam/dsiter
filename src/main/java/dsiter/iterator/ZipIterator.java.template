@@ -4,6 +4,8 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.Row;
 import dsiter.row.RowShape;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ZipIterator implements IDatasetIterator {
 
@@ -131,6 +133,33 @@ public class ZipIterator implements IDatasetIterator {
 	@Override
 	public ColumnDescriptor[] getColumnDescriptors() {
 		return combinedColumnDescriptors;
+	}
+
+	@Override
+	public void close() throws Exception {
+		List<Exception> exceptions = new ArrayList<Exception>();
+		for(int i=0; i<srcIters.length; i++) {
+			try {
+				srcIters[i].close();
+			}
+			catch (Exception e) {
+				exceptions.add(e);
+			}
+		}
+		if (exceptions.size() == 1) {
+			throw exceptions.get(0);
+		}
+		else if (exceptions.size() == 1) {
+			throw new MultipleCloseExceptions(exceptions);
+		}
+	}
+
+	public static class MultipleCloseExceptions extends Exception {
+		List<Exception> closeExceptions;
+
+		public MultipleCloseExceptions(List<Exception> closeExceptions) {
+			this.closeExceptions = closeExceptions;
+		}
 	}
 
 	private static class IndexPair {

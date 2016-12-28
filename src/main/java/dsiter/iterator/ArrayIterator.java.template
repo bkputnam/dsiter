@@ -64,6 +64,11 @@ public class ArrayIterator implements IDatasetIterator {
 		};
 	}
 
+	@Override
+	public void close() {
+		// do nothing
+	}
+
 	private interface RowWriter {
 		void writeToRow(Row row);
 	}

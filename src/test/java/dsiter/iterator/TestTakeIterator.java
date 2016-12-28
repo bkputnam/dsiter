@@ -8,37 +8,41 @@ public class TestTakeIterator {
 
 	@Test
 	public void testTake5() throws Exception {
-		TakeIterator ti = new TakeIterator(
+		try (TakeIterator ti = new TakeIterator(
 			new RangeIterator(10),
 			5
-		);
-		IterUtils.assertValues(ti, "value", new Integer[] { 0, 1, 2, 3, 4 });
+		)) {
+			IterUtils.assertValues(ti, "value", new Integer[]{0, 1, 2, 3, 4});
+		}
 	}
 
 	@Test
-	public void testLen10() {
-		TakeIterator ti = new TakeIterator(
+	public void testLen10() throws Exception {
+		try (TakeIterator ti = new TakeIterator(
 			new RangeIterator(10),
 			10
-		);
-		assertEquals(10, ti.tryGetLength());
+		)) {
+			assertEquals(10, ti.tryGetLength());
+		}
 	}
 
 	@Test
-	public void testLen5of10() {
-		TakeIterator ti = new TakeIterator(
+	public void testLen5of10() throws Exception {
+		try (TakeIterator ti = new TakeIterator(
 			new RangeIterator(10),
 			5
-		);
-		assertEquals(5, ti.tryGetLength());
+		)) {
+			assertEquals(5, ti.tryGetLength());
+		}
 	}
 
 	@Test
-	public void testLen10of5() {
-		TakeIterator ti = new TakeIterator(
+	public void testLen10of5() throws Exception {
+		try (TakeIterator ti = new TakeIterator(
 			new RangeIterator(5),
 			10
-		);
-		assertEquals(5, ti.tryGetLength());
+		)) {
+			assertEquals(5, ti.tryGetLength());
+		}
 	}
 }

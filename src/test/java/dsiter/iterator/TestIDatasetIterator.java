@@ -9,21 +9,23 @@ import static org.junit.Assert.*;
 public class TestIDatasetIterator {
 
 	@Test
-	public void testColumnLookup() {
-		IDatasetIterator it = new RangeIterator(5);
+	public void testColumnLookup() throws Exception {
+		try (IDatasetIterator it = new RangeIterator(5)) {
 
-		ColumnDescriptor ca = it.getColumnDescriptor("value");
+			ColumnDescriptor ca = it.getColumnDescriptor("value");
 
-		assertNotNull(ca);
-		assertEquals("value", ca.getName());
+			assertNotNull(ca);
+			assertEquals("value", ca.getName());
+		}
 	}
 
 	@Test
-	public void testColumnLookupDoesntThrow() {
-		IDatasetIterator it = new RangeIterator(5);
+	public void testColumnLookupDoesntThrow() throws Exception {
+		try (IDatasetIterator it = new RangeIterator(5)) {
 
-		ColumnDescriptor ca = it.getColumnDescriptor("not a real column");
+			ColumnDescriptor ca = it.getColumnDescriptor("not a real column");
 
-		assertNull(ca);
+			assertNull(ca);
+		}
 	}
 }
