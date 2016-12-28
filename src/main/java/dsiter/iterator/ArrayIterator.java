@@ -125,7 +125,7 @@
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	public void close() throws Exception {
+/* GENERATED CODE */	public void close() {
 /* GENERATED CODE */		// do nothing
 /* GENERATED CODE */	}
 /* GENERATED CODE */

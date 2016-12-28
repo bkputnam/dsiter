@@ -49,7 +49,7 @@ public class TestArrayIterator {
     }
 
     @Test
-	public void testLength() throws Exception {
+	public void testLength() {
 		try (ArrayIterator it = new ArrayIterator(true, false, false, true)) {
 			assertEquals(4, it.tryGetLength());
 		}

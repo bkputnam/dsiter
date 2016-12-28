@@ -82,7 +82,7 @@ public class RangeIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public void close() throws Exception {
+	public void close() {
 		// do nothing
 	}
 }

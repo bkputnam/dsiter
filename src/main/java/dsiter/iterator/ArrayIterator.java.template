@@ -65,7 +65,7 @@ public class ArrayIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public void close() throws Exception {
+	public void close() {
 		// do nothing
 	}
 
