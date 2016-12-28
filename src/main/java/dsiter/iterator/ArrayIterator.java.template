@@ -1,6 +1,8 @@
 package dsiter.iterator;
 
 import dsiter.row.*;
+import dsiter.pipe.IPipe;
+import dsiter.pipe.SkipPipe;
 
 /**
  * An iterator over an array. The array may be
@@ -67,6 +69,18 @@ public class ArrayIterator implements IDatasetIterator {
 	@Override
 	public void close() {
 		// do nothing
+	}
+
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		if (pipe instanceof SkipPipe) {
+			long howMany = ((SkipPipe)pipe).getHowMany();
+			index += howMany;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private interface RowWriter {

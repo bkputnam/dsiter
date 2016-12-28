@@ -1,7 +1,10 @@
 package dsiter.iterator;
 
+import dsiter.pipe.IPipe;
+import dsiter.pipe.SkipPipe;
 import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
+import static dsiter.StdPipes.*;
 
 /**
  * Construct an iterator that only returns 1 in every
@@ -44,16 +47,11 @@ public class StrideIterator implements IDatasetIterator {
 	public boolean tryMoveNext() {
 		if( isFirstTime ) {
 			isFirstTime = false;
-			return src.tryMoveNext();
 		}
 		else {
-			for( int i=0; i<stride; i++) {
-				if( !this.src.tryMoveNext() ) {
-					return false;
-				}
-			}
-			return true;
+			src = src.pipe(skip(stride-1));
 		}
+		return src.tryMoveNext();
 	}
 
 	@Override
@@ -69,5 +67,17 @@ public class StrideIterator implements IDatasetIterator {
 	@Override
 	public void close() throws Exception {
 		src.close();
+	}
+
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		if (pipe instanceof SkipPipe) {
+			long howMany = ((SkipPipe)pipe).getHowMany();
+			src = src.pipe(skip(stride * howMany));
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

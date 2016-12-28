@@ -1,6 +1,7 @@
 package dsiter.iterator;
 
 import dsiter.IterUtils;
+import static dsiter.StdPipes.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -43,6 +44,18 @@ public class TestTakeIterator {
 			10
 		)) {
 			assertEquals(5, ti.tryGetLength());
+		}
+	}
+
+	@Test
+	public void testTakeThenSkip() throws Exception {
+		IteratorCounter counter = new IteratorCounter();
+		try (
+			IDatasetIterator it = new RangeIterator(20)
+				.pipe(take(10))
+				.pipe(skip(5))
+		) {
+			IterUtils.assertValues(it, "value", new Integer[] { 5, 6, 7, 8, 9 });
 		}
 	}
 }

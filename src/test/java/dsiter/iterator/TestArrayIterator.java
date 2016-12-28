@@ -1,6 +1,7 @@
 package dsiter.iterator;
 
 import dsiter.IterUtils;
+import dsiter.pipe.SkipPipe;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -52,6 +53,14 @@ public class TestArrayIterator {
 	public void testLength() {
 		try (ArrayIterator it = new ArrayIterator(true, false, false, true)) {
 			assertEquals(4, it.tryGetLength());
+		}
+	}
+
+	@Test
+	public void tryAbsorbSkip() throws Exception {
+		try (ArrayIterator it = new ArrayIterator(new int[] { 3, 1, 4, 1, 5, 9, 2, 6 })) {
+			assertEquals(true, it.tryAbsorb(new SkipPipe(5)));
+			IterUtils.assertValues(it, "value", new Integer[] { 9, 2, 6 });
 		}
 	}
 }

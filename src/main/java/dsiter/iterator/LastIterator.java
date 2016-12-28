@@ -1,5 +1,7 @@
 package dsiter.iterator;
 
+import dsiter.pipe.IPipe;
+import dsiter.pipe.SkipPipe;
 import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.RowCopier;
@@ -38,6 +40,7 @@ public class LastIterator implements IDatasetIterator {
 	private Row row;
 	private RowCopier copier;
 	private boolean alreadyReadRow = false;
+	private boolean done = false;
 
 	public LastIterator(IDatasetIterator src) {
 		this.src = src;
@@ -45,6 +48,11 @@ public class LastIterator implements IDatasetIterator {
 	}
 
 	public boolean tryMoveNext() {
+
+		if (done) {
+			return false;
+		}
+		done = true;
 
 		long srcLen = src.tryGetLength();
 		if (srcLen == 0) {
@@ -111,4 +119,17 @@ public class LastIterator implements IDatasetIterator {
 		src.close();
 	}
 
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		if (pipe instanceof SkipPipe) {
+			long howMany = ((SkipPipe)pipe).getHowMany();
+			if (howMany > 0) {
+				done = true;
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

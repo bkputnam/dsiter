@@ -1,9 +1,7 @@
 /* GENERATED CODE */package dsiter.iterator;
 /* GENERATED CODE */
-/* GENERATED CODE */import dsiter.row.ColumnDescriptor;
-/* GENERATED CODE */import dsiter.row.ColumnType;
-/* GENERATED CODE */import dsiter.row.Row;
-/* GENERATED CODE */import dsiter.row.RowShape;
+/* GENERATED CODE */import dsiter.pipe.*;
+/* GENERATED CODE */import dsiter.row.*;
 /* GENERATED CODE */import java.util.ArrayList;
 /* GENERATED CODE */import java.util.List;
 /* GENERATED CODE */
@@ -249,6 +247,23 @@
 /* GENERATED CODE */		public IndexPair(int srcIndex, int destIndex) {
 /* GENERATED CODE */			this.srcIndex = srcIndex;
 /* GENERATED CODE */			this.destIndex = destIndex;
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public boolean tryAbsorb(IPipe pipe) {
+/* GENERATED CODE */		if (
+/* GENERATED CODE */			pipe instanceof SkipPipe ||
+/* GENERATED CODE */			pipe instanceof FirstPipe
+/* GENERATED CODE */		) {
+/* GENERATED CODE */			for (int i=0; i<srcIters.length; i++) {
+/* GENERATED CODE */				srcIters[i] = srcIters[i].pipe(pipe);
+/* GENERATED CODE */			}
+/* GENERATED CODE */			return true;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else {
+/* GENERATED CODE */			return false;
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */}

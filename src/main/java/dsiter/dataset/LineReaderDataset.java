@@ -1,6 +1,8 @@
 package dsiter.dataset;
 
 import dsiter.iterator.IDatasetIterator;
+import dsiter.pipe.IPipe;
+import dsiter.pipe.SkipPipe;
 import dsiter.reader.FileReaderFactory;
 import dsiter.reader.IReaderFactory;
 import dsiter.reader.StringReaderFactory;
@@ -122,6 +124,28 @@ public class LineReaderDataset implements IDataset {
 		@Override
 		public void close() throws Exception {
 			reader.close();
+		}
+
+		@Override
+		public boolean tryAbsorb(IPipe pipe) {
+			if (pipe instanceof SkipPipe) {
+				skipLines(((SkipPipe)pipe).getHowMany());
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		private void skipLines(long howMany) {
+			try {
+				for (long i=0; i<howMany; i++) {
+					reader.readLine();
+				}
+			}
+			catch (IOException e) {
+				done = true;
+			}
 		}
 	}
 }

@@ -77,16 +77,15 @@ public class TestZipIterator {
 			.pipe(counter4.getPipe())
 			.pipe(rename("value", "d"));
 
+		IteratorExpectations e = new IteratorExpectations();
+		e.expectInts("a", vals1);
+		e.expectFloats("b", vals2);
+		e.expectBools("c", vals3);
+		e.expectStrings("d", vals4);
+
 		try (
 			ZipIterator it = new ZipIterator(it1, it2, it3, it4);
 		) {
-
-			IteratorExpectations e = new IteratorExpectations();
-			e.expectInts("a", vals1);
-			e.expectFloats("b", vals2);
-			e.expectBools("c", vals3);
-			e.expectStrings("d", vals4);
-
 			e.checkIterator(it);
 		}
 
@@ -117,6 +116,26 @@ public class TestZipIterator {
 			new RangeIterator(10).pipe(rename("value", "i3")).pipe(filter("i3<5"))
 		)) {
 			assertEquals(-1, zi.tryGetLength());
+		}
+	}
+
+	@Test
+	public void testMultiLengthLast() throws Exception {
+
+		IteratorExpectations e = new IteratorExpectations();
+		e.expectInts("i1", new int[] { 2 });
+		e.expectInts("i2", new int[] { 2 });
+		e.expectInts("i3", new int[] { 2 });
+
+		try (
+			IDatasetIterator zi = new ZipIterator(
+				new RangeIterator(3).pipe(rename("value", "i1")),
+				new RangeIterator(5).pipe(rename("value", "i2")),
+				new RangeIterator(10).pipe(rename("value", "i3")).pipe(filter("i3<5"))
+			)
+			.pipe(last());
+		) {
+			e.checkIterator(zi);
 		}
 	}
 }

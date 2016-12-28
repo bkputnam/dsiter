@@ -1,5 +1,7 @@
 package dsiter.iterator;
 
+import dsiter.pipe.IPipe;
+import dsiter.pipe.SkipPipe;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.Row;
 
@@ -51,5 +53,19 @@ public class FirstIterator implements IDatasetIterator {
 	@Override
 	public void close() throws Exception {
 		src.close();
+	}
+
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		if (pipe instanceof SkipPipe) {
+			long howMany = ((SkipPipe)pipe).getHowMany();
+			if (howMany > 0) {
+				hasMovedNext = true;
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

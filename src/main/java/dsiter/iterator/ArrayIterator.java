@@ -1,6 +1,8 @@
 /* GENERATED CODE */package dsiter.iterator;
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.*;
+/* GENERATED CODE */import dsiter.pipe.IPipe;
+/* GENERATED CODE */import dsiter.pipe.SkipPipe;
 /* GENERATED CODE */
                     /**
                      * An iterator over an array. The array may be
@@ -127,6 +129,18 @@
 /* GENERATED CODE */	@Override
 /* GENERATED CODE */	public void close() {
 /* GENERATED CODE */		// do nothing
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public boolean tryAbsorb(IPipe pipe) {
+/* GENERATED CODE */		if (pipe instanceof SkipPipe) {
+/* GENERATED CODE */			long howMany = ((SkipPipe)pipe).getHowMany();
+/* GENERATED CODE */			index += howMany;
+/* GENERATED CODE */			return true;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else {
+/* GENERATED CODE */			return false;
+/* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	private interface RowWriter {

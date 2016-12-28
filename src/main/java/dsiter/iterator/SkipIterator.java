@@ -1,5 +1,6 @@
 package dsiter.iterator;
 
+import dsiter.pipe.IPipe;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.Row;
 
@@ -65,5 +66,10 @@ public class SkipIterator implements IDatasetIterator {
 	@Override
 	public void close() throws Exception {
 		src.close();
+	}
+
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		return false;
 	}
 }
