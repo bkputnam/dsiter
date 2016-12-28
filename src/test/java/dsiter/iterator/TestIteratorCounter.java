@@ -14,13 +14,15 @@ public class TestIteratorCounter {
 		IteratorCounter counter1 = new IteratorCounter();
 		IteratorCounter counter2 = new IteratorCounter();
 
-		IDatasetIterator it = new RangeIterator(10)
+		try (IDatasetIterator it = new RangeIterator(10)
 			.pipe(counter1.getPipe())
 			.pipe(stride(3)) // 0 3 6 9
-			.pipe(counter2.getPipe());
+			.pipe(counter2.getPipe())
+		) {
 
-		while(it.tryMoveNext()) {
-			Row row = it.getCurrentRow();
+			while (it.tryMoveNext()) {
+				Row row = it.getCurrentRow();
+			}
 		}
 
 		assertEquals(10, counter1.getTryMoveNextCount());
@@ -31,19 +33,21 @@ public class TestIteratorCounter {
 	}
 
 	@Test
-	public void testGetColumnDescriptorsCount() {
+	public void testGetColumnDescriptorsCount() throws Exception {
 
 		IteratorCounter counter = new IteratorCounter();
 
-		IDatasetIterator it = new RangeIterator(10)
-			.pipe(counter.getPipe());
+		try (IDatasetIterator it = new RangeIterator(10)
+			.pipe(counter.getPipe())
+		) {
 
-		assertEquals(0, counter.getTryMoveNextCount());
-		assertEquals(0, counter.getGetCurrentRowCount());
-		assertEquals(0, counter.getGetColumnDescriptorsCount());
-		assertEquals(0, counter.getTryGetLengthCount());
+			assertEquals(0, counter.getTryMoveNextCount());
+			assertEquals(0, counter.getGetCurrentRowCount());
+			assertEquals(0, counter.getGetColumnDescriptorsCount());
+			assertEquals(0, counter.getTryGetLengthCount());
 
-		ColumnDescriptor[] cds = it.getColumnDescriptors();
+			ColumnDescriptor[] cds = it.getColumnDescriptors();
+		}
 
 		assertEquals(0, counter.getTryMoveNextCount());
 		assertEquals(0, counter.getGetCurrentRowCount());
@@ -52,19 +56,21 @@ public class TestIteratorCounter {
 	}
 
 	@Test
-	public void testGetTryGetLengthCount() {
+	public void testGetTryGetLengthCount() throws Exception {
 
 		IteratorCounter counter = new IteratorCounter();
 
-		IDatasetIterator it = new RangeIterator(10)
-			.pipe(counter.getPipe());
+		try (IDatasetIterator it = new RangeIterator(10)
+			.pipe(counter.getPipe())
+		) {
 
-		assertEquals(0, counter.getTryMoveNextCount());
-		assertEquals(0, counter.getGetCurrentRowCount());
-		assertEquals(0, counter.getGetColumnDescriptorsCount());
-		assertEquals(0, counter.getTryGetLengthCount());
+			assertEquals(0, counter.getTryMoveNextCount());
+			assertEquals(0, counter.getGetCurrentRowCount());
+			assertEquals(0, counter.getGetColumnDescriptorsCount());
+			assertEquals(0, counter.getTryGetLengthCount());
 
-		long len = it.tryGetLength();
+			long len = it.tryGetLength();
+		}
 
 		assertEquals(0, counter.getTryMoveNextCount());
 		assertEquals(0, counter.getGetCurrentRowCount());
