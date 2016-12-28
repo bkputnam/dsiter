@@ -14,37 +14,41 @@ public class TestZipIterator {
 	@Test
 	public void testZipIterator() throws Exception {
 
-		IDatasetIterator leftIter = new RenameIterator(
-			new RangeIterator(5),
-			"value",
-			"a"
-		);
-		IDatasetIterator rightIter = new RenameIterator(
-			new StrideIterator(
-				new RangeIterator(10),
-				2
-			),
-			"value",
-			"b"
-		);
+		IteratorCounter leftCounter = new IteratorCounter();
+		IteratorCounter rightCounter1 = new IteratorCounter();
+		IteratorCounter rightCounter2 = new IteratorCounter();
 
-		IDatasetIterator it = new ZipIterator(leftIter, rightIter);
+		IDatasetIterator leftIter = new RangeIterator(5)
+			.pipe(leftCounter.getPipe())
+			.pipe(rename("value", "a"));
+		IDatasetIterator rightIter = new RangeIterator(10)
+			.pipe(rightCounter1.getPipe())
+			.pipe(stride(2))
+			.pipe(rightCounter2.getPipe())
+			.pipe(rename("value", "b"));
 
-		ColumnDescriptor[] cds = it.getColumnDescriptors();
-		assertEquals(2, cds.length);
-		assertEquals("a", cds[0].getName());
-		assertEquals("b", cds[1].getName());
+		try (IDatasetIterator it = new ZipIterator(leftIter, rightIter)) {
 
-		IRowAccessor[] cas = new IRowAccessor[] {
-			cds[0].getAccessor(),
-			cds[1].getAccessor(),
-		};
+			ColumnDescriptor[] cds = it.getColumnDescriptors();
+			assertEquals(2, cds.length);
+			assertEquals("a", cds[0].getName());
+			assertEquals("b", cds[1].getName());
 
-		IteratorExpectations e = new IteratorExpectations();
-		e.expectInts("a", 0, 1, 2, 3, 4);
-		e.expectInts("b", 0, 2, 4, 6, 8);
+			IRowAccessor[] cas = new IRowAccessor[]{
+				cds[0].getAccessor(),
+				cds[1].getAccessor(),
+			};
 
-		e.checkIterator(it);
+			IteratorExpectations e = new IteratorExpectations();
+			e.expectInts("a", 0, 1, 2, 3, 4);
+			e.expectInts("b", 0, 2, 4, 6, 8);
+
+			e.checkIterator(it);
+		}
+
+		assertEquals(1, leftCounter.getCloseCount());
+		assertEquals(1, rightCounter1.getCloseCount());
+		assertEquals(1, rightCounter2.getCloseCount());
 	}
 
 	@Test
@@ -55,20 +59,41 @@ public class TestZipIterator {
 		boolean[] vals3 = new boolean[] { true, true, false, false, false };
 		String[] vals4 = new String[] { "hello", "world", "foo", "bar", "baz" };
 
-		IDatasetIterator it1 = new RenameIterator(new ArrayIterator(vals1), "value", "a");
-		IDatasetIterator it2 = new RenameIterator(new ArrayIterator(vals2), "value", "b");
-		IDatasetIterator it3 = new RenameIterator(new ArrayIterator(vals3), "value", "c");
-		IDatasetIterator it4 = new RenameIterator(new ArrayIterator(vals4), "value", "d");
+		IteratorCounter counter1 = new IteratorCounter();
+		IteratorCounter counter2 = new IteratorCounter();
+		IteratorCounter counter3 = new IteratorCounter();
+		IteratorCounter counter4 = new IteratorCounter();
 
-		ZipIterator it = new ZipIterator(it1, it2, it3, it4);
+		IDatasetIterator it1 = new ArrayIterator(vals1)
+			.pipe(counter1.getPipe())
+			.pipe(rename("value", "a"));
+		IDatasetIterator it2 = new ArrayIterator(vals2)
+			.pipe(counter2.getPipe())
+			.pipe(rename("value", "b"));
+		IDatasetIterator it3 = new ArrayIterator(vals3)
+			.pipe(counter3.getPipe())
+			.pipe(rename("value", "c"));
+		IDatasetIterator it4 = new ArrayIterator(vals4)
+			.pipe(counter4.getPipe())
+			.pipe(rename("value", "d"));
 
-		IteratorExpectations e = new IteratorExpectations();
-		e.expectInts("a", vals1);
-		e.expectFloats("b", vals2);
-		e.expectBools("c", vals3);
-		e.expectStrings("d", vals4);
+		try (
+			ZipIterator it = new ZipIterator(it1, it2, it3, it4);
+		) {
 
-		e.checkIterator(it);
+			IteratorExpectations e = new IteratorExpectations();
+			e.expectInts("a", vals1);
+			e.expectFloats("b", vals2);
+			e.expectBools("c", vals3);
+			e.expectStrings("d", vals4);
+
+			e.checkIterator(it);
+		}
+
+		assertEquals(1, counter1.getCloseCount());
+		assertEquals(1, counter2.getCloseCount());
+		assertEquals(1, counter3.getCloseCount());
+		assertEquals(1, counter4.getCloseCount());
 	}
 
 	@Test
@@ -84,14 +109,14 @@ public class TestZipIterator {
 	}
 
 	@Test
-	public void testLengthNegOne() {
+	public void testLengthNegOne() throws Exception {
 
-		IDatasetIterator zi = new ZipIterator(
+		try (IDatasetIterator zi = new ZipIterator(
 			new RangeIterator(3).pipe(rename("value", "i1")),
 			new RangeIterator(5).pipe(rename("value", "i2")),
 			new RangeIterator(10).pipe(rename("value", "i3")).pipe(filter("i3<5"))
-		);
-
-		assertEquals(-1, zi.tryGetLength());
+		)) {
+			assertEquals(-1, zi.tryGetLength());
+		}
 	}
 }
