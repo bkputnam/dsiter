@@ -4,6 +4,8 @@
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */import dsiter.row.RowShape;
+/* GENERATED CODE */import java.util.ArrayList;
+/* GENERATED CODE */import java.util.List;
 /* GENERATED CODE */
 /* GENERATED CODE */public class ZipIterator implements IDatasetIterator {
 /* GENERATED CODE */
@@ -211,6 +213,33 @@
 /* GENERATED CODE */	@Override
 /* GENERATED CODE */	public ColumnDescriptor[] getColumnDescriptors() {
 /* GENERATED CODE */		return combinedColumnDescriptors;
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public void close() throws Exception {
+/* GENERATED CODE */		List<Exception> exceptions = new ArrayList<Exception>();
+/* GENERATED CODE */		for(int i=0; i<srcIters.length; i++) {
+/* GENERATED CODE */			try {
+/* GENERATED CODE */				srcIters[i].close();
+/* GENERATED CODE */			}
+/* GENERATED CODE */			catch (Exception e) {
+/* GENERATED CODE */				exceptions.add(e);
+/* GENERATED CODE */			}
+/* GENERATED CODE */		}
+/* GENERATED CODE */		if (exceptions.size() == 1) {
+/* GENERATED CODE */			throw exceptions.get(0);
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if (exceptions.size() == 1) {
+/* GENERATED CODE */			throw new MultipleCloseExceptions(exceptions);
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	public static class MultipleCloseExceptions extends Exception {
+/* GENERATED CODE */		List<Exception> closeExceptions;
+/* GENERATED CODE */
+/* GENERATED CODE */		public MultipleCloseExceptions(List<Exception> closeExceptions) {
+/* GENERATED CODE */			this.closeExceptions = closeExceptions;
+/* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	private static class IndexPair {

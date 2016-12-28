@@ -59,5 +59,10 @@ public class IteratorCounter {
 			getColumnDescriptorsCount++;
 			return src.getColumnDescriptors();
 		}
+
+		@Override
+		public void close() throws Exception {
+			src.close();
+		}
 	}
 }
