@@ -10,11 +10,13 @@ public class IteratorCounter {
 	private long getCurrentRowCount = 0;
 	private long tryGetLengthCount = 0;
 	private long getColumnDescriptorsCount = 0;
+	private long closeCount = 0;
 
 	public long getTryMoveNextCount() { return tryMoveNextCount; }
 	public long getGetCurrentRowCount() { return getCurrentRowCount; }
 	public long getTryGetLengthCount() { return tryGetLengthCount; }
 	public long getGetColumnDescriptorsCount() { return getColumnDescriptorsCount; }
+	public long getCloseCount() { return closeCount; }
 
 	public IPipe getPipe() {
 		return new CountPipe();
@@ -62,6 +64,7 @@ public class IteratorCounter {
 
 		@Override
 		public void close() throws Exception {
+			closeCount++;
 			src.close();
 		}
 	}

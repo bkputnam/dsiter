@@ -71,4 +71,34 @@ public class TestIteratorCounter {
 		assertEquals(0, counter.getGetColumnDescriptorsCount());
 		assertEquals(1, counter.getTryGetLengthCount());
 	}
+
+	@Test
+	public void testClosesCount_try() throws Exception {
+		IteratorCounter counter = new IteratorCounter();
+
+		try (IDatasetIterator it = new RangeIterator(5).pipe(counter.getPipe())) {
+			int index = 0;
+			while(it.tryMoveNext()) {
+				Row r = it.getCurrentRow();
+				assertEquals(index++, r.ints[0]);
+			}
+		}
+
+		assertEquals(1, counter.getCloseCount());
+	}
+
+	@Test
+	public void testClosesCount_manual() throws Exception {
+		IteratorCounter counter = new IteratorCounter();
+		IDatasetIterator it = new RangeIterator(5).pipe(counter.getPipe());
+
+		int index = 0;
+		while(it.tryMoveNext()) {
+			Row r = it.getCurrentRow();
+			assertEquals(index++, r.ints[0]);
+		}
+		it.close();
+
+		assertEquals(1, counter.getCloseCount());
+	}
 }
