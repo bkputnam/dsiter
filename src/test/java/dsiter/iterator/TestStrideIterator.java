@@ -14,43 +14,47 @@ public class TestStrideIterator {
 	@Test
 	public void testStride4() throws Exception {
 
-		IDatasetIterator it = new StrideIterator(
+		try (IDatasetIterator it = new StrideIterator(
 			new RangeIterator(10),
 			4
-		);
+		)) {
 
-		IterUtils.assertValues(
-			it,
-			"value",
-			new Integer[] { 0, 4, 8 }
-		);
+			IterUtils.assertValues(
+				it,
+				"value",
+				new Integer[]{0, 4, 8}
+			);
+		}
 	}
 
 	@Test
 	public void testStrideLast() throws Exception {
 
-		IDatasetIterator it = new LastIterator(
+		try (IDatasetIterator it = new LastIterator(
 			new StrideIterator(
 				new RangeIterator(10),
 				4
 			)
 		);
+		) {
 
-		IterUtils.assertValues(
-			it,
-			"value",
-			new Integer[] { 8 }
-		);
+			IterUtils.assertValues(
+				it,
+				"value",
+				new Integer[]{8}
+			);
+		}
 	}
 
 	@Test
-	public void testLength() {
+	public void testLength() throws Exception {
 
-		IDatasetIterator it = new StrideIterator(
+		try (IDatasetIterator it = new StrideIterator(
 			new RangeIterator(10),
 			4
-		);
+		)) {
 
-		assertEquals(3, it.tryGetLength());
+			assertEquals(3, it.tryGetLength());
+		}
 	}
 }
