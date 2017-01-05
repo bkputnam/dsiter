@@ -44,6 +44,6 @@ public interface IPipe {
 	 * @return An iterator with this pipe attached to it (conceptually, if
 	 * not necessarily physically)
 	 */
-	public IDatasetIterator attachTo(IDatasetIterator src);
+	IDatasetIterator attachTo(IDatasetIterator src);
 
 }

@@ -14,6 +14,8 @@ public class SkipPipe implements IPipe {
         this.howMany = howMany;
     }
 
+    public long getHowMany() { return howMany; }
+
     @Override
     public IDatasetIterator attachTo(IDatasetIterator src) {
         return new SkipIterator(src, howMany);

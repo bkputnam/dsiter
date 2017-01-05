@@ -25,7 +25,7 @@ public class TestIteratorCounter {
 			}
 		}
 
-		assertEquals(10, counter1.getTryMoveNextCount());
+		assertTrue(counter1.getTryMoveNextCount() <= 10);
 		assertEquals(4, counter1.getGetCurrentRowCount());
 
 		assertEquals(4, counter2.getTryMoveNextCount());

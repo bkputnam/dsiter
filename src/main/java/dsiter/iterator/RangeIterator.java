@@ -1,5 +1,7 @@
 package dsiter.iterator;
 
+import dsiter.pipe.IPipe;
+import dsiter.pipe.SkipPipe;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.Row;
@@ -84,5 +86,16 @@ public class RangeIterator implements IDatasetIterator {
 	@Override
 	public void close() {
 		// do nothing
+	}
+
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		if (pipe instanceof SkipPipe) {
+			curVal += ((SkipPipe)pipe).getHowMany();
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

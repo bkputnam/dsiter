@@ -3,6 +3,7 @@ package dsiter.iterator;
 import static org.junit.Assert.*;
 
 import dsiter.IterUtils;
+import dsiter.pipe.SkipPipe;
 import dsiter.row.Row;
 import org.junit.Test;
 
@@ -134,6 +135,14 @@ public class TestRangeIterator {
 	public void testLength() {
 		try (RangeIterator it = new RangeIterator(5, 10)) {
 			assertEquals(5, it.tryGetLength());
+		}
+	}
+
+	@Test
+	public void tryAbsorbSkip() throws Exception {
+		try (RangeIterator ri = new RangeIterator(10)) {
+			assertEquals(true, ri.tryAbsorb(new SkipPipe(5)));
+			IterUtils.assertValues(ri, "value", new Integer[] { 5, 6, 7, 8, 9 });
 		}
 	}
 }

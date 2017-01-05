@@ -1,13 +1,9 @@
 package dsiter.iterator;
 
 import dsiter.IterUtils;
-import dsiter.iterator.IDatasetIterator;
-import dsiter.iterator.RangeIterator;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import dsiter.iterator.StrideIterator;
-import dsiter.iterator.LastIterator;
+import static dsiter.StdPipes.*;
 
 public class TestStrideIterator {
 
@@ -30,12 +26,9 @@ public class TestStrideIterator {
 	@Test
 	public void testStrideLast() throws Exception {
 
-		try (IDatasetIterator it = new LastIterator(
-			new StrideIterator(
-				new RangeIterator(10),
-				4
-			)
-		);
+		try (IDatasetIterator it = new RangeIterator(10)
+			 .pipe(stride(4))
+			 .pipe(last());
 		) {
 
 			IterUtils.assertValues(

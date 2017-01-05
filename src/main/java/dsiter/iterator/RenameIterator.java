@@ -1,5 +1,6 @@
 package dsiter.iterator;
 
+import dsiter.pipe.IPipe;
 import dsiter.row.Row;
 import dsiter.row.ColumnDescriptor;
 
@@ -61,5 +62,10 @@ public class RenameIterator implements IDatasetIterator {
 	@Override
 	public void close() throws Exception {
 		src.close();
+	}
+
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		return src.tryAbsorb(pipe);
 	}
 }

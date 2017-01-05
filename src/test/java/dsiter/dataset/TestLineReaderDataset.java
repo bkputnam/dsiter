@@ -3,6 +3,7 @@ package dsiter.dataset;
 import dsiter.IterUtils;
 import dsiter.IteratorExpectations;
 import dsiter.iterator.IDatasetIterator;
+import dsiter.pipe.SkipPipe;
 import dsiter.reader.FileReaderFactory;
 import dsiter.reader.StringReaderFactory;
 import org.junit.Test;
@@ -57,6 +58,25 @@ public class TestLineReaderDataset {
 		LineReaderDataset lrd = LineReaderDataset.fromString("a\nb\nc");
 		try (IDatasetIterator it = lrd.getIterator()) {
 			assertEquals(-1, it.tryGetLength());
+		}
+	}
+
+	@Test
+	public void testAbsorbSkip() throws Exception {
+		String src = "Hello there\nworld\nfoo\n\n";
+
+		LineReaderDataset lrd = new LineReaderDataset(
+			new StringReaderFactory(src)
+		);
+
+		String[] expectedLines = new String[] {
+			"foo",
+			""
+		};
+
+		try (IDatasetIterator it = lrd.getIterator()) {
+			assertEquals(true, it.tryAbsorb(new SkipPipe(2)));
+			IterUtils.assertValues(it, "line", expectedLines);
 		}
 	}
 }

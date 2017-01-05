@@ -1,9 +1,7 @@
 package dsiter.iterator;
 
-import dsiter.row.ColumnDescriptor;
-import dsiter.row.ColumnType;
-import dsiter.row.Row;
-import dsiter.row.RowShape;
+import dsiter.pipe.*;
+import dsiter.row.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -169,6 +167,23 @@ public class ZipIterator implements IDatasetIterator {
 		public IndexPair(int srcIndex, int destIndex) {
 			this.srcIndex = srcIndex;
 			this.destIndex = destIndex;
+		}
+	}
+
+
+	@Override
+	public boolean tryAbsorb(IPipe pipe) {
+		if (
+			pipe instanceof SkipPipe ||
+			pipe instanceof FirstPipe
+		) {
+			for (int i=0; i<srcIters.length; i++) {
+				srcIters[i] = srcIters[i].pipe(pipe);
+			}
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

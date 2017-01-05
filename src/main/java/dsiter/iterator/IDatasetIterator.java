@@ -45,7 +45,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * 		{@code false} if there are no more items
 	 * 		to be iterated over.
 	 */
-	public boolean tryMoveNext();
+	boolean tryMoveNext();
 
 	/**
 	 * Return the current Row.
@@ -70,7 +70,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * </p>
 	 * @return Row The current Row
 	 */
-	public Row getCurrentRow() throws Exception;
+	Row getCurrentRow() throws Exception;
 
 	/**
 	 * Return the iterator's length, if known, or -1 if
@@ -82,7 +82,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 */
 	// Note: no default method to force implementors to
 	// think about this
-	public long tryGetLength();
+	long tryGetLength();
 
 	/**
 	 * Return descriptions of all columns supported by this
@@ -105,7 +105,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * </p>
 	 * @return This iterator's ColumnDescriptors
 	 */
-	public ColumnDescriptor[] getColumnDescriptors();
+	ColumnDescriptor[] getColumnDescriptors();
 
 	/**
 	 * Look up a ColumnDescriptor by name
@@ -124,7 +124,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * @return A ColumnDescriptor describing the named column,
 	 * or {@code null} if no such column exists
 	 */
-	default public ColumnDescriptor getColumnDescriptor(String name) {
+	default ColumnDescriptor getColumnDescriptor(String name) {
 		ColumnDescriptor[] cds = this.getColumnDescriptors();
 
 		for( int i=0; i<cds.length; i++ ) {
@@ -146,7 +146,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * @return a {@code RowShape} instance describing the shape of the {@code Rows} returned
 	 * by this iterator.
 	 */
-	default public RowShape computeShape() {
+	default RowShape computeShape() {
 		return new RowShape(this.getColumnDescriptors());
 	}
 
@@ -156,7 +156,55 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * @param pipe The pipe to be attached to this iterator
 	 * @return An iterator that represents this iterator with the pipe attached
 	 */
-	default public IDatasetIterator pipe(IPipe pipe) {
-		return pipe.attachTo(this);
+	default IDatasetIterator pipe(IPipe pipe) {
+		if (this.tryAbsorb(pipe)) {
+			return this;
+		}
+		else {
+			return pipe.attachTo(this);
+		}
 	}
+
+	/**
+	 * Attempt to 'absorb' a pipe into the iterator.
+	 *
+	 * For example, an iterator may have a way to efficiently filter certain kinds of rows
+	 * and, if so, it may choose to absorb some FilterPipe instances instead of allowing
+	 * them to behave in their normal, potentially inefficient, manner (FilterPipes must
+	 * create a Row instance for every possible Row so that they can inspect them and decide
+	 * if they must be filtered out or not. There are sometimes much more efficient ways to
+	 * filter out rows that don't involve reading them at all).
+	 *
+	 * An important
+	 * example is datasets that interface with some sort of database system or large
+	 * sorted file system: when they see certain kinds of IPipes they may be able to reduce
+	 * their workload by incorporating the pipe into the base query (for databases) or by
+	 * only reading the relevant subset of the files (for filesystem-based datasets).
+	 *
+	 * It's important to note that absorbing a pipe necessarily modifies an iterator in some
+	 * way. Attempting to absorb a pipe may modify the iterator even if {@code tryAbsorb}
+	 * returns {@code false}; the pipe is said to be <i>partially absorbed</i>. When {@code tryAbsorb}
+	 * returns {@code true} this means that the pipe has been <i>fully absorbed</i> and
+	 * should be discarded. A <i>partially absorbed</i> pipe should still be applied as if
+	 * it wasn't absorbed, but the iterator may still have made some optimizations under the
+	 * hood (indeed; the caller has no way to tell whether a pipe was partially absorbed or
+	 * not absorbed at all and the two situations should be treated identically).
+	 *
+	 * As an example of why a partially applied pipe might be useful, imagine a dataset that
+	 * is a series of CSV files. The rows in the files are ordered by time, as are the files.
+	 * If a {@code filter("time>2016-01-01")} pipe is applied, the dataset iterator will be
+	 * able to exclude all files that are strictly before {@code 2016-01-01}. However, the
+	 * first file may include a mix of rows that are before {@code 2016-01-01} and rows that
+	 * are after. The iterator has managed to exclude a potentially large portion of rows
+	 * that are guaranteed not to match the filter but not all of them, so the filter still
+	 * needs to be applied to the remaining rows. If {@code 2016-01-01} happens to be an
+	 * exact boundary between CSV files then perhaps the iterator will be able to fully
+	 * apply the {@code FilterPipe} - depends on how optimized that particular implementation
+	 * is.
+	 *
+	 * @param pipe The pipe that the iterator should try to absorb
+	 * @return True, if the pipe was completely absorbed (and should be discarded), else false.
+	 */
+	// Note: no default implementation to force authors to think about this
+	boolean tryAbsorb(IPipe pipe);
 }
