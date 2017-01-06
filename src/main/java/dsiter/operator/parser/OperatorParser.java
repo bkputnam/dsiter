@@ -3,6 +3,7 @@ package dsiter.operator.parser;
 import dsiter.operator.*;
 import dsiter.row.*;
 
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -397,6 +398,19 @@ public class OperatorParser {
 			}
 			else if(operator.equals("^")) {
 				return new CaretOperator(lhs, rhs);
+			}
+			else if(operator.equals("~")) {
+				// rhs *should* be a constant expression representing a string
+				String pattern;
+				try {
+					// May throw a NullPointerException if rhs attempts to read from the empty Row,
+					// or may throw a ClassCastException if rhs does not return a String
+					pattern = (String) rhs.getValueFromRow(new Row());
+				}
+				catch (Exception e) {
+					throw new RegexParseException("User error: rhs of '~' operator should be a string literal");
+				}
+				return new RegexMatchOperator(lhs, pattern);
 			}
 			else {
 				throw new Error("Programmer Error: unrecognized binary operator token: \"" + operator + "\"");
