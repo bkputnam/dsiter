@@ -111,7 +111,7 @@
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	public boolean tryMoveNext() {
+/* GENERATED CODE */	public boolean tryMoveNext() throws Exception {
 /* GENERATED CODE */		for(int i=0; i<srcIters.length; i++) {
 /* GENERATED CODE */			if (!srcIters[i].tryMoveNext()) {
 /* GENERATED CODE */				return false;

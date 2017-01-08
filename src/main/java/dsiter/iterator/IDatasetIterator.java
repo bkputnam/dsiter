@@ -45,7 +45,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * 		{@code false} if there are no more items
 	 * 		to be iterated over.
 	 */
-	boolean tryMoveNext();
+	boolean tryMoveNext() throws Exception;
 
 	/**
 	 * Return the current Row.

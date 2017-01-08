@@ -40,7 +40,7 @@ public class RenameIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public boolean tryMoveNext() {
+	public boolean tryMoveNext() throws Exception {
 		return src.tryMoveNext();
 	}
 

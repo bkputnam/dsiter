@@ -27,7 +27,7 @@ public class SkipIterator implements IDatasetIterator {
     }
 
     @Override
-    public boolean tryMoveNext() {
+    public boolean tryMoveNext() throws Exception {
         while(remainingSkips > 0) {
             remainingSkips--;
             if(!src.tryMoveNext()) {

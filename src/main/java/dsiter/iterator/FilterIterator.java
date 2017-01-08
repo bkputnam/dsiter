@@ -34,7 +34,7 @@ public class FilterIterator implements IDatasetIterator {
     }
 
     @Override
-    public boolean tryMoveNext() {
+    public boolean tryMoveNext() throws Exception {
         boolean foundPassingRow = false;
         while(src.tryMoveNext()) {
             try {

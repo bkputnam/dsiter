@@ -44,7 +44,7 @@ public class StrideIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public boolean tryMoveNext() {
+	public boolean tryMoveNext() throws Exception {
 		if( isFirstTime ) {
 			isFirstTime = false;
 		}
