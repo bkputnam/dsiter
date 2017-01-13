@@ -17,7 +17,7 @@ public class TakeIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public boolean tryMoveNext() {
+	public boolean tryMoveNext() throws Exception {
 		if (remainingToTake == 0) {
 			return false;
 		}

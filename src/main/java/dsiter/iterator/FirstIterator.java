@@ -19,7 +19,7 @@ public class FirstIterator implements IDatasetIterator {
     }
 
     @Override
-    public boolean tryMoveNext() {
+    public boolean tryMoveNext() throws Exception {
         if(!hasMovedNext) {
             hasMovedNext = true;
             return src.tryMoveNext();

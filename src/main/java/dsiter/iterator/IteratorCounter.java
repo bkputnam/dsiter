@@ -42,7 +42,7 @@ public class IteratorCounter {
 		}
 
 		@Override
-		public boolean tryMoveNext() {
+		public boolean tryMoveNext() throws Exception {
 			boolean success = src.tryMoveNext();
 			if (success) { tryMoveNextCount++; }
 			return success;

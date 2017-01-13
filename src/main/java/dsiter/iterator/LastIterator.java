@@ -47,7 +47,7 @@ public class LastIterator implements IDatasetIterator {
 		copier = new RowCopier(src.getColumnDescriptors());
 	}
 
-	public boolean tryMoveNext() {
+	public boolean tryMoveNext() throws Exception {
 
 		if (done) {
 			return false;
