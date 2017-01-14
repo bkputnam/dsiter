@@ -19,9 +19,9 @@ public class CacheDataset implements IDataset {
 	private Row[] cache;
 	private ColumnDescriptor[] cds;
 
-	public CacheDataset(IDataset src, long timeoutMillis) throws Exception {
+	public CacheDataset(IDataset src, double timeoutSeconds) throws Exception {
 		this.src = src;
-		this.timeoutMillis = timeoutMillis;
+		this.timeoutMillis = (long)(timeoutSeconds * 1000);
 		refeshCache();
 	}
 
