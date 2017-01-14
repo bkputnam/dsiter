@@ -35,4 +35,8 @@ public class StdPipes {
 	public static IPipe take(long howMany) {
 		return new TakePipe(howMany);
 	}
+
+	public static IPipe takeWhile(String predicate) {
+		return new TakeWhilePipe(predicate);
+	}
 }

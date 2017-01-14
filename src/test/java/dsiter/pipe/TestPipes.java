@@ -84,4 +84,14 @@ public class TestPipes {
 			e.checkIterator(it);
 		}
     }
+
+    @Test
+	public void testTakeWhilePipe() throws Exception {
+    	try (
+    		IDatasetIterator it = new RangeIterator(10)
+				.pipe(new TakeWhilePipe("value != 5"))
+		) {
+    		IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4 });
+		}
+	}
 }
