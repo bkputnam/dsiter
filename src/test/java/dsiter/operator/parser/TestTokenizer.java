@@ -83,4 +83,31 @@ public class TestTokenizer {
 		String[] tokens = Tokenizer.tokenize("foo=-1.2");
 		assertArrayEquals(new String[] { "foo", "=", "-1.2"}, tokens);
 	}
+
+	@Test
+	public void testDate_full() {
+		String[] tokens = Tokenizer.tokenize("foo=2016-01-01T00:00:00Z");
+		assertArrayEquals(new String[] { "foo", "=", "2016-01-01T00:00:00Z"}, tokens);
+	}
+
+	@Test
+	public void testDate_noTimezone() {
+		String[] tokens = Tokenizer.tokenize("foo=2016-01-01T00:00:00");
+		assertArrayEquals(new String[] { "foo", "=", "2016-01-01T00:00:00"}, tokens);
+	}
+
+	@Test
+	public void testDate_noTime() {
+		String[] tokens = Tokenizer.tokenize("foo=2016-01-01");
+		assertArrayEquals(new String[] { "foo", "=", "2016-01-01"}, tokens);
+	}
+
+	@Test
+	public void testDate_noTimeWithTimezone() {
+		// Not 100% sure this is a valid ISO 8601 date string, but it seems like
+		// there ought to be a way to support timezones even if you don't have a
+		// time.
+		String[] tokens = Tokenizer.tokenize("foo=2016-01-01Z");
+		assertArrayEquals(new String[] { "foo", "=", "2016-01-01Z"}, tokens);
+	}
 }
