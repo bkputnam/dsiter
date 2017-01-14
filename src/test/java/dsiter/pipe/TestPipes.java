@@ -94,4 +94,14 @@ public class TestPipes {
     		IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4 });
 		}
 	}
+
+	@Test
+	public void testSkipWhilePipe() throws Exception {
+		try (
+			IDatasetIterator it = new RangeIterator(10)
+				.pipe(new SkipWhilePipe("value != 5"))
+		) {
+			IterUtils.assertValues(it, "value", new Integer[] { 5, 6, 7, 8, 9 });
+		}
+	}
 }

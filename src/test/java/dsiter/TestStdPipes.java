@@ -93,4 +93,14 @@ public class TestStdPipes {
 			IterUtils.assertValues(it, "value", new Integer[] { 0, 1, 2, 3, 4, 5 });
 		}
 	}
+
+	@Test
+	public void testSkipWhile() throws Exception {
+		try (
+			IDatasetIterator it = new RangeIterator(10)
+				.pipe(skipWhile("value != 6"))
+		) {
+			IterUtils.assertValues(it, "value", new Integer[] { 6, 7, 8, 9 });
+		}
+	}
 }
