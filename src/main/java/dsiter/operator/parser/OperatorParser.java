@@ -4,7 +4,9 @@ import dsiter.operator.*;
 import dsiter.row.*;
 
 import java.text.ParseException;
+import java.time.Instant;
 import java.util.*;
+import java.util.regex.Matcher;
 
 /**
  * Class for parsing strings to operator
@@ -91,7 +93,10 @@ public class OperatorParser {
 			// "If the token is a number, then push it to the output queue."
 			// Note: for us, this applies equally to number literals, string literals and
 			// column names.
-			if(tryParseNumber(token, receiver)) {
+			if(tryParseDatetime(token, receiver)) {
+				state.outputStack.push(receiver.accessor);
+			}
+			else if(tryParseNumber(token, receiver)) {
 				state.outputStack.push(receiver.accessor);
 			}
 			else if(token.startsWith("\"") && token.endsWith("\"")) {
@@ -335,6 +340,28 @@ public class OperatorParser {
 					return false;
 				}
 			}
+		}
+	}
+
+	static boolean tryParseDatetime(String token, AccessorContainer receiver) {
+		Matcher matcher = TimeParser.dateTimePattern.matcher(token);
+		if (matcher.matches()) {
+			switch (token.length()) {
+				case 10: /* yyyy-mm-dd */ token += "T00:00:00Z"; break;
+				case 11: /* yyyy-mm-ddZ */ token = token.substring(0, 10) + "T00:00:00Z"; break;
+				case 19: /* yyyy-mm-ddT00:00:00 */ token += "Z"; break;
+				case 20: /* yyyy-mm-ddT00:00:00Z */ break; // do nothing, token is already complete
+				default:
+					// If we hit this error, it means the regex let through a match of unexpected length
+					// (probably means the regex has been changed since this was first written)
+					throw new Error("This should be impossible");
+			}
+			Instant time = Instant.parse(token);
+			receiver.accessor = ConstantAccessor.getInstance(time.getEpochSecond());
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 

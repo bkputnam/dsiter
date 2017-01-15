@@ -73,7 +73,7 @@ final class Tokenizer {
 			);
 		}
 		else if (isNum(firstChar) || firstChar == '-') {
-			int dateLength = dateLengthAt(str, startIndex);
+			int dateLength = TimeParser.dateLengthAt(str, startIndex);
 			if (dateLength != -1) {
 				return new TokenResult(
 					str.substring(startIndex, startIndex + dateLength),
@@ -220,23 +220,5 @@ final class Tokenizer {
 	private static boolean isWhitespace(char c) {
 		// simple definition, may refine later.
 		return Character.isWhitespace(c);
-	}
-
-	private static Pattern dateTimePattern = Pattern.compile(
-		"^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?)?Z?"
-	);
-
-	private static int dateLengthAt(String input, int startIndex) {
-		Matcher matcher = dateTimePattern.matcher(
-			input.subSequence(startIndex, input.length())
-		);
-
-		if (matcher.matches()) {
-			int length = matcher.end();
-			return length;
-		}
-		else {
-			return -1;
-		}
 	}
 }
