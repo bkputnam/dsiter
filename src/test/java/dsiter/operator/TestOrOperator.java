@@ -11,8 +11,8 @@ public class TestOrOperator {
 	@Test
 	public void testTrueTrue() {
 		OrOperator ao = new OrOperator(
-			ConstantAccessor.getInstance(true),
-			ConstantAccessor.getInstance(true)
+			ConstantAccessor.getBoolInstance(true),
+			ConstantAccessor.getBoolInstance(true)
 		);
 
 		assertEquals(true, ao.getValueFromRow(new Row()));
@@ -21,8 +21,8 @@ public class TestOrOperator {
 	@Test
 	public void testTrueFalse() {
 		OrOperator ao = new OrOperator(
-			ConstantAccessor.getInstance(true),
-			ConstantAccessor.getInstance(false)
+			ConstantAccessor.getBoolInstance(true),
+			ConstantAccessor.getBoolInstance(false)
 		);
 
 		assertEquals(true, ao.getValueFromRow(new Row()));
@@ -31,8 +31,8 @@ public class TestOrOperator {
 	@Test
 	public void testFalseTrue() {
 		OrOperator ao = new OrOperator(
-			ConstantAccessor.getInstance(false),
-			ConstantAccessor.getInstance(true)
+			ConstantAccessor.getBoolInstance(false),
+			ConstantAccessor.getBoolInstance(true)
 		);
 
 		assertEquals(true, ao.getValueFromRow(new Row()));
@@ -41,8 +41,8 @@ public class TestOrOperator {
 	@Test
 	public void testFalseFalse() {
 		OrOperator ao = new OrOperator(
-			ConstantAccessor.getInstance(false),
-			ConstantAccessor.getInstance(false)
+			ConstantAccessor.getBoolInstance(false),
+			ConstantAccessor.getBoolInstance(false)
 		);
 
 		assertEquals(false, ao.getValueFromRow(new Row()));

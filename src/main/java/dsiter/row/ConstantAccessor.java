@@ -1,5 +1,7 @@
 /* GENERATED CODE */package dsiter.row;
 /* GENERATED CODE */
+/* GENERATED CODE */import java.time.Instant;
+/* GENERATED CODE */
                     /**
                      * Non-instantiable class whose static methods can be used to get
                      * instances of {@link IRowAccessor} that only return a single
@@ -18,9 +20,14 @@
                      */
 /* GENERATED CODE */public final class ConstantAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */   private ConstantAccessor() {
-/* GENERATED CODE */       throw new AssertionError("Programmer Error: this should be impossible");
-/* GENERATED CODE */   }
+/* GENERATED CODE */    private ConstantAccessor() {
+/* GENERATED CODE */        throw new AssertionError("Programmer Error: this should be impossible");
+/* GENERATED CODE */    }
+/* GENERATED CODE */
+/* GENERATED CODE */    public static IRowAccessor.JSDATE getJsDateInstance(String value) {
+/* GENERATED CODE */        Instant i = Instant.parse(value);
+/* GENERATED CODE */        return getJsDateInstance(i.getEpochSecond());
+/* GENERATED CODE */    }
 /* GENERATED CODE */
 /* GENERATED CODE */	
                     	/**
@@ -31,7 +38,7 @@
                     	 * @return An {@link IRowAccessor.INT} that always returns
                     	 * 		{@code value}
                     	 */
-/* GENERATED CODE */	public static IRowAccessor.INT getInstance(int value) {
+/* GENERATED CODE */	public static IRowAccessor.INT getIntInstance(int value) {
 /* GENERATED CODE */		return new IRowAccessor.INT() {
 /* GENERATED CODE */			@Override
 /* GENERATED CODE */			public int getIntFromRow(Row row) {
@@ -48,7 +55,7 @@
                     	 * @return An {@link IRowAccessor.LONG} that always returns
                     	 * 		{@code value}
                     	 */
-/* GENERATED CODE */	public static IRowAccessor.LONG getInstance(long value) {
+/* GENERATED CODE */	public static IRowAccessor.LONG getLongInstance(long value) {
 /* GENERATED CODE */		return new IRowAccessor.LONG() {
 /* GENERATED CODE */			@Override
 /* GENERATED CODE */			public long getLongFromRow(Row row) {
@@ -65,7 +72,7 @@
                     	 * @return An {@link IRowAccessor.FLOAT} that always returns
                     	 * 		{@code value}
                     	 */
-/* GENERATED CODE */	public static IRowAccessor.FLOAT getInstance(float value) {
+/* GENERATED CODE */	public static IRowAccessor.FLOAT getFloatInstance(float value) {
 /* GENERATED CODE */		return new IRowAccessor.FLOAT() {
 /* GENERATED CODE */			@Override
 /* GENERATED CODE */			public float getFloatFromRow(Row row) {
@@ -82,7 +89,7 @@
                     	 * @return An {@link IRowAccessor.DOUBLE} that always returns
                     	 * 		{@code value}
                     	 */
-/* GENERATED CODE */	public static IRowAccessor.DOUBLE getInstance(double value) {
+/* GENERATED CODE */	public static IRowAccessor.DOUBLE getDoubleInstance(double value) {
 /* GENERATED CODE */		return new IRowAccessor.DOUBLE() {
 /* GENERATED CODE */			@Override
 /* GENERATED CODE */			public double getDoubleFromRow(Row row) {
@@ -99,7 +106,7 @@
                     	 * @return An {@link IRowAccessor.STRING} that always returns
                     	 * 		{@code value}
                     	 */
-/* GENERATED CODE */	public static IRowAccessor.STRING getInstance(String value) {
+/* GENERATED CODE */	public static IRowAccessor.STRING getStringInstance(String value) {
 /* GENERATED CODE */		return new IRowAccessor.STRING() {
 /* GENERATED CODE */			@Override
 /* GENERATED CODE */			public String getStringFromRow(Row row) {
@@ -116,10 +123,27 @@
                     	 * @return An {@link IRowAccessor.BOOLEAN} that always returns
                     	 * 		{@code value}
                     	 */
-/* GENERATED CODE */	public static IRowAccessor.BOOLEAN getInstance(boolean value) {
+/* GENERATED CODE */	public static IRowAccessor.BOOLEAN getBoolInstance(boolean value) {
 /* GENERATED CODE */		return new IRowAccessor.BOOLEAN() {
 /* GENERATED CODE */			@Override
 /* GENERATED CODE */			public boolean getBoolFromRow(Row row) {
+/* GENERATED CODE */				return value;
+/* GENERATED CODE */			}
+/* GENERATED CODE */		};
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
+                    	/**
+                    	 * Construct and return a new {@link IRowAccessor.JSDATE} which
+                    	 * always returns {@code value}
+                    	 *
+                    	 * @param value The constant value to be returned by the IRowAccessor
+                    	 * @return An {@link IRowAccessor.JSDATE} that always returns
+                    	 * 		{@code value}
+                    	 */
+/* GENERATED CODE */	public static IRowAccessor.JSDATE getJsDateInstance(long value) {
+/* GENERATED CODE */		return new IRowAccessor.JSDATE() {
+/* GENERATED CODE */			@Override
+/* GENERATED CODE */			public long getJsDateFromRow(Row row) {
 /* GENERATED CODE */				return value;
 /* GENERATED CODE */			}
 /* GENERATED CODE */		};

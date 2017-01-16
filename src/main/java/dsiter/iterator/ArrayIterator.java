@@ -28,72 +28,91 @@
                     	 * Construct a new ArrayIterator with type {@code ColumnType.INT}
                     	 * @param values the values to iterator over
                     	 */
-/* GENERATED CODE */	public ArrayIterator(int... values) {
-/* GENERATED CODE */		this();
-/* GENERATED CODE */		row.ints = new int[1];
-/* GENERATED CODE */		length = values.length;
-/* GENERATED CODE */		type = ColumnType.INT;
-/* GENERATED CODE */		writer = new INT(values);
+/* GENERATED CODE */	public static ArrayIterator fromInts (int... values) {
+/* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
+/* GENERATED CODE */		result.row.ints = new int[1];
+/* GENERATED CODE */		result.length = values.length;
+/* GENERATED CODE */		result.type = ColumnType.INT;
+/* GENERATED CODE */		result.writer = result.new INT(values);
+/* GENERATED CODE */		return result;
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.LONG}
                     	 * @param values the values to iterator over
                     	 */
-/* GENERATED CODE */	public ArrayIterator(long... values) {
-/* GENERATED CODE */		this();
-/* GENERATED CODE */		row.longs = new long[1];
-/* GENERATED CODE */		length = values.length;
-/* GENERATED CODE */		type = ColumnType.LONG;
-/* GENERATED CODE */		writer = new LONG(values);
+/* GENERATED CODE */	public static ArrayIterator fromLongs (long... values) {
+/* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
+/* GENERATED CODE */		result.row.longs = new long[1];
+/* GENERATED CODE */		result.length = values.length;
+/* GENERATED CODE */		result.type = ColumnType.LONG;
+/* GENERATED CODE */		result.writer = result.new LONG(values);
+/* GENERATED CODE */		return result;
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.FLOAT}
                     	 * @param values the values to iterator over
                     	 */
-/* GENERATED CODE */	public ArrayIterator(float... values) {
-/* GENERATED CODE */		this();
-/* GENERATED CODE */		row.floats = new float[1];
-/* GENERATED CODE */		length = values.length;
-/* GENERATED CODE */		type = ColumnType.FLOAT;
-/* GENERATED CODE */		writer = new FLOAT(values);
+/* GENERATED CODE */	public static ArrayIterator fromFloats (float... values) {
+/* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
+/* GENERATED CODE */		result.row.floats = new float[1];
+/* GENERATED CODE */		result.length = values.length;
+/* GENERATED CODE */		result.type = ColumnType.FLOAT;
+/* GENERATED CODE */		result.writer = result.new FLOAT(values);
+/* GENERATED CODE */		return result;
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.DOUBLE}
                     	 * @param values the values to iterator over
                     	 */
-/* GENERATED CODE */	public ArrayIterator(double... values) {
-/* GENERATED CODE */		this();
-/* GENERATED CODE */		row.doubles = new double[1];
-/* GENERATED CODE */		length = values.length;
-/* GENERATED CODE */		type = ColumnType.DOUBLE;
-/* GENERATED CODE */		writer = new DOUBLE(values);
+/* GENERATED CODE */	public static ArrayIterator fromDoubles (double... values) {
+/* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
+/* GENERATED CODE */		result.row.doubles = new double[1];
+/* GENERATED CODE */		result.length = values.length;
+/* GENERATED CODE */		result.type = ColumnType.DOUBLE;
+/* GENERATED CODE */		result.writer = result.new DOUBLE(values);
+/* GENERATED CODE */		return result;
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.STRING}
                     	 * @param values the values to iterator over
                     	 */
-/* GENERATED CODE */	public ArrayIterator(String... values) {
-/* GENERATED CODE */		this();
-/* GENERATED CODE */		row.strings = new String[1];
-/* GENERATED CODE */		length = values.length;
-/* GENERATED CODE */		type = ColumnType.STRING;
-/* GENERATED CODE */		writer = new STRING(values);
+/* GENERATED CODE */	public static ArrayIterator fromStrings (String... values) {
+/* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
+/* GENERATED CODE */		result.row.strings = new String[1];
+/* GENERATED CODE */		result.length = values.length;
+/* GENERATED CODE */		result.type = ColumnType.STRING;
+/* GENERATED CODE */		result.writer = result.new STRING(values);
+/* GENERATED CODE */		return result;
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.BOOLEAN}
                     	 * @param values the values to iterator over
                     	 */
-/* GENERATED CODE */	public ArrayIterator(boolean... values) {
-/* GENERATED CODE */		this();
-/* GENERATED CODE */		row.bools = new boolean[1];
-/* GENERATED CODE */		length = values.length;
-/* GENERATED CODE */		type = ColumnType.BOOLEAN;
-/* GENERATED CODE */		writer = new BOOLEAN(values);
+/* GENERATED CODE */	public static ArrayIterator fromBools (boolean... values) {
+/* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
+/* GENERATED CODE */		result.row.bools = new boolean[1];
+/* GENERATED CODE */		result.length = values.length;
+/* GENERATED CODE */		result.type = ColumnType.BOOLEAN;
+/* GENERATED CODE */		result.writer = result.new BOOLEAN(values);
+/* GENERATED CODE */		return result;
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
+                    	/**
+                    	 * Construct a new ArrayIterator with type {@code ColumnType.JSDATE}
+                    	 * @param values the values to iterator over
+                    	 */
+/* GENERATED CODE */	public static ArrayIterator fromJsDates (long... values) {
+/* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
+/* GENERATED CODE */		result.row.jsdates = new long[1];
+/* GENERATED CODE */		result.length = values.length;
+/* GENERATED CODE */		result.type = ColumnType.JSDATE;
+/* GENERATED CODE */		result.writer = result.new JSDATE(values);
+/* GENERATED CODE */		return result;
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
 /* GENERATED CODE */
@@ -223,6 +242,19 @@
 /* GENERATED CODE */		@Override
 /* GENERATED CODE */		public void writeToRow(Row row) {
 /* GENERATED CODE */			row.bools[0] = arr[index];
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
+/* GENERATED CODE */	private class JSDATE implements RowWriter{
+/* GENERATED CODE */		private long[] arr;
+/* GENERATED CODE */
+/* GENERATED CODE */		public JSDATE(long[] arr) {
+/* GENERATED CODE */			this.arr = arr;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		public void writeToRow(Row row) {
+/* GENERATED CODE */			row.jsdates[0] = arr[index];
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	

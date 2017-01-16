@@ -12,10 +12,10 @@ public class TestCacheIterator {
 	@Test
 	public void basicTest() throws Exception {
 		Row[] cache = new Row[] {
-			new Row(new int[] { 2, 3, 4 }),
-			new Row(new int[] { 5, 6, 7 }),
-			new Row(new int[] { 8, 9, 10 }),
-			new Row(new int[] { 11, 12, 13 })
+			Row.fromInts( 2, 3, 4 ),
+			Row.fromInts( 5, 6, 7 ),
+			Row.fromInts( 8, 9, 10 ),
+			Row.fromInts( 11, 12, 13 )
 		};
 		ColumnDescriptor[] cds = new ColumnDescriptor[] {
 			new ColumnDescriptor("x", ColumnType.INT, 0),
@@ -37,10 +37,10 @@ public class TestCacheIterator {
 	@Test
 	public void testDoesntModifySrc() throws Exception {
 		Row[] cache = new Row[] {
-			new Row(new int[] { 2, 3, 4 }),
-			new Row(new int[] { 5, 6, 7 }),
-			new Row(new int[] { 8, 9, 10 }),
-			new Row(new int[] { 11, 12, 13 })
+			Row.fromInts( 2, 3, 4 ),
+			Row.fromInts( 5, 6, 7 ),
+			Row.fromInts( 8, 9, 10 ),
+			Row.fromInts( 11, 12, 13 )
 		};
 		ColumnDescriptor[] cds = new ColumnDescriptor[] {
 			new ColumnDescriptor("x", ColumnType.INT, 0),

@@ -9,7 +9,8 @@
 /* GENERATED CODE */	FLOAT,
 /* GENERATED CODE */	DOUBLE,
 /* GENERATED CODE */	STRING,
-/* GENERATED CODE */	BOOLEAN;
+/* GENERATED CODE */	BOOLEAN,
+/* GENERATED CODE */	JSDATE;
 /* GENERATED CODE */
                     	/**
                     	 * Returns {@code true} if the current value represents a numeric type.

@@ -28,12 +28,13 @@ public class ArrayIterator implements IDatasetIterator {
 	 * Construct a new ArrayIterator with type {@code ColumnType.${type.type}}
 	 * @param values the values to iterator over
 	 */
-	public ArrayIterator(${type.nativeType}... values) {
-		this();
-		row.${type.rowArray} = new ${type.nativeType}[1];
-		length = values.length;
-		type = ColumnType.${type.type};
-		writer = new ${type.type}(values);
+	public static ArrayIterator from${type.capitalized}s (${type.nativeType}... values) {
+		ArrayIterator result = new ArrayIterator();
+		result.row.${type.rowArray} = new ${type.nativeType}[1];
+		result.length = values.length;
+		result.type = ColumnType.${type.type};
+		result.writer = result.new ${type.type}(values);
+		return result;
 	}
 	<% } %>
 

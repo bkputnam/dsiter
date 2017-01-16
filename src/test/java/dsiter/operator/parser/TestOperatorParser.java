@@ -22,16 +22,16 @@ public class TestOperatorParser {
 
 	private static IDatasetIterator dummyIterator() {
 		return new ZipIterator(
-			new ArrayIterator(new int[] { 1 }).pipe(new RenamePipe("value", "i1")),
-			new ArrayIterator(new int[] { 2 }).pipe(new RenamePipe("value", "i2")),
-			new ArrayIterator(new int[] { 3 }).pipe(new RenamePipe("value", "i3")),
-			new ArrayIterator(new int[] { 4 }).pipe(new RenamePipe("value", "i4")),
-			new ArrayIterator(new long[] { 1234567890123456789L }).pipe(new RenamePipe("value", "l")),
-			new ArrayIterator(new float[] { 3.14F }).pipe(new RenamePipe("value", "f")),
-			new ArrayIterator(new double[] { 2.71 }).pipe(new RenamePipe("value", "d")),
-			new ArrayIterator(new String[] { "hello world" }).pipe(new RenamePipe("value", "s")),
-			new ArrayIterator(new boolean[] { true }).pipe(new RenamePipe("value", "bt")),
-			new ArrayIterator(new boolean[] { false }).pipe(new RenamePipe("value", "bf"))
+			ArrayIterator.fromInts(new int[] { 1 }).pipe(new RenamePipe("value", "i1")),
+			ArrayIterator.fromInts(new int[] { 2 }).pipe(new RenamePipe("value", "i2")),
+			ArrayIterator.fromInts(new int[] { 3 }).pipe(new RenamePipe("value", "i3")),
+			ArrayIterator.fromInts(new int[] { 4 }).pipe(new RenamePipe("value", "i4")),
+			ArrayIterator.fromLongs(new long[] { 1234567890123456789L }).pipe(new RenamePipe("value", "l")),
+			ArrayIterator.fromFloats(new float[] { 3.14F }).pipe(new RenamePipe("value", "f")),
+			ArrayIterator.fromDoubles(new double[] { 2.71 }).pipe(new RenamePipe("value", "d")),
+			ArrayIterator.fromStrings(new String[] { "hello world" }).pipe(new RenamePipe("value", "s")),
+			ArrayIterator.fromBools(new boolean[] { true }).pipe(new RenamePipe("value", "bt")),
+			ArrayIterator.fromBools(new boolean[] { false }).pipe(new RenamePipe("value", "bf"))
 		);
 	}
 
@@ -269,7 +269,7 @@ public class TestOperatorParser {
 
 	@Test
 	public void testDateParser6() throws Exception {
-		IDatasetIterator it = new ArrayIterator(
+		IDatasetIterator it = ArrayIterator.fromJsDates(
 			Instant.parse("1970-01-01T00:00:00Z").getEpochSecond(),
 			Instant.parse("1980-01-01T00:00:00Z").getEpochSecond(),
 			Instant.parse("1990-01-01T00:00:00Z").getEpochSecond(),

@@ -49,7 +49,11 @@ public class Row {
 	 * @param vals	The {@code ${type.nativeType}} values to populate
 	 * 				the Row with.
 	 */
-	public Row(${type.nativeType}... vals) { this.${type.rowArray} = vals.clone(); }
+	public static Row from${type.capitalized}s(${type.nativeType}... vals) {
+	    Row result = new Row();
+	    result.${type.rowArray} = vals.clone();
+	    return result;
+	}
 	<% } %>
 
 	/**

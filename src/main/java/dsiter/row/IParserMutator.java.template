@@ -1,6 +1,7 @@
 package dsiter.row;
 
 import java.text.NumberFormat;
+import java.time.Instant;
 
 /**
  * Interface for classes that parse strings and insert them directly into
@@ -44,6 +45,7 @@ public interface IParserMutator {
                 def preambles = [
                     "INT": "parser = NumberFormat.getIntegerInstance(java.util.Locale.US);",
                     "LONG": "parser = NumberFormat.getIntegerInstance(java.util.Locale.US);",
+                    "JSDATE": "",
                     "FLOAT": "parser = NumberFormat.getNumberInstance(java.util.Locale.US);",
                     "DOUBLE": "parser = NumberFormat.getNumberInstance(java.util.Locale.US);",
                     "STRING": "",
@@ -52,6 +54,7 @@ public interface IParserMutator {
                 def parserExprs = [
                     "INT": "parser.parse(value).intValue()",
                     "LONG": "parser.parse(value).longValue()",
+                    "JSDATE": "Instant.parse(value).getEpochSecond()",
                     "FLOAT": "parser.parse(value).floatValue()",
                     "DOUBLE": "parser.parse(value).doubleValue()",
                     "STRING": "value",

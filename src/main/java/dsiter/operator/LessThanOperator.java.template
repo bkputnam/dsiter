@@ -25,8 +25,21 @@ public class LessThanOperator extends TypedBinaryOperator {
 
 	@Override
 	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
-		return (lhsType.isNumeric() && rhsType.isNumeric());
+		return (lhsType.isNumeric() && rhsType.isNumeric()) ||
+		    (lhsType == ColumnType.JSDATE && rhsType == ColumnType.JSDATE) ||
+		    (eitherTypeIs(ColumnType.JSDATE) && (eitherTypeIs(ColumnType.INT) || eitherTypeIs(ColumnType.LONG)));
 	}
+
+	@Override
+	protected boolean handle_int_jsdate_bool(int lhs, long rhs) { return lhs < rhs; }
+	@Override
+	protected boolean handle_long_jsdate_bool(long lhs, long rhs) { return lhs < rhs; }
+	@Override
+	protected boolean handle_jsdate_int_bool(long lhs, int rhs) { return lhs < rhs; }
+	@Override
+	protected boolean handle_jsdate_long_bool(long lhs, long rhs) { return lhs < rhs; }
+	@Override
+	protected boolean handle_jsdate_jsdate_bool(long lhs, long rhs) { return lhs < rhs; }
 
 	<%
 		def numberTypes = ["int", "long", "float", "double"]
@@ -34,6 +47,6 @@ public class LessThanOperator extends TypedBinaryOperator {
 			numberTypes.each { rhsType ->
 	%>
 	@Override
-	protected boolean handle_${lhsType}_${rhsType}_boolean(${lhsType} lhs, ${rhsType} rhs) { return lhs < rhs; }
+	protected boolean handle_${lhsType}_${rhsType}_bool(${lhsType} lhs, ${rhsType} rhs) { return lhs < rhs; }
 	<% }} %>
 }

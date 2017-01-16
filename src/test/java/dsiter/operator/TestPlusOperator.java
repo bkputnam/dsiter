@@ -12,8 +12,8 @@ public class TestPlusOperator {
 
     @Test
     public void testIntInt() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1);
-		IRowAccessor ca2 = ConstantAccessor.getInstance(2);
+        IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
+		IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -22,8 +22,8 @@ public class TestPlusOperator {
 
     @Test
     public void testIntLong() {
-		IRowAccessor ca1 = ConstantAccessor.getInstance(1);
-		IRowAccessor ca2 = ConstantAccessor.getInstance(2L);
+		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
+		IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -32,8 +32,8 @@ public class TestPlusOperator {
 
     @Test
     public void testIntFloat() {
-		IRowAccessor ca1 = ConstantAccessor.getInstance(1);
-		IRowAccessor ca2 = ConstantAccessor.getInstance(2F);
+		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
+		IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -42,8 +42,8 @@ public class TestPlusOperator {
 
     @Test
     public void testIntDouble() {
-		IRowAccessor ca1 = ConstantAccessor.getInstance(1);
-		IRowAccessor ca2 = ConstantAccessor.getInstance(2D);
+		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
+		IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -52,8 +52,8 @@ public class TestPlusOperator {
 
     @Test
     public void testIntString() {
-		IRowAccessor ca1 = ConstantAccessor.getInstance(1);
-		IRowAccessor ca2 = ConstantAccessor.getInstance("2");
+		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
+		IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -64,8 +64,8 @@ public class TestPlusOperator {
 
     @Test
     public void testLongInt() {
-		IRowAccessor ca1 = ConstantAccessor.getInstance(1L);
-		IRowAccessor ca2 = ConstantAccessor.getInstance(2);
+		IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
+		IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -74,8 +74,8 @@ public class TestPlusOperator {
 
     @Test
     public void testLongLong() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1L);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2L);
+        IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
+        IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -84,8 +84,8 @@ public class TestPlusOperator {
 
     @Test
     public void testLongFloat() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1L);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2F);
+        IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
+        IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -94,8 +94,8 @@ public class TestPlusOperator {
 
     @Test
     public void testLongDouble() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1L);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2D);
+        IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
+        IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -104,8 +104,8 @@ public class TestPlusOperator {
 
     @Test
     public void testLongString() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1L);
-        IRowAccessor ca2 = ConstantAccessor.getInstance("2");
+        IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
+        IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -116,8 +116,8 @@ public class TestPlusOperator {
 
     @Test
     public void testFloatInt() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1F);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2);
+        IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
+        IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -126,8 +126,8 @@ public class TestPlusOperator {
 
     @Test
     public void testFloatLong() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1F);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2L);
+        IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
+        IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -136,8 +136,8 @@ public class TestPlusOperator {
 
     @Test
     public void testFloatFloat() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1F);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2F);
+        IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
+        IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -146,8 +146,8 @@ public class TestPlusOperator {
 
     @Test
     public void testFloatDouble() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1F);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2D);
+        IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
+        IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -156,8 +156,8 @@ public class TestPlusOperator {
 
     @Test
     public void testFloatString() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1F);
-        IRowAccessor ca2 = ConstantAccessor.getInstance("2");
+        IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
+        IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -168,8 +168,8 @@ public class TestPlusOperator {
 
     @Test
     public void testDoubleInt() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1D);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2);
+        IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
+        IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -178,8 +178,8 @@ public class TestPlusOperator {
 
     @Test
     public void testDoubleLong() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1D);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2L);
+        IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
+        IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -188,8 +188,8 @@ public class TestPlusOperator {
 
     @Test
     public void testDoubleFloat() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1D);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2F);
+        IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
+        IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -198,8 +198,8 @@ public class TestPlusOperator {
 
     @Test
     public void testDoubleDouble() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1D);
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2D);
+        IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
+        IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -208,8 +208,8 @@ public class TestPlusOperator {
 
     @Test
     public void testDoubleString() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(1D);
-        IRowAccessor ca2 = ConstantAccessor.getInstance("2");
+        IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
+        IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -220,8 +220,8 @@ public class TestPlusOperator {
 
     @Test
     public void testStringInt() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance("1");
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2);
+        IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
+        IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -230,8 +230,8 @@ public class TestPlusOperator {
 
     @Test
     public void testStringLong() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance("1");
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2L);
+        IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
+        IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -240,8 +240,8 @@ public class TestPlusOperator {
 
     @Test
     public void testStringFloat() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance("1");
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2F);
+        IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
+        IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -250,8 +250,8 @@ public class TestPlusOperator {
 
     @Test
     public void testStringDouble() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance("1");
-        IRowAccessor ca2 = ConstantAccessor.getInstance(2D);
+        IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
+        IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -260,8 +260,8 @@ public class TestPlusOperator {
 
     @Test
     public void testStringString() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance("1");
-        IRowAccessor ca2 = ConstantAccessor.getInstance("2");
+        IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
+        IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -270,8 +270,8 @@ public class TestPlusOperator {
 
     @Test
     public void testStringBool() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance("1");
-        IRowAccessor ca2 = ConstantAccessor.getInstance(true);
+        IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
+        IRowAccessor ca2 = ConstantAccessor.getBoolInstance(true);
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 
@@ -282,8 +282,8 @@ public class TestPlusOperator {
 
     @Test
     public void testBoolString() {
-        IRowAccessor ca1 = ConstantAccessor.getInstance(true);
-        IRowAccessor ca2 = ConstantAccessor.getInstance("2");
+        IRowAccessor ca1 = ConstantAccessor.getBoolInstance(true);
+        IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
         PlusOperator po = new PlusOperator(ca1, ca2);
 

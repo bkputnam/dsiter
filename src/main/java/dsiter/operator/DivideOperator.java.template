@@ -1,7 +1,5 @@
 package dsiter.operator;
 
-${Disclaimer}
-
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.row.IRowAccessor;

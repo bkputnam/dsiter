@@ -13,12 +13,13 @@
 /* GENERATED CODE */	private int numDoubles;
 /* GENERATED CODE */	private int numStrings;
 /* GENERATED CODE */	private int numBools;
+/* GENERATED CODE */	private int numJsDates;
 /* GENERATED CODE */
                     	/**
                     	 * Construct a new RowShape with all dimensions set to {@code 0}
                     	 */
 /* GENERATED CODE */	public RowShape() {
-/* GENERATED CODE */		this(0, 0, 0, 0, 0, 0);
+/* GENERATED CODE */		this(0, 0, 0, 0, 0, 0, 0);
 /* GENERATED CODE */	}
 /* GENERATED CODE */
                     	/**
@@ -31,8 +32,9 @@
                     	 * @param numDoubles		The number of doubles
                     	 * @param numStrings		The number of Strings
                     	 * @param numBools		The number of booleans
+                    	 * @param numJsDates		The number of longs
                     	 */
-/* GENERATED CODE */	public RowShape(int numInts, int numLongs, int numFloats, int numDoubles, int numStrings, int numBools) {
+/* GENERATED CODE */	public RowShape(int numInts, int numLongs, int numFloats, int numDoubles, int numStrings, int numBools, int numJsDates) {
 /* GENERATED CODE */		
 /* GENERATED CODE */		this.numInts = numInts;
 /* GENERATED CODE */		this.numLongs = numLongs;
@@ -40,6 +42,7 @@
 /* GENERATED CODE */		this.numDoubles = numDoubles;
 /* GENERATED CODE */		this.numStrings = numStrings;
 /* GENERATED CODE */		this.numBools = numBools;
+/* GENERATED CODE */		this.numJsDates = numJsDates;
 /* GENERATED CODE */	}
 /* GENERATED CODE */
                     	/**
@@ -106,6 +109,13 @@
                     	 */
 /* GENERATED CODE */	public int getNumBools() { return numBools; }
 /* GENERATED CODE */	
+                    	/**
+                    	 * Return the number of longs in the current shape
+                    	 *
+                    	 * @return The number of longs in the current shape
+                    	 */
+/* GENERATED CODE */	public int getNumJsDates() { return numJsDates; }
+/* GENERATED CODE */	
 /* GENERATED CODE */
 /* GENERATED CODE */	
 /* GENERATED CODE */
@@ -140,6 +150,9 @@
 /* GENERATED CODE */		else if(type == ColumnType.BOOLEAN) {
 /* GENERATED CODE */			return getNumBools();
 /* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.JSDATE) {
+/* GENERATED CODE */			return getNumJsDates();
+/* GENERATED CODE */		}
 /* GENERATED CODE */		else {
 /* GENERATED CODE */			throw new Error("This should be impossible");
 /* GENERATED CODE */		}
@@ -170,6 +183,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */		else if(type == ColumnType.BOOLEAN) {
 /* GENERATED CODE */			numBools = num;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.JSDATE) {
+/* GENERATED CODE */			numJsDates = num;
 /* GENERATED CODE */		}
 /* GENERATED CODE */		else {
 /* GENERATED CODE */			throw new Error("This should be impossible");
@@ -206,6 +222,9 @@
 /* GENERATED CODE */		else if(type == ColumnType.BOOLEAN) {
 /* GENERATED CODE */			numBools++;
 /* GENERATED CODE */		}
+/* GENERATED CODE */		else if(type == ColumnType.JSDATE) {
+/* GENERATED CODE */			numJsDates++;
+/* GENERATED CODE */		}
 /* GENERATED CODE */		else {
 /* GENERATED CODE */			throw new Error("This should be impossible");
 /* GENERATED CODE */		}
@@ -229,7 +248,8 @@
 /* GENERATED CODE */			shape1.numFloats + shape2.numFloats,
 /* GENERATED CODE */			shape1.numDoubles + shape2.numDoubles,
 /* GENERATED CODE */			shape1.numStrings + shape2.numStrings,
-/* GENERATED CODE */			shape1.numBools + shape2.numBools
+/* GENERATED CODE */			shape1.numBools + shape2.numBools,
+/* GENERATED CODE */			shape1.numJsDates + shape2.numJsDates
 /* GENERATED CODE */		);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

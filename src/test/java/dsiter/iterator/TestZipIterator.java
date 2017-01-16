@@ -64,16 +64,16 @@ public class TestZipIterator {
 		IteratorCounter counter3 = new IteratorCounter();
 		IteratorCounter counter4 = new IteratorCounter();
 
-		IDatasetIterator it1 = new ArrayIterator(vals1)
+		IDatasetIterator it1 = ArrayIterator.fromInts(vals1)
 			.pipe(counter1.getPipe())
 			.pipe(rename("value", "a"));
-		IDatasetIterator it2 = new ArrayIterator(vals2)
+		IDatasetIterator it2 = ArrayIterator.fromFloats(vals2)
 			.pipe(counter2.getPipe())
 			.pipe(rename("value", "b"));
-		IDatasetIterator it3 = new ArrayIterator(vals3)
+		IDatasetIterator it3 = ArrayIterator.fromBools(vals3)
 			.pipe(counter3.getPipe())
 			.pipe(rename("value", "c"));
-		IDatasetIterator it4 = new ArrayIterator(vals4)
+		IDatasetIterator it4 = ArrayIterator.fromStrings(vals4)
 			.pipe(counter4.getPipe())
 			.pipe(rename("value", "d"));
 

@@ -101,7 +101,7 @@ public class OperatorParser {
 			}
 			else if(token.startsWith("\"") && token.endsWith("\"")) {
 				state.outputStack.push(
-					ConstantAccessor.getInstance(
+					ConstantAccessor.getStringInstance(
 						token.substring(1, token.length()-1)
 					)
 				);
@@ -321,19 +321,19 @@ public class OperatorParser {
 		// all doubles (that seems to be the usual practice in most Java code, anyway)
 		try {
 			int intVal = Integer.parseInt(token);
-			accessorReceiver.accessor = ConstantAccessor.getInstance(intVal);
+			accessorReceiver.accessor = ConstantAccessor.getIntInstance(intVal);
 			return true;
 		}
 		catch (NumberFormatException e1) {
 			try {
 				long longVal = Long.parseLong(token);
-				accessorReceiver.accessor = ConstantAccessor.getInstance(longVal);
+				accessorReceiver.accessor = ConstantAccessor.getLongInstance(longVal);
 				return true;
 			}
 			catch (NumberFormatException e2) {
 				try {
 					double doubleVal = Double.parseDouble(token);
-					accessorReceiver.accessor = ConstantAccessor.getInstance(doubleVal);
+					accessorReceiver.accessor = ConstantAccessor.getDoubleInstance(doubleVal);
 					return true;
 				}
 				catch (NumberFormatException e3) {
@@ -357,7 +357,7 @@ public class OperatorParser {
 					throw new Error("This should be impossible");
 			}
 			Instant time = Instant.parse(token);
-			receiver.accessor = ConstantAccessor.getInstance(time.getEpochSecond());
+			receiver.accessor = ConstantAccessor.getJsDateInstance(time.getEpochSecond());
 			return true;
 		}
 		else {

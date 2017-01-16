@@ -26,64 +26,78 @@
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
 /* GENERATED CODE */	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
-/* GENERATED CODE */		return lhsType == rhsType || (lhsType.isNumeric() && rhsType.isNumeric());
+/* GENERATED CODE */		return lhsType == rhsType ||
+/* GENERATED CODE */		    (lhsType.isNumeric() && rhsType.isNumeric()) ||
+/* GENERATED CODE */		    (eitherTypeIs(ColumnType.JSDATE) && (eitherTypeIs(ColumnType.INT) || eitherTypeIs(ColumnType.INT)));
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_String_String_boolean(String lhs, String rhs) { return lhs.equals(rhs); }
+/* GENERATED CODE */	protected boolean handle_string_string_bool(String lhs, String rhs) { return lhs.equals(rhs); }
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	protected boolean handle_int_jsdate_bool(int lhs, long rhs) { return lhs == rhs; }
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	protected boolean handle_long_jsdate_bool(long lhs, long rhs) { return lhs == rhs; }
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	protected boolean handle_jsdate_int_bool(long lhs, int rhs) { return lhs == rhs; }
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	protected boolean handle_jsdate_long_bool(long lhs, long rhs) { return lhs == rhs; }
 /* GENERATED CODE */
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_int_int_boolean(int lhs, int rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_int_int_bool(int lhs, int rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_long_long_boolean(long lhs, long rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_long_long_bool(long lhs, long rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_float_float_boolean(float lhs, float rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_float_float_bool(float lhs, float rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_double_double_boolean(double lhs, double rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_double_double_bool(double lhs, double rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_boolean_boolean_boolean(boolean lhs, boolean rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_bool_bool_bool(boolean lhs, boolean rhs) { return lhs == rhs; }
+/* GENERATED CODE */	
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	protected boolean handle_jsdate_jsdate_bool(long lhs, long rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_int_long_boolean(int lhs, long rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_int_long_bool(int lhs, long rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_int_float_boolean(int lhs, float rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_int_float_bool(int lhs, float rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_int_double_boolean(int lhs, double rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_int_double_bool(int lhs, double rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_long_int_boolean(long lhs, int rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_long_int_bool(long lhs, int rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_long_float_boolean(long lhs, float rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_long_float_bool(long lhs, float rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_long_double_boolean(long lhs, double rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_long_double_bool(long lhs, double rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_float_int_boolean(float lhs, int rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_float_int_bool(float lhs, int rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_float_long_boolean(float lhs, long rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_float_long_bool(float lhs, long rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_float_double_boolean(float lhs, double rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_float_double_bool(float lhs, double rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_double_int_boolean(double lhs, int rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_double_int_bool(double lhs, int rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_double_long_boolean(double lhs, long rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_double_long_bool(double lhs, long rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	protected boolean handle_double_float_boolean(double lhs, float rhs) { return lhs == rhs; }
+/* GENERATED CODE */	protected boolean handle_double_float_bool(double lhs, float rhs) { return lhs == rhs; }
 /* GENERATED CODE */	
 /* GENERATED CODE */}

@@ -29,5 +29,5 @@ public class NotOperator extends TypedUnaryOperator {
 	}
 
 	@Override
-	public boolean handle_boolean_boolean(boolean src) { return !src; }
+	public boolean handle_bool_bool(boolean src) { return !src; }
 }

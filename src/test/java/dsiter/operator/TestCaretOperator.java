@@ -9,8 +9,8 @@ public class TestCaretOperator {
 	@Test
 	public void testInt() {
 		CaretOperator co = new CaretOperator(
-			ConstantAccessor.getInstance(2),
-			ConstantAccessor.getInstance(3)
+			ConstantAccessor.getIntInstance(2),
+			ConstantAccessor.getIntInstance(3)
 		);
 
 		assertEquals(8, co.getValueFromRow(new Row()));
@@ -19,8 +19,8 @@ public class TestCaretOperator {
 	@Test
 	public void testLong() {
 		CaretOperator co = new CaretOperator(
-			ConstantAccessor.getInstance(2L),
-			ConstantAccessor.getInstance(3L)
+			ConstantAccessor.getLongInstance(2L),
+			ConstantAccessor.getLongInstance(3L)
 		);
 
 		assertEquals(8L, co.getValueFromRow(new Row()));
@@ -29,8 +29,8 @@ public class TestCaretOperator {
 	@Test
 	public void testFloat() {
 		CaretOperator co = new CaretOperator(
-			ConstantAccessor.getInstance(2F),
-			ConstantAccessor.getInstance(3F)
+			ConstantAccessor.getFloatInstance(2F),
+			ConstantAccessor.getFloatInstance(3F)
 		);
 
 		assertEquals(8F, co.getValueFromRow(new Row()));
@@ -39,8 +39,8 @@ public class TestCaretOperator {
 	@Test
 	public void testDouble() {
 		CaretOperator co = new CaretOperator(
-			ConstantAccessor.getInstance(2D),
-			ConstantAccessor.getInstance(3D)
+			ConstantAccessor.getDoubleInstance(2D),
+			ConstantAccessor.getDoubleInstance(3D)
 		);
 
 		assertEquals(8D, co.getValueFromRow(new Row()));

@@ -1,5 +1,7 @@
 package dsiter.row;
 
+import java.time.Instant;
+
 /**
  * Non-instantiable class whose static methods can be used to get
  * instances of {@link IRowAccessor} that only return a single
@@ -18,9 +20,14 @@ package dsiter.row;
  */
 public final class ConstantAccessor {
 
-   private ConstantAccessor() {
-       throw new AssertionError("Programmer Error: this should be impossible");
-   }
+    private ConstantAccessor() {
+        throw new AssertionError("Programmer Error: this should be impossible");
+    }
+
+    public static IRowAccessor.JSDATE getJsDateInstance(String value) {
+        Instant i = Instant.parse(value);
+        return getJsDateInstance(i.getEpochSecond());
+    }
 
 	<% ColumnTypes.each { type -> %>
 	/**
@@ -31,7 +38,7 @@ public final class ConstantAccessor {
 	 * @return An {@link IRowAccessor.${type.type}} that always returns
 	 * 		{@code value}
 	 */
-	public static IRowAccessor.${type.type} getInstance(${type.nativeType} value) {
+	public static IRowAccessor.${type.type} get${type.capitalized}Instance(${type.nativeType} value) {
 		return new IRowAccessor.${type.type}() {
 			@Override
 			public ${type.nativeType} get${type.capitalized}FromRow(Row row) {

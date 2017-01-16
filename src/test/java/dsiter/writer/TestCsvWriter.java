@@ -21,10 +21,10 @@ public class TestCsvWriter {
 		boolean[] vals3 = new boolean[] { true, true, false, false, false };
 		String[] vals4 = new String[] { "hello", "world", "foo", "bar", "baz" };
 
-		IDatasetIterator it1 = new ArrayIterator(vals1).pipe(rename("value", "a"));
-		IDatasetIterator it2 = new ArrayIterator(vals2).pipe(rename("value", "b"));
-		IDatasetIterator it3 = new ArrayIterator(vals3).pipe(rename("value", "c"));
-		IDatasetIterator it4 = new ArrayIterator(vals4).pipe(rename("value", "d"));
+		IDatasetIterator it1 = ArrayIterator.fromInts(vals1).pipe(rename("value", "a"));
+		IDatasetIterator it2 = ArrayIterator.fromFloats(vals2).pipe(rename("value", "b"));
+		IDatasetIterator it3 = ArrayIterator.fromBools(vals3).pipe(rename("value", "c"));
+		IDatasetIterator it4 = ArrayIterator.fromStrings(vals4).pipe(rename("value", "d"));
 
 		try (ZipIterator it = new ZipIterator(it1, it2, it3, it4)) {
 			OutputStream os = new ByteArrayOutputStream();

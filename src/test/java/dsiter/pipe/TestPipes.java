@@ -37,9 +37,9 @@ public class TestPipes {
 		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsOperator(
 				new ModuloOperator(
 					IColumnAccessor.getInstance(ColumnType.INT, 0),
-						ConstantAccessor.getInstance(2)
+						ConstantAccessor.getIntInstance(2)
 				),
-				ConstantAccessor.getInstance(0)
+				ConstantAccessor.getIntInstance(0)
 		).asBoolAccessor();
 
 		try (IDatasetIterator it = new RangeIterator(10)
@@ -73,7 +73,7 @@ public class TestPipes {
 		try (IDatasetIterator it = new RangeIterator(5)
 			.pipe(
 				new ZipPipe(
-					new ArrayIterator(1, 3, 5, 7, 9)
+					ArrayIterator.fromInts(1, 3, 5, 7, 9)
 						.pipe(new RenamePipe("value", "a"))
 				)
 			)

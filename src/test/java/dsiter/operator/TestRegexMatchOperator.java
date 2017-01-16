@@ -57,21 +57,21 @@ public class TestRegexMatchOperator {
 			"aaaaaWaaaaaaWaaaaa"
 		};
 
-		IDatasetIterator it = new ArrayIterator(samples).pipe(filter("value~\"W.*W\""));
+		IDatasetIterator it = ArrayIterator.fromStrings(samples).pipe(filter("value~\"W.*W\""));
 
 		IterUtils.assertValues(it, "value", expected);
 	}
 
 	@Test(expected=RegexParseException.class)
 	public void testParserException1() {
-		IDatasetIterator it = new ArrayIterator(new String[0]).pipe(filter("value~3"));
+		IDatasetIterator it = ArrayIterator.fromStrings().pipe(filter("value~3"));
 	}
 
 	@Test(expected=RegexParseException.class)
 	public void testParserException2() {
-		IDatasetIterator it = new ArrayIterator(new String[0])
+		IDatasetIterator it = ArrayIterator.fromStrings()
 			.pipe(zip(
-				new ArrayIterator(new String[0]).pipe(rename("value", "foo"))
+				ArrayIterator.fromStrings(new String[0]).pipe(rename("value", "foo"))
 			));
 		IDatasetIterator it2 = it.pipe(filter("value~foo"));
 	}
