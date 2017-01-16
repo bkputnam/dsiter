@@ -27,9 +27,13 @@ public class StrideIterator implements IDatasetIterator {
 	private int stride;
 	private boolean isFirstTime = true;
 
+	private SkipPipe skipPipe;
+	private boolean useSkipPipeOptimization = true;
+
 	public StrideIterator(IDatasetIterator src, int stride) {
 		this.src = src;
 		this.stride = stride;
+		skipPipe = new SkipPipe(stride-1);
 	}
 
 	@Override
@@ -49,7 +53,18 @@ public class StrideIterator implements IDatasetIterator {
 			isFirstTime = false;
 		}
 		else {
-			src = src.pipe(skip(stride-1));
+			if (useSkipPipeOptimization) {
+				useSkipPipeOptimization = src.tryAbsorb(skipPipe); // if it fails once, don't bother trying again
+			}
+			if (!useSkipPipeOptimization) {
+				int remainingSkips = stride - 1;
+				while(remainingSkips > 0) {
+					remainingSkips--;
+					if(!src.tryMoveNext()) {
+						return false;
+					}
+				}
+			}
 		}
 		return src.tryMoveNext();
 	}
