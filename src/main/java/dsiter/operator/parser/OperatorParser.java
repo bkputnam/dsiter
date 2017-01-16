@@ -357,7 +357,7 @@ public class OperatorParser {
 					throw new Error("This should be impossible");
 			}
 			Instant time = Instant.parse(token);
-			receiver.accessor = ConstantAccessor.getJsDateInstance(time.getEpochSecond());
+			receiver.accessor = ConstantAccessor.getJsDateInstance(time.toEpochMilli());
 			return true;
 		}
 		else {
