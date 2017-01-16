@@ -50,9 +50,7 @@ public class DirectoryListIterator implements IDatasetIterator {
 
 	@Override
 	public Row getCurrentRow() throws Exception {
-		int basePathCount = basePath.getNameCount();
-		int curCount = currentPath.getNameCount();
-		row.strings[0] = currentPath.subpath(basePathCount, curCount).toString();
+		row.strings[0] = currentPath.toString();
 		row.longs[0] = currentPath.toFile().length();
 		return row;
 	}
