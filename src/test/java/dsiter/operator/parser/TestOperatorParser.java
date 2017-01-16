@@ -243,14 +243,14 @@ public class TestOperatorParser {
 	public void testDateParser2() {
 		IRowAccessor accessor = OperatorParser.parseOperator(new ColumnDescriptor[0], "1970-01-01T00:00:05Z");
 		Object val = accessor.getValueFromRow(new Row());
-		assertEquals(5L, val);
+		assertEquals(5000L, val);
 	}
 
 	@Test
 	public void testDateParser3() {
 		IRowAccessor accessor = OperatorParser.parseOperator(new ColumnDescriptor[0], "1970-01-01T00:00:05");
 		Object val = accessor.getValueFromRow(new Row());
-		assertEquals(5L, val);
+		assertEquals(5000L, val);
 	}
 
 	@Test
@@ -270,19 +270,19 @@ public class TestOperatorParser {
 	@Test
 	public void testDateParser6() throws Exception {
 		IDatasetIterator it = ArrayIterator.fromJsDates(
-			Instant.parse("1970-01-01T00:00:00Z").getEpochSecond(),
-			Instant.parse("1980-01-01T00:00:00Z").getEpochSecond(),
-			Instant.parse("1990-01-01T00:00:00Z").getEpochSecond(),
-			Instant.parse("2000-01-01T00:00:00Z").getEpochSecond(),
-			Instant.parse("2001-01-01T00:00:00Z").getEpochSecond(),
-			Instant.parse("2002-01-01T00:00:00Z").getEpochSecond()
+			Instant.parse("1970-01-01T00:00:00Z").toEpochMilli(),
+			Instant.parse("1980-01-01T00:00:00Z").toEpochMilli(),
+			Instant.parse("1990-01-01T00:00:00Z").toEpochMilli(),
+			Instant.parse("2000-01-01T00:00:00Z").toEpochMilli(),
+			Instant.parse("2001-01-01T00:00:00Z").toEpochMilli(),
+			Instant.parse("2002-01-01T00:00:00Z").toEpochMilli()
 		)
 		.pipe(filter("value>=2000-01-01"));
 
 		IterUtils.assertValues(it, "value", new Long[] {
-			Instant.parse("2000-01-01T00:00:00Z").getEpochSecond(),
-			Instant.parse("2001-01-01T00:00:00Z").getEpochSecond(),
-			Instant.parse("2002-01-01T00:00:00Z").getEpochSecond()
+			Instant.parse("2000-01-01T00:00:00Z").toEpochMilli(),
+			Instant.parse("2001-01-01T00:00:00Z").toEpochMilli(),
+			Instant.parse("2002-01-01T00:00:00Z").toEpochMilli()
 		});
 	}
 }
