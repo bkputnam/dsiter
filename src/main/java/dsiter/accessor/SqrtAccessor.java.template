@@ -1,0 +1,29 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+
+public interface SqrtAccessor extends IRowAccessor.DOUBLE {
+
+	<%
+		def types = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			ColumnTypes.find { type -> type.type == name }
+		}
+
+		types.each { type ->
+	%>
+	public static class ${type.type} implements SqrtAccessor {
+
+		private IRowAccessor.${type.type} src;
+
+		public ${type.type}(IRowAccessor.${type.type} lhs) {
+			this.src = src;
+		}
+
+		@Override
+		public double getDoubleFromRow(Row row) {
+			return Math.sqrt(src.get${type.capitalized}FromRow(row));
+		}
+	}
+	<% } %>
+}

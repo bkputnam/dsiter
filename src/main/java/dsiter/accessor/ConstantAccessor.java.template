@@ -1,0 +1,22 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+
+public interface ConstantAccessor extends IRowAccessor {
+
+	<% ColumnTypes.each { type -> %>
+	public static class ${type.type} implements ConstantAccessor, IRowAccessor.${type.type} {
+		private ${type.nativeType} value;
+
+		public ${type.type} (${type.nativeType} value) {
+			this.value = value;
+		}
+
+		@Override
+		public ${type.nativeType} get${type.capitalized}FromRow(Row row) {
+			return value;
+		}
+	}
+	<% } %>
+}
