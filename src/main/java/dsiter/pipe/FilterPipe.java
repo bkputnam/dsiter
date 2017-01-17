@@ -2,7 +2,7 @@ package dsiter.pipe;
 
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.FilterIterator;
-import dsiter.operator.parser.OperatorParser;
+import dsiter.parser.OperatorParser;
 import dsiter.row.IRowAccessor;
 
 /**

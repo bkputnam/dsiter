@@ -1,7 +1,7 @@
 package dsiter.iterator;
 
 import dsiter.IterUtils;
-import dsiter.operator.parser.OperatorParser;
+import dsiter.parser.OperatorParser;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 import org.junit.Test;

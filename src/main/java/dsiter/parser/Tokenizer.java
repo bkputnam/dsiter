@@ -1,9 +1,7 @@
-package dsiter.operator.parser;
+package dsiter.parser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Private class that tokenizes expression for the OperatorParser.

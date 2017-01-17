@@ -10,7 +10,7 @@
                      *
                      * <p>
                      *     You probably won't ever want to use this class directly;
-                     *     it's much simpler to use {@link dsiter.operator.parser.OperatorParser}
+                     *     it's much simpler to use {@link dsiter.parser.OperatorParser}
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
