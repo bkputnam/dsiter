@@ -268,7 +268,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	public boolean tryAbsorb(IPipe pipe) {
+/* GENERATED CODE */	public boolean tryAbsorb(IPipe pipe) throws Exception {
 /* GENERATED CODE */		if (
 /* GENERATED CODE */			pipe instanceof SkipPipe ||
 /* GENERATED CODE */			pipe instanceof FirstPipe

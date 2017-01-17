@@ -156,7 +156,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * @param pipe The pipe to be attached to this iterator
 	 * @return An iterator that represents this iterator with the pipe attached
 	 */
-	default IDatasetIterator pipe(IPipe pipe) {
+	default IDatasetIterator pipe(IPipe pipe) throws Exception {
 		if (this.tryAbsorb(pipe)) {
 			return this;
 		}
@@ -206,5 +206,5 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * @return True, if the pipe was completely absorbed (and should be discarded), else false.
 	 */
 	// Note: no default implementation to force authors to think about this
-	boolean tryAbsorb(IPipe pipe);
+	boolean tryAbsorb(IPipe pipe) throws Exception;
 }

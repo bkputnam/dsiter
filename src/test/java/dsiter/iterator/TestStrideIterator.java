@@ -43,6 +43,28 @@ public class TestStrideIterator {
 	}
 
 	@Test
+	public void testStrideSkip() throws Exception {
+		IDatasetIterator it = new RangeIterator(100)
+			.pipe(stride(10))
+			.pipe(skip(5));
+
+		IterUtils.assertValues(it, "value", new Integer[] {
+			50, 60, 70 , 80, 90
+		});
+	}
+
+	@Test
+	public void testStrideStride() throws Exception {
+		IDatasetIterator it = new RangeIterator(100)
+			.pipe(stride(10))
+			.pipe(stride(3));
+
+		IterUtils.assertValues(it, "value", new Integer[] {
+			0, 30, 60, 90
+		});
+	}
+
+	@Test
 	public void testLength() throws Exception {
 
 		try (IDatasetIterator it = new StrideIterator(

@@ -54,7 +54,7 @@ public class TakeIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public boolean tryAbsorb(IPipe pipe) {
+	public boolean tryAbsorb(IPipe pipe) throws Exception {
 		if (pipe instanceof SkipPipe) {
 			long howMany = ((SkipPipe)pipe).getHowMany();
 			src = src.pipe(pipe);
