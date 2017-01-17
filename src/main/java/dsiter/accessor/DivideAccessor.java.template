@@ -2,27 +2,27 @@ package dsiter.accessor;
 
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
+import dsiter.row.IRowAccessor;
 
 /**
- * Binary operator that computes the multiplicative product of {@code lhs}
- * and {@code rhs}
+ * Binary operator that computes {@code lhs} divided by {@code rhs}
  *
  * <p>
  *     You probably won't ever want to use this class directly;
- *     it's much simpler to use {@link dsiter.parser.OperatorParser}
+ *     it's much simpler to use {@link dsiter.parser.AccessorParser}
  *     directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class TimesOperator extends TypedBinaryOperator {
+public class DivideAccessor extends TypedBinaryAccessor {
 
-    public TimesOperator(IRowAccessor lhs, IRowAccessor rhs) {
+    public DivideAccessor(IRowAccessor lhs, IRowAccessor rhs) {
         super(lhs, rhs);
     }
 
     @Override
-    public ColumnType getReturnType(ColumnType lhsType, ColumnType rhsType) {
+    public ColumnType getReturnType(ColumnType lhs, ColumnType rhs) {
         return
-            eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
+            super.eitherTypeIs(ColumnType.DOUBLE) ? ColumnType.DOUBLE :
             eitherTypeIs(ColumnType.FLOAT) ? ColumnType.FLOAT :
             eitherTypeIs(ColumnType.LONG) ? ColumnType.LONG :
             ColumnType.INT;
@@ -41,6 +41,6 @@ public class TimesOperator extends TypedBinaryOperator {
 				def returnType = lhsIndex >= rhsIndex ? lhs : rhs;
 	%>
 	@Override
-	protected ${returnType} handle_${lhs}_${rhs}_${returnType}(${lhs} lhs, ${rhs} rhs) { return lhs * rhs; }
+	protected ${returnType} handle_${lhs}_${rhs}_${returnType}(${lhs} lhs, ${rhs} rhs) { return lhs / rhs; }
 	<% }} %>
 }

@@ -12,9 +12,9 @@ import dsiter.row.IRowAccessor;
  *     directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class SqrtOperator extends TypedUnaryOperator {
+public class SqrtAccessor extends TypedUnaryAccessor {
 
-	public SqrtOperator(IRowAccessor src) {
+	public SqrtAccessor(IRowAccessor src) {
 		super(src);
 	}
 

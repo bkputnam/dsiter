@@ -2,14 +2,14 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that computes {@code lhs} divided by {@code rhs}
                      *
                      * <p>
                      *     You probably won't ever want to use this class directly;
-                     *     it's much simpler to use {@link dsiter.parser.OperatorParser}
+                     *     it's much simpler to use {@link dsiter.parser.AccessorParser}
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */

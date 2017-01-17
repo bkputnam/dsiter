@@ -3,7 +3,7 @@
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
-/* GENERATED CODE */
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Abstract class for use in creating binary operators. Not all binary operators
@@ -45,7 +45,7 @@
 /* GENERATED CODE */	private IRowAccessor innerAccessor;
 /* GENERATED CODE */
                     	/**
-                    	 * Construct a TypedBinaryOperator with {@code lhs} and {@code rhs} as
+                    	 * Construct a TypedBinaryAccessor with {@code lhs} and {@code rhs} as
                     	 * its left- and right-hand sides, respectively.
                     	 * 
                     	 * @param lhs	The {@code IRowAccessor} that will provide the left
