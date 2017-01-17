@@ -8,11 +8,13 @@ import dsiter.iterator.IDatasetIterator;
  */
 public class StridePipe implements IPipe {
 
-	private int stride;
+	private long stride;
 
-	public StridePipe(int stride) {
+	public StridePipe(long stride) {
 		this.stride = stride;
 	}
+
+	public long getStride() { return stride; }
 
 	public IDatasetIterator attachTo(IDatasetIterator src) {
 		return new StrideIterator( src, stride );
