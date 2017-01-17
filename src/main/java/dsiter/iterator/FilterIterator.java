@@ -10,7 +10,7 @@ import dsiter.row.IRowAccessor;
  * to filter values from a source iterator.
  *
  * <p>
- *     Note that {@link dsiter.operator.parser.OperatorParser}
+ *     Note that {@link dsiter.parser.OperatorParser}
  *     is frequently used to create the
  *     {@code TypedRowAccessor.BOOLEAN} instances
  * </p>

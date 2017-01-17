@@ -2,7 +2,7 @@ package dsiter.pipe;
 
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.TakeWhileIterator;
-import dsiter.operator.parser.OperatorParser;
+import dsiter.parser.OperatorParser;
 import dsiter.row.IRowAccessor;
 
 public class TakeWhilePipe implements IPipe {

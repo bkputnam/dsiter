@@ -1,9 +1,8 @@
-package dsiter.operator.parser;
+package dsiter.parser;
 
 import dsiter.operator.*;
 import dsiter.row.*;
 
-import java.text.ParseException;
 import java.time.Instant;
 import java.util.*;
 import java.util.regex.Matcher;

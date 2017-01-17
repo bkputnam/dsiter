@@ -1,4 +1,4 @@
-package dsiter.operator.parser;
+package dsiter.parser;
 
 import dsiter.row.ColumnType;
 import dsiter.row.Row;
