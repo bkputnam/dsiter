@@ -172,7 +172,7 @@ public class ZipIterator implements IDatasetIterator {
 
 
 	@Override
-	public boolean tryAbsorb(IPipe pipe) {
+	public boolean tryAbsorb(IPipe pipe) throws Exception {
 		if (
 			pipe instanceof SkipPipe ||
 			pipe instanceof FirstPipe

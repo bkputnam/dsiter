@@ -96,7 +96,7 @@ public class TestZipIterator {
 	}
 
 	@Test
-	public void testLength() {
+	public void testLength() throws Exception {
 
 		IDatasetIterator zi = new ZipIterator(
 			new RangeIterator(3).pipe(rename("value", "i1")),

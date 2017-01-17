@@ -63,12 +63,12 @@ public class TestRegexMatchOperator {
 	}
 
 	@Test(expected=RegexParseException.class)
-	public void testParserException1() {
+	public void testParserException1() throws Exception {
 		IDatasetIterator it = ArrayIterator.fromStrings().pipe(filter("value~3"));
 	}
 
 	@Test(expected=RegexParseException.class)
-	public void testParserException2() {
+	public void testParserException2() throws Exception {
 		IDatasetIterator it = ArrayIterator.fromStrings()
 			.pipe(zip(
 				ArrayIterator.fromStrings(new String[0]).pipe(rename("value", "foo"))

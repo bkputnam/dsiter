@@ -88,7 +88,7 @@ public class SkipWhileIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public boolean tryAbsorb(IPipe pipe) {
+	public boolean tryAbsorb(IPipe pipe) throws Exception {
 		// Once skip is completed, this iterator essentially becomes the source iterator so we
 		// can just pass pipes right on through.
 		if (!skipCompleted) {

@@ -20,7 +20,7 @@ import static dsiter.StdPipes.*;
  */
 public class TestOperatorParser {
 
-	private static IDatasetIterator dummyIterator() {
+	private static IDatasetIterator dummyIterator() throws Exception {
 		return new ZipIterator(
 			ArrayIterator.fromInts(new int[] { 1 }).pipe(new RenamePipe("value", "i1")),
 			ArrayIterator.fromInts(new int[] { 2 }).pipe(new RenamePipe("value", "i2")),
