@@ -1,7 +1,7 @@
 dsiter
 dsiter.dataset
 dsiter.iterator
-dsiter.operator
+dsiter.accessor
 dsiter.parser
 dsiter.pipe
 dsiter.reader

@@ -1,0 +1,128 @@
+package dsiter.accessor;
+
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+import dsiter.row.IRowAccessor;
+
+/**
+ * Abstract class for use in creating unary operators. Not all unary operators
+ * need to use this class, but it's almost certainly easier to implement if you
+ * do.
+ * 
+ * <p>
+ * 		Subclasses must override the {@link #getReturnType} and {@link #testTypeCompatibility}
+ *		methods. This class can then use that information to determine how best to process
+ *		the source operator.
+ * </p>
+ *
+ * <p>
+ * 		This class provides overrideable methods for every possible type combination
+ *		of {@code source} and {@code returnValue} (which means there are
+ *		{@code (# of types)^2} overridable methods available). Subclasses only
+ *		need to override the methods which they will actually support. So, for example,
+ *		a logical boolean operator only needs to override {@link #handle_bool_bool}
+ *		and a numeric operator will only need to override the appropriate numeric
+ *		{@code handle_x_y} method(s). This superclass will use the information from
+ *		{@link #getReturnType} and {@link #testTypeCompatibility} to efficiently determine
+ *		which method to call.
+ * </p>
+ */
+public abstract class TypedUnaryOperator implements IRowAccessor {
+
+	private IRowAccessor src;
+	private IRowAccessor innerAccessor;
+
+	public TypedUnaryOperator(IRowAccessor src) {
+		this.src = src;
+
+		if(src == null) { throw new IllegalArgumentException("src cannot be null"); }
+
+		ColumnType srcType = src.getType();
+
+		if(!testTypeCompatibility(srcType)) {
+			throw new IllegalArgumentException("Incompatible type: " + srcType);
+		}
+
+		ColumnType returnType = this.getReturnType(srcType);
+		innerAccessor = getInnerAccessor(src, returnType);
+	}
+
+	protected abstract ColumnType getReturnType(ColumnType srcType);
+	protected abstract boolean testTypeCompatibility(ColumnType srcType);
+
+	@Override
+	public ColumnType getType() {
+		return innerAccessor.getType();
+	}
+
+	@Override
+	public Object getValueFromRow(Row row) {
+		return innerAccessor.getValueFromRow(row);
+	}
+
+<% ColumnTypes.each { type -> %>
+/**
+ * Convert this IRowAccessor to an {@code IRowAccessor.${type.type}}
+	 * by casting and returning the hidden {@code innerAccessor}
+	 *
+	 * @return An {@code IRowAccessor.${type.type}} representation
+	 * of this instance
+	 */
+	@Override
+	public IRowAccessor.${type.type} as${type.capitalized}Accessor() { return (IRowAccessor.${type.type})innerAccessor; }
+<% } %>
+
+<%
+def typeSwitch(indent, varName, bodyGenerator) {
+	ColumnTypes.eachWithIndex { type, index ->
+//		println ""
+		if(index == 0) { print "${indent}if" } else { print "\n${indent}else if" }
+		println "(" + varName + " == ColumnType." + type.type + ") {"
+		bodyGenerator(indent + "\t", type)
+		print "\n" + indent + "}"
+	}
+	println "\n" + indent + "else {"
+	println indent + "\tthrow new Error(\"This should be impossible\");"
+	print indent + "}"
+}
+%>
+
+	private IRowAccessor getInnerAccessor(IRowAccessor src, ColumnType returnType) {
+		ColumnType srcType = src.getType();
+
+<%
+	typeSwitch("\t\t", "srcType") { indent1, srcType ->
+		typeSwitch(indent1, "returnType") { indent2, returnType ->
+			def methodName = "handle_${srcType.nativeType}_${returnType.nativeType}"
+			print "${indent2}return new ${srcType.type}_${returnType.type}(src);"
+		}
+	}
+%>
+	}
+
+	<%
+		ColumnTypes.each { srcType -> ColumnTypes.each { returnType ->
+		def methodName = "handle_" + srcType.lowercased + "_" + returnType.lowercased;
+	%>
+	protected ${returnType.nativeType} ${methodName}( ${srcType.nativeType} src )  { throw new Error("Programmer error: ${methodName} must be overridden by subclass"); }<% }} %>
+
+<%
+ColumnTypes.each { srcType ->
+	ColumnTypes.each { returnType ->
+		def methodName = "handle_" + srcType.lowercased + "_" + returnType.lowercased;
+%>
+	private class ${srcType.type}_${returnType.type} implements IRowAccessor.${returnType.type} {
+
+		private IRowAccessor.${srcType.type} src;
+
+		private ${srcType.type}_${returnType.type}(IRowAccessor src) {
+			this.src = src.as${srcType.capitalized}Accessor();
+		}
+
+		public ${returnType.nativeType} get${returnType.capitalized}FromRow(Row row) {
+			return ${methodName}(src.get${srcType.capitalized}FromRow(row));
+		}
+	}
+<% }} %>
+}
