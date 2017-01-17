@@ -121,7 +121,7 @@ class OperatorInfo {
 		}
 
 		// Sanity check: make sure everything in precedenceLookup is
-		// a real operator
+		// a real accessor
 		for(Map.Entry<String, Integer> kvp : precedenceLookup.entrySet()) {
 			assert(operatorLookup.containsKey(kvp.getKey()));
 		}

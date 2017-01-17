@@ -38,7 +38,7 @@ final class Tokenizer {
 		char firstChar = str.charAt(startIndex);
 
 		if (firstChar == '-') {
-			// Special logic for '-' because it can be either a standalone operator
+			// Special logic for '-' because it can be either a standalone accessor
 			// (as in "a-b" i.e. "a minus b") or the start of a number (as in "-13")
 			if (prevType == TokenType.IDENTIFIER || prevType == TokenType.NUMBER) {
 				return new TokenResult(

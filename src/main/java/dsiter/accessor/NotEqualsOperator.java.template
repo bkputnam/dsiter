@@ -1,0 +1,54 @@
+package dsiter.accessor;
+
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+import dsiter.row.IRowAccessor;
+
+/**
+ * Binary operator that tests whether {@code lhs} is not equal to {@code rhs}
+ *
+ * <p>
+ *		You probably won't ever want to use this class directly;
+ *		it's much simpler to use {@link dsiter.parser.OperatorParser}
+ *		directly. However, I certainly won't tell you you can't!
+ * </p>
+ */
+public class NotEqualsOperator extends TypedBinaryOperator {
+
+	public NotEqualsOperator(IRowAccessor lhs, IRowAccessor rhs) {
+		super(lhs, rhs);
+	}
+
+	@Override
+	public ColumnType getReturnType(ColumnType lhsType, ColumnType rhsType) {
+		return ColumnType.BOOLEAN;
+	}
+
+	@Override
+	protected boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType) {
+		return lhsType == rhsType ||
+			(lhsType.isNumeric() && rhsType.isNumeric()) ||
+			(eitherTypeIs(ColumnType.JSDATE) && (eitherTypeIs(ColumnType.INT) || eitherTypeIs(ColumnType.INT)));
+	}
+
+	@Override
+	protected boolean handle_string_string_bool(String lhs, String rhs) { return !lhs.equals(rhs); }
+
+	<%
+		ColumnTypes.each { type ->
+			if( type.type == "STRING") { return } // strings are handled separately using .equals()
+	%>
+	@Override
+	protected boolean handle_${type.lowercased}_${type.lowercased}_bool(${type.nativeType} lhs, ${type.nativeType} rhs) { return lhs != rhs; }
+	<% } %>
+
+	<%
+		def numberTypes = ["int", "long", "float", "double"]
+		numberTypes.each { lhsType ->
+			numberTypes.each { rhsType ->
+				if( lhsType.equals(rhsType) ) { return; } // already done same-same comparisons above
+	%>
+	@Override
+	protected boolean handle_${lhsType}_${rhsType}_bool(${lhsType} lhs, ${rhsType} rhs) { return lhs != rhs; }
+	<% }} %>
+}

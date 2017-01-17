@@ -5,8 +5,8 @@ import dsiter.IteratorExpectations;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.RangeIterator;
-import dsiter.operator.EqualsOperator;
-import dsiter.operator.ModuloOperator;
+import dsiter.accessor.EqualsOperator;
+import dsiter.accessor.ModuloOperator;
 import dsiter.row.*;
 import org.junit.Test;
 

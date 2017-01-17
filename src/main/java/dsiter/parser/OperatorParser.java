@@ -1,6 +1,6 @@
 package dsiter.parser;
 
-import dsiter.operator.*;
+import dsiter.accessor.*;
 import dsiter.row.*;
 
 import java.time.Instant;
@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 
 /**
- * Class for parsing strings to operator
+ * Class for parsing strings to accessor
  * <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">ASTs</a>.
  * This class is non-instantiable, and only publicly provides
  * the static method {@link #parseOperator(ColumnDescriptor[], String)}
@@ -19,19 +19,19 @@ public class OperatorParser {
 	private OperatorParser() { throw new Error("Programmer Error: OperatorParser should never be instantiated"); }
 
 	/**
-	 * Parse an operator string representing an expression to an operator
+	 * Parse an accessor string representing an expression to an accessor
 	 * tree that knows how to extract and compute that expression from
 	 * a Row. Besides the expression to be parsed, this method also
 	 * requires a description (in the form of a {@code ColumnDescriptor[]})
-	 * of the rows that the returned operator will be operating on
+	 * of the rows that the returned accessor will be operating on
 	 * (e.g. for the expression {@code "foo>5"} we need to know how to
 	 * extract the column {@code "foo"})
 	 *
 	 * @param metadata ColumnDescriptors that describe the shape of the
-	 *                 Rows that the returned operator will be operating
+	 *                 Rows that the returned accessor will be operating
 	 *                 on
 	 * @param string   The expression to be parsed
-	 * @return An operator that can compute the given expression from a
+	 * @return An accessor that can compute the given expression from a
 	 * Row of the expected shape.
 	 */
 	public static IRowAccessor parseOperator(ColumnDescriptor[] metadata, String string) {
@@ -79,7 +79,7 @@ public class OperatorParser {
 		//		as they are added to the stack. This is equivalent to evaluating
 		//		the reverse-polish-notation as it is generated. At the end of the
 		//		algorithm there should only be one value on the stack; a single
-		//		operator instance representing the entire expression.
+		//		accessor instance representing the entire expression.
 
 		AccessorContainer receiver = new AccessorContainer();
 
@@ -143,12 +143,12 @@ public class OperatorParser {
 			}
 
 			// """
-			//	* If the token is an operator, o1, then:
-			//		* while there is an operator token o2, at the top of the operator stack and either
+			//	* If the token is an accessor, o1, then:
+			//		* while there is an accessor token o2, at the top of the accessor stack and either
 			//				? o1 is left-associative and its precedence is less than or equal to that of o2, or
 			//				? o1 is right associative, and has precedence less than that of o2,
-			//			* pop o2 off the operator stack, onto the output queue;
-			//		* at the end of iteration push o1 onto the operator stack.
+			//			* pop o2 off the accessor stack, onto the output queue;
+			//		* at the end of iteration push o1 onto the accessor stack.
 			// """
 			else if(isOperator(token)) {
 				String o1 = token;
@@ -203,7 +203,7 @@ public class OperatorParser {
 					}
 				}
 				if(!foundLParenOrFunction) {
-					throw new IllegalArgumentException("Mismatched parenthesis in operator string: \"" + string + "\" (extra ')')");
+					throw new IllegalArgumentException("Mismatched parenthesis in accessor string: \"" + string + "\" (extra ')')");
 				}
 				if(topOperator.equals("(")) {
 					// pop the left parenthesis, but not onto the output queue
@@ -211,7 +211,7 @@ public class OperatorParser {
 					state.operatorStack.pop();
 				}
 				else {
-					// top operator is a function: pop both the operator and the
+					// top accessor is a function: pop both the accessor and the
 					// left paren simultaneously
 					popOperator(state);
 				}
@@ -223,13 +223,13 @@ public class OperatorParser {
 		} // end foreach token loop
 
 		//	* When there are no more tokens to read:
-		//		* While there are still operator tokens in the stack:
-		//			* If the operator token on the top of the stack is a parenthesis, then there are mismatched parentheses.
-		//			* Pop the operator onto the output queue.
+		//		* While there are still accessor tokens in the stack:
+		//			* If the accessor token on the top of the stack is a parenthesis, then there are mismatched parentheses.
+		//			* Pop the accessor onto the output queue.
 		while(!state.operatorStack.empty()) {
 			String topOperator = state.operatorStack.peek();
 			if(topOperator.equals("(")) {
-				throw new IllegalArgumentException("Mismatched parenthesis in operator string: \"" + string + "\" (extra '(')");
+				throw new IllegalArgumentException("Mismatched parenthesis in accessor string: \"" + string + "\" (extra '(')");
 			}
 			popOperator(state);
 		}
@@ -379,7 +379,7 @@ public class OperatorParser {
 			IRowAccessor rhs = state.outputStack.pop();
 			IRowAccessor lhs = state.outputStack.pop();
 
-			// This is probably a silly way to implement an operator lookup.
+			// This is probably a silly way to implement an accessor lookup.
 			if(operator.equals("=")) {
 				return new EqualsOperator(lhs, rhs);
 			}
@@ -434,12 +434,12 @@ public class OperatorParser {
 					pattern = (String) rhs.getValueFromRow(new Row());
 				}
 				catch (Exception e) {
-					throw new RegexParseException("User error: rhs of '~' operator should be a string literal");
+					throw new RegexParseException("User error: rhs of '~' accessor should be a string literal");
 				}
 				return new RegexMatchOperator(lhs, pattern);
 			}
 			else {
-				throw new Error("Programmer Error: unrecognized binary operator token: \"" + operator + "\"");
+				throw new Error("Programmer Error: unrecognized binary accessor token: \"" + operator + "\"");
 			}
 		}
 		else if(OperatorInfo.getNumParams(operator) == 1) {
@@ -452,12 +452,12 @@ public class OperatorParser {
 				return new SqrtOperator(src);
 			}
 			else {
-				throw new Error("Programmer Error: unrecognized unary operator token: \"" + operator + "\"");
+				throw new Error("Programmer Error: unrecognized unary accessor token: \"" + operator + "\"");
 			}
 		}
 		else {
 			throw new Error(
-				"Programmer Error: Unable to determine type of \"" + operator + "\" operator." +
+				"Programmer Error: Unable to determine type of \"" + operator + "\" accessor." +
 				" This should be impossible."
 			);
 		}
