@@ -17,7 +17,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_int_eq_int() {
-		GreaterThanOperator gte = new GreaterThanOperator(
+		GreaterThanAccessor gte = new GreaterThanAccessor(
 			ConstantAccessor.getIntInstance(1),
 			ConstantAccessor.getIntInstance(1)
 		);
@@ -27,7 +27,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_int_gt_int() {
-		GreaterThanOperator gte = new GreaterThanOperator(
+		GreaterThanAccessor gte = new GreaterThanAccessor(
 			ConstantAccessor.getIntInstance(2),
 			ConstantAccessor.getIntInstance(1)
 		);
@@ -37,7 +37,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_int_lt_int() {
-		GreaterThanOperator gte = new GreaterThanOperator(
+		GreaterThanAccessor gte = new GreaterThanAccessor(
 			ConstantAccessor.getIntInstance(0),
 			ConstantAccessor.getIntInstance(1)
 		);
@@ -47,7 +47,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_long_eq_long() {
-		GreaterThanOperator gte = new GreaterThanOperator(
+		GreaterThanAccessor gte = new GreaterThanAccessor(
 			ConstantAccessor.getLongInstance(1L),
 			ConstantAccessor.getLongInstance(1L)
 		);
@@ -57,7 +57,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_float_eq_float() {
-		GreaterThanOperator gte = new GreaterThanOperator(
+		GreaterThanAccessor gte = new GreaterThanAccessor(
 			ConstantAccessor.getFloatInstance(1F),
 			ConstantAccessor.getFloatInstance(1F)
 		);
@@ -67,7 +67,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_double_eq_double() {
-		GreaterThanOperator gte = new GreaterThanOperator(
+		GreaterThanAccessor gte = new GreaterThanAccessor(
 			ConstantAccessor.getDoubleInstance(1D),
 			ConstantAccessor.getDoubleInstance(1D)
 		);
@@ -84,7 +84,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_jsdate_eq_int() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getIntInstance(0)
 		);
@@ -92,7 +92,7 @@ public class TestGreaterThanOperator {
 	}
 	@Test
 	public void test_jsdate_gt_int() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z"),
 				ConstantAccessor.getIntInstance(0)
 		);
@@ -100,7 +100,7 @@ public class TestGreaterThanOperator {
 	}
 	@Test
 	public void test_jsdate_lt_int() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getIntInstance(1)
 		);
@@ -109,7 +109,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_jsdate_eq_long() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getLongInstance(0L)
 		);
@@ -117,7 +117,7 @@ public class TestGreaterThanOperator {
 	}
 	@Test
 	public void test_jsdate_gt_long() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z"),
 				ConstantAccessor.getLongInstance(0L)
 		);
@@ -125,7 +125,7 @@ public class TestGreaterThanOperator {
 	}
 	@Test
 	public void test_jsdate_lt_long() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getLongInstance(1L)
 		);
@@ -134,7 +134,7 @@ public class TestGreaterThanOperator {
 
 	@Test
 	public void test_int_eq_jsdate() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getIntInstance(0),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z")
 		);
@@ -142,7 +142,7 @@ public class TestGreaterThanOperator {
 	}
 	@Test
 	public void test_int_gt_jsdate() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getIntInstance(1),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z")
 		);
@@ -150,7 +150,7 @@ public class TestGreaterThanOperator {
 	}
 	@Test
 	public void test_int_lt_jsdate() {
-		GreaterThanOperator op = new GreaterThanOperator(
+		GreaterThanAccessor op = new GreaterThanAccessor(
 				ConstantAccessor.getIntInstance(0),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z")
 		);

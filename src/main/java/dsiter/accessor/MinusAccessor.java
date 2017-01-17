@@ -5,7 +5,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
                     /**
-                     * Binary accessor that computes the value of {@code rhs} substracted
+                     * Binary operator that computes the value of {@code rhs} substracted
                      * from {@code lhs}
                      *
                      * <p>
@@ -14,9 +14,9 @@
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
-/* GENERATED CODE */public class MinusOperator extends TypedBinaryOperator {
+/* GENERATED CODE */public class MinusAccessor extends TypedBinaryAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */	public MinusOperator(IRowAccessor lhs, IRowAccessor rhs) {
+/* GENERATED CODE */	public MinusAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */        super(lhs, rhs);
 /* GENERATED CODE */    }
 /* GENERATED CODE */

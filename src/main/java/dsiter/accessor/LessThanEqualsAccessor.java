@@ -5,7 +5,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
                     /**
-                     * Binary accessor that tests whether {@code lhs} is less than or equal
+                     * Binary operator that tests whether {@code lhs} is less than or equal
                      * to {@code rhs}
                      *
                      * <p>
@@ -14,9 +14,9 @@
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
-/* GENERATED CODE */public class LessThanEqualsOperator extends TypedBinaryOperator {
+/* GENERATED CODE */public class LessThanEqualsAccessor extends TypedBinaryAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */	public LessThanEqualsOperator(IRowAccessor lhs, IRowAccessor rhs) {
+/* GENERATED CODE */	public LessThanEqualsAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

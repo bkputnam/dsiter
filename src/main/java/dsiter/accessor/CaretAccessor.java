@@ -5,7 +5,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
                     /**
-                     * Binary accessor that computes the exponent of {@code lhs}
+                     * Binary operator that computes the exponent of {@code lhs}
                      * raised to the power of {@code rhs}
                      *
                      * <p>
@@ -14,9 +14,9 @@
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
-/* GENERATED CODE */public class CaretOperator extends TypedBinaryOperator {
+/* GENERATED CODE */public class CaretAccessor extends TypedBinaryAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */   public CaretOperator(IRowAccessor lhs, IRowAccessor rhs) {
+/* GENERATED CODE */   public CaretAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */       super(lhs, rhs);
 /* GENERATED CODE */   }
 /* GENERATED CODE */

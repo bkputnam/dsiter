@@ -1,4 +1,4 @@
-package dsiter.accessor;
+package dsiter.parser;
 
 public class RegexParseException extends RuntimeException {
 

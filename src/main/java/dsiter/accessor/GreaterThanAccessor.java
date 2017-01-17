@@ -5,7 +5,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
                     /**
-                     * Binary accessor that tests whether {@code lhs} is greater than {@code rhs}
+                     * Binary operator that tests whether {@code lhs} is greater than {@code rhs}
                      *
                      * <p>
                      *     You probably won't ever want to use this class directly;
@@ -13,9 +13,9 @@
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
-/* GENERATED CODE */public class GreaterThanOperator extends TypedBinaryOperator {
+/* GENERATED CODE */public class GreaterThanAccessor extends TypedBinaryAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */	public GreaterThanOperator(IRowAccessor lhs, IRowAccessor rhs) {
+/* GENERATED CODE */	public GreaterThanAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

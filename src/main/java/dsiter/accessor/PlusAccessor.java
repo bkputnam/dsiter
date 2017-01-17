@@ -14,11 +14,11 @@ import dsiter.row.IRowAccessor;
  *     directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class PlusOperator extends TypedBinaryOperator {
+public class PlusAccessor extends TypedBinaryAccessor {
 
     private ColumnType type;
 
-    public PlusOperator(IRowAccessor lhs, IRowAccessor rhs) {
+    public PlusAccessor(IRowAccessor lhs, IRowAccessor rhs) {
         super(lhs, rhs);
     }
 

@@ -15,7 +15,7 @@ public class TestDivideOperator {
         int lhs = 1;
         int rhs = 5;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getIntInstance(lhs),
                 ConstantAccessor.getIntInstance(rhs)
         );
@@ -28,7 +28,7 @@ public class TestDivideOperator {
         int lhs = 1;
         long rhs = 5L;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getIntInstance(lhs),
                 ConstantAccessor.getLongInstance(rhs)
         );
@@ -41,7 +41,7 @@ public class TestDivideOperator {
         int lhs = 1;
         float rhs = 5F;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getIntInstance(lhs),
                 ConstantAccessor.getFloatInstance(rhs)
         );
@@ -54,7 +54,7 @@ public class TestDivideOperator {
         int lhs = 1;
         double rhs = 5D;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getIntInstance(lhs),
                 ConstantAccessor.getDoubleInstance(rhs)
         );
@@ -69,7 +69,7 @@ public class TestDivideOperator {
         long lhs = 1L;
         int rhs = 5;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getLongInstance(lhs),
                 ConstantAccessor.getIntInstance(rhs)
         );
@@ -82,7 +82,7 @@ public class TestDivideOperator {
         long lhs = 1L;
         long rhs = 5L;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getLongInstance(lhs),
                 ConstantAccessor.getLongInstance(rhs)
         );
@@ -95,7 +95,7 @@ public class TestDivideOperator {
         long lhs = 1L;
         float rhs = 5F;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getLongInstance(lhs),
                 ConstantAccessor.getFloatInstance(rhs)
         );
@@ -108,7 +108,7 @@ public class TestDivideOperator {
         long lhs = 1L;
         double rhs = 5D;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getLongInstance(lhs),
                 ConstantAccessor.getDoubleInstance(rhs)
         );
@@ -123,7 +123,7 @@ public class TestDivideOperator {
         float lhs = 1F;
         int rhs = 5;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getFloatInstance(lhs),
                 ConstantAccessor.getIntInstance(rhs)
         );
@@ -136,7 +136,7 @@ public class TestDivideOperator {
         float lhs = 1F;
         long rhs = 5L;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getFloatInstance(lhs),
                 ConstantAccessor.getLongInstance(rhs)
         );
@@ -149,7 +149,7 @@ public class TestDivideOperator {
         float lhs = 1F;
         float rhs = 5F;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getFloatInstance(lhs),
                 ConstantAccessor.getFloatInstance(rhs)
         );
@@ -162,7 +162,7 @@ public class TestDivideOperator {
         float lhs = 1F;
         double rhs = 5D;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getFloatInstance(lhs),
                 ConstantAccessor.getDoubleInstance(rhs)
         );
@@ -177,7 +177,7 @@ public class TestDivideOperator {
         double lhs = 1D;
         int rhs = 5;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getDoubleInstance(lhs),
                 ConstantAccessor.getIntInstance(rhs)
         );
@@ -190,7 +190,7 @@ public class TestDivideOperator {
         double lhs = 1D;
         long rhs = 5L;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getDoubleInstance(lhs),
                 ConstantAccessor.getLongInstance(rhs)
         );
@@ -203,7 +203,7 @@ public class TestDivideOperator {
         double lhs = 1D;
         float rhs = 5F;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getDoubleInstance(lhs),
                 ConstantAccessor.getFloatInstance(rhs)
         );
@@ -216,7 +216,7 @@ public class TestDivideOperator {
         double lhs = 1D;
         double rhs = 5D;
 
-        DivideOperator mo = new DivideOperator(
+        DivideAccessor mo = new DivideAccessor(
                 ConstantAccessor.getDoubleInstance(lhs),
                 ConstantAccessor.getDoubleInstance(rhs)
         );

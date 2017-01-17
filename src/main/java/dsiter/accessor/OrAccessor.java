@@ -4,7 +4,7 @@ import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 
 /**
- * Binary accessor that computes a logical AND operation.
+ * Binary accessor that computes the logical OR of {@code lhs} and {@code rhs}
  *
  * <p>
  *     You probably won't ever want to use this class directly;
@@ -12,9 +12,9 @@ import dsiter.row.IRowAccessor;
  *     directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class AndOperator extends TypedBinaryOperator {
+public class OrAccessor extends TypedBinaryAccessor {
 
-	public AndOperator(IRowAccessor lhs, IRowAccessor rhs) {
+	public OrAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 
@@ -29,5 +29,5 @@ public class AndOperator extends TypedBinaryOperator {
 	}
 
 	@Override
-	protected boolean handle_bool_bool_bool(boolean lhs, boolean rhs) { return lhs && rhs; }
+	protected boolean handle_bool_bool_bool(boolean lhs, boolean rhs) { return lhs || rhs; }
 }

@@ -3,6 +3,7 @@ package dsiter.accessor;
 import dsiter.IterUtils;
 import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.IDatasetIterator;
+import dsiter.parser.RegexParseException;
 import dsiter.row.ColumnType;
 import dsiter.row.IColumnAccessor;
 import dsiter.row.Row;
@@ -78,11 +79,11 @@ public class TestRegexMatchOperator {
 
 	private static class RmoTester {
 
-		private RegexMatchOperator rmo;
+		private RegexMatchAccessor rmo;
 		private Row row;
 
 		public RmoTester(String pattern) {
-			rmo = new RegexMatchOperator(
+			rmo = new RegexMatchAccessor(
 				IColumnAccessor.getInstance(ColumnType.STRING, 0),
 				pattern
 			);

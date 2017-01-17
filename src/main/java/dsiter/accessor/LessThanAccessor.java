@@ -4,7 +4,7 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
-                     * Binary accessor that tests whether {@code lhs} is less than {@code rhs}
+                     * Binary operator that tests whether {@code lhs} is less than {@code rhs}
                      *
                      * <p>
                      *     You probably won't ever want to use this class directly;
@@ -12,9 +12,9 @@
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
-/* GENERATED CODE */public class LessThanOperator extends TypedBinaryOperator {
+/* GENERATED CODE */public class LessThanAccessor extends TypedBinaryAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */	public LessThanOperator(IRowAccessor lhs, IRowAccessor rhs) {
+/* GENERATED CODE */	public LessThanAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

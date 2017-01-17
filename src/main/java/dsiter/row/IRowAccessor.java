@@ -1,9 +1,13 @@
 /* GENERATED CODE */package dsiter.row;
 /* GENERATED CODE */
-                    /**
+
+import dsiter.accessor.TypedBinaryAccessor;
+import dsiter.accessor.TypedUnaryAccessor;
+
+/**
                      * An interface representing objects that return values from {@link Row}s. The returned
                      * values may be simple column reads (see: {@link IColumnAccessor}), computed
-                     * values (see: everything in <a href="../accessor/package-summary.html">dsiter.accessor</a>),
+                     * values (see: everything in <a href="../operator/package-summary.html">dsiter.accessor</a>),
                      * or static values that
                      * have nothing at all to do with the passed {@code Row} (see: {@link ConstantAccessor}).
                      *
@@ -16,7 +20,7 @@
                      *     {@code this}, but some implementations override this with more sophisticated
                      *     behavior. For example some implementations override these
                      *     methods to return an inner accessor of the correct type (see:
-                     *     {@link dsiter.accessor.TypedBinaryOperator}, {@link dsiter.accessor.TypedUnaryOperator}).
+                     *     {@link TypedBinaryAccessor}, {@link TypedUnaryAccessor}).
                      * </p>
                      *
                      * <p>

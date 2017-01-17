@@ -12,7 +12,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testIntTrue() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getIntInstance(2),
 			ConstantAccessor.getIntInstance(2)
 		);
@@ -22,7 +22,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testIntFalse() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getIntInstance(2),
 			ConstantAccessor.getIntInstance(3)
 		);
@@ -32,7 +32,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testLongTrue() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getLongInstance(2L),
 			ConstantAccessor.getLongInstance(2L)
 		);
@@ -42,7 +42,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testLongFalse() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getLongInstance(2L),
 			ConstantAccessor.getLongInstance(3L)
 		);
@@ -59,7 +59,7 @@ public class TestEqualsOperator {
 		assertFalse(s1 == s2); // Make sure we don't get a false success
 		assertTrue(s1.equals(s2)); // Make sure I didn't mess up the string manipulation
 
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getStringInstance(s1),
 			ConstantAccessor.getStringInstance(s2)
 		);
@@ -76,7 +76,7 @@ public class TestEqualsOperator {
 		assertFalse(s1 == s2); // Make sure we don't get a false success
 		assertFalse(s1.equals(s2)); // Make sure I didn't mess up the string manipulation
 
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getStringInstance(s1),
 			ConstantAccessor.getStringInstance(s2)
 		);
@@ -86,7 +86,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testLongFloatTrue() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getLongInstance(2L),
 			ConstantAccessor.getFloatInstance(2.0F)
 		);
@@ -96,7 +96,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testLongFloatFalse() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 			ConstantAccessor.getLongInstance(2L),
 			ConstantAccessor.getFloatInstance(3.0F)
 		);
@@ -106,7 +106,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testJsDateTrue() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z")
 		);
@@ -115,7 +115,7 @@ public class TestEqualsOperator {
 
 	@Test
 	public void testJsDateFalse() {
-		EqualsOperator eq = new EqualsOperator(
+		EqualsAccessor eq = new EqualsAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z")
 		);

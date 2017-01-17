@@ -14,7 +14,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_int_eq_int() {
-		LessThanOperator gte = new LessThanOperator(
+		LessThanAccessor gte = new LessThanAccessor(
 			ConstantAccessor.getIntInstance(1),
 			ConstantAccessor.getIntInstance(1)
 		);
@@ -24,7 +24,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_int_gt_int() {
-		LessThanOperator gte = new LessThanOperator(
+		LessThanAccessor gte = new LessThanAccessor(
 			ConstantAccessor.getIntInstance(2),
 			ConstantAccessor.getIntInstance(1)
 		);
@@ -34,7 +34,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_int_lt_int() {
-		LessThanOperator gte = new LessThanOperator(
+		LessThanAccessor gte = new LessThanAccessor(
 			ConstantAccessor.getIntInstance(0),
 			ConstantAccessor.getIntInstance(1)
 		);
@@ -44,7 +44,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_long_eq_long() {
-		LessThanOperator gte = new LessThanOperator(
+		LessThanAccessor gte = new LessThanAccessor(
 			ConstantAccessor.getLongInstance(1L),
 			ConstantAccessor.getLongInstance(1L)
 		);
@@ -54,7 +54,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_float_eq_float() {
-		LessThanOperator gte = new LessThanOperator(
+		LessThanAccessor gte = new LessThanAccessor(
 			ConstantAccessor.getFloatInstance(1F),
 			ConstantAccessor.getFloatInstance(1F)
 		);
@@ -64,7 +64,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_double_eq_double() {
-		LessThanOperator gte = new LessThanOperator(
+		LessThanAccessor gte = new LessThanAccessor(
 			ConstantAccessor.getDoubleInstance(1D),
 			ConstantAccessor.getDoubleInstance(1D)
 		);
@@ -81,7 +81,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_jsdate_eq_int() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getIntInstance(0)
 		);
@@ -89,7 +89,7 @@ public class TestLessThanOperator {
 	}
 	@Test
 	public void test_jsdate_gt_int() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z"),
 				ConstantAccessor.getIntInstance(0)
 		);
@@ -97,7 +97,7 @@ public class TestLessThanOperator {
 	}
 	@Test
 	public void test_jsdate_lt_int() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getIntInstance(1)
 		);
@@ -106,7 +106,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_jsdate_eq_long() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getLongInstance(0L)
 		);
@@ -114,7 +114,7 @@ public class TestLessThanOperator {
 	}
 	@Test
 	public void test_jsdate_gt_long() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z"),
 				ConstantAccessor.getLongInstance(0L)
 		);
@@ -122,7 +122,7 @@ public class TestLessThanOperator {
 	}
 	@Test
 	public void test_jsdate_lt_long() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
 				ConstantAccessor.getLongInstance(1L)
 		);
@@ -131,7 +131,7 @@ public class TestLessThanOperator {
 
 	@Test
 	public void test_int_eq_jsdate() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getIntInstance(0),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z")
 		);
@@ -139,7 +139,7 @@ public class TestLessThanOperator {
 	}
 	@Test
 	public void test_int_gt_jsdate() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getIntInstance(1),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z")
 		);
@@ -147,7 +147,7 @@ public class TestLessThanOperator {
 	}
 	@Test
 	public void test_int_lt_jsdate() {
-		LessThanOperator op = new LessThanOperator(
+		LessThanAccessor op = new LessThanAccessor(
 				ConstantAccessor.getIntInstance(0),
 				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z")
 		);

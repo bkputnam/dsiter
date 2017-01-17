@@ -4,7 +4,7 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
-                     * Unary accessor that computes the square root of {@code src}
+                     * Unary operator that computes the square root of {@code src}
                      *
                      * <p>
                      *     You probably won't ever want to use this class directly;
@@ -12,9 +12,9 @@
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
-/* GENERATED CODE */public class SqrtOperator extends TypedUnaryOperator {
+/* GENERATED CODE */public class SqrtAccessor extends TypedUnaryAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */	public SqrtOperator(IRowAccessor src) {
+/* GENERATED CODE */	public SqrtAccessor(IRowAccessor src) {
 /* GENERATED CODE */		super(src);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

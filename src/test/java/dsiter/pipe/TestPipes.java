@@ -5,8 +5,8 @@ import dsiter.IteratorExpectations;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.RangeIterator;
-import dsiter.accessor.EqualsOperator;
-import dsiter.accessor.ModuloOperator;
+import dsiter.accessor.EqualsAccessor;
+import dsiter.accessor.ModuloAccessor;
 import dsiter.row.*;
 import org.junit.Test;
 
@@ -34,8 +34,8 @@ public class TestPipes {
 
 	@Test
 	public void testFilterPipe() throws Exception {
-		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsOperator(
-				new ModuloOperator(
+		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsAccessor(
+				new ModuloAccessor(
 					IColumnAccessor.getInstance(ColumnType.INT, 0),
 						ConstantAccessor.getIntInstance(2)
 				),

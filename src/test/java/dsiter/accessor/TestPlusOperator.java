@@ -15,7 +15,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
 		IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3, po.getValueFromRow(new Row()));
     }
@@ -25,7 +25,7 @@ public class TestPlusOperator {
 		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
 		IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3L, po.getValueFromRow(new Row()));
     }
@@ -35,7 +35,7 @@ public class TestPlusOperator {
 		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
 		IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3F, po.getValueFromRow(new Row()));
     }
@@ -45,7 +45,7 @@ public class TestPlusOperator {
 		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
 		IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3D, po.getValueFromRow(new Row()));
     }
@@ -55,7 +55,7 @@ public class TestPlusOperator {
 		IRowAccessor ca1 = ConstantAccessor.getIntInstance(1);
 		IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("12", po.getValueFromRow(new Row()));
     }
@@ -67,7 +67,7 @@ public class TestPlusOperator {
 		IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
 		IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3L, po.getValueFromRow(new Row()));
     }
@@ -77,7 +77,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
         IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3L, po.getValueFromRow(new Row()));
     }
@@ -87,7 +87,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
         IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3F, po.getValueFromRow(new Row()));
     }
@@ -97,7 +97,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
         IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3D, po.getValueFromRow(new Row()));
     }
@@ -107,7 +107,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getLongInstance(1L);
         IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("12", po.getValueFromRow(new Row()));
     }
@@ -119,7 +119,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
         IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3F, po.getValueFromRow(new Row()));
     }
@@ -129,7 +129,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
         IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3F, po.getValueFromRow(new Row()));
     }
@@ -139,7 +139,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
         IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3F, po.getValueFromRow(new Row()));
     }
@@ -149,7 +149,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
         IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3D, po.getValueFromRow(new Row()));
     }
@@ -159,7 +159,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getFloatInstance(1F);
         IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("1.02", po.getValueFromRow(new Row()));
     }
@@ -171,7 +171,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
         IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3D, po.getValueFromRow(new Row()));
     }
@@ -181,7 +181,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
         IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3D, po.getValueFromRow(new Row()));
     }
@@ -191,7 +191,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
         IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3D, po.getValueFromRow(new Row()));
     }
@@ -201,7 +201,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
         IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals(3D, po.getValueFromRow(new Row()));
     }
@@ -211,7 +211,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getDoubleInstance(1D);
         IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("1.02", po.getValueFromRow(new Row()));
     }
@@ -223,7 +223,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
         IRowAccessor ca2 = ConstantAccessor.getIntInstance(2);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("12", po.getValueFromRow(new Row()));
     }
@@ -233,7 +233,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
         IRowAccessor ca2 = ConstantAccessor.getLongInstance(2L);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("12", po.getValueFromRow(new Row()));
     }
@@ -243,7 +243,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
         IRowAccessor ca2 = ConstantAccessor.getFloatInstance(2F);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("12.0", po.getValueFromRow(new Row()));
     }
@@ -253,7 +253,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
         IRowAccessor ca2 = ConstantAccessor.getDoubleInstance(2D);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("12.0", po.getValueFromRow(new Row()));
     }
@@ -263,7 +263,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
         IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("12", po.getValueFromRow(new Row()));
     }
@@ -273,7 +273,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getStringInstance("1");
         IRowAccessor ca2 = ConstantAccessor.getBoolInstance(true);
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("1true", po.getValueFromRow(new Row()));
     }
@@ -285,7 +285,7 @@ public class TestPlusOperator {
         IRowAccessor ca1 = ConstantAccessor.getBoolInstance(true);
         IRowAccessor ca2 = ConstantAccessor.getStringInstance("2");
 
-        PlusOperator po = new PlusOperator(ca1, ca2);
+        PlusAccessor po = new PlusAccessor(ca1, ca2);
 
         assertEquals("true2", po.getValueFromRow(new Row()));
     }
