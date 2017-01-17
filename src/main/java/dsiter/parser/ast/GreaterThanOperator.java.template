@@ -1,0 +1,70 @@
+package dsiter.parser.ast;
+
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+import dsiter.accessor.GreaterThanAccessor;
+
+public class GreaterThanOperator implements AstNode {
+
+	private AstNode lhsNode;
+	private AstNode rhsNode;
+
+	public GreaterThanOperator(AstNode lhsNode, AstNode rhsNode) {
+		this.lhsNode = lhsNode;
+		this.rhsNode = rhsNode;
+	}
+
+	@Override
+	public IRowAccessor link(ColumnDescriptor[] cds) {
+		IRowAccessor lhs = lhsNode.link(cds);
+		IRowAccessor rhs = rhsNode.link(cds);
+
+		ColumnType lhsType = lhs.getType();
+		ColumnType rhsType = rhs.getType();
+
+		<%
+			def typeLookup = ColumnTypes.collectEntries { type ->
+				[(type.type): type]
+			}
+
+			def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+				typeLookup[name]
+			}
+
+			def typePairs = []
+
+			numericTypes.each { lhsType ->
+				numericTypes.each { rhsType ->
+					typePairs << new Tuple(lhsType, rhsType)
+				}
+			}
+
+			typePairs << new Tuple(typeLookup["JSDATE"], typeLookup["JSDATE"])
+			typePairs << new Tuple(typeLookup["JSDATE"], typeLookup["INT"])
+			typePairs << new Tuple(typeLookup["JSDATE"], typeLookup["LONG"])
+			typePairs << new Tuple(typeLookup["INT"], typeLookup["JSDATE"])
+			typePairs << new Tuple(typeLookup["LONG"], typeLookup["JSDATE"])
+
+			def isFirst = true
+			typePairs.each { pair ->
+				def lhsType = pair.get(0)
+				def rhsType = pair.get(1)
+		%>
+		${!isFirst ? "else " : ""}if (lhsType == ColumnType.${lhsType.type} && rhsType == ColumnType.${lhsType.type}) {
+			return new GreaterThanAccessor.${lhsType.type}_${rhsType.type}(
+				(IRowAccessor.${lhsType.type})lhs,
+				(IRowAccessor.${rhsType.type})rhs
+			);
+		}<%
+				isFirst = false
+			}
+		%>
+		else {
+			throw new LinkException(
+				"Unsupported operand types for GreaterThanOperator: (" +
+				lhsType + ", " + rhsType + ")"
+			);
+		}
+	}
+}

@@ -1,0 +1,34 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+
+public interface ExponentAccessor extends IRowAccessor.DOUBLE {
+
+	<%
+		def types = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			ColumnTypes.find { type -> type.type == name }
+		}
+
+		types.each { lhs ->
+			types.each { rhs ->
+	%>
+	public static class ${lhs.type}_${rhs.type} implements ExponentAccessor {
+
+		private IRowAccessor.${lhs.type} lhs;
+		private IRowAccessor.${rhs.type} rhs;
+
+		public ${lhs.type}_${rhs.type}(IRowAccessor.${lhs.type} lhs, IRowAccessor.${rhs.type} rhs) {
+			this.lhs = lhs;
+			this.rhs = rhs;
+		}
+
+		@Override
+		public double getDoubleFromRow(Row row) {
+			return Math.pow(lhs.get${lhs.capitalized}FromRow(row), rhs.get${rhs.capitalized}FromRow(row));
+		}
+	}
+	<%
+		} }
+	%>
+}
