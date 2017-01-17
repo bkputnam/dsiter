@@ -3,10 +3,16 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */
-/* GENERATED CODE */public interface GreaterThanAccessor extends IRowAccessor.BOOLEAN {
+/* GENERATED CODE */public interface AddAccessor extends IRowAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class INT_INT implements GreaterThanAccessor {
+/* GENERATED CODE */	public interface INT extends AddAccessor, IRowAccessor.INT { }
+/* GENERATED CODE */	public interface LONG extends AddAccessor, IRowAccessor.LONG { }
+/* GENERATED CODE */	public interface FLOAT extends AddAccessor, IRowAccessor.FLOAT { }
+/* GENERATED CODE */	public interface DOUBLE extends AddAccessor, IRowAccessor.DOUBLE { }
+/* GENERATED CODE */
+/* GENERATED CODE */	
+/* GENERATED CODE */	public class INT_INT implements INT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
 /* GENERATED CODE */		private IRowAccessor.INT rhs;
@@ -17,12 +23,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getIntFromRow(row) > rhs.getIntFromRow(row);
+/* GENERATED CODE */		public int getIntFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getIntFromRow(row) + rhs.getIntFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class INT_LONG implements GreaterThanAccessor {
+/* GENERATED CODE */	public class INT_LONG implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
 /* GENERATED CODE */		private IRowAccessor.LONG rhs;
@@ -33,12 +39,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getIntFromRow(row) > rhs.getLongFromRow(row);
+/* GENERATED CODE */		public long getLongFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getIntFromRow(row) + rhs.getLongFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class INT_FLOAT implements GreaterThanAccessor {
+/* GENERATED CODE */	public class INT_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
 /* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
@@ -49,12 +55,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getIntFromRow(row) > rhs.getFloatFromRow(row);
+/* GENERATED CODE */		public float getFloatFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getIntFromRow(row) + rhs.getFloatFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class INT_DOUBLE implements GreaterThanAccessor {
+/* GENERATED CODE */	public class INT_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
 /* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
@@ -65,12 +71,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getIntFromRow(row) > rhs.getDoubleFromRow(row);
+/* GENERATED CODE */		public double getDoubleFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getIntFromRow(row) + rhs.getDoubleFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class LONG_INT implements GreaterThanAccessor {
+/* GENERATED CODE */	public class LONG_INT implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
 /* GENERATED CODE */		private IRowAccessor.INT rhs;
@@ -81,12 +87,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getLongFromRow(row) > rhs.getIntFromRow(row);
+/* GENERATED CODE */		public long getLongFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getLongFromRow(row) + rhs.getIntFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class LONG_LONG implements GreaterThanAccessor {
+/* GENERATED CODE */	public class LONG_LONG implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
 /* GENERATED CODE */		private IRowAccessor.LONG rhs;
@@ -97,12 +103,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getLongFromRow(row) > rhs.getLongFromRow(row);
+/* GENERATED CODE */		public long getLongFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getLongFromRow(row) + rhs.getLongFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class LONG_FLOAT implements GreaterThanAccessor {
+/* GENERATED CODE */	public class LONG_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
 /* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
@@ -113,12 +119,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getLongFromRow(row) > rhs.getFloatFromRow(row);
+/* GENERATED CODE */		public float getFloatFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getLongFromRow(row) + rhs.getFloatFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class LONG_DOUBLE implements GreaterThanAccessor {
+/* GENERATED CODE */	public class LONG_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
 /* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
@@ -129,12 +135,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getLongFromRow(row) > rhs.getDoubleFromRow(row);
+/* GENERATED CODE */		public double getDoubleFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getLongFromRow(row) + rhs.getDoubleFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class FLOAT_INT implements GreaterThanAccessor {
+/* GENERATED CODE */	public class FLOAT_INT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
 /* GENERATED CODE */		private IRowAccessor.INT rhs;
@@ -145,12 +151,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getFloatFromRow(row) > rhs.getIntFromRow(row);
+/* GENERATED CODE */		public float getFloatFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getFloatFromRow(row) + rhs.getIntFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class FLOAT_LONG implements GreaterThanAccessor {
+/* GENERATED CODE */	public class FLOAT_LONG implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
 /* GENERATED CODE */		private IRowAccessor.LONG rhs;
@@ -161,12 +167,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getFloatFromRow(row) > rhs.getLongFromRow(row);
+/* GENERATED CODE */		public float getFloatFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getFloatFromRow(row) + rhs.getLongFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class FLOAT_FLOAT implements GreaterThanAccessor {
+/* GENERATED CODE */	public class FLOAT_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
 /* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
@@ -177,12 +183,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getFloatFromRow(row) > rhs.getFloatFromRow(row);
+/* GENERATED CODE */		public float getFloatFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getFloatFromRow(row) + rhs.getFloatFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class FLOAT_DOUBLE implements GreaterThanAccessor {
+/* GENERATED CODE */	public class FLOAT_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
 /* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
@@ -193,12 +199,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getFloatFromRow(row) > rhs.getDoubleFromRow(row);
+/* GENERATED CODE */		public double getDoubleFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getFloatFromRow(row) + rhs.getDoubleFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class DOUBLE_INT implements GreaterThanAccessor {
+/* GENERATED CODE */	public class DOUBLE_INT implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
 /* GENERATED CODE */		private IRowAccessor.INT rhs;
@@ -209,12 +215,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getDoubleFromRow(row) > rhs.getIntFromRow(row);
+/* GENERATED CODE */		public double getDoubleFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getDoubleFromRow(row) + rhs.getIntFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class DOUBLE_LONG implements GreaterThanAccessor {
+/* GENERATED CODE */	public class DOUBLE_LONG implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
 /* GENERATED CODE */		private IRowAccessor.LONG rhs;
@@ -225,12 +231,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getDoubleFromRow(row) > rhs.getLongFromRow(row);
+/* GENERATED CODE */		public double getDoubleFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getDoubleFromRow(row) + rhs.getLongFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class DOUBLE_FLOAT implements GreaterThanAccessor {
+/* GENERATED CODE */	public class DOUBLE_FLOAT implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
 /* GENERATED CODE */		private IRowAccessor.FLOAT rhs;
@@ -241,12 +247,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getDoubleFromRow(row) > rhs.getFloatFromRow(row);
+/* GENERATED CODE */		public double getDoubleFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getDoubleFromRow(row) + rhs.getFloatFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
-/* GENERATED CODE */	public static class DOUBLE_DOUBLE implements GreaterThanAccessor {
+/* GENERATED CODE */	public class DOUBLE_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
 /* GENERATED CODE */		private IRowAccessor.DOUBLE rhs;
@@ -257,88 +263,8 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getDoubleFromRow(row) > rhs.getDoubleFromRow(row);
-/* GENERATED CODE */		}
-/* GENERATED CODE */	}
-/* GENERATED CODE */	
-/* GENERATED CODE */	public static class JSDATE_JSDATE implements GreaterThanAccessor {
-/* GENERATED CODE */
-/* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
-/* GENERATED CODE */		private IRowAccessor.JSDATE rhs;
-/* GENERATED CODE */
-/* GENERATED CODE */		public JSDATE_JSDATE(IRowAccessor.JSDATE lhs, IRowAccessor.JSDATE rhs) {
-/* GENERATED CODE */			this.lhs = lhs;
-/* GENERATED CODE */			this.rhs = rhs;
-/* GENERATED CODE */		}
-/* GENERATED CODE */
-/* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getJsDateFromRow(row) > rhs.getJsDateFromRow(row);
-/* GENERATED CODE */		}
-/* GENERATED CODE */	}
-/* GENERATED CODE */	
-/* GENERATED CODE */	public static class JSDATE_INT implements GreaterThanAccessor {
-/* GENERATED CODE */
-/* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
-/* GENERATED CODE */		private IRowAccessor.INT rhs;
-/* GENERATED CODE */
-/* GENERATED CODE */		public JSDATE_INT(IRowAccessor.JSDATE lhs, IRowAccessor.INT rhs) {
-/* GENERATED CODE */			this.lhs = lhs;
-/* GENERATED CODE */			this.rhs = rhs;
-/* GENERATED CODE */		}
-/* GENERATED CODE */
-/* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getJsDateFromRow(row) > rhs.getIntFromRow(row);
-/* GENERATED CODE */		}
-/* GENERATED CODE */	}
-/* GENERATED CODE */	
-/* GENERATED CODE */	public static class JSDATE_LONG implements GreaterThanAccessor {
-/* GENERATED CODE */
-/* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
-/* GENERATED CODE */		private IRowAccessor.LONG rhs;
-/* GENERATED CODE */
-/* GENERATED CODE */		public JSDATE_LONG(IRowAccessor.JSDATE lhs, IRowAccessor.LONG rhs) {
-/* GENERATED CODE */			this.lhs = lhs;
-/* GENERATED CODE */			this.rhs = rhs;
-/* GENERATED CODE */		}
-/* GENERATED CODE */
-/* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getJsDateFromRow(row) > rhs.getLongFromRow(row);
-/* GENERATED CODE */		}
-/* GENERATED CODE */	}
-/* GENERATED CODE */	
-/* GENERATED CODE */	public static class INT_JSDATE implements GreaterThanAccessor {
-/* GENERATED CODE */
-/* GENERATED CODE */		private IRowAccessor.INT lhs;
-/* GENERATED CODE */		private IRowAccessor.JSDATE rhs;
-/* GENERATED CODE */
-/* GENERATED CODE */		public INT_JSDATE(IRowAccessor.INT lhs, IRowAccessor.JSDATE rhs) {
-/* GENERATED CODE */			this.lhs = lhs;
-/* GENERATED CODE */			this.rhs = rhs;
-/* GENERATED CODE */		}
-/* GENERATED CODE */
-/* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getIntFromRow(row) > rhs.getJsDateFromRow(row);
-/* GENERATED CODE */		}
-/* GENERATED CODE */	}
-/* GENERATED CODE */	
-/* GENERATED CODE */	public static class LONG_JSDATE implements GreaterThanAccessor {
-/* GENERATED CODE */
-/* GENERATED CODE */		private IRowAccessor.LONG lhs;
-/* GENERATED CODE */		private IRowAccessor.JSDATE rhs;
-/* GENERATED CODE */
-/* GENERATED CODE */		public LONG_JSDATE(IRowAccessor.LONG lhs, IRowAccessor.JSDATE rhs) {
-/* GENERATED CODE */			this.lhs = lhs;
-/* GENERATED CODE */			this.rhs = rhs;
-/* GENERATED CODE */		}
-/* GENERATED CODE */
-/* GENERATED CODE */		@Override
-/* GENERATED CODE */		public boolean getBoolFromRow(Row row) {
-/* GENERATED CODE */			return lhs.getLongFromRow(row) > rhs.getJsDateFromRow(row);
+/* GENERATED CODE */		public double getDoubleFromRow(Row row) {
+/* GENERATED CODE */			return lhs.getDoubleFromRow(row) + rhs.getDoubleFromRow(row);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	

@@ -3,7 +3,7 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
-public interface GreaterThanAccessor extends IRowAccessor.BOOLEAN {
+public interface LessThanAccessor extends IRowAccessor.BOOLEAN {
 
 	<%
 		def typeLookup = ColumnTypes.collectEntries { type ->
@@ -32,7 +32,7 @@ public interface GreaterThanAccessor extends IRowAccessor.BOOLEAN {
 			def lhsType = pair.get(0)
 			def rhsType = pair.get(1)
 	%>
-	public static class ${lhsType.type}_${rhsType.type} implements GreaterThanAccessor {
+	public static class ${lhsType.type}_${rhsType.type} implements LessThanAccessor {
 
 		private IRowAccessor.${lhsType.type} lhs;
 		private IRowAccessor.${rhsType.type} rhs;
@@ -44,7 +44,7 @@ public interface GreaterThanAccessor extends IRowAccessor.BOOLEAN {
 
 		@Override
 		public boolean getBoolFromRow(Row row) {
-			return lhs.get${lhsType.capitalized}FromRow(row) > rhs.get${rhsType.capitalized}FromRow(row);
+			return lhs.get${lhsType.capitalized}FromRow(row) < rhs.get${rhsType.capitalized}FromRow(row);
 		}
 	}
 	<% } %>
