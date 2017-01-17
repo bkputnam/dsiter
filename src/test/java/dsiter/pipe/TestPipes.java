@@ -2,6 +2,7 @@ package dsiter.pipe;
 
 import dsiter.IterUtils;
 import dsiter.IteratorExpectations;
+import dsiter.accessor.ConstantAccessor;
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.RangeIterator;
@@ -34,12 +35,12 @@ public class TestPipes {
 
 	@Test
 	public void testFilterPipe() throws Exception {
-		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsAccessor(
-				new ModuloAccessor(
-					IColumnAccessor.getInstance(ColumnType.INT, 0),
-						ConstantAccessor.getIntInstance(2)
+		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsAccessor.INT_INT(
+				new ModuloAccessor.INT_INT(
+					IColumnAccessor.getInstance(ColumnType.INT, 0).asIntAccessor(),
+						new ConstantAccessor.INT(2)
 				),
-				ConstantAccessor.getIntInstance(0)
+				new ConstantAccessor.INT(0)
 		).asBoolAccessor();
 
 		try (IDatasetIterator it = new RangeIterator(10)
