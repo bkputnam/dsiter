@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class TestCaretOperator {
 	@Test
 	public void testInt() {
-		CaretOperator co = new CaretOperator(
+		CaretAccessor co = new CaretAccessor(
 			ConstantAccessor.getIntInstance(2),
 			ConstantAccessor.getIntInstance(3)
 		);
@@ -18,7 +18,7 @@ public class TestCaretOperator {
 
 	@Test
 	public void testLong() {
-		CaretOperator co = new CaretOperator(
+		CaretAccessor co = new CaretAccessor(
 			ConstantAccessor.getLongInstance(2L),
 			ConstantAccessor.getLongInstance(3L)
 		);
@@ -28,7 +28,7 @@ public class TestCaretOperator {
 
 	@Test
 	public void testFloat() {
-		CaretOperator co = new CaretOperator(
+		CaretAccessor co = new CaretAccessor(
 			ConstantAccessor.getFloatInstance(2F),
 			ConstantAccessor.getFloatInstance(3F)
 		);
@@ -38,7 +38,7 @@ public class TestCaretOperator {
 
 	@Test
 	public void testDouble() {
-		CaretOperator co = new CaretOperator(
+		CaretAccessor co = new CaretAccessor(
 			ConstantAccessor.getDoubleInstance(2D),
 			ConstantAccessor.getDoubleInstance(3D)
 		);

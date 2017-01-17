@@ -381,49 +381,49 @@ public class OperatorParser {
 
 			// This is probably a silly way to implement an accessor lookup.
 			if(operator.equals("=")) {
-				return new EqualsOperator(lhs, rhs);
+				return new EqualsAccessor(lhs, rhs);
 			}
 			else if(operator.equals("!=")) {
-				return new NotEqualsOperator(lhs, rhs);
+				return new NotEqualsAccessor(lhs, rhs);
 			}
 			else if(operator.equals("<")) {
-				return new LessThanOperator(lhs, rhs);
+				return new LessThanAccessor(lhs, rhs);
 			}
 			else if(operator.equals(">")) {
-				return new GreaterThanOperator(lhs, rhs);
+				return new GreaterThanAccessor(lhs, rhs);
 			}
 			else if(operator.equals("<=")) {
-				return new LessThanEqualsOperator(lhs, rhs);
+				return new LessThanEqualsAccessor(lhs, rhs);
 			}
 			else if(operator.equals(">=")) {
-				return new GreaterThanEqualsOperator(lhs, rhs);
+				return new GreaterThanEqualsAccessor(lhs, rhs);
 			}
 			else if(operator.equals("||")) {
-				return new OrOperator(lhs, rhs);
+				return new OrAccessor(lhs, rhs);
 			}
 			else if(operator.equals("&&")) {
-				return new AndOperator(lhs, rhs);
+				return new AndAccessor(lhs, rhs);
 			}
 			else if(operator.equals("%")) {
-				return new ModuloOperator(lhs, rhs);
+				return new ModuloAccessor(lhs, rhs);
 			}
 			else if(operator.equals("+")) {
-				return new PlusOperator(lhs, rhs);
+				return new PlusAccessor(lhs, rhs);
 			}
 			else if(operator.equals("-")) {
-				return new MinusOperator(lhs, rhs);
+				return new MinusAccessor(lhs, rhs);
 			}
 			else if(operator.equals("*")) {
-				return new TimesOperator(lhs, rhs);
+				return new TimesAccessor(lhs, rhs);
 			}
 			else if(operator.equals("/")) {
-				return new DivideOperator(lhs, rhs);
+				return new DivideAccessor(lhs, rhs);
 			}
 			else if(operator.equals("nroot(")) {
-				return new NthRootOperator(lhs, rhs);
+				return new NthRootAccessor(lhs, rhs);
 			}
 			else if(operator.equals("^")) {
-				return new CaretOperator(lhs, rhs);
+				return new CaretAccessor(lhs, rhs);
 			}
 			else if(operator.equals("~")) {
 				// rhs *should* be a constant expression representing a string
@@ -436,7 +436,7 @@ public class OperatorParser {
 				catch (Exception e) {
 					throw new RegexParseException("User error: rhs of '~' accessor should be a string literal");
 				}
-				return new RegexMatchOperator(lhs, pattern);
+				return new RegexMatchAccessor(lhs, pattern);
 			}
 			else {
 				throw new Error("Programmer Error: unrecognized binary accessor token: \"" + operator + "\"");
@@ -446,10 +446,10 @@ public class OperatorParser {
 			IRowAccessor src = state.outputStack.pop();
 
 			if(operator.equals("!")) {
-				return new NotOperator(src);
+				return new NotAccessor(src);
 			}
 			else if(operator.equals("sqrt(")) {
-				return new SqrtOperator(src);
+				return new SqrtAccessor(src);
 			}
 			else {
 				throw new Error("Programmer Error: unrecognized unary accessor token: \"" + operator + "\"");

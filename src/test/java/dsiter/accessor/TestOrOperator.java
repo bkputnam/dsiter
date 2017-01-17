@@ -10,7 +10,7 @@ public class TestOrOperator {
 
 	@Test
 	public void testTrueTrue() {
-		OrOperator ao = new OrOperator(
+		OrAccessor ao = new OrAccessor(
 			ConstantAccessor.getBoolInstance(true),
 			ConstantAccessor.getBoolInstance(true)
 		);
@@ -20,7 +20,7 @@ public class TestOrOperator {
 
 	@Test
 	public void testTrueFalse() {
-		OrOperator ao = new OrOperator(
+		OrAccessor ao = new OrAccessor(
 			ConstantAccessor.getBoolInstance(true),
 			ConstantAccessor.getBoolInstance(false)
 		);
@@ -30,7 +30,7 @@ public class TestOrOperator {
 
 	@Test
 	public void testFalseTrue() {
-		OrOperator ao = new OrOperator(
+		OrAccessor ao = new OrAccessor(
 			ConstantAccessor.getBoolInstance(false),
 			ConstantAccessor.getBoolInstance(true)
 		);
@@ -40,7 +40,7 @@ public class TestOrOperator {
 
 	@Test
 	public void testFalseFalse() {
-		OrOperator ao = new OrOperator(
+		OrAccessor ao = new OrAccessor(
 			ConstantAccessor.getBoolInstance(false),
 			ConstantAccessor.getBoolInstance(false)
 		);

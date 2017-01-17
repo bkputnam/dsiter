@@ -10,7 +10,7 @@ public class TestNotOperator {
 
     @Test
     public void testNotTrue() {
-        NotOperator no = new NotOperator(
+        NotAccessor no = new NotAccessor(
             ConstantAccessor.getBoolInstance(true)
         );
 
@@ -19,7 +19,7 @@ public class TestNotOperator {
 
     @Test
     public void testNotFalse() {
-        NotOperator no = new NotOperator(
+        NotAccessor no = new NotAccessor(
                 ConstantAccessor.getBoolInstance(false)
         );
 
@@ -28,6 +28,6 @@ public class TestNotOperator {
 
     @Test(expected=IllegalArgumentException.class)
     public void testNullFails() {
-        NotOperator no = new NotOperator(null);
+        NotAccessor no = new NotAccessor(null);
     }
 }

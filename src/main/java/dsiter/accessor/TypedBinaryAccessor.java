@@ -21,16 +21,16 @@
                      *		of {@code lhs}, {@code rhs}, and {@code returnValue} (which means there are
                      *		{@code (# of types)^3} overridable methods available). Subclasses only
                      *		need to override the methods which they will actually support. So, for example,
-                     *		a logical boolean accessor only needs to override {@link #handle_bool_bool_bool}
-                     *		and a numeric accessor will only need to override the appropriate numeric
+                     *		a logical boolean operator only needs to override {@link #handle_bool_bool_bool}
+                     *		and a numeric operator will only need to override the appropriate numeric
                      *		{@code handle_x_y_z} methods. This superclass will use the information from
                      *		{@link #getReturnType} and {@link #testTypeCompatibility} to efficiently determine
                      *		which method to call.
                      * </p>
                      * 
-                     * @see TypedUnaryOperator
+                     * @see TypedUnaryAccessor
                      */
-/* GENERATED CODE */public abstract class TypedBinaryOperator implements IRowAccessor {
+/* GENERATED CODE */public abstract class TypedBinaryAccessor implements IRowAccessor {
 /* GENERATED CODE */
                     	/**
                     	 * Left Hand Side
@@ -53,7 +53,7 @@
                     	 * @param rhs	The {@code IRowAccessor} that will provide the right
                     	 *				hand side of the operation
                     	 */
-/* GENERATED CODE */	public TypedBinaryOperator(IRowAccessor lhs, IRowAccessor rhs) {
+/* GENERATED CODE */	public TypedBinaryAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		this.lhs = lhs;
 /* GENERATED CODE */		this.rhs = rhs;
 /* GENERATED CODE */
@@ -158,8 +158,8 @@
                     	 * of this operation. This method will only be called if {@link #testTypeCompatibility}
                     	 * returned {@code true}.
                     	 * 
-                    	 * @param lhsType	The type of the left hand side of the accessor
-                    	 * @param rhsType	The type of the right hand side of the accessor
+                    	 * @param lhsType	The type of the left hand side of the operator
+                    	 * @param rhsType	The type of the right hand side of the operator
                     	 * @return	The return type of the operation
                     	 */
 /* GENERATED CODE */	protected abstract ColumnType getReturnType(ColumnType lhsType, ColumnType rhsType);
@@ -168,8 +168,8 @@
                     	 * Subclasses must implement this method to let the superclass know whether or not they
                     	 * will accept {@code lhsType} and {@code rhsType} as valid argument types or not.
                     	 * 
-                    	 * @param lhsType	The type of the left hand side of the accessor
-                    	 * @param rhsType	The type of the right hand side of the accessor
+                    	 * @param lhsType	The type of the left hand side of the operator
+                    	 * @param rhsType	The type of the right hand side of the operator
                     	 * @return	{@code true} if the subclass will accept the passed types, else {@code false}
                     	 */
 /* GENERATED CODE */	protected abstract boolean testTypeCompatibility(ColumnType lhsType, ColumnType rhsType);
@@ -1516,7 +1516,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_int_int_int( int lhs, int rhs )  { throw new Error("Programmer error: handle_int_int_int must be overridden by subclass"); }
                     	/**
@@ -1524,7 +1524,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_int_long( int lhs, int rhs )  { throw new Error("Programmer error: handle_int_int_long must be overridden by subclass"); }
                     	/**
@@ -1532,7 +1532,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_int_int_float( int lhs, int rhs )  { throw new Error("Programmer error: handle_int_int_float must be overridden by subclass"); }
                     	/**
@@ -1540,7 +1540,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_int_int_double( int lhs, int rhs )  { throw new Error("Programmer error: handle_int_int_double must be overridden by subclass"); }
                     	/**
@@ -1548,7 +1548,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_int_int_string( int lhs, int rhs )  { throw new Error("Programmer error: handle_int_int_string must be overridden by subclass"); }
                     	/**
@@ -1556,7 +1556,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_int_int_bool( int lhs, int rhs )  { throw new Error("Programmer error: handle_int_int_bool must be overridden by subclass"); }
                     	/**
@@ -1564,7 +1564,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_int_jsdate( int lhs, int rhs )  { throw new Error("Programmer error: handle_int_int_jsdate must be overridden by subclass"); }
                     	/**
@@ -1572,7 +1572,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_int_long_int( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_long_int must be overridden by subclass"); }
                     	/**
@@ -1580,7 +1580,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_long_long( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_long_long must be overridden by subclass"); }
                     	/**
@@ -1588,7 +1588,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_int_long_float( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_long_float must be overridden by subclass"); }
                     	/**
@@ -1596,7 +1596,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_int_long_double( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_long_double must be overridden by subclass"); }
                     	/**
@@ -1604,7 +1604,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_int_long_string( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_long_string must be overridden by subclass"); }
                     	/**
@@ -1612,7 +1612,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_int_long_bool( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_long_bool must be overridden by subclass"); }
                     	/**
@@ -1620,7 +1620,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_long_jsdate( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_long_jsdate must be overridden by subclass"); }
                     	/**
@@ -1628,7 +1628,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_int_float_int( int lhs, float rhs )  { throw new Error("Programmer error: handle_int_float_int must be overridden by subclass"); }
                     	/**
@@ -1636,7 +1636,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_float_long( int lhs, float rhs )  { throw new Error("Programmer error: handle_int_float_long must be overridden by subclass"); }
                     	/**
@@ -1644,7 +1644,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_int_float_float( int lhs, float rhs )  { throw new Error("Programmer error: handle_int_float_float must be overridden by subclass"); }
                     	/**
@@ -1652,7 +1652,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_int_float_double( int lhs, float rhs )  { throw new Error("Programmer error: handle_int_float_double must be overridden by subclass"); }
                     	/**
@@ -1660,7 +1660,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_int_float_string( int lhs, float rhs )  { throw new Error("Programmer error: handle_int_float_string must be overridden by subclass"); }
                     	/**
@@ -1668,7 +1668,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_int_float_bool( int lhs, float rhs )  { throw new Error("Programmer error: handle_int_float_bool must be overridden by subclass"); }
                     	/**
@@ -1676,7 +1676,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_float_jsdate( int lhs, float rhs )  { throw new Error("Programmer error: handle_int_float_jsdate must be overridden by subclass"); }
                     	/**
@@ -1684,7 +1684,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_int_double_int( int lhs, double rhs )  { throw new Error("Programmer error: handle_int_double_int must be overridden by subclass"); }
                     	/**
@@ -1692,7 +1692,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_double_long( int lhs, double rhs )  { throw new Error("Programmer error: handle_int_double_long must be overridden by subclass"); }
                     	/**
@@ -1700,7 +1700,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_int_double_float( int lhs, double rhs )  { throw new Error("Programmer error: handle_int_double_float must be overridden by subclass"); }
                     	/**
@@ -1708,7 +1708,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_int_double_double( int lhs, double rhs )  { throw new Error("Programmer error: handle_int_double_double must be overridden by subclass"); }
                     	/**
@@ -1716,7 +1716,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_int_double_string( int lhs, double rhs )  { throw new Error("Programmer error: handle_int_double_string must be overridden by subclass"); }
                     	/**
@@ -1724,7 +1724,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_int_double_bool( int lhs, double rhs )  { throw new Error("Programmer error: handle_int_double_bool must be overridden by subclass"); }
                     	/**
@@ -1732,7 +1732,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_double_jsdate( int lhs, double rhs )  { throw new Error("Programmer error: handle_int_double_jsdate must be overridden by subclass"); }
                     	/**
@@ -1740,7 +1740,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_int_string_int( int lhs, String rhs )  { throw new Error("Programmer error: handle_int_string_int must be overridden by subclass"); }
                     	/**
@@ -1748,7 +1748,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_string_long( int lhs, String rhs )  { throw new Error("Programmer error: handle_int_string_long must be overridden by subclass"); }
                     	/**
@@ -1756,7 +1756,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_int_string_float( int lhs, String rhs )  { throw new Error("Programmer error: handle_int_string_float must be overridden by subclass"); }
                     	/**
@@ -1764,7 +1764,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_int_string_double( int lhs, String rhs )  { throw new Error("Programmer error: handle_int_string_double must be overridden by subclass"); }
                     	/**
@@ -1772,7 +1772,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_int_string_string( int lhs, String rhs )  { throw new Error("Programmer error: handle_int_string_string must be overridden by subclass"); }
                     	/**
@@ -1780,7 +1780,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_int_string_bool( int lhs, String rhs )  { throw new Error("Programmer error: handle_int_string_bool must be overridden by subclass"); }
                     	/**
@@ -1788,7 +1788,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_string_jsdate( int lhs, String rhs )  { throw new Error("Programmer error: handle_int_string_jsdate must be overridden by subclass"); }
                     	/**
@@ -1796,7 +1796,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_int_bool_int( int lhs, boolean rhs )  { throw new Error("Programmer error: handle_int_bool_int must be overridden by subclass"); }
                     	/**
@@ -1804,7 +1804,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_bool_long( int lhs, boolean rhs )  { throw new Error("Programmer error: handle_int_bool_long must be overridden by subclass"); }
                     	/**
@@ -1812,7 +1812,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_int_bool_float( int lhs, boolean rhs )  { throw new Error("Programmer error: handle_int_bool_float must be overridden by subclass"); }
                     	/**
@@ -1820,7 +1820,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_int_bool_double( int lhs, boolean rhs )  { throw new Error("Programmer error: handle_int_bool_double must be overridden by subclass"); }
                     	/**
@@ -1828,7 +1828,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_int_bool_string( int lhs, boolean rhs )  { throw new Error("Programmer error: handle_int_bool_string must be overridden by subclass"); }
                     	/**
@@ -1836,7 +1836,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_int_bool_bool( int lhs, boolean rhs )  { throw new Error("Programmer error: handle_int_bool_bool must be overridden by subclass"); }
                     	/**
@@ -1844,7 +1844,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_bool_jsdate( int lhs, boolean rhs )  { throw new Error("Programmer error: handle_int_bool_jsdate must be overridden by subclass"); }
                     	/**
@@ -1852,7 +1852,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_int_jsdate_int( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_jsdate_int must be overridden by subclass"); }
                     	/**
@@ -1860,7 +1860,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_jsdate_long( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_jsdate_long must be overridden by subclass"); }
                     	/**
@@ -1868,7 +1868,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_int_jsdate_float( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_jsdate_float must be overridden by subclass"); }
                     	/**
@@ -1876,7 +1876,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_int_jsdate_double( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_jsdate_double must be overridden by subclass"); }
                     	/**
@@ -1884,7 +1884,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_int_jsdate_string( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_jsdate_string must be overridden by subclass"); }
                     	/**
@@ -1892,7 +1892,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_int_jsdate_bool( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_jsdate_bool must be overridden by subclass"); }
                     	/**
@@ -1900,7 +1900,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_int_jsdate_jsdate( int lhs, long rhs )  { throw new Error("Programmer error: handle_int_jsdate_jsdate must be overridden by subclass"); }
                     	/**
@@ -1908,7 +1908,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_long_int_int( long lhs, int rhs )  { throw new Error("Programmer error: handle_long_int_int must be overridden by subclass"); }
                     	/**
@@ -1916,7 +1916,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_int_long( long lhs, int rhs )  { throw new Error("Programmer error: handle_long_int_long must be overridden by subclass"); }
                     	/**
@@ -1924,7 +1924,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_long_int_float( long lhs, int rhs )  { throw new Error("Programmer error: handle_long_int_float must be overridden by subclass"); }
                     	/**
@@ -1932,7 +1932,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_long_int_double( long lhs, int rhs )  { throw new Error("Programmer error: handle_long_int_double must be overridden by subclass"); }
                     	/**
@@ -1940,7 +1940,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_long_int_string( long lhs, int rhs )  { throw new Error("Programmer error: handle_long_int_string must be overridden by subclass"); }
                     	/**
@@ -1948,7 +1948,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_long_int_bool( long lhs, int rhs )  { throw new Error("Programmer error: handle_long_int_bool must be overridden by subclass"); }
                     	/**
@@ -1956,7 +1956,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_int_jsdate( long lhs, int rhs )  { throw new Error("Programmer error: handle_long_int_jsdate must be overridden by subclass"); }
                     	/**
@@ -1964,7 +1964,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_long_long_int( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_long_int must be overridden by subclass"); }
                     	/**
@@ -1972,7 +1972,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_long_long( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_long_long must be overridden by subclass"); }
                     	/**
@@ -1980,7 +1980,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_long_long_float( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_long_float must be overridden by subclass"); }
                     	/**
@@ -1988,7 +1988,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_long_long_double( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_long_double must be overridden by subclass"); }
                     	/**
@@ -1996,7 +1996,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_long_long_string( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_long_string must be overridden by subclass"); }
                     	/**
@@ -2004,7 +2004,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_long_long_bool( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_long_bool must be overridden by subclass"); }
                     	/**
@@ -2012,7 +2012,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_long_jsdate( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_long_jsdate must be overridden by subclass"); }
                     	/**
@@ -2020,7 +2020,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_long_float_int( long lhs, float rhs )  { throw new Error("Programmer error: handle_long_float_int must be overridden by subclass"); }
                     	/**
@@ -2028,7 +2028,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_float_long( long lhs, float rhs )  { throw new Error("Programmer error: handle_long_float_long must be overridden by subclass"); }
                     	/**
@@ -2036,7 +2036,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_long_float_float( long lhs, float rhs )  { throw new Error("Programmer error: handle_long_float_float must be overridden by subclass"); }
                     	/**
@@ -2044,7 +2044,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_long_float_double( long lhs, float rhs )  { throw new Error("Programmer error: handle_long_float_double must be overridden by subclass"); }
                     	/**
@@ -2052,7 +2052,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_long_float_string( long lhs, float rhs )  { throw new Error("Programmer error: handle_long_float_string must be overridden by subclass"); }
                     	/**
@@ -2060,7 +2060,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_long_float_bool( long lhs, float rhs )  { throw new Error("Programmer error: handle_long_float_bool must be overridden by subclass"); }
                     	/**
@@ -2068,7 +2068,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_float_jsdate( long lhs, float rhs )  { throw new Error("Programmer error: handle_long_float_jsdate must be overridden by subclass"); }
                     	/**
@@ -2076,7 +2076,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_long_double_int( long lhs, double rhs )  { throw new Error("Programmer error: handle_long_double_int must be overridden by subclass"); }
                     	/**
@@ -2084,7 +2084,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_double_long( long lhs, double rhs )  { throw new Error("Programmer error: handle_long_double_long must be overridden by subclass"); }
                     	/**
@@ -2092,7 +2092,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_long_double_float( long lhs, double rhs )  { throw new Error("Programmer error: handle_long_double_float must be overridden by subclass"); }
                     	/**
@@ -2100,7 +2100,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_long_double_double( long lhs, double rhs )  { throw new Error("Programmer error: handle_long_double_double must be overridden by subclass"); }
                     	/**
@@ -2108,7 +2108,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_long_double_string( long lhs, double rhs )  { throw new Error("Programmer error: handle_long_double_string must be overridden by subclass"); }
                     	/**
@@ -2116,7 +2116,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_long_double_bool( long lhs, double rhs )  { throw new Error("Programmer error: handle_long_double_bool must be overridden by subclass"); }
                     	/**
@@ -2124,7 +2124,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_double_jsdate( long lhs, double rhs )  { throw new Error("Programmer error: handle_long_double_jsdate must be overridden by subclass"); }
                     	/**
@@ -2132,7 +2132,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_long_string_int( long lhs, String rhs )  { throw new Error("Programmer error: handle_long_string_int must be overridden by subclass"); }
                     	/**
@@ -2140,7 +2140,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_string_long( long lhs, String rhs )  { throw new Error("Programmer error: handle_long_string_long must be overridden by subclass"); }
                     	/**
@@ -2148,7 +2148,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_long_string_float( long lhs, String rhs )  { throw new Error("Programmer error: handle_long_string_float must be overridden by subclass"); }
                     	/**
@@ -2156,7 +2156,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_long_string_double( long lhs, String rhs )  { throw new Error("Programmer error: handle_long_string_double must be overridden by subclass"); }
                     	/**
@@ -2164,7 +2164,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_long_string_string( long lhs, String rhs )  { throw new Error("Programmer error: handle_long_string_string must be overridden by subclass"); }
                     	/**
@@ -2172,7 +2172,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_long_string_bool( long lhs, String rhs )  { throw new Error("Programmer error: handle_long_string_bool must be overridden by subclass"); }
                     	/**
@@ -2180,7 +2180,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_string_jsdate( long lhs, String rhs )  { throw new Error("Programmer error: handle_long_string_jsdate must be overridden by subclass"); }
                     	/**
@@ -2188,7 +2188,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_long_bool_int( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_long_bool_int must be overridden by subclass"); }
                     	/**
@@ -2196,7 +2196,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_bool_long( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_long_bool_long must be overridden by subclass"); }
                     	/**
@@ -2204,7 +2204,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_long_bool_float( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_long_bool_float must be overridden by subclass"); }
                     	/**
@@ -2212,7 +2212,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_long_bool_double( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_long_bool_double must be overridden by subclass"); }
                     	/**
@@ -2220,7 +2220,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_long_bool_string( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_long_bool_string must be overridden by subclass"); }
                     	/**
@@ -2228,7 +2228,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_long_bool_bool( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_long_bool_bool must be overridden by subclass"); }
                     	/**
@@ -2236,7 +2236,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_bool_jsdate( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_long_bool_jsdate must be overridden by subclass"); }
                     	/**
@@ -2244,7 +2244,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_long_jsdate_int( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_jsdate_int must be overridden by subclass"); }
                     	/**
@@ -2252,7 +2252,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_jsdate_long( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_jsdate_long must be overridden by subclass"); }
                     	/**
@@ -2260,7 +2260,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_long_jsdate_float( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_jsdate_float must be overridden by subclass"); }
                     	/**
@@ -2268,7 +2268,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_long_jsdate_double( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_jsdate_double must be overridden by subclass"); }
                     	/**
@@ -2276,7 +2276,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_long_jsdate_string( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_jsdate_string must be overridden by subclass"); }
                     	/**
@@ -2284,7 +2284,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_long_jsdate_bool( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_jsdate_bool must be overridden by subclass"); }
                     	/**
@@ -2292,7 +2292,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_long_jsdate_jsdate( long lhs, long rhs )  { throw new Error("Programmer error: handle_long_jsdate_jsdate must be overridden by subclass"); }
                     	/**
@@ -2300,7 +2300,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_float_int_int( float lhs, int rhs )  { throw new Error("Programmer error: handle_float_int_int must be overridden by subclass"); }
                     	/**
@@ -2308,7 +2308,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_int_long( float lhs, int rhs )  { throw new Error("Programmer error: handle_float_int_long must be overridden by subclass"); }
                     	/**
@@ -2316,7 +2316,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_float_int_float( float lhs, int rhs )  { throw new Error("Programmer error: handle_float_int_float must be overridden by subclass"); }
                     	/**
@@ -2324,7 +2324,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_float_int_double( float lhs, int rhs )  { throw new Error("Programmer error: handle_float_int_double must be overridden by subclass"); }
                     	/**
@@ -2332,7 +2332,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_float_int_string( float lhs, int rhs )  { throw new Error("Programmer error: handle_float_int_string must be overridden by subclass"); }
                     	/**
@@ -2340,7 +2340,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_float_int_bool( float lhs, int rhs )  { throw new Error("Programmer error: handle_float_int_bool must be overridden by subclass"); }
                     	/**
@@ -2348,7 +2348,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_int_jsdate( float lhs, int rhs )  { throw new Error("Programmer error: handle_float_int_jsdate must be overridden by subclass"); }
                     	/**
@@ -2356,7 +2356,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_float_long_int( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_long_int must be overridden by subclass"); }
                     	/**
@@ -2364,7 +2364,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_long_long( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_long_long must be overridden by subclass"); }
                     	/**
@@ -2372,7 +2372,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_float_long_float( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_long_float must be overridden by subclass"); }
                     	/**
@@ -2380,7 +2380,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_float_long_double( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_long_double must be overridden by subclass"); }
                     	/**
@@ -2388,7 +2388,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_float_long_string( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_long_string must be overridden by subclass"); }
                     	/**
@@ -2396,7 +2396,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_float_long_bool( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_long_bool must be overridden by subclass"); }
                     	/**
@@ -2404,7 +2404,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_long_jsdate( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_long_jsdate must be overridden by subclass"); }
                     	/**
@@ -2412,7 +2412,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_float_float_int( float lhs, float rhs )  { throw new Error("Programmer error: handle_float_float_int must be overridden by subclass"); }
                     	/**
@@ -2420,7 +2420,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_float_long( float lhs, float rhs )  { throw new Error("Programmer error: handle_float_float_long must be overridden by subclass"); }
                     	/**
@@ -2428,7 +2428,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_float_float_float( float lhs, float rhs )  { throw new Error("Programmer error: handle_float_float_float must be overridden by subclass"); }
                     	/**
@@ -2436,7 +2436,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_float_float_double( float lhs, float rhs )  { throw new Error("Programmer error: handle_float_float_double must be overridden by subclass"); }
                     	/**
@@ -2444,7 +2444,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_float_float_string( float lhs, float rhs )  { throw new Error("Programmer error: handle_float_float_string must be overridden by subclass"); }
                     	/**
@@ -2452,7 +2452,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_float_float_bool( float lhs, float rhs )  { throw new Error("Programmer error: handle_float_float_bool must be overridden by subclass"); }
                     	/**
@@ -2460,7 +2460,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_float_jsdate( float lhs, float rhs )  { throw new Error("Programmer error: handle_float_float_jsdate must be overridden by subclass"); }
                     	/**
@@ -2468,7 +2468,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_float_double_int( float lhs, double rhs )  { throw new Error("Programmer error: handle_float_double_int must be overridden by subclass"); }
                     	/**
@@ -2476,7 +2476,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_double_long( float lhs, double rhs )  { throw new Error("Programmer error: handle_float_double_long must be overridden by subclass"); }
                     	/**
@@ -2484,7 +2484,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_float_double_float( float lhs, double rhs )  { throw new Error("Programmer error: handle_float_double_float must be overridden by subclass"); }
                     	/**
@@ -2492,7 +2492,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_float_double_double( float lhs, double rhs )  { throw new Error("Programmer error: handle_float_double_double must be overridden by subclass"); }
                     	/**
@@ -2500,7 +2500,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_float_double_string( float lhs, double rhs )  { throw new Error("Programmer error: handle_float_double_string must be overridden by subclass"); }
                     	/**
@@ -2508,7 +2508,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_float_double_bool( float lhs, double rhs )  { throw new Error("Programmer error: handle_float_double_bool must be overridden by subclass"); }
                     	/**
@@ -2516,7 +2516,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_double_jsdate( float lhs, double rhs )  { throw new Error("Programmer error: handle_float_double_jsdate must be overridden by subclass"); }
                     	/**
@@ -2524,7 +2524,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_float_string_int( float lhs, String rhs )  { throw new Error("Programmer error: handle_float_string_int must be overridden by subclass"); }
                     	/**
@@ -2532,7 +2532,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_string_long( float lhs, String rhs )  { throw new Error("Programmer error: handle_float_string_long must be overridden by subclass"); }
                     	/**
@@ -2540,7 +2540,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_float_string_float( float lhs, String rhs )  { throw new Error("Programmer error: handle_float_string_float must be overridden by subclass"); }
                     	/**
@@ -2548,7 +2548,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_float_string_double( float lhs, String rhs )  { throw new Error("Programmer error: handle_float_string_double must be overridden by subclass"); }
                     	/**
@@ -2556,7 +2556,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_float_string_string( float lhs, String rhs )  { throw new Error("Programmer error: handle_float_string_string must be overridden by subclass"); }
                     	/**
@@ -2564,7 +2564,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_float_string_bool( float lhs, String rhs )  { throw new Error("Programmer error: handle_float_string_bool must be overridden by subclass"); }
                     	/**
@@ -2572,7 +2572,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_string_jsdate( float lhs, String rhs )  { throw new Error("Programmer error: handle_float_string_jsdate must be overridden by subclass"); }
                     	/**
@@ -2580,7 +2580,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_float_bool_int( float lhs, boolean rhs )  { throw new Error("Programmer error: handle_float_bool_int must be overridden by subclass"); }
                     	/**
@@ -2588,7 +2588,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_bool_long( float lhs, boolean rhs )  { throw new Error("Programmer error: handle_float_bool_long must be overridden by subclass"); }
                     	/**
@@ -2596,7 +2596,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_float_bool_float( float lhs, boolean rhs )  { throw new Error("Programmer error: handle_float_bool_float must be overridden by subclass"); }
                     	/**
@@ -2604,7 +2604,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_float_bool_double( float lhs, boolean rhs )  { throw new Error("Programmer error: handle_float_bool_double must be overridden by subclass"); }
                     	/**
@@ -2612,7 +2612,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_float_bool_string( float lhs, boolean rhs )  { throw new Error("Programmer error: handle_float_bool_string must be overridden by subclass"); }
                     	/**
@@ -2620,7 +2620,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_float_bool_bool( float lhs, boolean rhs )  { throw new Error("Programmer error: handle_float_bool_bool must be overridden by subclass"); }
                     	/**
@@ -2628,7 +2628,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_bool_jsdate( float lhs, boolean rhs )  { throw new Error("Programmer error: handle_float_bool_jsdate must be overridden by subclass"); }
                     	/**
@@ -2636,7 +2636,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_float_jsdate_int( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_jsdate_int must be overridden by subclass"); }
                     	/**
@@ -2644,7 +2644,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_jsdate_long( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_jsdate_long must be overridden by subclass"); }
                     	/**
@@ -2652,7 +2652,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_float_jsdate_float( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_jsdate_float must be overridden by subclass"); }
                     	/**
@@ -2660,7 +2660,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_float_jsdate_double( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_jsdate_double must be overridden by subclass"); }
                     	/**
@@ -2668,7 +2668,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_float_jsdate_string( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_jsdate_string must be overridden by subclass"); }
                     	/**
@@ -2676,7 +2676,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_float_jsdate_bool( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_jsdate_bool must be overridden by subclass"); }
                     	/**
@@ -2684,7 +2684,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_float_jsdate_jsdate( float lhs, long rhs )  { throw new Error("Programmer error: handle_float_jsdate_jsdate must be overridden by subclass"); }
                     	/**
@@ -2692,7 +2692,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_double_int_int( double lhs, int rhs )  { throw new Error("Programmer error: handle_double_int_int must be overridden by subclass"); }
                     	/**
@@ -2700,7 +2700,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_int_long( double lhs, int rhs )  { throw new Error("Programmer error: handle_double_int_long must be overridden by subclass"); }
                     	/**
@@ -2708,7 +2708,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_double_int_float( double lhs, int rhs )  { throw new Error("Programmer error: handle_double_int_float must be overridden by subclass"); }
                     	/**
@@ -2716,7 +2716,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_double_int_double( double lhs, int rhs )  { throw new Error("Programmer error: handle_double_int_double must be overridden by subclass"); }
                     	/**
@@ -2724,7 +2724,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_double_int_string( double lhs, int rhs )  { throw new Error("Programmer error: handle_double_int_string must be overridden by subclass"); }
                     	/**
@@ -2732,7 +2732,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_double_int_bool( double lhs, int rhs )  { throw new Error("Programmer error: handle_double_int_bool must be overridden by subclass"); }
                     	/**
@@ -2740,7 +2740,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_int_jsdate( double lhs, int rhs )  { throw new Error("Programmer error: handle_double_int_jsdate must be overridden by subclass"); }
                     	/**
@@ -2748,7 +2748,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_double_long_int( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_long_int must be overridden by subclass"); }
                     	/**
@@ -2756,7 +2756,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_long_long( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_long_long must be overridden by subclass"); }
                     	/**
@@ -2764,7 +2764,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_double_long_float( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_long_float must be overridden by subclass"); }
                     	/**
@@ -2772,7 +2772,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_double_long_double( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_long_double must be overridden by subclass"); }
                     	/**
@@ -2780,7 +2780,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_double_long_string( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_long_string must be overridden by subclass"); }
                     	/**
@@ -2788,7 +2788,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_double_long_bool( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_long_bool must be overridden by subclass"); }
                     	/**
@@ -2796,7 +2796,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_long_jsdate( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_long_jsdate must be overridden by subclass"); }
                     	/**
@@ -2804,7 +2804,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_double_float_int( double lhs, float rhs )  { throw new Error("Programmer error: handle_double_float_int must be overridden by subclass"); }
                     	/**
@@ -2812,7 +2812,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_float_long( double lhs, float rhs )  { throw new Error("Programmer error: handle_double_float_long must be overridden by subclass"); }
                     	/**
@@ -2820,7 +2820,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_double_float_float( double lhs, float rhs )  { throw new Error("Programmer error: handle_double_float_float must be overridden by subclass"); }
                     	/**
@@ -2828,7 +2828,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_double_float_double( double lhs, float rhs )  { throw new Error("Programmer error: handle_double_float_double must be overridden by subclass"); }
                     	/**
@@ -2836,7 +2836,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_double_float_string( double lhs, float rhs )  { throw new Error("Programmer error: handle_double_float_string must be overridden by subclass"); }
                     	/**
@@ -2844,7 +2844,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_double_float_bool( double lhs, float rhs )  { throw new Error("Programmer error: handle_double_float_bool must be overridden by subclass"); }
                     	/**
@@ -2852,7 +2852,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_float_jsdate( double lhs, float rhs )  { throw new Error("Programmer error: handle_double_float_jsdate must be overridden by subclass"); }
                     	/**
@@ -2860,7 +2860,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_double_double_int( double lhs, double rhs )  { throw new Error("Programmer error: handle_double_double_int must be overridden by subclass"); }
                     	/**
@@ -2868,7 +2868,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_double_long( double lhs, double rhs )  { throw new Error("Programmer error: handle_double_double_long must be overridden by subclass"); }
                     	/**
@@ -2876,7 +2876,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_double_double_float( double lhs, double rhs )  { throw new Error("Programmer error: handle_double_double_float must be overridden by subclass"); }
                     	/**
@@ -2884,7 +2884,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_double_double_double( double lhs, double rhs )  { throw new Error("Programmer error: handle_double_double_double must be overridden by subclass"); }
                     	/**
@@ -2892,7 +2892,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_double_double_string( double lhs, double rhs )  { throw new Error("Programmer error: handle_double_double_string must be overridden by subclass"); }
                     	/**
@@ -2900,7 +2900,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_double_double_bool( double lhs, double rhs )  { throw new Error("Programmer error: handle_double_double_bool must be overridden by subclass"); }
                     	/**
@@ -2908,7 +2908,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_double_jsdate( double lhs, double rhs )  { throw new Error("Programmer error: handle_double_double_jsdate must be overridden by subclass"); }
                     	/**
@@ -2916,7 +2916,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_double_string_int( double lhs, String rhs )  { throw new Error("Programmer error: handle_double_string_int must be overridden by subclass"); }
                     	/**
@@ -2924,7 +2924,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_string_long( double lhs, String rhs )  { throw new Error("Programmer error: handle_double_string_long must be overridden by subclass"); }
                     	/**
@@ -2932,7 +2932,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_double_string_float( double lhs, String rhs )  { throw new Error("Programmer error: handle_double_string_float must be overridden by subclass"); }
                     	/**
@@ -2940,7 +2940,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_double_string_double( double lhs, String rhs )  { throw new Error("Programmer error: handle_double_string_double must be overridden by subclass"); }
                     	/**
@@ -2948,7 +2948,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_double_string_string( double lhs, String rhs )  { throw new Error("Programmer error: handle_double_string_string must be overridden by subclass"); }
                     	/**
@@ -2956,7 +2956,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_double_string_bool( double lhs, String rhs )  { throw new Error("Programmer error: handle_double_string_bool must be overridden by subclass"); }
                     	/**
@@ -2964,7 +2964,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_string_jsdate( double lhs, String rhs )  { throw new Error("Programmer error: handle_double_string_jsdate must be overridden by subclass"); }
                     	/**
@@ -2972,7 +2972,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_double_bool_int( double lhs, boolean rhs )  { throw new Error("Programmer error: handle_double_bool_int must be overridden by subclass"); }
                     	/**
@@ -2980,7 +2980,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_bool_long( double lhs, boolean rhs )  { throw new Error("Programmer error: handle_double_bool_long must be overridden by subclass"); }
                     	/**
@@ -2988,7 +2988,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_double_bool_float( double lhs, boolean rhs )  { throw new Error("Programmer error: handle_double_bool_float must be overridden by subclass"); }
                     	/**
@@ -2996,7 +2996,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_double_bool_double( double lhs, boolean rhs )  { throw new Error("Programmer error: handle_double_bool_double must be overridden by subclass"); }
                     	/**
@@ -3004,7 +3004,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_double_bool_string( double lhs, boolean rhs )  { throw new Error("Programmer error: handle_double_bool_string must be overridden by subclass"); }
                     	/**
@@ -3012,7 +3012,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_double_bool_bool( double lhs, boolean rhs )  { throw new Error("Programmer error: handle_double_bool_bool must be overridden by subclass"); }
                     	/**
@@ -3020,7 +3020,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_bool_jsdate( double lhs, boolean rhs )  { throw new Error("Programmer error: handle_double_bool_jsdate must be overridden by subclass"); }
                     	/**
@@ -3028,7 +3028,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_double_jsdate_int( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_jsdate_int must be overridden by subclass"); }
                     	/**
@@ -3036,7 +3036,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_jsdate_long( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_jsdate_long must be overridden by subclass"); }
                     	/**
@@ -3044,7 +3044,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_double_jsdate_float( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_jsdate_float must be overridden by subclass"); }
                     	/**
@@ -3052,7 +3052,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_double_jsdate_double( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_jsdate_double must be overridden by subclass"); }
                     	/**
@@ -3060,7 +3060,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_double_jsdate_string( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_jsdate_string must be overridden by subclass"); }
                     	/**
@@ -3068,7 +3068,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_double_jsdate_bool( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_jsdate_bool must be overridden by subclass"); }
                     	/**
@@ -3076,7 +3076,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_double_jsdate_jsdate( double lhs, long rhs )  { throw new Error("Programmer error: handle_double_jsdate_jsdate must be overridden by subclass"); }
                     	/**
@@ -3084,7 +3084,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_string_int_int( String lhs, int rhs )  { throw new Error("Programmer error: handle_string_int_int must be overridden by subclass"); }
                     	/**
@@ -3092,7 +3092,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_int_long( String lhs, int rhs )  { throw new Error("Programmer error: handle_string_int_long must be overridden by subclass"); }
                     	/**
@@ -3100,7 +3100,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_string_int_float( String lhs, int rhs )  { throw new Error("Programmer error: handle_string_int_float must be overridden by subclass"); }
                     	/**
@@ -3108,7 +3108,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_string_int_double( String lhs, int rhs )  { throw new Error("Programmer error: handle_string_int_double must be overridden by subclass"); }
                     	/**
@@ -3116,7 +3116,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_string_int_string( String lhs, int rhs )  { throw new Error("Programmer error: handle_string_int_string must be overridden by subclass"); }
                     	/**
@@ -3124,7 +3124,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_string_int_bool( String lhs, int rhs )  { throw new Error("Programmer error: handle_string_int_bool must be overridden by subclass"); }
                     	/**
@@ -3132,7 +3132,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_int_jsdate( String lhs, int rhs )  { throw new Error("Programmer error: handle_string_int_jsdate must be overridden by subclass"); }
                     	/**
@@ -3140,7 +3140,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_string_long_int( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_long_int must be overridden by subclass"); }
                     	/**
@@ -3148,7 +3148,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_long_long( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_long_long must be overridden by subclass"); }
                     	/**
@@ -3156,7 +3156,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_string_long_float( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_long_float must be overridden by subclass"); }
                     	/**
@@ -3164,7 +3164,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_string_long_double( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_long_double must be overridden by subclass"); }
                     	/**
@@ -3172,7 +3172,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_string_long_string( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_long_string must be overridden by subclass"); }
                     	/**
@@ -3180,7 +3180,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_string_long_bool( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_long_bool must be overridden by subclass"); }
                     	/**
@@ -3188,7 +3188,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_long_jsdate( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_long_jsdate must be overridden by subclass"); }
                     	/**
@@ -3196,7 +3196,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_string_float_int( String lhs, float rhs )  { throw new Error("Programmer error: handle_string_float_int must be overridden by subclass"); }
                     	/**
@@ -3204,7 +3204,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_float_long( String lhs, float rhs )  { throw new Error("Programmer error: handle_string_float_long must be overridden by subclass"); }
                     	/**
@@ -3212,7 +3212,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_string_float_float( String lhs, float rhs )  { throw new Error("Programmer error: handle_string_float_float must be overridden by subclass"); }
                     	/**
@@ -3220,7 +3220,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_string_float_double( String lhs, float rhs )  { throw new Error("Programmer error: handle_string_float_double must be overridden by subclass"); }
                     	/**
@@ -3228,7 +3228,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_string_float_string( String lhs, float rhs )  { throw new Error("Programmer error: handle_string_float_string must be overridden by subclass"); }
                     	/**
@@ -3236,7 +3236,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_string_float_bool( String lhs, float rhs )  { throw new Error("Programmer error: handle_string_float_bool must be overridden by subclass"); }
                     	/**
@@ -3244,7 +3244,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_float_jsdate( String lhs, float rhs )  { throw new Error("Programmer error: handle_string_float_jsdate must be overridden by subclass"); }
                     	/**
@@ -3252,7 +3252,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_string_double_int( String lhs, double rhs )  { throw new Error("Programmer error: handle_string_double_int must be overridden by subclass"); }
                     	/**
@@ -3260,7 +3260,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_double_long( String lhs, double rhs )  { throw new Error("Programmer error: handle_string_double_long must be overridden by subclass"); }
                     	/**
@@ -3268,7 +3268,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_string_double_float( String lhs, double rhs )  { throw new Error("Programmer error: handle_string_double_float must be overridden by subclass"); }
                     	/**
@@ -3276,7 +3276,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_string_double_double( String lhs, double rhs )  { throw new Error("Programmer error: handle_string_double_double must be overridden by subclass"); }
                     	/**
@@ -3284,7 +3284,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_string_double_string( String lhs, double rhs )  { throw new Error("Programmer error: handle_string_double_string must be overridden by subclass"); }
                     	/**
@@ -3292,7 +3292,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_string_double_bool( String lhs, double rhs )  { throw new Error("Programmer error: handle_string_double_bool must be overridden by subclass"); }
                     	/**
@@ -3300,7 +3300,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_double_jsdate( String lhs, double rhs )  { throw new Error("Programmer error: handle_string_double_jsdate must be overridden by subclass"); }
                     	/**
@@ -3308,7 +3308,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_string_string_int( String lhs, String rhs )  { throw new Error("Programmer error: handle_string_string_int must be overridden by subclass"); }
                     	/**
@@ -3316,7 +3316,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_string_long( String lhs, String rhs )  { throw new Error("Programmer error: handle_string_string_long must be overridden by subclass"); }
                     	/**
@@ -3324,7 +3324,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_string_string_float( String lhs, String rhs )  { throw new Error("Programmer error: handle_string_string_float must be overridden by subclass"); }
                     	/**
@@ -3332,7 +3332,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_string_string_double( String lhs, String rhs )  { throw new Error("Programmer error: handle_string_string_double must be overridden by subclass"); }
                     	/**
@@ -3340,7 +3340,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_string_string_string( String lhs, String rhs )  { throw new Error("Programmer error: handle_string_string_string must be overridden by subclass"); }
                     	/**
@@ -3348,7 +3348,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_string_string_bool( String lhs, String rhs )  { throw new Error("Programmer error: handle_string_string_bool must be overridden by subclass"); }
                     	/**
@@ -3356,7 +3356,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_string_jsdate( String lhs, String rhs )  { throw new Error("Programmer error: handle_string_string_jsdate must be overridden by subclass"); }
                     	/**
@@ -3364,7 +3364,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_string_bool_int( String lhs, boolean rhs )  { throw new Error("Programmer error: handle_string_bool_int must be overridden by subclass"); }
                     	/**
@@ -3372,7 +3372,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_bool_long( String lhs, boolean rhs )  { throw new Error("Programmer error: handle_string_bool_long must be overridden by subclass"); }
                     	/**
@@ -3380,7 +3380,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_string_bool_float( String lhs, boolean rhs )  { throw new Error("Programmer error: handle_string_bool_float must be overridden by subclass"); }
                     	/**
@@ -3388,7 +3388,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_string_bool_double( String lhs, boolean rhs )  { throw new Error("Programmer error: handle_string_bool_double must be overridden by subclass"); }
                     	/**
@@ -3396,7 +3396,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_string_bool_string( String lhs, boolean rhs )  { throw new Error("Programmer error: handle_string_bool_string must be overridden by subclass"); }
                     	/**
@@ -3404,7 +3404,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_string_bool_bool( String lhs, boolean rhs )  { throw new Error("Programmer error: handle_string_bool_bool must be overridden by subclass"); }
                     	/**
@@ -3412,7 +3412,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_bool_jsdate( String lhs, boolean rhs )  { throw new Error("Programmer error: handle_string_bool_jsdate must be overridden by subclass"); }
                     	/**
@@ -3420,7 +3420,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_string_jsdate_int( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_jsdate_int must be overridden by subclass"); }
                     	/**
@@ -3428,7 +3428,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_jsdate_long( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_jsdate_long must be overridden by subclass"); }
                     	/**
@@ -3436,7 +3436,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_string_jsdate_float( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_jsdate_float must be overridden by subclass"); }
                     	/**
@@ -3444,7 +3444,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_string_jsdate_double( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_jsdate_double must be overridden by subclass"); }
                     	/**
@@ -3452,7 +3452,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_string_jsdate_string( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_jsdate_string must be overridden by subclass"); }
                     	/**
@@ -3460,7 +3460,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_string_jsdate_bool( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_jsdate_bool must be overridden by subclass"); }
                     	/**
@@ -3468,7 +3468,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_string_jsdate_jsdate( String lhs, long rhs )  { throw new Error("Programmer error: handle_string_jsdate_jsdate must be overridden by subclass"); }
                     	/**
@@ -3476,7 +3476,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_bool_int_int( boolean lhs, int rhs )  { throw new Error("Programmer error: handle_bool_int_int must be overridden by subclass"); }
                     	/**
@@ -3484,7 +3484,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_int_long( boolean lhs, int rhs )  { throw new Error("Programmer error: handle_bool_int_long must be overridden by subclass"); }
                     	/**
@@ -3492,7 +3492,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_bool_int_float( boolean lhs, int rhs )  { throw new Error("Programmer error: handle_bool_int_float must be overridden by subclass"); }
                     	/**
@@ -3500,7 +3500,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_bool_int_double( boolean lhs, int rhs )  { throw new Error("Programmer error: handle_bool_int_double must be overridden by subclass"); }
                     	/**
@@ -3508,7 +3508,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_bool_int_string( boolean lhs, int rhs )  { throw new Error("Programmer error: handle_bool_int_string must be overridden by subclass"); }
                     	/**
@@ -3516,7 +3516,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_bool_int_bool( boolean lhs, int rhs )  { throw new Error("Programmer error: handle_bool_int_bool must be overridden by subclass"); }
                     	/**
@@ -3524,7 +3524,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_int_jsdate( boolean lhs, int rhs )  { throw new Error("Programmer error: handle_bool_int_jsdate must be overridden by subclass"); }
                     	/**
@@ -3532,7 +3532,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_bool_long_int( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_long_int must be overridden by subclass"); }
                     	/**
@@ -3540,7 +3540,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_long_long( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_long_long must be overridden by subclass"); }
                     	/**
@@ -3548,7 +3548,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_bool_long_float( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_long_float must be overridden by subclass"); }
                     	/**
@@ -3556,7 +3556,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_bool_long_double( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_long_double must be overridden by subclass"); }
                     	/**
@@ -3564,7 +3564,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_bool_long_string( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_long_string must be overridden by subclass"); }
                     	/**
@@ -3572,7 +3572,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_bool_long_bool( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_long_bool must be overridden by subclass"); }
                     	/**
@@ -3580,7 +3580,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_long_jsdate( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_long_jsdate must be overridden by subclass"); }
                     	/**
@@ -3588,7 +3588,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_bool_float_int( boolean lhs, float rhs )  { throw new Error("Programmer error: handle_bool_float_int must be overridden by subclass"); }
                     	/**
@@ -3596,7 +3596,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_float_long( boolean lhs, float rhs )  { throw new Error("Programmer error: handle_bool_float_long must be overridden by subclass"); }
                     	/**
@@ -3604,7 +3604,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_bool_float_float( boolean lhs, float rhs )  { throw new Error("Programmer error: handle_bool_float_float must be overridden by subclass"); }
                     	/**
@@ -3612,7 +3612,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_bool_float_double( boolean lhs, float rhs )  { throw new Error("Programmer error: handle_bool_float_double must be overridden by subclass"); }
                     	/**
@@ -3620,7 +3620,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_bool_float_string( boolean lhs, float rhs )  { throw new Error("Programmer error: handle_bool_float_string must be overridden by subclass"); }
                     	/**
@@ -3628,7 +3628,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_bool_float_bool( boolean lhs, float rhs )  { throw new Error("Programmer error: handle_bool_float_bool must be overridden by subclass"); }
                     	/**
@@ -3636,7 +3636,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_float_jsdate( boolean lhs, float rhs )  { throw new Error("Programmer error: handle_bool_float_jsdate must be overridden by subclass"); }
                     	/**
@@ -3644,7 +3644,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_bool_double_int( boolean lhs, double rhs )  { throw new Error("Programmer error: handle_bool_double_int must be overridden by subclass"); }
                     	/**
@@ -3652,7 +3652,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_double_long( boolean lhs, double rhs )  { throw new Error("Programmer error: handle_bool_double_long must be overridden by subclass"); }
                     	/**
@@ -3660,7 +3660,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_bool_double_float( boolean lhs, double rhs )  { throw new Error("Programmer error: handle_bool_double_float must be overridden by subclass"); }
                     	/**
@@ -3668,7 +3668,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_bool_double_double( boolean lhs, double rhs )  { throw new Error("Programmer error: handle_bool_double_double must be overridden by subclass"); }
                     	/**
@@ -3676,7 +3676,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_bool_double_string( boolean lhs, double rhs )  { throw new Error("Programmer error: handle_bool_double_string must be overridden by subclass"); }
                     	/**
@@ -3684,7 +3684,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_bool_double_bool( boolean lhs, double rhs )  { throw new Error("Programmer error: handle_bool_double_bool must be overridden by subclass"); }
                     	/**
@@ -3692,7 +3692,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_double_jsdate( boolean lhs, double rhs )  { throw new Error("Programmer error: handle_bool_double_jsdate must be overridden by subclass"); }
                     	/**
@@ -3700,7 +3700,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_bool_string_int( boolean lhs, String rhs )  { throw new Error("Programmer error: handle_bool_string_int must be overridden by subclass"); }
                     	/**
@@ -3708,7 +3708,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_string_long( boolean lhs, String rhs )  { throw new Error("Programmer error: handle_bool_string_long must be overridden by subclass"); }
                     	/**
@@ -3716,7 +3716,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_bool_string_float( boolean lhs, String rhs )  { throw new Error("Programmer error: handle_bool_string_float must be overridden by subclass"); }
                     	/**
@@ -3724,7 +3724,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_bool_string_double( boolean lhs, String rhs )  { throw new Error("Programmer error: handle_bool_string_double must be overridden by subclass"); }
                     	/**
@@ -3732,7 +3732,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_bool_string_string( boolean lhs, String rhs )  { throw new Error("Programmer error: handle_bool_string_string must be overridden by subclass"); }
                     	/**
@@ -3740,7 +3740,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_bool_string_bool( boolean lhs, String rhs )  { throw new Error("Programmer error: handle_bool_string_bool must be overridden by subclass"); }
                     	/**
@@ -3748,7 +3748,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_string_jsdate( boolean lhs, String rhs )  { throw new Error("Programmer error: handle_bool_string_jsdate must be overridden by subclass"); }
                     	/**
@@ -3756,7 +3756,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_bool_bool_int( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_bool_bool_int must be overridden by subclass"); }
                     	/**
@@ -3764,7 +3764,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_bool_long( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_bool_bool_long must be overridden by subclass"); }
                     	/**
@@ -3772,7 +3772,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_bool_bool_float( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_bool_bool_float must be overridden by subclass"); }
                     	/**
@@ -3780,7 +3780,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_bool_bool_double( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_bool_bool_double must be overridden by subclass"); }
                     	/**
@@ -3788,7 +3788,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_bool_bool_string( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_bool_bool_string must be overridden by subclass"); }
                     	/**
@@ -3796,7 +3796,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_bool_bool_bool( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_bool_bool_bool must be overridden by subclass"); }
                     	/**
@@ -3804,7 +3804,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_bool_jsdate( boolean lhs, boolean rhs )  { throw new Error("Programmer error: handle_bool_bool_jsdate must be overridden by subclass"); }
                     	/**
@@ -3812,7 +3812,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_bool_jsdate_int( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_jsdate_int must be overridden by subclass"); }
                     	/**
@@ -3820,7 +3820,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_jsdate_long( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_jsdate_long must be overridden by subclass"); }
                     	/**
@@ -3828,7 +3828,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_bool_jsdate_float( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_jsdate_float must be overridden by subclass"); }
                     	/**
@@ -3836,7 +3836,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_bool_jsdate_double( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_jsdate_double must be overridden by subclass"); }
                     	/**
@@ -3844,7 +3844,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_bool_jsdate_string( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_jsdate_string must be overridden by subclass"); }
                     	/**
@@ -3852,7 +3852,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_bool_jsdate_bool( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_jsdate_bool must be overridden by subclass"); }
                     	/**
@@ -3860,7 +3860,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_bool_jsdate_jsdate( boolean lhs, long rhs )  { throw new Error("Programmer error: handle_bool_jsdate_jsdate must be overridden by subclass"); }
                     	/**
@@ -3868,7 +3868,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_jsdate_int_int( long lhs, int rhs )  { throw new Error("Programmer error: handle_jsdate_int_int must be overridden by subclass"); }
                     	/**
@@ -3876,7 +3876,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_int_long( long lhs, int rhs )  { throw new Error("Programmer error: handle_jsdate_int_long must be overridden by subclass"); }
                     	/**
@@ -3884,7 +3884,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_jsdate_int_float( long lhs, int rhs )  { throw new Error("Programmer error: handle_jsdate_int_float must be overridden by subclass"); }
                     	/**
@@ -3892,7 +3892,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_jsdate_int_double( long lhs, int rhs )  { throw new Error("Programmer error: handle_jsdate_int_double must be overridden by subclass"); }
                     	/**
@@ -3900,7 +3900,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_jsdate_int_string( long lhs, int rhs )  { throw new Error("Programmer error: handle_jsdate_int_string must be overridden by subclass"); }
                     	/**
@@ -3908,7 +3908,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_jsdate_int_bool( long lhs, int rhs )  { throw new Error("Programmer error: handle_jsdate_int_bool must be overridden by subclass"); }
                     	/**
@@ -3916,7 +3916,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_int_jsdate( long lhs, int rhs )  { throw new Error("Programmer error: handle_jsdate_int_jsdate must be overridden by subclass"); }
                     	/**
@@ -3924,7 +3924,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_jsdate_long_int( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_long_int must be overridden by subclass"); }
                     	/**
@@ -3932,7 +3932,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_long_long( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_long_long must be overridden by subclass"); }
                     	/**
@@ -3940,7 +3940,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_jsdate_long_float( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_long_float must be overridden by subclass"); }
                     	/**
@@ -3948,7 +3948,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_jsdate_long_double( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_long_double must be overridden by subclass"); }
                     	/**
@@ -3956,7 +3956,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_jsdate_long_string( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_long_string must be overridden by subclass"); }
                     	/**
@@ -3964,7 +3964,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_jsdate_long_bool( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_long_bool must be overridden by subclass"); }
                     	/**
@@ -3972,7 +3972,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_long_jsdate( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_long_jsdate must be overridden by subclass"); }
                     	/**
@@ -3980,7 +3980,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_jsdate_float_int( long lhs, float rhs )  { throw new Error("Programmer error: handle_jsdate_float_int must be overridden by subclass"); }
                     	/**
@@ -3988,7 +3988,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_float_long( long lhs, float rhs )  { throw new Error("Programmer error: handle_jsdate_float_long must be overridden by subclass"); }
                     	/**
@@ -3996,7 +3996,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_jsdate_float_float( long lhs, float rhs )  { throw new Error("Programmer error: handle_jsdate_float_float must be overridden by subclass"); }
                     	/**
@@ -4004,7 +4004,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_jsdate_float_double( long lhs, float rhs )  { throw new Error("Programmer error: handle_jsdate_float_double must be overridden by subclass"); }
                     	/**
@@ -4012,7 +4012,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_jsdate_float_string( long lhs, float rhs )  { throw new Error("Programmer error: handle_jsdate_float_string must be overridden by subclass"); }
                     	/**
@@ -4020,7 +4020,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_jsdate_float_bool( long lhs, float rhs )  { throw new Error("Programmer error: handle_jsdate_float_bool must be overridden by subclass"); }
                     	/**
@@ -4028,7 +4028,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_float_jsdate( long lhs, float rhs )  { throw new Error("Programmer error: handle_jsdate_float_jsdate must be overridden by subclass"); }
                     	/**
@@ -4036,7 +4036,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_jsdate_double_int( long lhs, double rhs )  { throw new Error("Programmer error: handle_jsdate_double_int must be overridden by subclass"); }
                     	/**
@@ -4044,7 +4044,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_double_long( long lhs, double rhs )  { throw new Error("Programmer error: handle_jsdate_double_long must be overridden by subclass"); }
                     	/**
@@ -4052,7 +4052,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_jsdate_double_float( long lhs, double rhs )  { throw new Error("Programmer error: handle_jsdate_double_float must be overridden by subclass"); }
                     	/**
@@ -4060,7 +4060,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_jsdate_double_double( long lhs, double rhs )  { throw new Error("Programmer error: handle_jsdate_double_double must be overridden by subclass"); }
                     	/**
@@ -4068,7 +4068,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_jsdate_double_string( long lhs, double rhs )  { throw new Error("Programmer error: handle_jsdate_double_string must be overridden by subclass"); }
                     	/**
@@ -4076,7 +4076,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_jsdate_double_bool( long lhs, double rhs )  { throw new Error("Programmer error: handle_jsdate_double_bool must be overridden by subclass"); }
                     	/**
@@ -4084,7 +4084,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_double_jsdate( long lhs, double rhs )  { throw new Error("Programmer error: handle_jsdate_double_jsdate must be overridden by subclass"); }
                     	/**
@@ -4092,7 +4092,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_jsdate_string_int( long lhs, String rhs )  { throw new Error("Programmer error: handle_jsdate_string_int must be overridden by subclass"); }
                     	/**
@@ -4100,7 +4100,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_string_long( long lhs, String rhs )  { throw new Error("Programmer error: handle_jsdate_string_long must be overridden by subclass"); }
                     	/**
@@ -4108,7 +4108,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_jsdate_string_float( long lhs, String rhs )  { throw new Error("Programmer error: handle_jsdate_string_float must be overridden by subclass"); }
                     	/**
@@ -4116,7 +4116,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_jsdate_string_double( long lhs, String rhs )  { throw new Error("Programmer error: handle_jsdate_string_double must be overridden by subclass"); }
                     	/**
@@ -4124,7 +4124,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_jsdate_string_string( long lhs, String rhs )  { throw new Error("Programmer error: handle_jsdate_string_string must be overridden by subclass"); }
                     	/**
@@ -4132,7 +4132,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_jsdate_string_bool( long lhs, String rhs )  { throw new Error("Programmer error: handle_jsdate_string_bool must be overridden by subclass"); }
                     	/**
@@ -4140,7 +4140,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_string_jsdate( long lhs, String rhs )  { throw new Error("Programmer error: handle_jsdate_string_jsdate must be overridden by subclass"); }
                     	/**
@@ -4148,7 +4148,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_jsdate_bool_int( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_jsdate_bool_int must be overridden by subclass"); }
                     	/**
@@ -4156,7 +4156,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_bool_long( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_jsdate_bool_long must be overridden by subclass"); }
                     	/**
@@ -4164,7 +4164,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_jsdate_bool_float( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_jsdate_bool_float must be overridden by subclass"); }
                     	/**
@@ -4172,7 +4172,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_jsdate_bool_double( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_jsdate_bool_double must be overridden by subclass"); }
                     	/**
@@ -4180,7 +4180,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_jsdate_bool_string( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_jsdate_bool_string must be overridden by subclass"); }
                     	/**
@@ -4188,7 +4188,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_jsdate_bool_bool( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_jsdate_bool_bool must be overridden by subclass"); }
                     	/**
@@ -4196,7 +4196,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_bool_jsdate( long lhs, boolean rhs )  { throw new Error("Programmer error: handle_jsdate_bool_jsdate must be overridden by subclass"); }
                     	/**
@@ -4204,7 +4204,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected int handle_jsdate_jsdate_int( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_jsdate_int must be overridden by subclass"); }
                     	/**
@@ -4212,7 +4212,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_jsdate_long( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_jsdate_long must be overridden by subclass"); }
                     	/**
@@ -4220,7 +4220,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected float handle_jsdate_jsdate_float( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_jsdate_float must be overridden by subclass"); }
                     	/**
@@ -4228,7 +4228,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected double handle_jsdate_jsdate_double( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_jsdate_double must be overridden by subclass"); }
                     	/**
@@ -4236,7 +4236,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected String handle_jsdate_jsdate_string( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_jsdate_string must be overridden by subclass"); }
                     	/**
@@ -4244,7 +4244,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected boolean handle_jsdate_jsdate_bool( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_jsdate_bool must be overridden by subclass"); }
                     	/**
@@ -4252,7 +4252,7 @@
                     	 * 
                     	 * @param lhs The value of the left-hand side
                     	 * @param rhs The value of the right-hand side
-                    	 * @return The computed value of the binary accessor
+                    	 * @return The computed value of the binary operator
                     	 */
 /* GENERATED CODE */	protected long handle_jsdate_jsdate_jsdate( long lhs, long rhs )  { throw new Error("Programmer error: handle_jsdate_jsdate_jsdate must be overridden by subclass"); }
 /* GENERATED CODE */

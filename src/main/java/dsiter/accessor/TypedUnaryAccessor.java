@@ -3,7 +3,7 @@
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
-/* GENERATED CODE */
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Abstract class for use in creating unary operators. Not all unary operators
@@ -13,7 +13,7 @@
                      * <p>
                      * 		Subclasses must override the {@link #getReturnType} and {@link #testTypeCompatibility}
                      *		methods. This class can then use that information to determine how best to process
-                     *		the source accessor.
+                     *		the source operator.
                      * </p>
                      *
                      * <p>
@@ -21,19 +21,19 @@
                      *		of {@code source} and {@code returnValue} (which means there are
                      *		{@code (# of types)^2} overridable methods available). Subclasses only
                      *		need to override the methods which they will actually support. So, for example,
-                     *		a logical boolean accessor only needs to override {@link #handle_bool_bool}
-                     *		and a numeric accessor will only need to override the appropriate numeric
+                     *		a logical boolean operator only needs to override {@link #handle_bool_bool}
+                     *		and a numeric operator will only need to override the appropriate numeric
                      *		{@code handle_x_y} method(s). This superclass will use the information from
                      *		{@link #getReturnType} and {@link #testTypeCompatibility} to efficiently determine
                      *		which method to call.
                      * </p>
                      */
-/* GENERATED CODE */public abstract class TypedUnaryOperator implements IRowAccessor {
+/* GENERATED CODE */public abstract class TypedUnaryAccessor implements IRowAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */	private IRowAccessor src;
 /* GENERATED CODE */	private IRowAccessor innerAccessor;
 /* GENERATED CODE */
-/* GENERATED CODE */	public TypedUnaryOperator(IRowAccessor src) {
+/* GENERATED CODE */	public TypedUnaryAccessor(IRowAccessor src) {
 /* GENERATED CODE */		this.src = src;
 /* GENERATED CODE */
 /* GENERATED CODE */		if(src == null) { throw new IllegalArgumentException("src cannot be null"); }

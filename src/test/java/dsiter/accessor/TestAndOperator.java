@@ -10,7 +10,7 @@ public class TestAndOperator {
 
 	@Test
 	public void testTrueTrue() {
-		AndOperator ao = new AndOperator(
+		AndAccessor ao = new AndAccessor(
 			ConstantAccessor.getBoolInstance(true),
 			ConstantAccessor.getBoolInstance(true)
 		);
@@ -20,7 +20,7 @@ public class TestAndOperator {
 
 	@Test
 	public void testTrueFalse() {
-		AndOperator ao = new AndOperator(
+		AndAccessor ao = new AndAccessor(
 			ConstantAccessor.getBoolInstance(true),
 			ConstantAccessor.getBoolInstance(false)
 		);
@@ -30,7 +30,7 @@ public class TestAndOperator {
 
 	@Test
 	public void testFalseTrue() {
-		AndOperator ao = new AndOperator(
+		AndAccessor ao = new AndAccessor(
 			ConstantAccessor.getBoolInstance(false),
 			ConstantAccessor.getBoolInstance(true)
 		);
@@ -40,7 +40,7 @@ public class TestAndOperator {
 
 	@Test
 	public void testFalseFalse() {
-		AndOperator ao = new AndOperator(
+		AndAccessor ao = new AndAccessor(
 			ConstantAccessor.getBoolInstance(false),
 			ConstantAccessor.getBoolInstance(false)
 		);

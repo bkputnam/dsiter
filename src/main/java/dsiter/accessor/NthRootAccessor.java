@@ -5,7 +5,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
                     /**
-                     * Binary accessor that computes the {@code rhs}-th root of
+                     * Binary operator that computes the {@code rhs}-th root of
                      * {@code lhs}
                      *
                      * <p>
@@ -14,9 +14,9 @@
                      *     directly. However, I certainly won't tell you you can't!
                      * </p>
                      */
-/* GENERATED CODE */public class NthRootOperator extends TypedBinaryOperator {
+/* GENERATED CODE */public class NthRootAccessor extends TypedBinaryAccessor {
 /* GENERATED CODE */
-/* GENERATED CODE */	public NthRootOperator(IRowAccessor lhs, IRowAccessor rhs) {
+/* GENERATED CODE */	public NthRootAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 /* GENERATED CODE */		super(lhs, rhs);
 /* GENERATED CODE */	}
 /* GENERATED CODE */

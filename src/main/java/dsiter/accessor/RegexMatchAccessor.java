@@ -6,11 +6,11 @@ import dsiter.row.IRowAccessor;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-public class RegexMatchOperator extends TypedUnaryOperator {
+public class RegexMatchAccessor extends TypedUnaryAccessor {
 
 	private Predicate<String> pattern;
 
-	public RegexMatchOperator(IRowAccessor src, String regex) {
+	public RegexMatchAccessor(IRowAccessor src, String regex) {
 		super(src);
 		pattern = Pattern.compile(regex).asPredicate();
 	}
