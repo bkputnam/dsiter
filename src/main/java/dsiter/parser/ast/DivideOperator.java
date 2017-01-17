@@ -26,112 +26,112 @@
 /* GENERATED CODE */		ColumnType rhsType = rhs.getType();
 /* GENERATED CODE */
 /* GENERATED CODE */		
-/* GENERATED CODE */		if (lhsType == ColumnType.INT && lhsType == ColumnType.INT) {
+/* GENERATED CODE */		if (lhsType == ColumnType.INT && rhsType == ColumnType.INT) {
 /* GENERATED CODE */			return new DivideAccessor.INT_INT(
 /* GENERATED CODE */				(IRowAccessor.INT)lhs,
 /* GENERATED CODE */				(IRowAccessor.INT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.INT && lhsType == ColumnType.LONG) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.INT && rhsType == ColumnType.LONG) {
 /* GENERATED CODE */			return new DivideAccessor.INT_LONG(
 /* GENERATED CODE */				(IRowAccessor.INT)lhs,
 /* GENERATED CODE */				(IRowAccessor.LONG)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.INT && lhsType == ColumnType.FLOAT) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.INT && rhsType == ColumnType.FLOAT) {
 /* GENERATED CODE */			return new DivideAccessor.INT_FLOAT(
 /* GENERATED CODE */				(IRowAccessor.INT)lhs,
 /* GENERATED CODE */				(IRowAccessor.FLOAT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.INT && lhsType == ColumnType.DOUBLE) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.INT && rhsType == ColumnType.DOUBLE) {
 /* GENERATED CODE */			return new DivideAccessor.INT_DOUBLE(
 /* GENERATED CODE */				(IRowAccessor.INT)lhs,
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && lhsType == ColumnType.INT) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && rhsType == ColumnType.INT) {
 /* GENERATED CODE */			return new DivideAccessor.LONG_INT(
 /* GENERATED CODE */				(IRowAccessor.LONG)lhs,
 /* GENERATED CODE */				(IRowAccessor.INT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && lhsType == ColumnType.LONG) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && rhsType == ColumnType.LONG) {
 /* GENERATED CODE */			return new DivideAccessor.LONG_LONG(
 /* GENERATED CODE */				(IRowAccessor.LONG)lhs,
 /* GENERATED CODE */				(IRowAccessor.LONG)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && lhsType == ColumnType.FLOAT) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && rhsType == ColumnType.FLOAT) {
 /* GENERATED CODE */			return new DivideAccessor.LONG_FLOAT(
 /* GENERATED CODE */				(IRowAccessor.LONG)lhs,
 /* GENERATED CODE */				(IRowAccessor.FLOAT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && lhsType == ColumnType.DOUBLE) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.LONG && rhsType == ColumnType.DOUBLE) {
 /* GENERATED CODE */			return new DivideAccessor.LONG_DOUBLE(
 /* GENERATED CODE */				(IRowAccessor.LONG)lhs,
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && lhsType == ColumnType.INT) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && rhsType == ColumnType.INT) {
 /* GENERATED CODE */			return new DivideAccessor.FLOAT_INT(
 /* GENERATED CODE */				(IRowAccessor.FLOAT)lhs,
 /* GENERATED CODE */				(IRowAccessor.INT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && lhsType == ColumnType.LONG) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && rhsType == ColumnType.LONG) {
 /* GENERATED CODE */			return new DivideAccessor.FLOAT_LONG(
 /* GENERATED CODE */				(IRowAccessor.FLOAT)lhs,
 /* GENERATED CODE */				(IRowAccessor.LONG)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && lhsType == ColumnType.FLOAT) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && rhsType == ColumnType.FLOAT) {
 /* GENERATED CODE */			return new DivideAccessor.FLOAT_FLOAT(
 /* GENERATED CODE */				(IRowAccessor.FLOAT)lhs,
 /* GENERATED CODE */				(IRowAccessor.FLOAT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && lhsType == ColumnType.DOUBLE) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.FLOAT && rhsType == ColumnType.DOUBLE) {
 /* GENERATED CODE */			return new DivideAccessor.FLOAT_DOUBLE(
 /* GENERATED CODE */				(IRowAccessor.FLOAT)lhs,
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && lhsType == ColumnType.INT) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && rhsType == ColumnType.INT) {
 /* GENERATED CODE */			return new DivideAccessor.DOUBLE_INT(
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)lhs,
 /* GENERATED CODE */				(IRowAccessor.INT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && lhsType == ColumnType.LONG) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && rhsType == ColumnType.LONG) {
 /* GENERATED CODE */			return new DivideAccessor.DOUBLE_LONG(
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)lhs,
 /* GENERATED CODE */				(IRowAccessor.LONG)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && lhsType == ColumnType.FLOAT) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && rhsType == ColumnType.FLOAT) {
 /* GENERATED CODE */			return new DivideAccessor.DOUBLE_FLOAT(
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)lhs,
 /* GENERATED CODE */				(IRowAccessor.FLOAT)rhs
 /* GENERATED CODE */			);
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
-/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && lhsType == ColumnType.DOUBLE) {
+/* GENERATED CODE */		else if (lhsType == ColumnType.DOUBLE && rhsType == ColumnType.DOUBLE) {
 /* GENERATED CODE */			return new DivideAccessor.DOUBLE_DOUBLE(
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)lhs,
 /* GENERATED CODE */				(IRowAccessor.DOUBLE)rhs
