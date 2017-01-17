@@ -13,9 +13,9 @@ import dsiter.row.IRowAccessor;
  *		directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class NotEqualsOperator extends TypedBinaryOperator {
+public class NotEqualsAccessor extends TypedBinaryAccessor {
 
-	public NotEqualsOperator(IRowAccessor lhs, IRowAccessor rhs) {
+	public NotEqualsAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 

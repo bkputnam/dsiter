@@ -14,9 +14,9 @@ import dsiter.row.IRowAccessor;
  *     directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class CaretOperator extends TypedBinaryOperator {
+public class CaretAccessor extends TypedBinaryAccessor {
 
-   public CaretOperator(IRowAccessor lhs, IRowAccessor rhs) {
+   public CaretAccessor(IRowAccessor lhs, IRowAccessor rhs) {
        super(lhs, rhs);
    }
 

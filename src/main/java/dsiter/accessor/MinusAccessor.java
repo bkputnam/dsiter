@@ -2,7 +2,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
-/* GENERATED CODE */
+/* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
                     /**
                      * Binary operator that computes the value of {@code rhs} substracted

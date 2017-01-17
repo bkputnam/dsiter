@@ -28,12 +28,12 @@ import dsiter.row.IRowAccessor;
  *		which method to call.
  * </p>
  */
-public abstract class TypedUnaryOperator implements IRowAccessor {
+public abstract class TypedUnaryAccessor implements IRowAccessor {
 
 	private IRowAccessor src;
 	private IRowAccessor innerAccessor;
 
-	public TypedUnaryOperator(IRowAccessor src) {
+	public TypedUnaryAccessor(IRowAccessor src) {
 		this.src = src;
 
 		if(src == null) { throw new IllegalArgumentException("src cannot be null"); }

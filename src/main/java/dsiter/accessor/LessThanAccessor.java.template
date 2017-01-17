@@ -12,9 +12,9 @@ import dsiter.row.IRowAccessor;
  *     directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class LessThanOperator extends TypedBinaryOperator {
+public class LessThanAccessor extends TypedBinaryAccessor {
 
-	public LessThanOperator(IRowAccessor lhs, IRowAccessor rhs) {
+	public LessThanAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 

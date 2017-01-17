@@ -5,8 +5,7 @@ import dsiter.row.IRowAccessor;
 import dsiter.row.IRowAccessor;
 
 /**
- * Binary operator that tests whether {@code lhs} is greater than or equal
- * to {@code rhs}
+ * Binary operator that tests whether {@code lhs} is greater than {@code rhs}
  *
  * <p>
  *     You probably won't ever want to use this class directly;
@@ -14,9 +13,9 @@ import dsiter.row.IRowAccessor;
  *     directly. However, I certainly won't tell you you can't!
  * </p>
  */
-public class GreaterThanEqualsOperator extends TypedBinaryOperator {
+public class GreaterThanAccessor extends TypedBinaryAccessor {
 
-	public GreaterThanEqualsOperator(IRowAccessor lhs, IRowAccessor rhs) {
+	public GreaterThanAccessor(IRowAccessor lhs, IRowAccessor rhs) {
 		super(lhs, rhs);
 	}
 
@@ -33,15 +32,15 @@ public class GreaterThanEqualsOperator extends TypedBinaryOperator {
 	}
 
 	@Override
-	protected boolean handle_int_jsdate_bool(int lhs, long rhs) { return lhs >= rhs; }
+	protected boolean handle_int_jsdate_bool(int lhs, long rhs) { return lhs > rhs; }
 	@Override
-	protected boolean handle_long_jsdate_bool(long lhs, long rhs) { return lhs >= rhs; }
+	protected boolean handle_long_jsdate_bool(long lhs, long rhs) { return lhs > rhs; }
 	@Override
-	protected boolean handle_jsdate_int_bool(long lhs, int rhs) { return lhs >= rhs; }
+	protected boolean handle_jsdate_int_bool(long lhs, int rhs) { return lhs > rhs; }
 	@Override
-	protected boolean handle_jsdate_long_bool(long lhs, long rhs) { return lhs >= rhs; }
+	protected boolean handle_jsdate_long_bool(long lhs, long rhs) { return lhs > rhs; }
 	@Override
-	protected boolean handle_jsdate_jsdate_bool(long lhs, long rhs) { return lhs >= rhs; }
+	protected boolean handle_jsdate_jsdate_bool(long lhs, long rhs) { return lhs > rhs; }
 
 	<%
 		def numberTypes = ["int", "long", "float", "double"]
@@ -49,6 +48,6 @@ public class GreaterThanEqualsOperator extends TypedBinaryOperator {
 			numberTypes.each { rhsType ->
 	%>
 	@Override
-	protected boolean handle_${lhsType}_${rhsType}_bool(${lhsType} lhs, ${rhsType} rhs) { return lhs >= rhs; }
+	protected boolean handle_${lhsType}_${rhsType}_bool(${lhsType} lhs, ${rhsType} rhs) { return lhs > rhs; }
 	<% }} %>
 }
