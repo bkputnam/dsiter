@@ -3,14 +3,14 @@ package dsiter.parser.ast;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.accessor.GreaterThanAccessor;
+import dsiter.accessor.LessThanEqualsAccessor;
 
-public class GreaterThanOperator implements AstNode {
+public class LessThanEqualsOperator implements AstNode {
 
 	private AstNode lhsNode;
 	private AstNode rhsNode;
 
-	public GreaterThanOperator(AstNode lhsNode, AstNode rhsNode) {
+	public LessThanEqualsOperator(AstNode lhsNode, AstNode rhsNode) {
 		this.lhsNode = lhsNode;
 		this.rhsNode = rhsNode;
 	}
@@ -52,7 +52,7 @@ public class GreaterThanOperator implements AstNode {
 				def rhsType = pair.get(1)
 		%>
 		${!isFirst ? "else " : ""}if (lhsType == ColumnType.${lhsType.type} && rhsType == ColumnType.${rhsType.type}) {
-			return new GreaterThanAccessor.${lhsType.type}_${rhsType.type}(
+			return new LessThanEqualsAccessor.${lhsType.type}_${rhsType.type}(
 				(IRowAccessor.${lhsType.type})lhs,
 				(IRowAccessor.${rhsType.type})rhs
 			);
@@ -62,7 +62,7 @@ public class GreaterThanOperator implements AstNode {
 		%>
 		else {
 			throw new LinkException(
-				"Unsupported operand types for GreaterThanOperator: (" +
+				"Unsupported operand types for LessThanEqualsOperator: (" +
 				lhsType + ", " + rhsType + ")"
 			);
 		}
