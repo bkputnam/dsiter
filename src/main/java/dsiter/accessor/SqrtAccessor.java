@@ -10,7 +10,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT src;
 /* GENERATED CODE */
-/* GENERATED CODE */		public INT(IRowAccessor.INT lhs) {
+/* GENERATED CODE */		public INT(IRowAccessor.INT src) {
 /* GENERATED CODE */			this.src = src;
 /* GENERATED CODE */		}
 /* GENERATED CODE */
@@ -24,7 +24,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG src;
 /* GENERATED CODE */
-/* GENERATED CODE */		public LONG(IRowAccessor.LONG lhs) {
+/* GENERATED CODE */		public LONG(IRowAccessor.LONG src) {
 /* GENERATED CODE */			this.src = src;
 /* GENERATED CODE */		}
 /* GENERATED CODE */
@@ -38,7 +38,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT src;
 /* GENERATED CODE */
-/* GENERATED CODE */		public FLOAT(IRowAccessor.FLOAT lhs) {
+/* GENERATED CODE */		public FLOAT(IRowAccessor.FLOAT src) {
 /* GENERATED CODE */			this.src = src;
 /* GENERATED CODE */		}
 /* GENERATED CODE */
@@ -52,7 +52,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE src;
 /* GENERATED CODE */
-/* GENERATED CODE */		public DOUBLE(IRowAccessor.DOUBLE lhs) {
+/* GENERATED CODE */		public DOUBLE(IRowAccessor.DOUBLE src) {
 /* GENERATED CODE */			this.src = src;
 /* GENERATED CODE */		}
 /* GENERATED CODE */

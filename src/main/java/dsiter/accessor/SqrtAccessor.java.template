@@ -16,7 +16,7 @@ public interface SqrtAccessor extends IRowAccessor.DOUBLE {
 
 		private IRowAccessor.${type.type} src;
 
-		public ${type.type}(IRowAccessor.${type.type} lhs) {
+		public ${type.type}(IRowAccessor.${type.type} src) {
 			this.src = src;
 		}
 
