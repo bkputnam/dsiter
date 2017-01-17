@@ -1,0 +1,58 @@
+package dsiter.parser.ast;
+
+import dsiter.accessor.ExponentAccessor;
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.IRowAccessor;
+import dsiter.row.ColumnType;
+
+public class CaretOperator implements AstNode {
+
+	private AstNode lhsNode;
+	private AstNode rhsNode;
+
+	public CaretOperator(AstNode lhsNode, AstNode rhsNode) {
+		this.lhsNode = lhsNode;
+		this.rhsNode = rhsNode;
+	}
+
+	@Override
+	public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
+		IRowAccessor lhs = lhsNode.link(cds);
+		IRowAccessor rhs = rhsNode.link(cds);
+
+		ColumnType lhsType = lhs.getType();
+		ColumnType rhsType = rhs.getType();
+
+		if (
+			!lhsType.isNumeric() ||
+			!rhsType.isNumeric()
+		) {
+			throw new LinkException(
+				"lhs and rhs must both have numeric types. Found: (" +
+				lhsType + ", " + rhsType + ")"
+			);
+		}
+
+		<%
+			def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+				ColumnTypes.find { type -> type.type == name }
+			}
+
+			def isFirst = true
+			numericTypes.each { lhs ->
+				numericTypes.each { rhs ->
+		%>
+		${isFirst ? "" : "else " }if (lhsType == ColumnType.${lhs.type} && rhsType == ColumnType.${rhs.type}) {
+			return new ExponentAccessor.${lhs.type}_${rhs.type}(
+				(IRowAccessor.${lhs.type})lhs,
+				(IRowAccessor.${rhs.type})rhs
+			);
+		}<%
+					isFirst = false;
+				}
+			}
+		%>
+
+		throw new Error("This should be impossible");
+	}
+}
