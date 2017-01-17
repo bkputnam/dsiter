@@ -1,0 +1,48 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class TestLessThanAccessor {
+
+	<%
+		def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			ColumnTypes.find { type -> type.type == name }
+		}
+
+		numericTypes.each { lhs ->
+			numericTypes.each { rhs ->
+	%>
+	@Test
+	public void test${lhs.capitalized}Lt${rhs.capitalized}() {
+		LessThanAccessor x = new LessThanAccessor.${lhs.type}_${rhs.type}(
+			new ConstantAccessor.${lhs.type}(0),
+			new ConstantAccessor.${rhs.type}(1)
+		);
+		assertEquals(true, x.getValueFromRow(new Row()));
+	}
+
+	@Test
+	public void test${lhs.capitalized}Eq${rhs.capitalized}() {
+		LessThanAccessor x = new LessThanAccessor.${lhs.type}_${rhs.type}(
+			new ConstantAccessor.${lhs.type}(1),
+			new ConstantAccessor.${rhs.type}(1)
+		);
+		assertEquals(false, x.getValueFromRow(new Row()));
+	}
+
+	@Test
+	public void test${lhs.capitalized}Gt${rhs.capitalized}() {
+		LessThanAccessor x = new LessThanAccessor.${lhs.type}_${rhs.type}(
+			new ConstantAccessor.${lhs.type}(1),
+			new ConstantAccessor.${rhs.type}(0)
+		);
+		assertEquals(false, x.getValueFromRow(new Row()));
+	}
+	<%
+			}
+		}
+	%>
+}
