@@ -1,0 +1,43 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+
+public interface SubtractAccessor extends IRowAccessor {
+
+	<%
+		def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			ColumnTypes.find { type -> type.type == name }
+		}
+
+		numericTypes.each { type ->
+	%>
+	public interface ${type.type} extends SubtractAccessor, IRowAccessor.${type.type} { }<% } %>
+
+	<%
+		numericTypes.each { lhs ->
+			numericTypes.each { rhs ->
+				def outputType = numericTypes.indexOf(lhs) > numericTypes.indexOf(rhs)
+					? lhs
+					: rhs
+	%>
+	public class ${lhs.type}_${rhs.type} implements ${outputType.type} {
+
+		private IRowAccessor.${lhs.type} lhs;
+		private IRowAccessor.${rhs.type} rhs;
+
+		public ${lhs.type}_${rhs.type}(IRowAccessor.${lhs.type} lhs, IRowAccessor.${rhs.type} rhs) {
+			this.lhs = lhs;
+			this.rhs = rhs;
+		}
+
+		@Override
+		public ${outputType.nativeType} get${outputType.capitalized}FromRow(Row row) {
+			return lhs.get${lhs.capitalized}FromRow(row) - rhs.get${rhs.capitalized}FromRow(row);
+		}
+	}
+	<%
+			}
+		}
+	%>
+}

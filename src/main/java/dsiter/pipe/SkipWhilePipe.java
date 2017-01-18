@@ -2,31 +2,29 @@ package dsiter.pipe;
 
 import dsiter.iterator.IDatasetIterator;
 import dsiter.iterator.SkipWhileIterator;
-import dsiter.iterator.TakeWhileIterator;
-import dsiter.operator.parser.OperatorParser;
+import dsiter.parser.OperatorParser;
+import dsiter.parser.ast.AstNode;
+import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 
 public class SkipWhilePipe implements IPipe {
 
-	private IRowAccessor.BOOLEAN predicate;
-	private String predicateExpression;
+	private AstNode astNode;
 
-	public SkipWhilePipe(IRowAccessor.BOOLEAN predicate) {
-		this.predicate = predicate;
+	public SkipWhilePipe(AstNode astNode) {
+		this.astNode = astNode;
 	}
 
 	public SkipWhilePipe(String predicateExpression) {
-		this.predicateExpression = predicateExpression;
+		this.astNode = OperatorParser.parseOperator(predicateExpression);
 	}
 
 	@Override
 	public IDatasetIterator attachTo(IDatasetIterator src) {
-		if (predicate == null) {
-			predicate = OperatorParser.parseOperator(
-				src.getColumnDescriptors(),
-				predicateExpression
-			).asBoolAccessor();
+		IRowAccessor predicate = astNode.link(src.getColumnDescriptors());
+		if (predicate.getType() != ColumnType.BOOLEAN) {
+			throw new RuntimeException("SkipWhile must be a boolean expression");
 		}
-		return new SkipWhileIterator(src, predicate);
+		return new SkipWhileIterator(src, (IRowAccessor.BOOLEAN)predicate);
 	}
 }

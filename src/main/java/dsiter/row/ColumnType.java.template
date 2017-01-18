@@ -24,4 +24,14 @@ public enum ColumnType {
 	public boolean isNumeric() {
 		return this == INT || this == LONG || this == FLOAT || this == DOUBLE;
 	}
+
+	/**
+	 * Returns {@code true} if the current value represents an integer type.
+	 * Numeric types are defined to be {@code INT} and {@code LONG}
+	 *
+	 * @return {@code true} if value is numeric
+	 */
+	public boolean isInteger() {
+		return this == INT || this == LONG;
+	}
 }

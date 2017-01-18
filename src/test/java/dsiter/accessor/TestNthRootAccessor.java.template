@@ -1,0 +1,30 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class TestNthRootAccessor {
+
+	<%
+		def types = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			ColumnTypes.find { type -> type.type == name }
+		}
+
+		types.each { lhs ->
+			types.each { rhs ->
+	%>
+	@Test
+	public void test${lhs.capitalized}${rhs.capitalized}() {
+		IRowAccessor x = new NthRootAccessor.${lhs.type}_${rhs.type}(
+			new ConstantAccessor.${lhs.type}(8),
+			new ConstantAccessor.${rhs.type}(3)
+		);
+		assertEquals(2D, x.getValueFromRow(new Row()));
+	}
+	<%
+		} }
+	%>
+
+}

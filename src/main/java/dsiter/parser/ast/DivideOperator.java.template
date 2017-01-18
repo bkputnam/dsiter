@@ -1,0 +1,54 @@
+package dsiter.parser.ast;
+
+import dsiter.accessor.DivideAccessor;
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+
+public class DivideOperator implements AstNode {
+
+	private AstNode lhsNode;
+	private AstNode rhsNode;
+
+	public DivideOperator(AstNode lhsNode, AstNode rhsNode) {
+		this.lhsNode = lhsNode;
+		this.rhsNode = rhsNode;
+	}
+
+	<%
+		def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			ColumnTypes.find { type -> type.type == name }
+		}
+	%>
+
+	@Override
+	public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
+		IRowAccessor lhs = lhsNode.link(cds);
+		IRowAccessor rhs = rhsNode.link(cds);
+
+		ColumnType lhsType = lhs.getType();
+		ColumnType rhsType = rhs.getType();
+
+		<%
+			def isFirst = true
+			numericTypes.each { lhs ->
+				numericTypes.each { rhs ->
+		%>
+		${isFirst ? "" : "else "}if (lhsType == ColumnType.${lhs.type} && rhsType == ColumnType.${rhs.type}) {
+			return new DivideAccessor.${lhs.type}_${rhs.type}(
+				(IRowAccessor.${lhs.type})lhs,
+				(IRowAccessor.${rhs.type})rhs
+			);
+		}
+		<%
+					isFirst = false
+				}
+			}
+		%>
+		else {
+			throw new LinkException("Unsupported operand types for DivideOperator: (" +
+				lhsType + ", " + rhsType + ")"
+			);
+		}
+	}
+}
