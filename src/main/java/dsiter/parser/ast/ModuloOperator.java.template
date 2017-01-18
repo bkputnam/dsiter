@@ -1,0 +1,54 @@
+package dsiter.parser.ast;
+
+import dsiter.accessor.ModuloAccessor;
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+
+public class ModuloOperator implements AstNode {
+
+	private AstNode lhsNode;
+	private AstNode rhsNode;
+
+	public ModuloOperator(AstNode lhsNode, AstNode rhsNode) {
+		this.lhsNode = lhsNode;
+		this.rhsNode = rhsNode;
+	}
+
+	<%
+		def integerTypes = ["INT", "LONG"].collect { name ->
+			ColumnTypes.find { type -> type.type == name }
+		}
+	%>
+
+	@Override
+	public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
+		IRowAccessor lhs = lhsNode.link(cds);
+		IRowAccessor rhs = rhsNode.link(cds);
+
+		ColumnType lhsType = lhs.getType();
+		ColumnType rhsType = rhs.getType();
+
+		<%
+			def isFirstTime = true
+			integerTypes.each { lhs ->
+				integerTypes.each { rhs ->
+		%>
+		${isFirstTime ? "" : "else "}if (lhsType == ColumnType.${lhs.type} && rhsType == ColumnType.${rhs.type}) {
+			return new ModuloAccessor.${lhs.type}_${rhs.type}(
+				(IRowAccessor.${lhs.type})lhs,
+				(IRowAccessor.${rhs.type})rhs
+			);
+		}
+		<%
+					isFirstTime = false
+				}
+			}
+		%>
+		else {
+			throw new LinkException("Unsupported operand types for ModuloOperator: (" +
+				lhsType + ", " + rhsType + ")"
+			);
+		}
+	}
+}
