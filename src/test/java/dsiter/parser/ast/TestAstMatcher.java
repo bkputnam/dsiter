@@ -17,7 +17,7 @@ public class TestAstMatcher {
 
 		assertNotNull(bounds);
 		assertEquals("foo", bounds.column.columnName);
-		assertEquals(5, bounds.lowerBound.link(null).getValueFromRow(null));
+		assertEquals(5, bounds.lowerBound.getValue());
 		assertEquals(false, bounds.lowerBoundInclusive);
 		assertEquals(null, bounds.upperBound);
 		assertEquals(false, bounds.upperBoundInclusive);
@@ -35,7 +35,7 @@ public class TestAstMatcher {
 
 		assertNotNull(bounds);
 		assertEquals("foo", bounds.column.columnName);
-		assertEquals(5, bounds.lowerBound.link(null).getValueFromRow(null));
+		assertEquals(5, bounds.lowerBound.getValue());
 		assertEquals(true, bounds.lowerBoundInclusive);
 		assertEquals(null, bounds.upperBound);
 		assertEquals(false, bounds.upperBoundInclusive);
@@ -55,7 +55,7 @@ public class TestAstMatcher {
 		assertEquals("foo", bounds.column.columnName);
 		assertEquals(null, bounds.lowerBound);
 		assertEquals(false, bounds.lowerBoundInclusive);
-		assertEquals(5, bounds.upperBound.link(null).getValueFromRow(null));
+		assertEquals(5, bounds.upperBound.getValue());
 		assertEquals(false, bounds.upperBoundInclusive);
 	}
 
@@ -73,7 +73,7 @@ public class TestAstMatcher {
 		assertEquals("foo", bounds.column.columnName);
 		assertEquals(null, bounds.lowerBound);
 		assertEquals(false, bounds.lowerBoundInclusive);
-		assertEquals(5, bounds.upperBound.link(null).getValueFromRow(null));
+		assertEquals(5, bounds.upperBound.getValue());
 		assertEquals(true, bounds.upperBoundInclusive);
 	}
 
@@ -89,10 +89,10 @@ public class TestAstMatcher {
 
 		assertNotNull(bounds);
 		assertEquals("foo", bounds.column.columnName);
-		assertEquals(null, bounds.lowerBound);
-		assertEquals(false, bounds.lowerBoundInclusive);
-		assertEquals(5, bounds.upperBound.link(null).getValueFromRow(null));
-		assertEquals(true, bounds.upperBoundInclusive);
+		assertEquals(5, bounds.lowerBound.getValue());
+		assertEquals(true, bounds.lowerBoundInclusive);
+		assertEquals(null, bounds.upperBound);
+		assertEquals(false, bounds.upperBoundInclusive);
 	}
 
 	@Test
@@ -100,12 +100,13 @@ public class TestAstMatcher {
 
 		AstNode x = new AndOperator(
 			new LessThanEqualsOperator(
-				new ConstantOperator.INT(10),
-				new ColumnOperator("foo")
+				new ColumnOperator("foo"),
+				new ConstantOperator.INT(10)
+
 			),
 			new GreaterThanEqualsOperator(
-				new ConstantOperator.INT(5),
-				new ColumnOperator("foo")
+				new ColumnOperator("foo"),
+				new ConstantOperator.INT(5)
 			)
 		);
 
@@ -113,9 +114,9 @@ public class TestAstMatcher {
 
 		assertNotNull(bounds);
 		assertEquals("foo", bounds.column.columnName);
-		assertEquals(5, bounds.lowerBound.link(null).getValueFromRow(null));
+		assertEquals(5, bounds.lowerBound.getValue());
 		assertEquals(true, bounds.lowerBoundInclusive);
-		assertEquals(10, bounds.upperBound.link(null).getValueFromRow(null));
+		assertEquals(10, bounds.upperBound.getValue());
 		assertEquals(true, bounds.upperBoundInclusive);
 	}
 

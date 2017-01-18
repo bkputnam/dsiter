@@ -26,27 +26,7 @@ public class AstMatcher {
 			return null;
 		}
 
-		if (lhsBound.lowerBound != null && rhsBound.upperBound != null) {
-			RangeBoundaries result = new RangeBoundaries();
-			result.column = lhsBound.column;
-			result.lowerBound = lhsBound.lowerBound;
-			result.lowerBoundInclusive = lhsBound.lowerBoundInclusive;
-			result.upperBound = rhsBound.upperBound;
-			result.upperBoundInclusive = rhsBound.upperBoundInclusive;
-			return result;
-		}
-		else if (lhsBound.upperBound != null && rhsBound.lowerBound != null) {
-			RangeBoundaries result = new RangeBoundaries();
-			result.column = lhsBound.column;
-			result.upperBound = lhsBound.upperBound;
-			result.upperBoundInclusive = lhsBound.upperBoundInclusive;
-			result.lowerBound = rhsBound.lowerBound;
-			result.lowerBoundInclusive = rhsBound.lowerBoundInclusive;
-			return result;
-		}
-		else {
-			return null;
-		}
+		return RangeBoundaries.tryMerge(lhsBound, rhsBound);
 	}
 
 	private static RangeBoundaries testSimpleBound(AstNode node) {
@@ -72,44 +52,40 @@ public class AstMatcher {
 	}
 
 	private static RangeBoundaries extractLowerBound(AstNode lhs, AstNode rhs, boolean inclusive) {
-		ColumnConst cc = toColumnConst(lhs, rhs);
+		ColumnConst cc = toColumnConst(lhs, rhs, false);
 		if (cc == null) {
 			return null;
 		}
 		else {
-			RangeBoundaries result = new RangeBoundaries();
-			result.column = cc.column;
-			result.lowerBound = cc.constant;
-			result.lowerBoundInclusive = inclusive;
-			return result;
+			return new RangeBoundaries(cc, inclusive);
 		}
 	}
 
 	private static RangeBoundaries extractUpperBound(AstNode lhs, AstNode rhs, boolean inclusive) {
-		ColumnConst cc = toColumnConst(lhs, rhs);
+		ColumnConst cc = toColumnConst(lhs, rhs, true);
 		if (cc == null) {
 			return null;
 		}
 		else {
-			RangeBoundaries result = new RangeBoundaries();
-			result.column = cc.column;
-			result.upperBound = cc.constant;
-			result.upperBoundInclusive = inclusive;
-			return result;
+			return new RangeBoundaries(cc, inclusive);
 		}
 	}
 
-	private static ColumnConst toColumnConst(AstNode lhs, AstNode rhs) {
+	private static ColumnConst toColumnConst(AstNode lhs, AstNode rhs, boolean isUpper) {
 		ColumnConst result = null;
 		if (lhs instanceof ColumnOperator && rhs instanceof ConstantOperator) {
-			result = new ColumnConst();
-			result.column = (ColumnOperator)lhs;
-			result.constant = (ConstantOperator)rhs;
+			result = new ColumnConst(
+				(ColumnOperator)lhs,
+				(ConstantOperator)rhs,
+				isUpper
+			);
 		}
 		else if (lhs instanceof ConstantOperator && rhs instanceof ColumnOperator) {
-			result = new ColumnConst();
-			result.column = (ColumnOperator)rhs;
-			result.constant = (ConstantOperator)lhs;
+			result = new ColumnConst(
+				(ColumnOperator)rhs,
+				(ConstantOperator)lhs,
+				!isUpper
+			);
 		}
 		return result;
 	}
@@ -122,10 +98,59 @@ public class AstMatcher {
 
 		ConstantOperator upperBound;
 		boolean upperBoundInclusive;
+
+		private RangeBoundaries() {}
+
+		public RangeBoundaries(ColumnConst cc, boolean isInclusive) {
+			this(cc.column, cc.constant, cc.isUpperBound, isInclusive);
+		}
+
+		public RangeBoundaries(ColumnOperator column, ConstantOperator constant, boolean isUpper, boolean isInclusive) {
+			this.column = column;
+			if (isUpper) {
+				upperBound = constant;
+				upperBoundInclusive = isInclusive;
+			}
+			else {
+				lowerBound = constant;
+				lowerBoundInclusive = isInclusive;
+			}
+		}
+
+		public static RangeBoundaries tryMerge(RangeBoundaries a, RangeBoundaries b) {
+			if (a.lowerBound != null && b.upperBound != null) {
+				RangeBoundaries result = new RangeBoundaries();
+				result.column = a.column;
+				result.lowerBound = a.lowerBound;
+				result.lowerBoundInclusive = a.lowerBoundInclusive;
+				result.upperBound = b.upperBound;
+				result.upperBoundInclusive = b.upperBoundInclusive;
+				return result;
+			}
+			else if (a.upperBound != null && b.lowerBound != null) {
+				RangeBoundaries result = new RangeBoundaries();
+				result.column = a.column;
+				result.upperBound = a.upperBound;
+				result.upperBoundInclusive = a.upperBoundInclusive;
+				result.lowerBound = b.lowerBound;
+				result.lowerBoundInclusive = b.lowerBoundInclusive;
+				return result;
+			}
+			else {
+				return null;
+			}
+		}
 	}
 
 	private static class ColumnConst {
 		ColumnOperator column;
 		ConstantOperator constant;
+		boolean isUpperBound;
+
+		public ColumnConst(ColumnOperator column, ConstantOperator constant, boolean isUpperBound) {
+			this.column = column;
+			this.constant = constant;
+			this.isUpperBound = isUpperBound;
+		}
 	}
 }

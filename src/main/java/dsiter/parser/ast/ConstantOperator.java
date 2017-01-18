@@ -8,6 +8,8 @@
 /* GENERATED CODE */
 /* GENERATED CODE */public interface ConstantOperator extends AstNode {
 /* GENERATED CODE */
+/* GENERATED CODE */	public Object getValue();
+/* GENERATED CODE */
 /* GENERATED CODE */	
 /* GENERATED CODE */	public static class INT implements ConstantOperator {
 /* GENERATED CODE */
@@ -15,6 +17,11 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		public INT(int value) {
 /* GENERATED CODE */			this.value = value;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		public Object getValue() {
+/* GENERATED CODE */			return value;
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
@@ -37,6 +44,11 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
+/* GENERATED CODE */		public Object getValue() {
+/* GENERATED CODE */			return value;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
 /* GENERATED CODE */		public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
 /* GENERATED CODE */			return new ConstantAccessor.LONG(value);
 /* GENERATED CODE */		}
@@ -53,6 +65,11 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		public FLOAT(float value) {
 /* GENERATED CODE */			this.value = value;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		public Object getValue() {
+/* GENERATED CODE */			return value;
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
@@ -75,6 +92,11 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
+/* GENERATED CODE */		public Object getValue() {
+/* GENERATED CODE */			return value;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
 /* GENERATED CODE */		public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
 /* GENERATED CODE */			return new ConstantAccessor.DOUBLE(value);
 /* GENERATED CODE */		}
@@ -91,6 +113,11 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		public STRING(String value) {
 /* GENERATED CODE */			this.value = value;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		public Object getValue() {
+/* GENERATED CODE */			return value;
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
@@ -113,6 +140,11 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override
+/* GENERATED CODE */		public Object getValue() {
+/* GENERATED CODE */			return value;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
 /* GENERATED CODE */		public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
 /* GENERATED CODE */			return new ConstantAccessor.BOOLEAN(value);
 /* GENERATED CODE */		}
@@ -129,6 +161,11 @@
 /* GENERATED CODE */
 /* GENERATED CODE */		public JSDATE(long value) {
 /* GENERATED CODE */			this.value = value;
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		public Object getValue() {
+/* GENERATED CODE */			return value;
 /* GENERATED CODE */		}
 /* GENERATED CODE */
 /* GENERATED CODE */		@Override

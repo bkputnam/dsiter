@@ -8,6 +8,8 @@ import java.util.Map;
 
 public interface ConstantOperator extends AstNode {
 
+	public Object getValue();
+
 	<% ColumnTypes.each { type -> %>
 	public static class ${type.type} implements ConstantOperator {
 
@@ -15,6 +17,11 @@ public interface ConstantOperator extends AstNode {
 
 		public ${type.type}(${type.nativeType} value) {
 			this.value = value;
+		}
+
+		@Override
+		public Object getValue() {
+			return value;
 		}
 
 		@Override
