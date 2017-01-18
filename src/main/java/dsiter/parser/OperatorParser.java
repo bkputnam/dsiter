@@ -1,41 +1,37 @@
 package dsiter.parser;
 
-import dsiter.accessor.*;
-import dsiter.row.*;
+import dsiter.parser.ast.*;
 
 import java.time.Instant;
 import java.util.*;
 import java.util.regex.Matcher;
 
 /**
- * Class for parsing strings to accessor
+ * Class for parsing strings to
  * <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">ASTs</a>.
  * This class is non-instantiable, and only publicly provides
- * the static method {@link #parseOperator(ColumnDescriptor[], String)}
+ * the static method {@link #parseOperator(String)}
  */
-public class OperatorParser {
+public final class OperatorParser {
 
 	// This class is effectively static: neither abstract nor instantiable
 	private OperatorParser() { throw new Error("Programmer Error: OperatorParser should never be instantiated"); }
 
 	/**
-	 * Parse an accessor string representing an expression to an accessor
+	 * Parse an astNode string representing an expression to an astNode
 	 * tree that knows how to extract and compute that expression from
 	 * a Row. Besides the expression to be parsed, this method also
 	 * requires a description (in the form of a {@code ColumnDescriptor[]})
-	 * of the rows that the returned accessor will be operating on
+	 * of the rows that the returned astNode will be operating on
 	 * (e.g. for the expression {@code "foo>5"} we need to know how to
 	 * extract the column {@code "foo"})
 	 *
-	 * @param metadata ColumnDescriptors that describe the shape of the
-	 *                 Rows that the returned accessor will be operating
-	 *                 on
 	 * @param string   The expression to be parsed
-	 * @return An accessor that can compute the given expression from a
+	 * @return An astNode that can compute the given expression from a
 	 * Row of the expected shape.
 	 */
-	public static IRowAccessor parseOperator(ColumnDescriptor[] metadata, String string) {
-		ParserState state = new ParserState(metadata);
+	public static AstNode parseOperator(String string) {
+		ParserState state = new ParserState();
 		return parseOperatorHelper(string, state);
 	}
 
@@ -52,22 +48,15 @@ public class OperatorParser {
 	// rest.
 	private static class ParserState {
 		public Stack<String> operatorStack;
-		public Stack<IRowAccessor> outputStack;
-		public HashMap<String, IColumnAccessor> accessorLookup;
+		public Stack<AstNode> outputStack;
 
-		public ParserState(ColumnDescriptor[] metadata) {
+		public ParserState() {
 			operatorStack = new Stack<>();
 			outputStack = new Stack<>();
-
-			accessorLookup = new HashMap<>();
-			for(int i=0; i<metadata.length; i++) {
-				ColumnDescriptor cd = metadata[i];
-				accessorLookup.put(cd.getName(), cd.getAccessor());
-			}
 		}
 	}
 
-	private static IRowAccessor parseOperatorHelper(String string, ParserState state) {
+	private static AstNode parseOperatorHelper(String string, ParserState state) {
 
 		String[] tokens = Tokenizer.tokenize(string);
 
@@ -79,7 +68,7 @@ public class OperatorParser {
 		//		as they are added to the stack. This is equivalent to evaluating
 		//		the reverse-polish-notation as it is generated. At the end of the
 		//		algorithm there should only be one value on the stack; a single
-		//		accessor instance representing the entire expression.
+		//		astNode instance representing the entire expression.
 
 		AccessorContainer receiver = new AccessorContainer();
 
@@ -93,24 +82,20 @@ public class OperatorParser {
 			// Note: for us, this applies equally to number literals, string literals and
 			// column names.
 			if(tryParseDatetime(token, receiver)) {
-				state.outputStack.push(receiver.accessor);
+				state.outputStack.push(receiver.astNode);
 			}
 			else if(tryParseNumber(token, receiver)) {
-				state.outputStack.push(receiver.accessor);
+				state.outputStack.push(receiver.astNode);
 			}
 			else if(token.startsWith("\"") && token.endsWith("\"")) {
 				state.outputStack.push(
-					new ConstantAccessor.STRING(
+					new ConstantOperator.STRING(
 						token.substring(1, token.length()-1)
 					)
 				);
 			}
 			else if(isColumn(token)) {
-				IRowAccessor ca = state.accessorLookup.get(token);
-				if(ca == null) {
-					throw new IllegalArgumentException("Unable to find column \"" + token + "\"");
-				}
-				state.outputStack.push(ca);
+				state.outputStack.push(new ColumnOperator(token));
 			}
 
 			// "If the token is a function token, then push it onto the stack."
@@ -143,12 +128,12 @@ public class OperatorParser {
 			}
 
 			// """
-			//	* If the token is an accessor, o1, then:
-			//		* while there is an accessor token o2, at the top of the accessor stack and either
+			//	* If the token is an astNode, o1, then:
+			//		* while there is an astNode token o2, at the top of the astNode stack and either
 			//				? o1 is left-associative and its precedence is less than or equal to that of o2, or
 			//				? o1 is right associative, and has precedence less than that of o2,
-			//			* pop o2 off the accessor stack, onto the output queue;
-			//		* at the end of iteration push o1 onto the accessor stack.
+			//			* pop o2 off the astNode stack, onto the output queue;
+			//		* at the end of iteration push o1 onto the astNode stack.
 			// """
 			else if(isOperator(token)) {
 				String o1 = token;
@@ -203,7 +188,7 @@ public class OperatorParser {
 					}
 				}
 				if(!foundLParenOrFunction) {
-					throw new IllegalArgumentException("Mismatched parenthesis in accessor string: \"" + string + "\" (extra ')')");
+					throw new IllegalArgumentException("Mismatched parenthesis in astNode string: \"" + string + "\" (extra ')')");
 				}
 				if(topOperator.equals("(")) {
 					// pop the left parenthesis, but not onto the output queue
@@ -211,7 +196,7 @@ public class OperatorParser {
 					state.operatorStack.pop();
 				}
 				else {
-					// top accessor is a function: pop both the accessor and the
+					// top astNode is a function: pop both the astNode and the
 					// left paren simultaneously
 					popOperator(state);
 				}
@@ -223,13 +208,13 @@ public class OperatorParser {
 		} // end foreach token loop
 
 		//	* When there are no more tokens to read:
-		//		* While there are still accessor tokens in the stack:
-		//			* If the accessor token on the top of the stack is a parenthesis, then there are mismatched parentheses.
-		//			* Pop the accessor onto the output queue.
+		//		* While there are still astNode tokens in the stack:
+		//			* If the astNode token on the top of the stack is a parenthesis, then there are mismatched parentheses.
+		//			* Pop the astNode onto the output queue.
 		while(!state.operatorStack.empty()) {
 			String topOperator = state.operatorStack.peek();
 			if(topOperator.equals("(")) {
-				throw new IllegalArgumentException("Mismatched parenthesis in accessor string: \"" + string + "\" (extra '(')");
+				throw new IllegalArgumentException("Mismatched parenthesis in astNode string: \"" + string + "\" (extra '(')");
 			}
 			popOperator(state);
 		}
@@ -297,7 +282,7 @@ public class OperatorParser {
 	}
 
 	static class AccessorContainer {
-		public IRowAccessor accessor;
+		public AstNode astNode;
 	}
 
 	static boolean tryParseNumber(String token, AccessorContainer accessorReceiver) {
@@ -320,19 +305,19 @@ public class OperatorParser {
 		// all doubles (that seems to be the usual practice in most Java code, anyway)
 		try {
 			int intVal = Integer.parseInt(token);
-			accessorReceiver.accessor = new ConstantAccessor.INT(intVal);
+			accessorReceiver.astNode = new ConstantOperator.INT(intVal);
 			return true;
 		}
 		catch (NumberFormatException e1) {
 			try {
 				long longVal = Long.parseLong(token);
-				accessorReceiver.accessor = new ConstantAccessor.LONG(longVal);
+				accessorReceiver.astNode = new ConstantOperator.LONG(longVal);
 				return true;
 			}
 			catch (NumberFormatException e2) {
 				try {
 					double doubleVal = Double.parseDouble(token);
-					accessorReceiver.accessor = new ConstantAccessor.DOUBLE(doubleVal);
+					accessorReceiver.astNode = new ConstantOperator.DOUBLE(doubleVal);
 					return true;
 				}
 				catch (NumberFormatException e3) {
@@ -356,7 +341,7 @@ public class OperatorParser {
 					throw new Error("This should be impossible");
 			}
 			Instant time = Instant.parse(token);
-			receiver.accessor = new ConstantAccessor.JSDATE(time.toEpochMilli());
+			receiver.astNode = new ConstantOperator.JSDATE(time.toEpochMilli());
 			return true;
 		}
 		else {
@@ -366,98 +351,88 @@ public class OperatorParser {
 
 	static void popOperator(ParserState state) {
 		String opStr = state.operatorStack.pop();
-		IRowAccessor opInst = operatorTokenToInstance(opStr, state);
+		AstNode opInst = operatorTokenToInstance(opStr, state);
 		state.outputStack.push(opInst);
 	}
 
-	static IRowAccessor operatorTokenToInstance(String operator, ParserState state) {
+	static AstNode operatorTokenToInstance(String operator, ParserState state) {
 
 		if(OperatorInfo.getNumParams(operator) == 2) {
 
 			// Remember: these are backwards because we're dealing with a stack
 			// (lhs is first, so got pushed onto stack sooner)
-			IRowAccessor rhs = state.outputStack.pop();
-			IRowAccessor lhs = state.outputStack.pop();
+			AstNode rhs = state.outputStack.pop();
+			AstNode lhs = state.outputStack.pop();
 
-			// This is probably a silly way to implement an accessor lookup.
+			// This is probably a silly way to implement an astNode lookup.
 			if(operator.equals("=")) {
-				return new EqualsAccessor(lhs, rhs);
+				return new EqualsOperator(lhs, rhs);
 			}
 			else if(operator.equals("!=")) {
-				return new NotEqualsAccessor(lhs, rhs);
+				return new NotEqualsOperator(lhs, rhs);
 			}
 			else if(operator.equals("<")) {
-				return new LessThanAccessor(lhs, rhs);
+				return new LessThanOperator(lhs, rhs);
 			}
 			else if(operator.equals(">")) {
-				return new GreaterThanAccessor(lhs, rhs);
+				return new GreaterThanOperator(lhs, rhs);
 			}
 			else if(operator.equals("<=")) {
-				return new LessThanEqualsAccessor(lhs, rhs);
+				return new LessThanEqualsOperator(lhs, rhs);
 			}
 			else if(operator.equals(">=")) {
-				return new GreaterThanEqualsAccessor(lhs, rhs);
+				return new GreaterThanEqualsOperator(lhs, rhs);
 			}
 			else if(operator.equals("||")) {
-				return new OrAccessor(lhs, rhs);
+				return new OrOperator(lhs, rhs);
 			}
 			else if(operator.equals("&&")) {
-				return new AndAccessor(lhs, rhs);
+				return new AndOperator(lhs, rhs);
 			}
 			else if(operator.equals("%")) {
-				return new ModuloAccessor(lhs, rhs);
+				return new ModuloOperator(lhs, rhs);
 			}
 			else if(operator.equals("+")) {
-				return new PlusAccessor(lhs, rhs);
+				return new PlusOperator(lhs, rhs);
 			}
 			else if(operator.equals("-")) {
-				return new MinusAccessor(lhs, rhs);
+				return new MinusOperator(lhs, rhs);
 			}
 			else if(operator.equals("*")) {
-				return new TimesAccessor(lhs, rhs);
+				return new TimesOperator(lhs, rhs);
 			}
 			else if(operator.equals("/")) {
-				return new DivideAccessor(lhs, rhs);
+				return new DivideOperator(lhs, rhs);
 			}
 			else if(operator.equals("nroot(")) {
-				return new NthRootAccessor(lhs, rhs);
+				return new NthRootOperator(lhs, rhs);
 			}
 			else if(operator.equals("^")) {
-				return new CaretAccessor(lhs, rhs);
+				return new CaretOperator(lhs, rhs);
 			}
 			else if(operator.equals("~")) {
-				// rhs *should* be a constant expression representing a string
-				String pattern;
-				try {
-					// May throw a NullPointerException if rhs attempts to read from the empty Row,
-					// or may throw a ClassCastException if rhs does not return a String
-					pattern = (String) rhs.getValueFromRow(new Row());
-				}
-				catch (Exception e) {
-					throw new RegexParseException("User error: rhs of '~' accessor should be a string literal");
-				}
-				return new RegexMatchAccessor(lhs, pattern);
+				return new RegexMatchOperator(lhs, rhs);
 			}
 			else {
-				throw new Error("Programmer Error: unrecognized binary accessor token: \"" + operator + "\"");
+				throw new Error("Programmer Error: unrecognized binary astNode token: \"" + operator + "\"");
 			}
 		}
 		else if(OperatorInfo.getNumParams(operator) == 1) {
-			IRowAccessor src = state.outputStack.pop();
+			AstNode src = state.outputStack.pop();
 
 			if(operator.equals("!")) {
-				return new NotAccessor(src);
+				return new NotOperator(src);
 			}
 			else if(operator.equals("sqrt(")) {
-				return new SqrtAccessor(src);
+				return new SqrtOperator(src);
 			}
 			else {
-				throw new Error("Programmer Error: unrecognized unary accessor token: \"" + operator + "\"");
+				throw new Error("Programmer Error: unrecognized unary astNode token: \"" + operator + "\"");
 			}
 		}
 		else {
 			throw new Error(
-				"Programmer Error: Unable to determine type of \"" + operator + "\" accessor." +
+				"Programmer Error: Unable to determine type of \"" + operator + "\" astNode." +
 				" This should be impossible."
 			);
 		}

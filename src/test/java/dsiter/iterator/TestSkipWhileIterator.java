@@ -16,10 +16,10 @@ public class TestSkipWhileIterator {
 		IDatasetIterator src = new RangeIterator(10)
 			.pipe(counter.getPipe());
 
-		IRowAccessor.BOOLEAN predicate = OperatorParser.parseOperator(
-			src.getColumnDescriptors(),
-			"value != 5"
-		).asBoolAccessor();
+		IRowAccessor.BOOLEAN predicate = OperatorParser
+			.parseOperator("value != 5")
+			.link(src.getColumnDescriptors())
+			.asBoolAccessor();
 
 		try (
 			SkipWhileIterator it = new SkipWhileIterator(src, predicate)

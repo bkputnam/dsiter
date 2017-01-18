@@ -8,6 +8,7 @@ import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.RangeIterator;
 import dsiter.accessor.EqualsAccessor;
 import dsiter.accessor.ModuloAccessor;
+import dsiter.parser.ast.*;
 import dsiter.row.*;
 import org.junit.Test;
 
@@ -35,13 +36,13 @@ public class TestPipes {
 
 	@Test
 	public void testFilterPipe() throws Exception {
-		IRowAccessor.BOOLEAN isEvenPredicate = new EqualsAccessor.INT_INT(
-				new ModuloAccessor.INT_INT(
-					IColumnAccessor.getInstance(ColumnType.INT, 0).asIntAccessor(),
-						new ConstantAccessor.INT(2)
-				),
-				new ConstantAccessor.INT(0)
-		).asBoolAccessor();
+		AstNode isEvenPredicate = new EqualsOperator(
+			new ModuloOperator(
+				new ColumnOperator("value"),
+				new ConstantOperator.INT(2)
+			),
+			new ConstantOperator.INT(0)
+		);
 
 		try (IDatasetIterator it = new RangeIterator(10)
 				.pipe(new FilterPipe(isEvenPredicate))
