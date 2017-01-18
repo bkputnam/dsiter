@@ -152,6 +152,23 @@
                     	 */
 /* GENERATED CODE */	default BOOLEAN asBoolAccessor() { return (BOOLEAN)this; }
 /* GENERATED CODE */	
+                    	/**
+                    	 * Convert this IRowAccessor to an {@code IRowAccessor.JSDATE}.
+                    	 * The default implementation of this method simply casts
+                    	 * {@code this} to {@code IRowAccessor.JSDATE}, but some
+                    	 * subclasses may wish to provide more sophisticated
+                    	 * implementations, e.g. by casting and returning an inner
+                    	 * accessor to the approriate type.
+                    	 *
+                    	 * <p>
+                    	 * 	Note: this method will throw if {@link #getType} does not
+                    	 * 	return {@link ColumnType#JSDATE}.
+                    	 * </p>
+                    	 * @return An {@code IRowAccessor.JSDATE} representation
+                    	 * of this instance
+                    	 */
+/* GENERATED CODE */	default JSDATE asJsDateAccessor() { return (JSDATE)this; }
+/* GENERATED CODE */	
 /* GENERATED CODE */	
 /* GENERATED CODE */	
                     	/**
@@ -259,6 +276,24 @@
 /* GENERATED CODE */		@Override
 /* GENERATED CODE */		default ColumnType getType() {
 /* GENERATED CODE */			return ColumnType.BOOLEAN;
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
+                    	/**
+                    	 * An {@link IRowAccessor} that returns a value of type long
+                    	 * (i.e.&nbsp;{@code getType() == ColumnType.JSDATE}).
+                    	 */
+/* GENERATED CODE */	public interface JSDATE extends IRowAccessor {
+/* GENERATED CODE */		public long getJsDateFromRow(Row row);
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		default Object getValueFromRow(Row row) {
+/* GENERATED CODE */			return getJsDateFromRow(row);
+/* GENERATED CODE */		}
+/* GENERATED CODE */
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		default ColumnType getType() {
+/* GENERATED CODE */			return ColumnType.JSDATE;
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	

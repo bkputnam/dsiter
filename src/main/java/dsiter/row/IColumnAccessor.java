@@ -100,6 +100,16 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * An {@link IColumnAccessor} that is also an {@link IRowAccessor.JSDATE}
+                    	 */
+/* GENERATED CODE */	interface JSDATE extends IColumnAccessor, IRowAccessor.JSDATE {
+/* GENERATED CODE */		@Override
+/* GENERATED CODE */		default long getJsDateFromRow(Row row) {
+/* GENERATED CODE */			return row.jsdates[getIndex()];
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
 /* GENERATED CODE */
                     	/**
                     	 * Get a type-specific instance of {@link IColumnAccessor}. The column's
@@ -139,6 +149,11 @@
 /* GENERATED CODE */			};
 /* GENERATED CODE */			
 /* GENERATED CODE */			case BOOLEAN: return new BOOLEAN() {
+/* GENERATED CODE */				@Override
+/* GENERATED CODE */				public int getIndex() { return index; }
+/* GENERATED CODE */			};
+/* GENERATED CODE */			
+/* GENERATED CODE */			case JSDATE: return new JSDATE() {
 /* GENERATED CODE */				@Override
 /* GENERATED CODE */				public int getIndex() { return index; }
 /* GENERATED CODE */			};

@@ -15,8 +15,8 @@ public class TestTimesOperator {
         int rhs = 5;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -28,8 +28,8 @@ public class TestTimesOperator {
         long rhs = 5L;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -41,8 +41,8 @@ public class TestTimesOperator {
         float rhs = 5F;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -54,8 +54,8 @@ public class TestTimesOperator {
         double rhs = 5D;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -69,8 +69,8 @@ public class TestTimesOperator {
         int rhs = 5;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -82,8 +82,8 @@ public class TestTimesOperator {
         long rhs = 5L;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -95,8 +95,8 @@ public class TestTimesOperator {
         float rhs = 5F;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -108,8 +108,8 @@ public class TestTimesOperator {
         double rhs = 5D;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -123,8 +123,8 @@ public class TestTimesOperator {
         int rhs = 5;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -136,8 +136,8 @@ public class TestTimesOperator {
         long rhs = 5L;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -149,8 +149,8 @@ public class TestTimesOperator {
         float rhs = 5F;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -162,8 +162,8 @@ public class TestTimesOperator {
         double rhs = 5D;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -177,8 +177,8 @@ public class TestTimesOperator {
         int rhs = 5;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -190,8 +190,8 @@ public class TestTimesOperator {
         long rhs = 5L;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -203,8 +203,8 @@ public class TestTimesOperator {
         float rhs = 5F;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));
@@ -216,8 +216,8 @@ public class TestTimesOperator {
         double rhs = 5D;
 
         TimesOperator mo = new TimesOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs * rhs, mo.getValueFromRow(new Row()));

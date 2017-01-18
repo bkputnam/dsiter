@@ -1,11 +1,5 @@
 /* GENERATED CODE */package dsiter.operator;
 /* GENERATED CODE */
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE *///	DO NOT EDIT!!!
-/* GENERATED CODE *///
-/* GENERATED CODE *///	This is generated code. Edit the template instead.
-/* GENERATED CODE *////////////////////////////////////////////
-/* GENERATED CODE */
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;

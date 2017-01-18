@@ -4,7 +4,9 @@ import dsiter.operator.*;
 import dsiter.row.*;
 
 import java.text.ParseException;
+import java.time.Instant;
 import java.util.*;
+import java.util.regex.Matcher;
 
 /**
  * Class for parsing strings to operator
@@ -91,12 +93,15 @@ public class OperatorParser {
 			// "If the token is a number, then push it to the output queue."
 			// Note: for us, this applies equally to number literals, string literals and
 			// column names.
-			if(tryParseNumber(token, receiver)) {
+			if(tryParseDatetime(token, receiver)) {
+				state.outputStack.push(receiver.accessor);
+			}
+			else if(tryParseNumber(token, receiver)) {
 				state.outputStack.push(receiver.accessor);
 			}
 			else if(token.startsWith("\"") && token.endsWith("\"")) {
 				state.outputStack.push(
-					ConstantAccessor.getInstance(
+					ConstantAccessor.getStringInstance(
 						token.substring(1, token.length()-1)
 					)
 				);
@@ -316,25 +321,47 @@ public class OperatorParser {
 		// all doubles (that seems to be the usual practice in most Java code, anyway)
 		try {
 			int intVal = Integer.parseInt(token);
-			accessorReceiver.accessor = ConstantAccessor.getInstance(intVal);
+			accessorReceiver.accessor = ConstantAccessor.getIntInstance(intVal);
 			return true;
 		}
 		catch (NumberFormatException e1) {
 			try {
 				long longVal = Long.parseLong(token);
-				accessorReceiver.accessor = ConstantAccessor.getInstance(longVal);
+				accessorReceiver.accessor = ConstantAccessor.getLongInstance(longVal);
 				return true;
 			}
 			catch (NumberFormatException e2) {
 				try {
 					double doubleVal = Double.parseDouble(token);
-					accessorReceiver.accessor = ConstantAccessor.getInstance(doubleVal);
+					accessorReceiver.accessor = ConstantAccessor.getDoubleInstance(doubleVal);
 					return true;
 				}
 				catch (NumberFormatException e3) {
 					return false;
 				}
 			}
+		}
+	}
+
+	static boolean tryParseDatetime(String token, AccessorContainer receiver) {
+		Matcher matcher = TimeParser.dateTimePattern.matcher(token);
+		if (matcher.matches()) {
+			switch (token.length()) {
+				case 10: /* yyyy-mm-dd */ token += "T00:00:00Z"; break;
+				case 11: /* yyyy-mm-ddZ */ token = token.substring(0, 10) + "T00:00:00Z"; break;
+				case 19: /* yyyy-mm-ddT00:00:00 */ token += "Z"; break;
+				case 20: /* yyyy-mm-ddT00:00:00Z */ break; // do nothing, token is already complete
+				default:
+					// If we hit this error, it means the regex let through a match of unexpected length
+					// (probably means the regex has been changed since this was first written)
+					throw new Error("This should be impossible");
+			}
+			Instant time = Instant.parse(token);
+			receiver.accessor = ConstantAccessor.getJsDateInstance(time.getEpochSecond());
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 

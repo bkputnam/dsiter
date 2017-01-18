@@ -11,7 +11,7 @@ public class TestNotOperator {
     @Test
     public void testNotTrue() {
         NotOperator no = new NotOperator(
-            ConstantAccessor.getInstance(true)
+            ConstantAccessor.getBoolInstance(true)
         );
 
         assertEquals(false, no.getValueFromRow(new Row()));
@@ -20,7 +20,7 @@ public class TestNotOperator {
     @Test
     public void testNotFalse() {
         NotOperator no = new NotOperator(
-                ConstantAccessor.getInstance(false)
+                ConstantAccessor.getBoolInstance(false)
         );
 
         assertEquals(true, no.getValueFromRow(new Row()));

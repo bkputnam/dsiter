@@ -1,6 +1,7 @@
 /* GENERATED CODE */package dsiter.row;
 /* GENERATED CODE */
 /* GENERATED CODE */import java.text.NumberFormat;
+/* GENERATED CODE */import java.time.Instant;
 /* GENERATED CODE */
                     /**
                      * Interface for classes that parse strings and insert them directly into
@@ -92,6 +93,15 @@
 /* GENERATED CODE */                    @Override
 /* GENERATED CODE */                    public void parseAndMutate(String value, Row row) throws Exception {
 /* GENERATED CODE */                        row.bools[index] = Boolean.parseBoolean(value);
+/* GENERATED CODE */                    }
+/* GENERATED CODE */                };
+/* GENERATED CODE */            
+/* GENERATED CODE */            case JSDATE:
+/* GENERATED CODE */                
+/* GENERATED CODE */                return new IParserMutator() {
+/* GENERATED CODE */                    @Override
+/* GENERATED CODE */                    public void parseAndMutate(String value, Row row) throws Exception {
+/* GENERATED CODE */                        row.jsdates[index] = Instant.parse(value).getEpochSecond();
 /* GENERATED CODE */                    }
 /* GENERATED CODE */                };
 /* GENERATED CODE */            

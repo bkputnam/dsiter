@@ -13,8 +13,8 @@ public class TestNotEqualsOperator {
 	@Test
 	public void testIntFalse() {
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(2),
-			ConstantAccessor.getInstance(2)
+			ConstantAccessor.getIntInstance(2),
+			ConstantAccessor.getIntInstance(2)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));
@@ -23,8 +23,8 @@ public class TestNotEqualsOperator {
 	@Test
 	public void testIntTrue() {
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(2),
-			ConstantAccessor.getInstance(3)
+			ConstantAccessor.getIntInstance(2),
+			ConstantAccessor.getIntInstance(3)
 		);
 
 		assertEquals(true, eq.getValueFromRow(new Row()));
@@ -33,8 +33,8 @@ public class TestNotEqualsOperator {
 	@Test
 	public void testLongFalse() {
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(2L),
-			ConstantAccessor.getInstance(2L)
+			ConstantAccessor.getLongInstance(2L),
+			ConstantAccessor.getLongInstance(2L)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));
@@ -43,8 +43,8 @@ public class TestNotEqualsOperator {
 	@Test
 	public void testLongTrue() {
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(2L),
-			ConstantAccessor.getInstance(3L)
+			ConstantAccessor.getLongInstance(2L),
+			ConstantAccessor.getLongInstance(3L)
 		);
 
 		assertEquals(true, eq.getValueFromRow(new Row()));
@@ -60,8 +60,8 @@ public class TestNotEqualsOperator {
 		assertTrue(s1.equals(s2)); // Make sure I didn't mess up the string manipulation
 
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(s1),
-			ConstantAccessor.getInstance(s2)
+			ConstantAccessor.getStringInstance(s1),
+			ConstantAccessor.getStringInstance(s2)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));
@@ -77,8 +77,8 @@ public class TestNotEqualsOperator {
 		assertFalse(s1.equals(s2)); // Make sure I didn't mess up the string manipulation
 
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(s1),
-			ConstantAccessor.getInstance(s2)
+			ConstantAccessor.getStringInstance(s1),
+			ConstantAccessor.getStringInstance(s2)
 		);
 
 		assertEquals(true, eq.getValueFromRow(new Row()));
@@ -87,8 +87,8 @@ public class TestNotEqualsOperator {
 	@Test
 	public void testLongFloatFalse() {
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(2L),
-			ConstantAccessor.getInstance(2.0F)
+			ConstantAccessor.getLongInstance(2L),
+			ConstantAccessor.getFloatInstance(2.0F)
 		);
 
 		assertEquals(false, eq.getValueFromRow(new Row()));
@@ -97,10 +97,28 @@ public class TestNotEqualsOperator {
 	@Test
 	public void testLongFloatTrue() {
 		NotEqualsOperator eq = new NotEqualsOperator(
-			ConstantAccessor.getInstance(2L),
-			ConstantAccessor.getInstance(3.0F)
+			ConstantAccessor.getLongInstance(2L),
+			ConstantAccessor.getFloatInstance(3.0F)
 		);
 
+		assertEquals(true, eq.getValueFromRow(new Row()));
+	}
+
+	@Test
+	public void testJsDateFalse() {
+		NotEqualsOperator eq = new NotEqualsOperator(
+				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
+				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z")
+		);
+		assertEquals(false, eq.getValueFromRow(new Row()));
+	}
+
+	@Test
+	public void testJsDateTrue() {
+		NotEqualsOperator eq = new NotEqualsOperator(
+				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:00Z"),
+				ConstantAccessor.getJsDateInstance("1970-01-01T00:00:01Z")
+		);
 		assertEquals(true, eq.getValueFromRow(new Row()));
 	}
 }

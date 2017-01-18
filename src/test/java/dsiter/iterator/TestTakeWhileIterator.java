@@ -11,7 +11,7 @@ public class TestTakeWhileIterator {
 	@Test
 	public void test1() throws Exception {
 
-		IDatasetIterator src = new ArrayIterator(
+		IDatasetIterator src = ArrayIterator.fromInts(
 			1,2,3,4,1,2,3,4,1,2,3,4
 		);
 

@@ -26,6 +26,7 @@
 /* GENERATED CODE */	private int[] srcDoubleIndexes;
 /* GENERATED CODE */	private int[] srcStringIndexes;
 /* GENERATED CODE */	private int[] srcBoolIndexes;
+/* GENERATED CODE */	private int[] srcJsDateIndexes;
 /* GENERATED CODE */
 /* GENERATED CODE */	private RowShape shape;
 /* GENERATED CODE */	private ColumnDescriptor[] destCds;
@@ -52,6 +53,7 @@
 /* GENERATED CODE */		srcDoubleIndexes = new int[shape.getNumDoubles()];
 /* GENERATED CODE */		srcStringIndexes = new int[shape.getNumStrings()];
 /* GENERATED CODE */		srcBoolIndexes = new int[shape.getNumBools()];
+/* GENERATED CODE */		srcJsDateIndexes = new int[shape.getNumJsDates()];
 /* GENERATED CODE */
 /* GENERATED CODE */		destCds = new ColumnDescriptor[srcCds.length];
 /* GENERATED CODE */
@@ -77,6 +79,7 @@
 /* GENERATED CODE */				case DOUBLE: srcDoubleIndexes[index] = ca.getIndex(); break;
 /* GENERATED CODE */				case STRING: srcStringIndexes[index] = ca.getIndex(); break;
 /* GENERATED CODE */				case BOOLEAN: srcBoolIndexes[index] = ca.getIndex(); break;
+/* GENERATED CODE */				case JSDATE: srcJsDateIndexes[index] = ca.getIndex(); break;
 /* GENERATED CODE */				default:
 /* GENERATED CODE */					throw new Error("This should be impossible");
 /* GENERATED CODE */			}
@@ -134,6 +137,10 @@
 /* GENERATED CODE */		
 /* GENERATED CODE */		for(int i=0; i<srcBoolIndexes.length; i++) {
 /* GENERATED CODE */			dest.bools[i] = src.bools[srcBoolIndexes[i]];
+/* GENERATED CODE */		}
+/* GENERATED CODE */		
+/* GENERATED CODE */		for(int i=0; i<srcJsDateIndexes.length; i++) {
+/* GENERATED CODE */			dest.jsdates[i] = src.jsdates[srcJsDateIndexes[i]];
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
 /* GENERATED CODE */	}

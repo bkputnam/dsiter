@@ -29,5 +29,5 @@ public class OrOperator extends TypedBinaryOperator {
 	}
 
 	@Override
-	protected boolean handle_boolean_boolean_boolean(boolean lhs, boolean rhs) { return lhs || rhs; }
+	protected boolean handle_bool_bool_bool(boolean lhs, boolean rhs) { return lhs || rhs; }
 }

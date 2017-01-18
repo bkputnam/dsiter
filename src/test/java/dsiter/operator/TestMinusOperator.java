@@ -16,8 +16,8 @@ public class TestMinusOperator {
         int rhs = 5;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -29,8 +29,8 @@ public class TestMinusOperator {
         long rhs = 5L;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -42,8 +42,8 @@ public class TestMinusOperator {
         float rhs = 5F;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -55,8 +55,8 @@ public class TestMinusOperator {
         double rhs = 5D;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getIntInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -70,8 +70,8 @@ public class TestMinusOperator {
         int rhs = 5;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -83,8 +83,8 @@ public class TestMinusOperator {
         long rhs = 5L;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -96,8 +96,8 @@ public class TestMinusOperator {
         float rhs = 5F;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -109,8 +109,8 @@ public class TestMinusOperator {
         double rhs = 5D;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getLongInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -124,8 +124,8 @@ public class TestMinusOperator {
         int rhs = 5;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -137,8 +137,8 @@ public class TestMinusOperator {
         long rhs = 5L;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -150,8 +150,8 @@ public class TestMinusOperator {
         float rhs = 5F;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -163,8 +163,8 @@ public class TestMinusOperator {
         double rhs = 5D;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getFloatInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -178,8 +178,8 @@ public class TestMinusOperator {
         int rhs = 5;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getIntInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -191,8 +191,8 @@ public class TestMinusOperator {
         long rhs = 5L;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getLongInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -204,8 +204,8 @@ public class TestMinusOperator {
         float rhs = 5F;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getFloatInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));
@@ -217,8 +217,8 @@ public class TestMinusOperator {
         double rhs = 5D;
 
         MinusOperator mo = new MinusOperator(
-                ConstantAccessor.getInstance(lhs),
-                ConstantAccessor.getInstance(rhs)
+                ConstantAccessor.getDoubleInstance(lhs),
+                ConstantAccessor.getDoubleInstance(rhs)
         );
 
         assertEquals(lhs - rhs, mo.getValueFromRow(new Row()));

@@ -2,6 +2,8 @@ package dsiter.operator.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Private class that tokenizes expression for the OperatorParser.
@@ -71,7 +73,17 @@ final class Tokenizer {
 			);
 		}
 		else if (isNum(firstChar) || firstChar == '-') {
-			return parseNum(str, startIndex);
+			int dateLength = TimeParser.dateLengthAt(str, startIndex);
+			if (dateLength != -1) {
+				return new TokenResult(
+					str.substring(startIndex, startIndex + dateLength),
+					startIndex + dateLength,
+					TokenType.DATETIME
+				);
+			}
+			else {
+				return parseNum(str, startIndex);
+			}
 		}
 		else if (isIdentifierHead(firstChar)) {
 			return parseIdentifier(str, startIndex);
@@ -177,6 +189,7 @@ final class Tokenizer {
 		NUMBER,
 		PAREN,
 		OPERATOR,
+		DATETIME
 	}
 
 	private static boolean isAlpha(char c) {

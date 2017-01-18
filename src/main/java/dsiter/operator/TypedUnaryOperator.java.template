@@ -1,7 +1,5 @@
 package dsiter.operator;
 
-${Disclaimer}
-
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
@@ -23,7 +21,7 @@ import dsiter.row.IRowAccessor;
  *		of {@code source} and {@code returnValue} (which means there are
  *		{@code (# of types)^2} overridable methods available). Subclasses only
  *		need to override the methods which they will actually support. So, for example,
- *		a logical boolean operator only needs to override {@link #handle_boolean_boolean}
+ *		a logical boolean operator only needs to override {@link #handle_bool_bool}
  *		and a numeric operator will only need to override the appropriate numeric
  *		{@code handle_x_y} method(s). This superclass will use the information from
  *		{@link #getReturnType} and {@link #testTypeCompatibility} to efficiently determine
@@ -105,14 +103,14 @@ def typeSwitch(indent, varName, bodyGenerator) {
 
 	<%
 		ColumnTypes.each { srcType -> ColumnTypes.each { returnType ->
-		def methodName = "handle_" + srcType.nativeType + "_" + returnType.nativeType;
+		def methodName = "handle_" + srcType.lowercased + "_" + returnType.lowercased;
 	%>
 	protected ${returnType.nativeType} ${methodName}( ${srcType.nativeType} src )  { throw new Error("Programmer error: ${methodName} must be overridden by subclass"); }<% }} %>
 
 <%
 ColumnTypes.each { srcType ->
 	ColumnTypes.each { returnType ->
-		def methodName = "handle_" + srcType.nativeType + "_" + returnType.nativeType;
+		def methodName = "handle_" + srcType.lowercased + "_" + returnType.lowercased;
 %>
 	private class ${srcType.type}_${returnType.type} implements IRowAccessor.${returnType.type} {
 

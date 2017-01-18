@@ -26,7 +26,7 @@ public class RegexMatchOperator extends TypedUnaryOperator {
 	}
 
 	@Override
-	protected boolean handle_String_boolean(String input) {
+	protected boolean handle_string_bool(String input) {
 		return pattern.test(input);
 	}
 }

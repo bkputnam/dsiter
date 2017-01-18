@@ -21,7 +21,7 @@ import dsiter.row.IRowAccessor;
  *		of {@code lhs}, {@code rhs}, and {@code returnValue} (which means there are
  *		{@code (# of types)^3} overridable methods available). Subclasses only
  *		need to override the methods which they will actually support. So, for example,
- *		a logical boolean operator only needs to override {@link #handle_boolean_boolean_boolean}
+ *		a logical boolean operator only needs to override {@link #handle_bool_bool_bool}
  *		and a numeric operator will only need to override the appropriate numeric
  *		{@code handle_x_y_z} methods. This superclass will use the information from
  *		{@link #getReturnType} and {@link #testTypeCompatibility} to efficiently determine
@@ -153,7 +153,7 @@ def typeSwitch(indent, varName, bodyGenerator) {
 	typeSwitch("\t\t", "lhsType") { indent1, lhsType ->
 		typeSwitch(indent1, "rhsType") { indent2, rhsType ->
 			typeSwitch(indent2, "returnType") { indent3, returnType ->
-				def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
+				def methodName = "handle_" + lhsType.lowercased + "_" + rhsType.lowercased + "_" + returnType.lowercased;
 				print "${indent3}return new ${lhsType.type}_${rhsType.type}_${returnType.type}(lhs, rhs);"
 			}
 		}
@@ -163,7 +163,7 @@ def typeSwitch(indent, varName, bodyGenerator) {
 
 	<%
 		ColumnTypes.each { lhsType -> ColumnTypes.each { rhsType -> ColumnTypes.each { returnType ->
-		def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
+		def methodName = "handle_" + lhsType.lowercased + "_" + rhsType.lowercased + "_" + returnType.lowercased;
 	%>
 	/**
 	 * Overrideable method. Computes value of operation from typed left- and right-hand side variables.
@@ -178,7 +178,7 @@ def typeSwitch(indent, varName, bodyGenerator) {
 ColumnTypes.each { lhsType ->
 	ColumnTypes.each { rhsType ->
 		ColumnTypes.each { returnType ->
-			def methodName = "handle_" + lhsType.nativeType + "_" + rhsType.nativeType + "_" + returnType.nativeType;
+			def methodName = "handle_" + lhsType.lowercased + "_" + rhsType.lowercased + "_" + returnType.lowercased;
 %>
 	private class ${lhsType.type}_${rhsType.type}_${returnType.type} implements IRowAccessor.${returnType.type} {
 
