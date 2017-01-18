@@ -3,14 +3,14 @@ package dsiter.parser.ast;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.accessor.EqualsAccessor;
+import dsiter.accessor.NotEqualsAccessor;
 
-public class EqualsOperator implements AstNode {
+public class NotEqualsOperator implements AstNode {
 
 	private AstNode lhsNode;
 	private AstNode rhsNode;
 
-	public EqualsOperator(AstNode lhsNode, AstNode rhsNode) {
+	public NotEqualsOperator(AstNode lhsNode, AstNode rhsNode) {
 		this.lhsNode = lhsNode;
 		this.rhsNode = rhsNode;
 	}
@@ -70,7 +70,7 @@ public class EqualsOperator implements AstNode {
 				def rhs = pair.get(1)
 		%>
 		${isFirst ? "" : "else "}if (lhsType == ColumnType.${lhs.type} && rhsType == ColumnType.${rhs.type}) {
-			return new EqualsAccessor.${lhs.type}_${rhs.type}(
+			return new NotEqualsAccessor.${lhs.type}_${rhs.type}(
 				(IRowAccessor.${lhs.type})lhs,
 				(IRowAccessor.${rhs.type})rhs
 			);
@@ -80,7 +80,7 @@ public class EqualsOperator implements AstNode {
 			}
 		%>
 		else {
-			throw new LinkException("Unsupported operand types for EqualsOperator: (" +
+			throw new LinkException("Unsupported operand types for NotEqualsOperator: (" +
 				lhsType + ", " + rhsType + ")"
 			);
 		}
