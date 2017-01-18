@@ -1,0 +1,25 @@
+package dsiter.parser.ast;
+
+import dsiter.accessor.ConstantAccessor;
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.IRowAccessor;
+
+public interface ConstantOperator extends AstNode {
+
+	<% ColumnTypes.each { type -> %>
+	public static class ${type.type} implements ConstantOperator {
+
+		private ${type.nativeType} value;
+
+		public ${type.type}(${type.nativeType} value) {
+			this.value = value;
+		}
+
+		@Override
+		public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
+			return new ConstantAccessor.${type.type}(value);
+		}
+	}
+	<% } %>
+
+}

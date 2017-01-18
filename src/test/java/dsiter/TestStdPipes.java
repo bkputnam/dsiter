@@ -65,8 +65,8 @@ public class TestStdPipes {
 	public void testZipPipe() throws Exception {
 		int[] intVals = new int[]{ 0, 1, 2, 3 };
 		String[] strVals = new String[]{ "0", "1", "2", "3" };
-		IDatasetIterator iter1 = new ArrayIterator(intVals);
-		IDatasetIterator iter2 = new ArrayIterator(strVals).pipe(rename("value", "s"));
+		IDatasetIterator iter1 = ArrayIterator.fromInts(intVals);
+		IDatasetIterator iter2 = ArrayIterator.fromStrings(strVals).pipe(rename("value", "s"));
 
 		try (IDatasetIterator zi = iter1.pipe(zip(iter2))) {
 

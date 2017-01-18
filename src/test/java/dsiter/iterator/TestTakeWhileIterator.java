@@ -1,7 +1,7 @@
 package dsiter.iterator;
 
 import dsiter.IterUtils;
-import dsiter.operator.parser.OperatorParser;
+import dsiter.parser.OperatorParser;
 import dsiter.row.IRowAccessor;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -11,14 +11,14 @@ public class TestTakeWhileIterator {
 	@Test
 	public void test1() throws Exception {
 
-		IDatasetIterator src = new ArrayIterator(
+		IDatasetIterator src = ArrayIterator.fromInts(
 			1,2,3,4,1,2,3,4,1,2,3,4
 		);
 
-		IRowAccessor.BOOLEAN predicate = OperatorParser.parseOperator(
-			src.getColumnDescriptors(),
-			"value!=4"
-		).asBoolAccessor();
+		IRowAccessor.BOOLEAN predicate = OperatorParser
+			.parseOperator("value!=4")
+			.link(src.getColumnDescriptors())
+			.asBoolAccessor();
 
 		TakeWhileIterator twi = new TakeWhileIterator(src, predicate);
 
@@ -33,10 +33,10 @@ public class TestTakeWhileIterator {
 		IteratorCounter counter = new IteratorCounter();
 		IDatasetIterator src = new RangeIterator(10).pipe(counter.getPipe());
 
-		IRowAccessor.BOOLEAN predicate = OperatorParser.parseOperator(
-			src.getColumnDescriptors(),
-			"value!=4"
-		).asBoolAccessor();
+		IRowAccessor.BOOLEAN predicate = OperatorParser
+			.parseOperator("value!=4")
+			.link(src.getColumnDescriptors())
+			.asBoolAccessor();
 
 		try (
 			TakeWhileIterator it = new TakeWhileIterator(src, predicate)

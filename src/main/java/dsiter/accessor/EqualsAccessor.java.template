@@ -1,0 +1,82 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+
+public interface EqualsAccessor extends IRowAccessor.BOOLEAN {
+
+	public static class STRING_STRING implements EqualsAccessor {
+
+		private IRowAccessor.STRING lhs;
+		private IRowAccessor.STRING rhs;
+
+		public STRING_STRING(IRowAccessor.STRING lhs, IRowAccessor.STRING rhs) {
+			this.lhs = lhs;
+			this.rhs = rhs;
+		}
+
+		@Override
+		public boolean getBoolFromRow(Row row) {
+			return lhs.getStringFromRow(row).equals(rhs.getStringFromRow(row));
+		}
+	}
+
+	<%
+		def printClass(lhs, rhs) {
+	%>
+	public static class ${lhs.type}_${rhs.type} implements EqualsAccessor {
+
+		private IRowAccessor.${lhs.type} lhs;
+		private IRowAccessor.${rhs.type} rhs;
+
+		public ${lhs.type}_${rhs.type}(IRowAccessor.${lhs.type} lhs, IRowAccessor.${rhs.type} rhs) {
+			this.lhs = lhs;
+			this.rhs = rhs;
+		}
+
+		@Override
+		public boolean getBoolFromRow(Row row) {
+			return lhs.get${lhs.capitalized}FromRow(row) == rhs.get${rhs.capitalized}FromRow(row);
+		}
+	}
+	<%
+		}
+
+		// First do same-type comparisons
+		// Exclude STRING, because we can't use == for that (have to write a
+		// special case to use .equals)
+		ColumnTypes.each { type ->
+			if (type.type == "STRING") { return }
+			printClass(type, type)
+		}
+
+		def typeLookup = ColumnTypes.collectEntries { type ->
+			[(type.type): type]
+		}
+
+		def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			typeLookup[name]
+		}
+
+		// Now do all numeric-numeric comparisons
+		numericTypes.each { lhs ->
+			numericTypes.each { rhs ->
+				if (lhs == rhs) { return }
+				printClass(lhs, rhs)
+			}
+		}
+
+		// Now do misc other pairs
+		[
+			["JSDATE", "INT"],
+			["JSDATE", "LONG"],
+			["INT", "JSDATE"],
+			["LONG", "JSDATE"]
+		]
+		.each { pair ->
+			lhs = typeLookup[pair[0]]
+			rhs = typeLookup[pair[1]]
+			printClass(lhs, rhs)
+		}
+	%>
+}

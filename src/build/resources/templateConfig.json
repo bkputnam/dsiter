@@ -1,43 +1,56 @@
 {
-  "ColumnTypes": [
-    {
-      "type": "INT",
-      "capitalized": "Int",
-      "rowArray": "ints",
-      "nativeType": "int"
-    },
-    {
-      "type": "LONG",
-      "capitalized": "Long",
-      "rowArray": "longs",
-      "nativeType": "long"
-    },
-    {
-      "type": "FLOAT",
-      "capitalized": "Float",
-      "rowArray": "floats",
-      "nativeType": "float"
-    },
-    {
-      "type": "DOUBLE",
-      "capitalized": "Double",
-      "rowArray": "doubles",
-      "nativeType": "double"
-    },
-    {
-      "type": "STRING",
-      "capitalized": "String",
-      "rowArray": "strings",
-      "nativeType": "String"
-    },
-    {
-      "type": "BOOLEAN",
-      "capitalized": "Bool",
-      "rowArray": "bools",
-      "nativeType": "boolean",
-      "accessorMethod": "getBoolFromRow"
-    }
-  ],
-  "Disclaimer": "///////////////////////////////////////////\n//\tDO NOT EDIT!!!\n//\n//\tThis is generated code. Edit the template instead.\n///////////////////////////////////////////"
+	"ColumnTypes": [
+		{
+			"type": "INT",
+			"capitalized": "Int",
+			"lowercased": "int",
+			"rowArray": "ints",
+			"nativeType": "int"
+		},
+		{
+			"type": "LONG",
+			"capitalized": "Long",
+			"lowercased": "long",
+			"rowArray": "longs",
+			"nativeType": "long"
+		},
+		{
+			"type": "FLOAT",
+			"capitalized": "Float",
+			"lowercased": "float",
+			"rowArray": "floats",
+			"nativeType": "float"
+		},
+		{
+			"type": "DOUBLE",
+			"capitalized": "Double",
+			"lowercased": "double",
+			"rowArray": "doubles",
+			"nativeType": "double"
+		},
+		{
+			"type": "STRING",
+			"capitalized": "String",
+			"lowercased": "string",
+			"rowArray": "strings",
+			"nativeType": "String"
+		},
+		{
+			"type": "BOOLEAN",
+			"capitalized": "Bool",
+			"lowercased": "bool",
+			"rowArray": "bools",
+			"nativeType": "boolean",
+			"accessorMethod": "getBoolFromRow"
+		},
+		{
+			"type": "JSDATE",
+			"capitalized": "JsDate",
+			"lowercased": "jsdate",
+			"rowArray": "jsdates",
+			"nativeType": "long",
+			"accessorMethod": "getJsDateFromRow"
+		}
+	]
 }
 

@@ -3,7 +3,7 @@ package dsiter.row;
 /**
  * An interface representing objects that return values from {@link Row}s. The returned
  * values may be simple column reads (see: {@link IColumnAccessor}), computed
- * values (see: everything in <a href="../operator/package-summary.html">dsiter.operator</a>),
+ * values (see: everything in <a href="../operator/package-summary.html">dsiter.accessor</a>),
  * or static values that
  * have nothing at all to do with the passed {@code Row} (see: {@link ConstantAccessor}).
  *
@@ -16,7 +16,7 @@ package dsiter.row;
  *     {@code this}, but some implementations override this with more sophisticated
  *     behavior. For example some implementations override these
  *     methods to return an inner accessor of the correct type (see:
- *     {@link dsiter.operator.TypedBinaryOperator}, {@link dsiter.operator.TypedUnaryOperator}).
+ *     {@link dsiter.accessor.TypedBinaryOperator}, {@link dsiter.accessor.TypedUnaryOperator}).
  * </p>
  *
  * <p>

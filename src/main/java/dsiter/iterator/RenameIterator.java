@@ -65,7 +65,7 @@ public class RenameIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public boolean tryAbsorb(IPipe pipe) {
+	public boolean tryAbsorb(IPipe pipe) throws Exception {
 		return src.tryAbsorb(pipe);
 	}
 }

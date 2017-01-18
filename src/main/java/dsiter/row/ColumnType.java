@@ -9,7 +9,8 @@
 /* GENERATED CODE */	FLOAT,
 /* GENERATED CODE */	DOUBLE,
 /* GENERATED CODE */	STRING,
-/* GENERATED CODE */	BOOLEAN;
+/* GENERATED CODE */	BOOLEAN,
+/* GENERATED CODE */	JSDATE;
 /* GENERATED CODE */
                     	/**
                     	 * Returns {@code true} if the current value represents a numeric type.
@@ -20,5 +21,15 @@
                     	 */
 /* GENERATED CODE */	public boolean isNumeric() {
 /* GENERATED CODE */		return this == INT || this == LONG || this == FLOAT || this == DOUBLE;
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+                    	/**
+                    	 * Returns {@code true} if the current value represents an integer type.
+                    	 * Numeric types are defined to be {@code INT} and {@code LONG}
+                    	 *
+                    	 * @return {@code true} if value is numeric
+                    	 */
+/* GENERATED CODE */	public boolean isInteger() {
+/* GENERATED CODE */		return this == INT || this == LONG;
 /* GENERATED CODE */	}
 /* GENERATED CODE */}

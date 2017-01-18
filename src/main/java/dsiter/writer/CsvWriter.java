@@ -7,6 +7,7 @@ import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.time.Instant;
 
 /**
  * An implementation of {@link IWriter} that writes an
@@ -94,6 +95,10 @@ public class CsvWriter implements IWriter {
 					out.print("\"");
 					out.print(ca.getValueFromRow(row));
 					out.print("\"");
+				}
+				else if(type == ColumnType.JSDATE) {
+					Instant inst = Instant.ofEpochMilli((long)ca.getValueFromRow(row));
+					out.print(inst.toString());
 				}
 				else {
 					out.print(ca.getValueFromRow(row));

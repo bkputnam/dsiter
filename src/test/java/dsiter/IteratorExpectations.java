@@ -158,6 +158,22 @@
 /* GENERATED CODE */        expectations.add(e);
 /* GENERATED CODE */    }
 /* GENERATED CODE */    
+/* GENERATED CODE */    public void expectJsDates(String name, long... values) {
+/* GENERATED CODE */        Object[] boxedVals = new Object[values.length];
+/* GENERATED CODE */        for(int i=0; i<values.length; i++) {
+/* GENERATED CODE */            boxedVals[i] = new Long(values[i]);
+/* GENERATED CODE */        }
+/* GENERATED CODE */
+/* GENERATED CODE */        checkLength(boxedVals);
+/* GENERATED CODE */
+/* GENERATED CODE */        ColumnExpectation e = new ColumnExpectation();
+/* GENERATED CODE */        e.name = name;
+/* GENERATED CODE */        e.type = ColumnType.JSDATE;
+/* GENERATED CODE */        e.values = boxedVals;
+/* GENERATED CODE */
+/* GENERATED CODE */        expectations.add(e);
+/* GENERATED CODE */    }
+/* GENERATED CODE */    
 /* GENERATED CODE */
 /* GENERATED CODE */
 /* GENERATED CODE */    private static class ColumnExpectation {

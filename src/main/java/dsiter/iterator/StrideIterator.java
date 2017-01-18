@@ -24,12 +24,20 @@ import static dsiter.StdPipes.*;
 public class StrideIterator implements IDatasetIterator {
 
 	private IDatasetIterator src;
-	private int stride;
+	private long stride;
 	private boolean isFirstTime = true;
 
-	public StrideIterator(IDatasetIterator src, int stride) {
+	private SkipPipe skipPipe;
+	private boolean useSkipPipeOptimization = true;
+
+	public StrideIterator(IDatasetIterator src, long stride) {
 		this.src = src;
 		this.stride = stride;
+		skipPipe = new SkipPipe(stride-1);
+	}
+
+	public long getStride() {
+		return stride;
 	}
 
 	@Override
@@ -49,9 +57,33 @@ public class StrideIterator implements IDatasetIterator {
 			isFirstTime = false;
 		}
 		else {
-			src = src.pipe(skip(stride-1));
+			maybeOptimizedSkip(skipPipe);
 		}
 		return src.tryMoveNext();
+	}
+
+	private boolean maybeOptimizedSkip(SkipPipe pipe) throws Exception {
+		if (useSkipPipeOptimization) {
+			// if it fails once, don't bother trying again
+			useSkipPipeOptimization = src.tryAbsorb(pipe);
+		}
+		if (!useSkipPipeOptimization) {
+			if (!manualSkip(pipe.getHowMany())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean manualSkip(long howMany) throws Exception {
+		long remainingSkips = howMany;
+		while(remainingSkips > 0) {
+			remainingSkips--;
+			if(!src.tryMoveNext()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -70,10 +102,10 @@ public class StrideIterator implements IDatasetIterator {
 	}
 
 	@Override
-	public boolean tryAbsorb(IPipe pipe) {
+	public boolean tryAbsorb(IPipe pipe) throws Exception {
 		if (pipe instanceof SkipPipe) {
 			long howMany = ((SkipPipe)pipe).getHowMany();
-			src = src.pipe(skip(stride * howMany));
+			maybeOptimizedSkip(new SkipPipe(howMany * stride));
 			return true;
 		}
 		else {

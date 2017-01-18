@@ -1,0 +1,51 @@
+package dsiter.accessor;
+
+import dsiter.row.IRowAccessor;
+import dsiter.row.Row;
+
+public interface GreaterThanEqualsAccessor extends IRowAccessor.BOOLEAN {
+
+	<%
+		def typeLookup = ColumnTypes.collectEntries { type ->
+			[(type.type): type]
+		}
+
+		def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			typeLookup[name]
+		}
+
+		def typePairs = []
+
+		numericTypes.each { lhsType ->
+			numericTypes.each { rhsType ->
+				typePairs << new Tuple(lhsType, rhsType)
+			}
+		}
+
+		typePairs << new Tuple(typeLookup["JSDATE"], typeLookup["JSDATE"])
+		typePairs << new Tuple(typeLookup["JSDATE"], typeLookup["INT"])
+		typePairs << new Tuple(typeLookup["JSDATE"], typeLookup["LONG"])
+		typePairs << new Tuple(typeLookup["INT"], typeLookup["JSDATE"])
+		typePairs << new Tuple(typeLookup["LONG"], typeLookup["JSDATE"])
+
+		typePairs.each { pair ->
+			def lhsType = pair.get(0)
+			def rhsType = pair.get(1)
+	%>
+	public static class ${lhsType.type}_${rhsType.type} implements GreaterThanEqualsAccessor {
+
+		private IRowAccessor.${lhsType.type} lhs;
+		private IRowAccessor.${rhsType.type} rhs;
+
+		public ${lhsType.type}_${rhsType.type}(IRowAccessor.${lhsType.type} lhs, IRowAccessor.${rhsType.type} rhs) {
+			this.lhs = lhs;
+			this.rhs = rhs;
+		}
+
+		@Override
+		public boolean getBoolFromRow(Row row) {
+			return lhs.get${lhsType.capitalized}FromRow(row) >= rhs.get${rhsType.capitalized}FromRow(row);
+		}
+	}
+	<% } %>
+}

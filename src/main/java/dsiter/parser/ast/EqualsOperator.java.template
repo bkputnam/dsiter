@@ -1,0 +1,88 @@
+package dsiter.parser.ast;
+
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.ColumnType;
+import dsiter.row.IRowAccessor;
+import dsiter.accessor.EqualsAccessor;
+
+public class EqualsOperator implements AstNode {
+
+	private AstNode lhsNode;
+	private AstNode rhsNode;
+
+	public EqualsOperator(AstNode lhsNode, AstNode rhsNode) {
+		this.lhsNode = lhsNode;
+		this.rhsNode = rhsNode;
+	}
+
+	<%
+		def typePairs = []
+
+		// First do same-type comparisons
+		// Exclude STRING, because we can't use == for that (have to write a
+		// special case to use .equals)
+		ColumnTypes.each { type ->
+			typePairs << new Tuple(type, type)
+		}
+
+		def typeLookup = ColumnTypes.collectEntries { type ->
+			[(type.type): type]
+		}
+
+		def numericTypes = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
+			typeLookup[name]
+		}
+
+		// Now do all numeric-numeric comparisons
+		numericTypes.each { lhs ->
+			numericTypes.each { rhs ->
+				if (lhs == rhs) { return }
+				typePairs << new Tuple(lhs, rhs)
+			}
+		}
+
+		// Now do misc other pairs
+		[
+			["JSDATE", "INT"],
+			["JSDATE", "LONG"],
+			["INT", "JSDATE"],
+			["LONG", "JSDATE"]
+		]
+		.each { pair ->
+			lhs = typeLookup[pair[0]]
+			rhs = typeLookup[pair[1]]
+			typePairs << new Tuple(lhs, rhs)
+		}
+	%>
+
+	@Override
+	public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
+		IRowAccessor lhs = lhsNode.link(cds);
+		IRowAccessor rhs = rhsNode.link(cds);
+
+		ColumnType lhsType = lhs.getType();
+		ColumnType rhsType = rhs.getType();
+
+		<%
+			def isFirst = true
+			typePairs.each { pair ->
+				def lhs = pair.get(0)
+				def rhs = pair.get(1)
+		%>
+		${isFirst ? "" : "else "}if (lhsType == ColumnType.${lhs.type} && rhsType == ColumnType.${rhs.type}) {
+			return new EqualsAccessor.${lhs.type}_${rhs.type}(
+				(IRowAccessor.${lhs.type})lhs,
+				(IRowAccessor.${rhs.type})rhs
+			);
+		}
+		<%
+				isFirst = false
+			}
+		%>
+		else {
+			throw new LinkException("Unsupported operand types for EqualsOperator: (" +
+				lhsType + ", " + rhsType + ")"
+			);
+		}
+	}
+}

@@ -60,6 +60,11 @@
                     	 */
 /* GENERATED CODE */	public boolean[] bools;
 /* GENERATED CODE */	
+                    	/**
+                    	 * The Row's long values
+                    	 */
+/* GENERATED CODE */	public long[] jsdates;
+/* GENERATED CODE */	
 /* GENERATED CODE */
                     	/**
                     	 * Construct a new Row with 0 of every type.
@@ -74,7 +79,11 @@
                     	 * @param vals	The {@code int} values to populate
                     	 * 				the Row with.
                     	 */
-/* GENERATED CODE */	public Row(int... vals) { this.ints = vals.clone(); }
+/* GENERATED CODE */	public static Row fromInts(int... vals) {
+/* GENERATED CODE */	    Row result = new Row();
+/* GENERATED CODE */	    result.ints = vals.clone();
+/* GENERATED CODE */	    return result;
+/* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a Row with {@code vals} as values. (Row
@@ -83,7 +92,11 @@
                     	 * @param vals	The {@code long} values to populate
                     	 * 				the Row with.
                     	 */
-/* GENERATED CODE */	public Row(long... vals) { this.longs = vals.clone(); }
+/* GENERATED CODE */	public static Row fromLongs(long... vals) {
+/* GENERATED CODE */	    Row result = new Row();
+/* GENERATED CODE */	    result.longs = vals.clone();
+/* GENERATED CODE */	    return result;
+/* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a Row with {@code vals} as values. (Row
@@ -92,7 +105,11 @@
                     	 * @param vals	The {@code float} values to populate
                     	 * 				the Row with.
                     	 */
-/* GENERATED CODE */	public Row(float... vals) { this.floats = vals.clone(); }
+/* GENERATED CODE */	public static Row fromFloats(float... vals) {
+/* GENERATED CODE */	    Row result = new Row();
+/* GENERATED CODE */	    result.floats = vals.clone();
+/* GENERATED CODE */	    return result;
+/* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a Row with {@code vals} as values. (Row
@@ -101,7 +118,11 @@
                     	 * @param vals	The {@code double} values to populate
                     	 * 				the Row with.
                     	 */
-/* GENERATED CODE */	public Row(double... vals) { this.doubles = vals.clone(); }
+/* GENERATED CODE */	public static Row fromDoubles(double... vals) {
+/* GENERATED CODE */	    Row result = new Row();
+/* GENERATED CODE */	    result.doubles = vals.clone();
+/* GENERATED CODE */	    return result;
+/* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a Row with {@code vals} as values. (Row
@@ -110,7 +131,11 @@
                     	 * @param vals	The {@code String} values to populate
                     	 * 				the Row with.
                     	 */
-/* GENERATED CODE */	public Row(String... vals) { this.strings = vals.clone(); }
+/* GENERATED CODE */	public static Row fromStrings(String... vals) {
+/* GENERATED CODE */	    Row result = new Row();
+/* GENERATED CODE */	    result.strings = vals.clone();
+/* GENERATED CODE */	    return result;
+/* GENERATED CODE */	}
 /* GENERATED CODE */	
                     	/**
                     	 * Construct a Row with {@code vals} as values. (Row
@@ -119,7 +144,24 @@
                     	 * @param vals	The {@code boolean} values to populate
                     	 * 				the Row with.
                     	 */
-/* GENERATED CODE */	public Row(boolean... vals) { this.bools = vals.clone(); }
+/* GENERATED CODE */	public static Row fromBools(boolean... vals) {
+/* GENERATED CODE */	    Row result = new Row();
+/* GENERATED CODE */	    result.bools = vals.clone();
+/* GENERATED CODE */	    return result;
+/* GENERATED CODE */	}
+/* GENERATED CODE */	
+                    	/**
+                    	 * Construct a Row with {@code vals} as values. (Row
+                    	 * will only contain values of type long)
+                    	 *
+                    	 * @param vals	The {@code long} values to populate
+                    	 * 				the Row with.
+                    	 */
+/* GENERATED CODE */	public static Row fromJsDates(long... vals) {
+/* GENERATED CODE */	    Row result = new Row();
+/* GENERATED CODE */	    result.jsdates = vals.clone();
+/* GENERATED CODE */	    return result;
+/* GENERATED CODE */	}
 /* GENERATED CODE */	
 /* GENERATED CODE */
                     	/**
@@ -148,6 +190,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */		if(shape.getNumBools() > 0) {
 /* GENERATED CODE */			bools = new boolean[shape.getNumBools()];
+/* GENERATED CODE */		}
+/* GENERATED CODE */		if(shape.getNumJsDates() > 0) {
+/* GENERATED CODE */			jsdates = new long[shape.getNumJsDates()];
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */

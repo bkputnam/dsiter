@@ -18,16 +18,16 @@ public class TestDirectoryListIterator {
 		DirectoryListIterator it = new DirectoryListIterator(dir);
 
 		Map<String, Boolean> seenDir = new HashMap<>();
-		seenDir.put("a.txt", false);
-		seenDir.put("b.txt", false);
-		seenDir.put("dir1/c.txt", false);
-		seenDir.put("dir1/d.txt", false);
+		seenDir.put(dir + "a.txt", false);
+		seenDir.put(dir + "b.txt", false);
+		seenDir.put(dir + "dir1/c.txt", false);
+		seenDir.put(dir + "dir1/d.txt", false);
 
 		Map<String, Long> expectedSizes = new HashMap<>();
-		expectedSizes.put("a.txt", 9L);
-		expectedSizes.put("b.txt", 5L);
-		expectedSizes.put("dir1/c.txt", 5L);
-		expectedSizes.put("dir1/d.txt", 0L);
+		expectedSizes.put(dir + "a.txt", 9L);
+		expectedSizes.put(dir + "b.txt", 5L);
+		expectedSizes.put(dir + "dir1/c.txt", 5L);
+		expectedSizes.put(dir + "dir1/d.txt", 0L);
 
 		IColumnAccessor getFilename = it.getColumnDescriptor("filename").getAccessor();
 		IColumnAccessor getSize = it.getColumnDescriptor("size").getAccessor();

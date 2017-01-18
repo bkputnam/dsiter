@@ -21,6 +21,7 @@
 /* GENERATED CODE */	private IndexPair[][] indexMapDouble;
 /* GENERATED CODE */	private IndexPair[][] indexMapString;
 /* GENERATED CODE */	private IndexPair[][] indexMapBool;
+/* GENERATED CODE */	private IndexPair[][] indexMapJsDate;
 /* GENERATED CODE */
 /* GENERATED CODE */	public ZipIterator(IDatasetIterator... srcIters) {
 /* GENERATED CODE */		this.srcIters = srcIters;
@@ -33,6 +34,7 @@
 /* GENERATED CODE */		indexMapDouble = new IndexPair[srcIters.length][];
 /* GENERATED CODE */		indexMapString = new IndexPair[srcIters.length][];
 /* GENERATED CODE */		indexMapBool = new IndexPair[srcIters.length][];
+/* GENERATED CODE */		indexMapJsDate = new IndexPair[srcIters.length][];
 /* GENERATED CODE */
 /* GENERATED CODE */		int numColumns = 0;
 /* GENERATED CODE */		for(int i=0; i<srcIters.length; i++) {
@@ -54,6 +56,7 @@
 /* GENERATED CODE */			indexMapDouble[iterIndex] = new IndexPair[iterShape.getNumDoubles()];
 /* GENERATED CODE */			indexMapString[iterIndex] = new IndexPair[iterShape.getNumStrings()];
 /* GENERATED CODE */			indexMapBool[iterIndex] = new IndexPair[iterShape.getNumBools()];
+/* GENERATED CODE */			indexMapJsDate[iterIndex] = new IndexPair[iterShape.getNumJsDates()];
 /* GENERATED CODE */
 /* GENERATED CODE */			iterShape = new RowShape(); // reset to 0's
 /* GENERATED CODE */
@@ -96,6 +99,10 @@
 /* GENERATED CODE */					
 /* GENERATED CODE */					case BOOLEAN:
 /* GENERATED CODE */						indexMapBool[iterIndex][columnIndex] = new IndexPair(srcIndex, destIndex);
+/* GENERATED CODE */						break;
+/* GENERATED CODE */					
+/* GENERATED CODE */					case JSDATE:
+/* GENERATED CODE */						indexMapJsDate[iterIndex][columnIndex] = new IndexPair(srcIndex, destIndex);
 /* GENERATED CODE */						break;
 /* GENERATED CODE */					
 /* GENERATED CODE */					default:
@@ -182,6 +189,15 @@
 /* GENERATED CODE */			}
 /* GENERATED CODE */		}
 /* GENERATED CODE */		
+/* GENERATED CODE */		for(int iterIndex=0; iterIndex<srcIters.length; iterIndex++) {
+/* GENERATED CODE */			IndexPair[] columnMap = indexMapJsDate[iterIndex];
+/* GENERATED CODE */
+/* GENERATED CODE */			for(int colIndex=0; colIndex<columnMap.length; colIndex++) {
+/* GENERATED CODE */				IndexPair map = columnMap[colIndex];
+/* GENERATED CODE */				row.jsdates[map.destIndex] = srcRows[iterIndex].jsdates[map.srcIndex];
+/* GENERATED CODE */			}
+/* GENERATED CODE */		}
+/* GENERATED CODE */		
 /* GENERATED CODE */
 /* GENERATED CODE */		// Null out srcRows. May allow them to be garbage collected,
 /* GENERATED CODE */		// depending on the implementation of the srcIter
@@ -252,7 +268,7 @@
 /* GENERATED CODE */
 /* GENERATED CODE */
 /* GENERATED CODE */	@Override
-/* GENERATED CODE */	public boolean tryAbsorb(IPipe pipe) {
+/* GENERATED CODE */	public boolean tryAbsorb(IPipe pipe) throws Exception {
 /* GENERATED CODE */		if (
 /* GENERATED CODE */			pipe instanceof SkipPipe ||
 /* GENERATED CODE */			pipe instanceof FirstPipe

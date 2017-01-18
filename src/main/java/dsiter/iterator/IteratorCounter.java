@@ -73,7 +73,7 @@ public class IteratorCounter {
 		}
 
 		@Override
-		public boolean tryAbsorb(IPipe pipe) {
+		public boolean tryAbsorb(IPipe pipe) throws Exception {
 			tryAbsorbCount++;
 			if (src.tryAbsorb(pipe)) {
 				tryAbsorbSuccessesCount++;

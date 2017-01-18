@@ -45,7 +45,7 @@ public class TestCacheDataset {
 
 		@Override
 		public IDatasetIterator getIterator() throws Exception {
-			return new ArrayIterator(flag);
+			return ArrayIterator.fromBools(flag);
 		}
 	}
 }

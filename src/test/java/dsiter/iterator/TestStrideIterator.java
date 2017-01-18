@@ -1,6 +1,9 @@
 package dsiter.iterator;
 
 import dsiter.IterUtils;
+import dsiter.pipe.IPipe;
+import dsiter.row.ColumnDescriptor;
+import dsiter.row.Row;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static dsiter.StdPipes.*;
@@ -40,6 +43,28 @@ public class TestStrideIterator {
 	}
 
 	@Test
+	public void testStrideSkip() throws Exception {
+		IDatasetIterator it = new RangeIterator(100)
+			.pipe(stride(10))
+			.pipe(skip(5));
+
+		IterUtils.assertValues(it, "value", new Integer[] {
+			50, 60, 70 , 80, 90
+		});
+	}
+
+	@Test
+	public void testStrideStride() throws Exception {
+		IDatasetIterator it = new RangeIterator(100)
+			.pipe(stride(10))
+			.pipe(stride(3));
+
+		IterUtils.assertValues(it, "value", new Integer[] {
+			0, 30, 60, 90
+		});
+	}
+
+	@Test
 	public void testLength() throws Exception {
 
 		try (IDatasetIterator it = new StrideIterator(
@@ -48,6 +73,56 @@ public class TestStrideIterator {
 		)) {
 
 			assertEquals(3, it.tryGetLength());
+		}
+	}
+
+	@Test
+	public void testUnoptimizedIterator() throws Exception {
+		IDatasetIterator it = new UnoptimizedIterator(
+			new RangeIterator(10)
+		).pipe(stride(3));
+
+		IterUtils.assertValues(it, "value", new Integer[] {
+			0, 3, 6, 9
+		});
+	}
+
+	private static class UnoptimizedIterator implements IDatasetIterator {
+
+		private IDatasetIterator src;
+
+		public UnoptimizedIterator(IDatasetIterator src) {
+			this.src = src;
+		}
+
+		@Override
+		public boolean tryMoveNext() throws Exception {
+			return src.tryMoveNext();
+		}
+
+		@Override
+		public Row getCurrentRow() throws Exception {
+			return src.getCurrentRow();
+		}
+
+		@Override
+		public long tryGetLength() {
+			return -1;
+		}
+
+		@Override
+		public ColumnDescriptor[] getColumnDescriptors() {
+			return src.getColumnDescriptors();
+		}
+
+		@Override
+		public boolean tryAbsorb(IPipe pipe) {
+			return false;
+		}
+
+		@Override
+		public void close() throws Exception {
+			src.close();
 		}
 	}
 }

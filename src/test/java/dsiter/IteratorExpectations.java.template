@@ -63,12 +63,13 @@ public class IteratorExpectations {
 
     <%
         def boxTypes = [
-                "INT": "Integer",
-                "LONG": "Long",
-                "FLOAT": "Float",
-                "DOUBLE": "Double",
-                "STRING": "String",
-                "BOOLEAN": "Boolean"
+            "INT": "Integer",
+            "LONG": "Long",
+            "FLOAT": "Float",
+            "DOUBLE": "Double",
+            "STRING": "String",
+            "BOOLEAN": "Boolean",
+            "JSDATE": "Long"
         ]
         ColumnTypes.each { type ->
     %>
