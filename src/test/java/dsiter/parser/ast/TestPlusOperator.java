@@ -9,6 +9,16 @@ import static org.junit.Assert.*;
 public class TestPlusOperator {
 
 	@Test
+	public void testStringString() {
+		AstNode x = new PlusOperator(
+			new ConstantOperator.STRING("foo"),
+			new ConstantOperator.STRING("bar")
+		);
+		IRowAccessor y = x.link(new ColumnDescriptor[0]);
+		assertEquals("foobar", y.getValueFromRow(new Row()));
+	}
+
+	@Test
 	public void testIntInt() {
 		AstNode x = new PlusOperator(
 			new ConstantOperator.INT(10),
