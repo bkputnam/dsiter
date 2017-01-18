@@ -5,6 +5,8 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.accessor.LessThanEqualsAccessor;
 /* GENERATED CODE */
+/* GENERATED CODE */import java.util.Map;
+/* GENERATED CODE */
 /* GENERATED CODE */public class LessThanEqualsOperator implements AstNode {
 /* GENERATED CODE */
 /* GENERATED CODE */	private AstNode lhsNode;
@@ -155,6 +157,19 @@
 /* GENERATED CODE */				"Unsupported operand types for LessThanEqualsOperator: (" +
 /* GENERATED CODE */				lhsType + ", " + rhsType + ")"
 /* GENERATED CODE */			);
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+/* GENERATED CODE */		if (!(compareTo instanceof LessThanEqualsOperator)) {
+/* GENERATED CODE */			return false;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else {
+/* GENERATED CODE */			LessThanEqualsOperator other = (LessThanEqualsOperator)compareTo;
+/* GENERATED CODE */			return
+/* GENERATED CODE */				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+/* GENERATED CODE */				rhsNode.matches(other.rhsNode, columnMap, constantMap);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */}

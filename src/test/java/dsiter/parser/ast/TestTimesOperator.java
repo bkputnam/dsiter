@@ -173,4 +173,9 @@ public class TestTimesOperator {
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(10D * 3F, y.getValueFromRow(new Row()));
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new TimesOperator(lhs, rhs));
+	}
 }

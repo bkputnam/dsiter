@@ -5,6 +5,8 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 
+import java.util.Map;
+
 public class ModuloOperator implements AstNode {
 
 	private AstNode lhsNode;
@@ -49,6 +51,19 @@ public class ModuloOperator implements AstNode {
 			throw new LinkException("Unsupported operand types for ModuloOperator: (" +
 				lhsType + ", " + rhsType + ")"
 			);
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof ModuloOperator)) {
+			return false;
+		}
+		else {
+			ModuloOperator other = (ModuloOperator)compareTo;
+			return
+				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+				rhsNode.matches(other.rhsNode, columnMap, constantMap);
 		}
 	}
 }

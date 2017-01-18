@@ -183,4 +183,9 @@ public class TestNthRootOperator {
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(Math.pow(10D, 1.0 / 3D), y.getValueFromRow(new Row()));
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new NthRootOperator(lhs, rhs));
+	}
 }

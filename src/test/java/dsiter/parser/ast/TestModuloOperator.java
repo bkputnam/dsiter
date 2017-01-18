@@ -47,4 +47,9 @@ public class TestModuloOperator {
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(1L, y.getValueFromRow(new Row()));
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new ModuloOperator(lhs, rhs));
+	}
 }

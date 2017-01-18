@@ -25,4 +25,9 @@ public class TestNotOperator {
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(true, y.getValueFromRow(new Row()));
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testUnaryOperator((src) -> new NotOperator(src));
+	}
 }

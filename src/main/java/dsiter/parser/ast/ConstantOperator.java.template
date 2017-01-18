@@ -4,6 +4,8 @@ import dsiter.accessor.ConstantAccessor;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.IRowAccessor;
 
+import java.util.Map;
+
 public interface ConstantOperator extends AstNode {
 
 	<% ColumnTypes.each { type -> %>
@@ -18,6 +20,11 @@ public interface ConstantOperator extends AstNode {
 		@Override
 		public IRowAccessor link(ColumnDescriptor[] cds) throws LinkException {
 			return new ConstantAccessor.${type.type}(value);
+		}
+
+		@Override
+		public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+			throw new Error("Use NamedConstantAccessor instead.");
 		}
 	}
 	<% } %>

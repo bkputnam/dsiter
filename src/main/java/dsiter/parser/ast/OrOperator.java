@@ -5,6 +5,8 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 
+import java.util.Map;
+
 public class OrOperator implements AstNode {
 
 	private AstNode lhsNode;
@@ -31,5 +33,18 @@ public class OrOperator implements AstNode {
 			(IRowAccessor.BOOLEAN)lhs,
 			(IRowAccessor.BOOLEAN)rhs
 		);
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof OrOperator)) {
+			return false;
+		}
+		else {
+			OrOperator other = (OrOperator)compareTo;
+			return
+				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+				rhsNode.matches(other.rhsNode, columnMap, constantMap);
+		}
 	}
 }

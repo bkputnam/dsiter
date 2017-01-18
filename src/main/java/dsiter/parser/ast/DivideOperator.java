@@ -5,6 +5,8 @@
 /* GENERATED CODE */import dsiter.row.ColumnType;
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */
+/* GENERATED CODE */import java.util.Map;
+/* GENERATED CODE */
 /* GENERATED CODE */public class DivideOperator implements AstNode {
 /* GENERATED CODE */
 /* GENERATED CODE */	private AstNode lhsNode;
@@ -142,6 +144,19 @@
 /* GENERATED CODE */			throw new LinkException("Unsupported operand types for DivideOperator: (" +
 /* GENERATED CODE */				lhsType + ", " + rhsType + ")"
 /* GENERATED CODE */			);
+/* GENERATED CODE */		}
+/* GENERATED CODE */	}
+/* GENERATED CODE */
+/* GENERATED CODE */	@Override
+/* GENERATED CODE */	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+/* GENERATED CODE */		if (!(compareTo instanceof DivideOperator)) {
+/* GENERATED CODE */			return false;
+/* GENERATED CODE */		}
+/* GENERATED CODE */		else {
+/* GENERATED CODE */			DivideOperator other = (DivideOperator)compareTo;
+/* GENERATED CODE */			return
+/* GENERATED CODE */				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+/* GENERATED CODE */				rhsNode.matches(other.rhsNode, columnMap, constantMap);
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */}

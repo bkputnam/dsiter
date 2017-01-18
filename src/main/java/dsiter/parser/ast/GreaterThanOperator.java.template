@@ -5,6 +5,8 @@ import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.accessor.GreaterThanAccessor;
 
+import java.util.Map;
+
 public class GreaterThanOperator implements AstNode {
 
 	private AstNode lhsNode;
@@ -65,6 +67,19 @@ public class GreaterThanOperator implements AstNode {
 				"Unsupported operand types for GreaterThanOperator: (" +
 				lhsType + ", " + rhsType + ")"
 			);
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof GreaterThanOperator)) {
+			return false;
+		}
+		else {
+			GreaterThanOperator other = (GreaterThanOperator)compareTo;
+			return
+				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+				rhsNode.matches(other.rhsNode, columnMap, constantMap);
 		}
 	}
 }

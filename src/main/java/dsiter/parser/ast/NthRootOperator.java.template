@@ -5,6 +5,8 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 
+import java.util.Map;
+
 public class NthRootOperator implements AstNode {
 
 	private AstNode lhsNode;
@@ -49,6 +51,19 @@ public class NthRootOperator implements AstNode {
 			throw new LinkException("Unsupported operand types for NthRootOperator: (" +
 				lhsType + ", " + rhsType + ")"
 			);
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof NthRootOperator)) {
+			return false;
+		}
+		else {
+			NthRootOperator other = (NthRootOperator)compareTo;
+			return
+				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+				rhsNode.matches(other.rhsNode, columnMap, constantMap);
 		}
 	}
 }

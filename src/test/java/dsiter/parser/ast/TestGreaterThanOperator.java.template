@@ -8,6 +8,11 @@ import static org.junit.Assert.*;
 
 public class TestGreaterThanOperator {
 
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new GreaterThanOperator(lhs, rhs));
+	}
+
 	<%
 		def typeLookup = ColumnTypes.collectEntries { type ->
 			[(type.type): type]

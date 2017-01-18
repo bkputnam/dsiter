@@ -5,6 +5,8 @@ import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.accessor.EqualsAccessor;
 
+import java.util.Map;
+
 public class EqualsOperator implements AstNode {
 
 	private AstNode lhsNode;
@@ -83,6 +85,19 @@ public class EqualsOperator implements AstNode {
 			throw new LinkException("Unsupported operand types for EqualsOperator: (" +
 				lhsType + ", " + rhsType + ")"
 			);
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof EqualsOperator)) {
+			return false;
+		}
+		else {
+			EqualsOperator other = (EqualsOperator)compareTo;
+			return
+				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+				rhsNode.matches(other.rhsNode, columnMap, constantMap);
 		}
 	}
 }

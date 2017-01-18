@@ -5,6 +5,8 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 
+import java.util.Map;
+
 public class SqrtOperator implements AstNode {
 	private AstNode srcNode;
 
@@ -31,6 +33,17 @@ public class SqrtOperator implements AstNode {
 		}
 		else {
 			throw new LinkException("Unsupported operand type for SqrtOperator: " + srcType);
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof SqrtOperator)) {
+			return false;
+		}
+		else {
+			SqrtOperator other = (SqrtOperator)compareTo;
+			return srcNode.matches(other.srcNode, columnMap, constantMap);
 		}
 	}
 }

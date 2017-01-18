@@ -43,4 +43,9 @@ public class TestSqrtOperator {
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(4D, y.getValueFromRow(new Row()));
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testUnaryOperator((src) -> new SqrtOperator(src));
+	}
 }

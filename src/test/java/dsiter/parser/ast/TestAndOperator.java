@@ -4,6 +4,10 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class TestAndOperator {
@@ -46,5 +50,10 @@ public class TestAndOperator {
 		);
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(false, y.getValueFromRow(new Row()));
+	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new AndOperator(lhs, rhs));
 	}
 }

@@ -173,4 +173,9 @@ public class TestDivideOperator {
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(10/3D, y.getValueFromRow(new Row()));
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new DivideOperator(lhs, rhs));
+	}
 }

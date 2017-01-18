@@ -5,6 +5,8 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 
+import java.util.Map;
+
 public class NotOperator implements AstNode {
 	private AstNode srcNode;
 
@@ -21,6 +23,17 @@ public class NotOperator implements AstNode {
 		}
 		else {
 			throw new LinkException("Invalid operand type for NotOperator: " + src.getType());
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof NotOperator)) {
+			return false;
+		}
+		else {
+			NotOperator other = (NotOperator)compareTo;
+			return srcNode.matches(other.srcNode, columnMap, constantMap);
 		}
 	}
 }

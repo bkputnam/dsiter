@@ -5,6 +5,8 @@ import dsiter.row.ColumnDescriptor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.ColumnType;
 
+import java.util.Map;
+
 public class CaretOperator implements AstNode {
 
 	private AstNode lhsNode;
@@ -54,5 +56,18 @@ public class CaretOperator implements AstNode {
 		%>
 
 		throw new Error("This should be impossible");
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof CaretOperator)) {
+			return false;
+		}
+		else {
+			CaretOperator other = (CaretOperator)compareTo;
+			return
+				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+				rhsNode.matches(other.rhsNode, columnMap, constantMap);
+		}
 	}
 }

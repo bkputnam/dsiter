@@ -5,6 +5,8 @@ import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
 import dsiter.accessor.LessThanEqualsAccessor;
 
+import java.util.Map;
+
 public class LessThanEqualsOperator implements AstNode {
 
 	private AstNode lhsNode;
@@ -65,6 +67,19 @@ public class LessThanEqualsOperator implements AstNode {
 				"Unsupported operand types for LessThanEqualsOperator: (" +
 				lhsType + ", " + rhsType + ")"
 			);
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof LessThanEqualsOperator)) {
+			return false;
+		}
+		else {
+			LessThanEqualsOperator other = (LessThanEqualsOperator)compareTo;
+			return
+				lhsNode.matches(other.lhsNode, columnMap, constantMap) &&
+				rhsNode.matches(other.rhsNode, columnMap, constantMap);
 		}
 	}
 }

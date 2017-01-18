@@ -49,4 +49,9 @@ public class TestRegexMatchOperator {
 			assertEquals(expectedResult, y.getValueFromRow(new Row()));
 		}
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new RegexMatchOperator(lhs, rhs));
+	}
 }

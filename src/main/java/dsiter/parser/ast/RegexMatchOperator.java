@@ -5,7 +5,8 @@ import dsiter.accessor.RegexMatchAccessor;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.ColumnType;
 import dsiter.row.IRowAccessor;
-import dsiter.row.Row;
+
+import java.util.Map;
 
 public class RegexMatchOperator implements AstNode {
 	private AstNode srcNode;
@@ -32,6 +33,19 @@ public class RegexMatchOperator implements AstNode {
 				(IRowAccessor.STRING)src,
 				((ConstantAccessor.STRING)pattern).getStringFromRow(null)
 			);
+		}
+	}
+
+	@Override
+	public boolean matches(AstNode compareTo, Map<String, String> columnMap, Map<String, ConstantOperator> constantMap) {
+		if (!(compareTo instanceof RegexMatchOperator)) {
+			return false;
+		}
+		else {
+			RegexMatchOperator other = (RegexMatchOperator)compareTo;
+			return
+				srcNode.matches(other.srcNode, columnMap, constantMap) &&
+				patternNode.matches(other.patternNode, columnMap, constantMap);
 		}
 	}
 }

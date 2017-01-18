@@ -173,4 +173,9 @@ public class TestCaretOperator {
 		IRowAccessor y = x.link(new ColumnDescriptor[0]);
 		assertEquals(8D, y.getValueFromRow(new Row()));
 	}
+
+	@Test
+	public void testMatches() {
+		TestMatch.testBinaryOperator((lhs, rhs) -> new CaretOperator(lhs, rhs));
+	}
 }

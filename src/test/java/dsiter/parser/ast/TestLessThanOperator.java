@@ -8,6 +8,11 @@
 /* GENERATED CODE */
 /* GENERATED CODE */public class TestLessThanOperator {
 /* GENERATED CODE */
+/* GENERATED CODE */	@Test
+/* GENERATED CODE */	public void testMatches() {
+/* GENERATED CODE */		TestMatch.testBinaryOperator((lhs, rhs) -> new LessThanOperator(lhs, rhs));
+/* GENERATED CODE */	}
+/* GENERATED CODE */
 /* GENERATED CODE */	
 /* GENERATED CODE */	@Test
 /* GENERATED CODE */	public void testIntLtInt() {
