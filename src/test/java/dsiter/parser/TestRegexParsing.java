@@ -3,6 +3,7 @@ package dsiter.parser;
 import dsiter.IterUtils;
 import dsiter.iterator.ArrayIterator;
 import dsiter.iterator.IDatasetIterator;
+import dsiter.parser.ast.LinkException;
 import org.junit.Test;
 
 import static dsiter.StdPipes.filter;
@@ -35,12 +36,12 @@ public class TestRegexParsing {
 		IterUtils.assertValues(it, "value", expected);
 	}
 
-	@Test(expected=RegexParseException.class)
+	@Test(expected=LinkException.class)
 	public void testParserException1() throws Exception {
 		IDatasetIterator it = ArrayIterator.fromStrings().pipe(filter("value~3"));
 	}
 
-	@Test(expected=RegexParseException.class)
+	@Test(expected=LinkException.class)
 	public void testParserException2() throws Exception {
 		IDatasetIterator it = ArrayIterator.fromStrings()
 			.pipe(zip(

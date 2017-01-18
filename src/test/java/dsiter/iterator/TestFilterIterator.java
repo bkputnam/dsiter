@@ -18,7 +18,7 @@ public class TestFilterIterator {
 
 			FilterIterator it = new FilterIterator(
 				range,
-				OperatorParser.parseOperator(range.getColumnDescriptors(), "value>5").asBoolAccessor()
+				OperatorParser.parseOperator("value>5").link(range.getColumnDescriptors()).asBoolAccessor()
 			);
 
 			IterUtils.assertValues(it, "value", new Integer[]{6, 7, 8, 9});
@@ -33,7 +33,7 @@ public class TestFilterIterator {
 
 			FilterIterator it = new FilterIterator(
 				range,
-				OperatorParser.parseOperator(range.getColumnDescriptors(), "value%2=0").asBoolAccessor()
+				OperatorParser.parseOperator("value%2=0").link(range.getColumnDescriptors()).asBoolAccessor()
 			);
 
 			IterUtils.assertValues(it, "value", new Integer[]{0, 2, 4, 6, 8});
@@ -46,7 +46,7 @@ public class TestFilterIterator {
 
 			FilterIterator it = new FilterIterator(
 				range,
-				OperatorParser.parseOperator(range.getColumnDescriptors(), "value>5").asBoolAccessor()
+				OperatorParser.parseOperator("value>5").link(range.getColumnDescriptors()).asBoolAccessor()
 			);
 
 			assertEquals(-1, it.tryGetLength());

@@ -38,7 +38,7 @@ public class TestOperatorParser {
 	@Test
 	public void testPlusOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1+l");
+			IRowAccessor parsed = OperatorParser.parseOperator("i1+l").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(1234567890123456790L, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -47,7 +47,7 @@ public class TestOperatorParser {
 	@Test
 	public void testMinusOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4-i2");
+			IRowAccessor parsed = OperatorParser.parseOperator("i4-i2").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(2, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -56,7 +56,7 @@ public class TestOperatorParser {
 	@Test
 	public void testTimesOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4*i2");
+			IRowAccessor parsed = OperatorParser.parseOperator("i4*i2").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(8, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -65,7 +65,7 @@ public class TestOperatorParser {
 	@Test
 	public void testDivideOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i4/i2");
+			IRowAccessor parsed = OperatorParser.parseOperator("i4/i2").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(2, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -74,7 +74,7 @@ public class TestOperatorParser {
 	@Test
 	public void testDivideOperatorReals() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "d/f");
+			IRowAccessor parsed = OperatorParser.parseOperator("d/f").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(2.71 / 3.14, (double) parsed.getValueFromRow(iter.getCurrentRow()), 0.0001);
 		}
@@ -83,7 +83,7 @@ public class TestOperatorParser {
 	@Test
 	public void testModuloOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i3/i2");
+			IRowAccessor parsed = OperatorParser.parseOperator("i3/i2").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(1, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -92,7 +92,7 @@ public class TestOperatorParser {
 	@Test
 	public void testNotOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "!bt");
+			IRowAccessor parsed = OperatorParser.parseOperator("!bt").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -101,16 +101,16 @@ public class TestOperatorParser {
 	@Test
 	public void testCaretOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i3^i4");
+			IRowAccessor parsed = OperatorParser.parseOperator("i3^i4").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
-			assertEquals(81, parsed.getValueFromRow(iter.getCurrentRow()));
+			assertEquals(81D, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
 	}
 
 	@Test
 	public void testAndOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "bt&&bf");
+			IRowAccessor parsed = OperatorParser.parseOperator("bt&&bf").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -119,7 +119,7 @@ public class TestOperatorParser {
 	@Test
 	public void testOrOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "bt||bf");
+			IRowAccessor parsed = OperatorParser.parseOperator("bt||bf").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(true, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -128,7 +128,7 @@ public class TestOperatorParser {
 	@Test
 	public void testRepeatedPluses() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1+i1+i1+i1");
+			IRowAccessor parsed = OperatorParser.parseOperator("i1+i1+i1+i1").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(4, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -137,7 +137,7 @@ public class TestOperatorParser {
 	@Test
 	public void testRepeatedDivides() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "d/f/f");
+			IRowAccessor parsed = OperatorParser.parseOperator("d/f/f").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(2.71 / 3.14 / 3.14, (double) parsed.getValueFromRow(iter.getCurrentRow()), 0.0000001);
 		}
@@ -146,18 +146,18 @@ public class TestOperatorParser {
 	@Test
 	public void testRepeatedExponents() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i2^i3^i2");
+			IRowAccessor parsed = OperatorParser.parseOperator("i2^i3^i2").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			// (2^3)^2 == 64
 			// 2^(3^2) == 512
-			assertEquals(512, parsed.getValueFromRow(iter.getCurrentRow()));
+			assertEquals(512D, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
 	}
 
 	@Test
 	public void testPrecedence() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i2+i3*i4");
+			IRowAccessor parsed = OperatorParser.parseOperator("i2+i3*i4").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			// (2+3)*4 == 20
 			// 2+(3*4) == 14
@@ -168,7 +168,7 @@ public class TestOperatorParser {
 	@Test
 	public void testParenthesis() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "(i2+i3)*i4");
+			IRowAccessor parsed = OperatorParser.parseOperator("(i2+i3)*i4").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			// (2+3)*4 == 20
 			// 2+(3*4) == 14
@@ -179,7 +179,7 @@ public class TestOperatorParser {
 	@Test
 	public void testSpaces() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), " ( i2 + i3    ) * i4 ");
+			IRowAccessor parsed = OperatorParser.parseOperator(" ( i2 + i3    ) * i4 ").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			// (2+3)*4 == 20
 			// 2+(3*4) == 14
@@ -190,7 +190,7 @@ public class TestOperatorParser {
 	@Test
 	public void testSqrtOperator() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "(i2+i3)*i4+sqrt(i4)");
+			IRowAccessor parsed = OperatorParser.parseOperator("(i2+i3)*i4+sqrt(i4)").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(22.0, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -199,7 +199,7 @@ public class TestOperatorParser {
 	@Test
 	public void testStringEqualsTrue() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "s=\"hello world\"");
+			IRowAccessor parsed = OperatorParser.parseOperator("s=\"hello world\"").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(true, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -208,7 +208,7 @@ public class TestOperatorParser {
 	@Test
 	public void testStringEqualsFalse() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "s=\"blergh\"");
+			IRowAccessor parsed = OperatorParser.parseOperator("s=\"blergh\"").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -217,7 +217,7 @@ public class TestOperatorParser {
 	@Test
 	public void testNotEquals1() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1!=2");
+			IRowAccessor parsed = OperatorParser.parseOperator("i1!=2").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(true, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -226,7 +226,7 @@ public class TestOperatorParser {
 	@Test
 	public void testNotEquals2() throws Exception {
 		try (IDatasetIterator iter = dummyIterator()) {
-			IRowAccessor parsed = OperatorParser.parseOperator(iter.getColumnDescriptors(), "i1!=1");
+			IRowAccessor parsed = OperatorParser.parseOperator("i1!=1").link(iter.getColumnDescriptors());
 			assertTrue(iter.tryMoveNext());
 			assertEquals(false, parsed.getValueFromRow(iter.getCurrentRow()));
 		}
@@ -234,35 +234,35 @@ public class TestOperatorParser {
 
 	@Test
 	public void testDateParser1() {
-		IRowAccessor accessor = OperatorParser.parseOperator(new ColumnDescriptor[0], "1970-01-01T00:00:00Z");
+		IRowAccessor accessor = OperatorParser.parseOperator("1970-01-01T00:00:00Z").link(new ColumnDescriptor[0]);
 		Object val = accessor.getValueFromRow(new Row());
 		assertEquals(0L, val);
 	}
 
 	@Test
 	public void testDateParser2() {
-		IRowAccessor accessor = OperatorParser.parseOperator(new ColumnDescriptor[0], "1970-01-01T00:00:05Z");
+		IRowAccessor accessor = OperatorParser.parseOperator("1970-01-01T00:00:05Z").link(new ColumnDescriptor[0]);
 		Object val = accessor.getValueFromRow(new Row());
 		assertEquals(5000L, val);
 	}
 
 	@Test
 	public void testDateParser3() {
-		IRowAccessor accessor = OperatorParser.parseOperator(new ColumnDescriptor[0], "1970-01-01T00:00:05");
+		IRowAccessor accessor = OperatorParser.parseOperator("1970-01-01T00:00:05").link(new ColumnDescriptor[0]);
 		Object val = accessor.getValueFromRow(new Row());
 		assertEquals(5000L, val);
 	}
 
 	@Test
 	public void testDateParser4() {
-		IRowAccessor accessor = OperatorParser.parseOperator(new ColumnDescriptor[0], "1970-01-01Z");
+		IRowAccessor accessor = OperatorParser.parseOperator("1970-01-01Z").link(new ColumnDescriptor[0]);
 		Object val = accessor.getValueFromRow(new Row());
 		assertEquals(0L, val);
 	}
 
 	@Test
 	public void testDateParser5() {
-		IRowAccessor accessor = OperatorParser.parseOperator(new ColumnDescriptor[0], "1970-01-01");
+		IRowAccessor accessor = OperatorParser.parseOperator("1970-01-01").link(new ColumnDescriptor[0]);
 		Object val = accessor.getValueFromRow(new Row());
 		assertEquals(0L, val);
 	}
