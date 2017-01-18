@@ -39,7 +39,7 @@ public class PlusOperator implements AstNode {
 		<%
 			numericTypes.each { lhs ->
 				numericTypes.each { rhs ->
-		%>else if (lhsType == ColumnType.${lhs.type} && lhsType == ColumnType.${rhs.type}) {
+		%>else if (lhsType == ColumnType.${lhs.type} && rhsType == ColumnType.${rhs.type}) {
 			return new AddAccessor.${lhs.type}_${rhs.type}(
 				(IRowAccessor.${lhs.type})lhs,
 				(IRowAccessor.${rhs.type})rhs
