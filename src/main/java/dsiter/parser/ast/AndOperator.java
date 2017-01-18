@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class AndOperator implements AstNode {
 
-	private AstNode lhsNode;
-	private AstNode rhsNode;
+	AstNode lhsNode;
+	AstNode rhsNode;
 
 	public AndOperator(AstNode lhsNode, AstNode rhsNode) {
 		this.lhsNode = lhsNode;

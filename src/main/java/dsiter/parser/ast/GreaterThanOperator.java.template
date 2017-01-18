@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class GreaterThanOperator implements AstNode {
 
-	private AstNode lhsNode;
-	private AstNode rhsNode;
+	AstNode lhsNode;
+	AstNode rhsNode;
 
 	public GreaterThanOperator(AstNode lhsNode, AstNode rhsNode) {
 		this.lhsNode = lhsNode;

@@ -7,7 +7,7 @@ import dsiter.row.IRowAccessor;
 import java.util.Map;
 
 public class ColumnOperator implements AstNode {
-	private String columnName;
+	String columnName;
 
 	public ColumnOperator(String columnName) {
 		this.columnName = columnName;

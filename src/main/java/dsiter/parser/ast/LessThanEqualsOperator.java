@@ -9,8 +9,8 @@
 /* GENERATED CODE */
 /* GENERATED CODE */public class LessThanEqualsOperator implements AstNode {
 /* GENERATED CODE */
-/* GENERATED CODE */	private AstNode lhsNode;
-/* GENERATED CODE */	private AstNode rhsNode;
+/* GENERATED CODE */	AstNode lhsNode;
+/* GENERATED CODE */	AstNode rhsNode;
 /* GENERATED CODE */
 /* GENERATED CODE */	public LessThanEqualsOperator(AstNode lhsNode, AstNode rhsNode) {
 /* GENERATED CODE */		this.lhsNode = lhsNode;
