@@ -3,6 +3,9 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */
+                    /**
+                     * IRowAccessor that computes the sum of two columns.
+                     */
 /* GENERATED CODE */public interface AddAccessor extends IRowAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */	

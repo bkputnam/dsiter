@@ -22,6 +22,7 @@ public interface IParserMutator {
      *
      * @param value The string value to be parsed
      * @param row   The Row to be modified
+     * @throws Exception If the parse operation fails
      */
     void parseAndMutate(String value, Row row) throws Exception;
 

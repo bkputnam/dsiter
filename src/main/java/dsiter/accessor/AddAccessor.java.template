@@ -3,6 +3,9 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/**
+ * IRowAccessor that computes the sum of two columns.
+ */
 public interface AddAccessor extends IRowAccessor {
 
 	<%

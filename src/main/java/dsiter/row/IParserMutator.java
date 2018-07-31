@@ -22,6 +22,7 @@
                          *
                          * @param value The string value to be parsed
                          * @param row   The Row to be modified
+                         * @throws Exception If the parse operation fails
                          */
 /* GENERATED CODE */    void parseAndMutate(String value, Row row) throws Exception;
 /* GENERATED CODE */

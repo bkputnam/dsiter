@@ -5,18 +5,13 @@ package dsiter.row;
  * values may be simple column reads (see: {@link IColumnAccessor}), computed
  * values (see: everything in <a href="../operator/package-summary.html">dsiter.accessor</a>),
  * or static values that
- * have nothing at all to do with the passed {@code Row} (see: {@link ConstantAccessor}).
+ * have nothing at all to do with the passed {@code Row} (see: {@link dsiter.accessor.ConstantAccessor}).
  *
  * <p>
  *     A plain {@code IRowAccessor} will return its value as an {@link Object}, but there
  *     are also type-specific inner interfaces, like {@link IRowAccessor.INT}, that can
  *     return the same value as a strongly-typed {@code int}. Plain {@code IRowAccessors}
  *     can be converted to their typed counterparts via methods like {@link #asIntAccessor()}.
- *     The default implementations of these methods perform a simple cast operation on
- *     {@code this}, but some implementations override this with more sophisticated
- *     behavior. For example some implementations override these
- *     methods to return an inner accessor of the correct type (see:
- *     {@link dsiter.accessor.TypedBinaryOperator}, {@link dsiter.accessor.TypedUnaryOperator}).
  * </p>
  *
  * <p>
