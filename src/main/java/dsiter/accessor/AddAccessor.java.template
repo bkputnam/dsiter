@@ -15,6 +15,7 @@ public interface AddAccessor extends IRowAccessor {
 
 		numericTypes.each { type ->
 	%>
+	/** AddAccessor that returns a(n) ${type.nativeType} */
 	public interface ${type.type} extends AddAccessor, IRowAccessor.${type.type} { }<% } %>
 
 	<%

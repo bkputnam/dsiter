@@ -6,9 +6,7 @@
                     /** IRowAccessor that computes the equality between two other IRowAccessors. */
 /* GENERATED CODE */public interface EqualsAccessor extends IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
-                    	/**
-                    	 * IRowAccessor that computes the equality between two String IRowAccessors.
-                    	 */
+                    	/** IRowAccessor that computes the equality between two String IRowAccessors. */
 /* GENERATED CODE */	public static class STRING_STRING implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.STRING lhs;

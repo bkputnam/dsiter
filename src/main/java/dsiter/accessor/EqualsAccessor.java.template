@@ -6,9 +6,7 @@ import dsiter.row.Row;
 /** IRowAccessor that computes the equality between two other IRowAccessors. */
 public interface EqualsAccessor extends IRowAccessor.BOOLEAN {
 
-	/**
-	 * IRowAccessor that computes the equality between two String IRowAccessors.
-	 */
+	/** IRowAccessor that computes the equality between two String IRowAccessors. */
 	public static class STRING_STRING implements EqualsAccessor {
 
 		private IRowAccessor.STRING lhs;

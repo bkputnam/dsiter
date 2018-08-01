@@ -9,9 +9,7 @@ import dsiter.row.Row;
 public interface ConstantAccessor extends IRowAccessor {
 
 	<% ColumnTypes.each { type -> %>
-	/**
-	 * IRowAccessor that returns a constant value of type ${type.nativeType}.
-	 */
+	/** IRowAccessor that returns a constant value of type ${type.nativeType}. */
 	public static class ${type.type} implements ConstantAccessor, IRowAccessor.${type.type} {
 		private ${type.nativeType} value;
 

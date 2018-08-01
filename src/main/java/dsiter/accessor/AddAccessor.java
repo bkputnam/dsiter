@@ -9,9 +9,13 @@
 /* GENERATED CODE */public interface AddAccessor extends IRowAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/** AddAccessor that returns a(n) int */
 /* GENERATED CODE */	public interface INT extends AddAccessor, IRowAccessor.INT { }
+                    	/** AddAccessor that returns a(n) long */
 /* GENERATED CODE */	public interface LONG extends AddAccessor, IRowAccessor.LONG { }
+                    	/** AddAccessor that returns a(n) float */
 /* GENERATED CODE */	public interface FLOAT extends AddAccessor, IRowAccessor.FLOAT { }
+                    	/** AddAccessor that returns a(n) double */
 /* GENERATED CODE */	public interface DOUBLE extends AddAccessor, IRowAccessor.DOUBLE { }
 /* GENERATED CODE */
 /* GENERATED CODE */	
