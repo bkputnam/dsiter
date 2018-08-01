@@ -3,6 +3,9 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/**
+ * IRowAccessor that computes the quotient of two numeric IRowAccessors.
+ */
 public interface DivideAccessor extends IRowAccessor {
 
 	<%
@@ -12,6 +15,7 @@ public interface DivideAccessor extends IRowAccessor {
 
 		numericTypes.each { type ->
 	%>
+	/** DivideAccessor that returns a value of type ${type.nativeType}. */
 	public interface ${type.type} extends DivideAccessor, IRowAccessor.${type.type} { }<% } %>
 
 	<%
@@ -21,6 +25,10 @@ public interface DivideAccessor extends IRowAccessor {
 					? lhs
 					: rhs
 	%>
+	/**
+	 * IRowAccessor that computes the quotient of a(n) ${lhs.nativeType} and a(n) ${rhs.nativeType}.
+	 * Returns a ${outputType.nativeType}.
+	 */
 	public class ${lhs.type}_${rhs.type} implements ${outputType.type} {
 
 		private IRowAccessor.${lhs.type} lhs;

@@ -15,6 +15,10 @@
 /* GENERATED CODE */	public interface DOUBLE extends AddAccessor, IRowAccessor.DOUBLE { }
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.INT and a(n) IRowAccessor.INT. The resulting sum has
+                    	 * type int.
+                    	 */
 /* GENERATED CODE */	public class INT_INT implements INT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -31,6 +35,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.INT and a(n) IRowAccessor.LONG. The resulting sum has
+                    	 * type long.
+                    	 */
 /* GENERATED CODE */	public class INT_LONG implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -47,6 +55,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.INT and a(n) IRowAccessor.FLOAT. The resulting sum has
+                    	 * type float.
+                    	 */
 /* GENERATED CODE */	public class INT_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -63,6 +75,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.INT and a(n) IRowAccessor.DOUBLE. The resulting sum has
+                    	 * type double.
+                    	 */
 /* GENERATED CODE */	public class INT_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -79,6 +95,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.LONG and a(n) IRowAccessor.INT. The resulting sum has
+                    	 * type long.
+                    	 */
 /* GENERATED CODE */	public class LONG_INT implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -95,6 +115,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.LONG and a(n) IRowAccessor.LONG. The resulting sum has
+                    	 * type long.
+                    	 */
 /* GENERATED CODE */	public class LONG_LONG implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -111,6 +135,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.LONG and a(n) IRowAccessor.FLOAT. The resulting sum has
+                    	 * type float.
+                    	 */
 /* GENERATED CODE */	public class LONG_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -127,6 +155,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.LONG and a(n) IRowAccessor.DOUBLE. The resulting sum has
+                    	 * type double.
+                    	 */
 /* GENERATED CODE */	public class LONG_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -143,6 +175,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.FLOAT and a(n) IRowAccessor.INT. The resulting sum has
+                    	 * type float.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_INT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -159,6 +195,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.FLOAT and a(n) IRowAccessor.LONG. The resulting sum has
+                    	 * type float.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_LONG implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -175,6 +215,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.FLOAT and a(n) IRowAccessor.FLOAT. The resulting sum has
+                    	 * type float.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -191,6 +235,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.FLOAT and a(n) IRowAccessor.DOUBLE. The resulting sum has
+                    	 * type double.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -207,6 +255,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.DOUBLE and a(n) IRowAccessor.INT. The resulting sum has
+                    	 * type double.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_INT implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -223,6 +275,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.DOUBLE and a(n) IRowAccessor.LONG. The resulting sum has
+                    	 * type double.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_LONG implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -239,6 +295,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.DOUBLE and a(n) IRowAccessor.FLOAT. The resulting sum has
+                    	 * type double.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_FLOAT implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -255,6 +315,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * Computes the sum of a(n) IRowAccessor.DOUBLE and a(n) IRowAccessor.DOUBLE. The resulting sum has
+                    	 * type double.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;

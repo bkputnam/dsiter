@@ -3,6 +3,7 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/** IRowAccessor that computes the square root of another IRowAccessor. */
 public interface SqrtAccessor extends IRowAccessor.DOUBLE {
 
 	<%
@@ -12,6 +13,7 @@ public interface SqrtAccessor extends IRowAccessor.DOUBLE {
 
 		types.each { type ->
 	%>
+	/** IRowAccessor that computes the square root of a ${type.nativeType}. */
 	public static class ${type.type} implements SqrtAccessor {
 
 		private IRowAccessor.${type.type} src;

@@ -3,6 +3,7 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/** IRowAccessor that computes the difference between two other IRowAccessors. */
 public interface SubtractAccessor extends IRowAccessor {
 
 	<%
@@ -12,6 +13,7 @@ public interface SubtractAccessor extends IRowAccessor {
 
 		numericTypes.each { type ->
 	%>
+	/** SubtractAccessor that returns a ${type.nativeType} */
 	public interface ${type.type} extends SubtractAccessor, IRowAccessor.${type.type} { }<% } %>
 
 	<%
@@ -21,6 +23,7 @@ public interface SubtractAccessor extends IRowAccessor {
 					? lhs
 					: rhs
 	%>
+	/** IRowAccessor that computes the difference between a ${lhs.nativeType} and a ${rhs.nativeType}. */
 	public class ${lhs.type}_${rhs.type} implements ${outputType.type} {
 
 		private IRowAccessor.${lhs.type} lhs;

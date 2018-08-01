@@ -3,6 +3,9 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/**
+ * IRowAccessor that computes the modulus of two IRowAccessors.
+ */
 public interface ModuloAccessor extends IRowAccessor {
 
 	<%
@@ -12,6 +15,7 @@ public interface ModuloAccessor extends IRowAccessor {
 
 		numericTypes.each { type ->
 	%>
+	/** ModuloAccessor that returns a ${type.nativeType}. */
 	public interface ${type.type} extends ModuloAccessor, IRowAccessor.${type.type} { }<% } %>
 
 	<%
@@ -21,6 +25,9 @@ public interface ModuloAccessor extends IRowAccessor {
 					? lhs
 					: rhs
 	%>
+	/**
+	 * IRowAccessor that computes the modulus of a(n) ${lhs.nativeType} and a(n) ${rhs.nativeType}.
+	 */
 	public class ${lhs.type}_${rhs.type} implements ${outputType.type} {
 
 		private IRowAccessor.${lhs.type} lhs;

@@ -3,6 +3,9 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/**
+ * IRowAccessor that computes the value of one IRowAccessor raised to the power of another IRowAccessor.
+ */
 public interface ExponentAccessor extends IRowAccessor.DOUBLE {
 
 	<%
@@ -13,6 +16,9 @@ public interface ExponentAccessor extends IRowAccessor.DOUBLE {
 		types.each { lhs ->
 			types.each { rhs ->
 	%>
+	/**
+	 * IRowAccessor that computes the value of a(n) ${lhs.nativeType} raised to the power of a(n) ${rhs.nativeType}.
+	 */
 	public static class ${lhs.type}_${rhs.type} implements ExponentAccessor {
 
 		private IRowAccessor.${lhs.type} lhs;

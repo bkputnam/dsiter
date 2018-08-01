@@ -3,6 +3,9 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/**
+ * IRowAccessor that computes the concatenation of two String IRowAccessors.
+ */
 public class ConcatAccessor implements IRowAccessor.STRING {
 
 	private IRowAccessor.STRING lhs;

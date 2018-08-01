@@ -3,8 +3,12 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */
+                    /** IRowAccessor that computes the equality between two other IRowAccessors. */
 /* GENERATED CODE */public interface EqualsAccessor extends IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
+                    	/**
+                    	 * IRowAccessor that computes the equality between two String IRowAccessors.
+                    	 */
 /* GENERATED CODE */	public static class STRING_STRING implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.STRING lhs;
@@ -22,6 +26,7 @@
 /* GENERATED CODE */	}
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) int and a(n) int. */
 /* GENERATED CODE */	public static class INT_INT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -38,6 +43,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) long. */
 /* GENERATED CODE */	public static class LONG_LONG implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -54,6 +60,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) float and a(n) float. */
 /* GENERATED CODE */	public static class FLOAT_FLOAT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -70,6 +77,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) double and a(n) double. */
 /* GENERATED CODE */	public static class DOUBLE_DOUBLE implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -86,6 +94,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) boolean and a(n) boolean. */
 /* GENERATED CODE */	public static class BOOLEAN_BOOLEAN implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.BOOLEAN lhs;
@@ -102,6 +111,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) long. */
 /* GENERATED CODE */	public static class JSDATE_JSDATE implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
@@ -118,6 +128,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) int and a(n) long. */
 /* GENERATED CODE */	public static class INT_LONG implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -134,6 +145,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) int and a(n) float. */
 /* GENERATED CODE */	public static class INT_FLOAT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -150,6 +162,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) int and a(n) double. */
 /* GENERATED CODE */	public static class INT_DOUBLE implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -166,6 +179,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) int. */
 /* GENERATED CODE */	public static class LONG_INT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -182,6 +196,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) float. */
 /* GENERATED CODE */	public static class LONG_FLOAT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -198,6 +213,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) double. */
 /* GENERATED CODE */	public static class LONG_DOUBLE implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -214,6 +230,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) float and a(n) int. */
 /* GENERATED CODE */	public static class FLOAT_INT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -230,6 +247,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) float and a(n) long. */
 /* GENERATED CODE */	public static class FLOAT_LONG implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -246,6 +264,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) float and a(n) double. */
 /* GENERATED CODE */	public static class FLOAT_DOUBLE implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -262,6 +281,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) double and a(n) int. */
 /* GENERATED CODE */	public static class DOUBLE_INT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -278,6 +298,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) double and a(n) long. */
 /* GENERATED CODE */	public static class DOUBLE_LONG implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -294,6 +315,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) double and a(n) float. */
 /* GENERATED CODE */	public static class DOUBLE_FLOAT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -310,6 +332,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) int. */
 /* GENERATED CODE */	public static class JSDATE_INT implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
@@ -326,6 +349,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) long. */
 /* GENERATED CODE */	public static class JSDATE_LONG implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
@@ -342,6 +366,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) int and a(n) long. */
 /* GENERATED CODE */	public static class INT_JSDATE implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -358,6 +383,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the equality of a(n) long and a(n) long. */
 /* GENERATED CODE */	public static class LONG_JSDATE implements EqualsAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;

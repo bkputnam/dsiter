@@ -24,6 +24,10 @@ public interface AddAccessor extends IRowAccessor {
 					? lhs
 					: rhs
 	%>
+	/**
+	 * Computes the sum of a(n) IRowAccessor.${lhs.type} and a(n) IRowAccessor.${rhs.type}. The resulting sum has
+	 * type ${outputType.nativeType}.
+	 */
 	public class ${lhs.type}_${rhs.type} implements ${outputType.type} {
 
 		private IRowAccessor.${lhs.type} lhs;

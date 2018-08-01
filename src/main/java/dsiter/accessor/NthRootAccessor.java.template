@@ -3,8 +3,8 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/** IRowAccessor that computes the nth root of one IRowAccessor with respect to another IRowAccessor. */
 public interface NthRootAccessor extends IRowAccessor.DOUBLE {
-
 	<%
 		def types = ["INT", "LONG", "FLOAT", "DOUBLE"].collect { name ->
 			ColumnTypes.find { type -> type.type == name }
@@ -13,6 +13,9 @@ public interface NthRootAccessor extends IRowAccessor.DOUBLE {
 		types.each { lhs ->
 			types.each { rhs ->
 	%>
+	/**
+	 * IRowAccessor that computes nth_root of a(n) ${lhs.nativeType} where {@code n} is of type ${rhs.nativeType}.
+	 */
 	public static class ${lhs.type}_${rhs.type} implements NthRootAccessor {
 
 		private IRowAccessor.${lhs.type} lhs;

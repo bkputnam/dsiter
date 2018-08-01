@@ -3,9 +3,15 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */
+                    /**
+                     * IRowAccessor that tests whether one IRowAccessor is greater than another.
+                     */
 /* GENERATED CODE */public interface GreaterThanAccessor extends IRowAccessor.BOOLEAN {
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) int is greater than a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class INT_INT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -22,6 +28,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) int is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class INT_LONG implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -38,6 +47,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) int is greater than a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class INT_FLOAT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -54,6 +66,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) int is greater than a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class INT_DOUBLE implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -70,6 +85,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class LONG_INT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -86,6 +104,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class LONG_LONG implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -102,6 +123,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class LONG_FLOAT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -118,6 +142,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class LONG_DOUBLE implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -134,6 +161,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) float is greater than a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_INT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -150,6 +180,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) float is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_LONG implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -166,6 +199,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) float is greater than a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_FLOAT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -182,6 +218,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) float is greater than a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_DOUBLE implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -198,6 +237,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) double is greater than a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_INT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -214,6 +256,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) double is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_LONG implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -230,6 +275,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) double is greater than a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_FLOAT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -246,6 +294,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) double is greater than a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_DOUBLE implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -262,6 +313,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class JSDATE_JSDATE implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
@@ -278,6 +332,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class JSDATE_INT implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
@@ -294,6 +351,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class JSDATE_LONG implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.JSDATE lhs;
@@ -310,6 +370,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) int is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class INT_JSDATE implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -326,6 +389,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that tests whether a(n) long is greater than a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class LONG_JSDATE implements GreaterThanAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;

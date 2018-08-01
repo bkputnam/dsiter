@@ -3,6 +3,7 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/** IRowAccessor that tests whether one IRowAccessor is greater than or equal to another. */
 public interface GreaterThanEqualsAccessor extends IRowAccessor.BOOLEAN {
 
 	<%
@@ -32,6 +33,9 @@ public interface GreaterThanEqualsAccessor extends IRowAccessor.BOOLEAN {
 			def lhsType = pair.get(0)
 			def rhsType = pair.get(1)
 	%>
+	/**
+	 * IRowAccessor that tests whether a(n) ${lhsType.nativeType} is greather than or equal to a(n) ${rhs.nativeType}.
+	 */
 	public static class ${lhsType.type}_${rhsType.type} implements GreaterThanEqualsAccessor {
 
 		private IRowAccessor.${lhsType.type} lhs;

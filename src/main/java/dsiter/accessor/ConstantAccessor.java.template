@@ -3,9 +3,15 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/**
+ * IRowAccessor that always returns a constant value.
+ */
 public interface ConstantAccessor extends IRowAccessor {
 
 	<% ColumnTypes.each { type -> %>
+	/**
+	 * IRowAccessor that returns a constant value of type ${type.nativeType}.
+	 */
 	public static class ${type.type} implements ConstantAccessor, IRowAccessor.${type.type} {
 		private ${type.nativeType} value;
 

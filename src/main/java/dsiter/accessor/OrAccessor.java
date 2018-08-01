@@ -3,6 +3,7 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/** IRowAccessor that computes the logical OR of two other IRowAccessors. */
 public class OrAccessor implements IRowAccessor.BOOLEAN {
 
 	IRowAccessor.BOOLEAN lhs;

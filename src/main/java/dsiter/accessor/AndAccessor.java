@@ -3,6 +3,9 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/**
+ * IRowAccessor that computes the logical AND of two boolean IRowAccessors.
+ */
 public class AndAccessor implements IRowAccessor.BOOLEAN {
 
 	IRowAccessor.BOOLEAN lhs;

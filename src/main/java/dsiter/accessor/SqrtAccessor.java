@@ -3,9 +3,11 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */
+                    /** IRowAccessor that computes the square root of another IRowAccessor. */
 /* GENERATED CODE */public interface SqrtAccessor extends IRowAccessor.DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the square root of a int. */
 /* GENERATED CODE */	public static class INT implements SqrtAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT src;
@@ -20,6 +22,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the square root of a long. */
 /* GENERATED CODE */	public static class LONG implements SqrtAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG src;
@@ -34,6 +37,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the square root of a float. */
 /* GENERATED CODE */	public static class FLOAT implements SqrtAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT src;
@@ -48,6 +52,7 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/** IRowAccessor that computes the square root of a double. */
 /* GENERATED CODE */	public static class DOUBLE implements SqrtAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE src;

@@ -3,15 +3,24 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */
+                    /** IRowAccessor that computes the product of two other IRowAccessors. */
 /* GENERATED CODE */public interface MultiplyAccessor extends IRowAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/** MultiplyAccessor that returns a int */
 /* GENERATED CODE */	public interface INT extends MultiplyAccessor, IRowAccessor.INT { }
+                    	/** MultiplyAccessor that returns a long */
 /* GENERATED CODE */	public interface LONG extends MultiplyAccessor, IRowAccessor.LONG { }
+                    	/** MultiplyAccessor that returns a float */
 /* GENERATED CODE */	public interface FLOAT extends MultiplyAccessor, IRowAccessor.FLOAT { }
+                    	/** MultiplyAccessor that returns a double */
 /* GENERATED CODE */	public interface DOUBLE extends MultiplyAccessor, IRowAccessor.DOUBLE { }
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) int and a(n) int.
+                    	 * Returns a(n) INT.
+                    	 */
 /* GENERATED CODE */	public class INT_INT implements INT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -28,6 +37,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) int and a(n) long.
+                    	 * Returns a(n) LONG.
+                    	 */
 /* GENERATED CODE */	public class INT_LONG implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -44,6 +57,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) int and a(n) float.
+                    	 * Returns a(n) FLOAT.
+                    	 */
 /* GENERATED CODE */	public class INT_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -60,6 +77,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) int and a(n) double.
+                    	 * Returns a(n) DOUBLE.
+                    	 */
 /* GENERATED CODE */	public class INT_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -76,6 +97,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) long and a(n) int.
+                    	 * Returns a(n) LONG.
+                    	 */
 /* GENERATED CODE */	public class LONG_INT implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -92,6 +117,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) long and a(n) long.
+                    	 * Returns a(n) LONG.
+                    	 */
 /* GENERATED CODE */	public class LONG_LONG implements LONG {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -108,6 +137,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) long and a(n) float.
+                    	 * Returns a(n) FLOAT.
+                    	 */
 /* GENERATED CODE */	public class LONG_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -124,6 +157,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) long and a(n) double.
+                    	 * Returns a(n) DOUBLE.
+                    	 */
 /* GENERATED CODE */	public class LONG_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -140,6 +177,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) float and a(n) int.
+                    	 * Returns a(n) FLOAT.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_INT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -156,6 +197,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) float and a(n) long.
+                    	 * Returns a(n) FLOAT.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_LONG implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -172,6 +217,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) float and a(n) float.
+                    	 * Returns a(n) FLOAT.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_FLOAT implements FLOAT {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -188,6 +237,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) float and a(n) double.
+                    	 * Returns a(n) DOUBLE.
+                    	 */
 /* GENERATED CODE */	public class FLOAT_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -204,6 +257,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) double and a(n) int.
+                    	 * Returns a(n) DOUBLE.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_INT implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -220,6 +277,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) double and a(n) long.
+                    	 * Returns a(n) DOUBLE.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_LONG implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -236,6 +297,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) double and a(n) float.
+                    	 * Returns a(n) DOUBLE.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_FLOAT implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -252,6 +317,10 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the product of a(n) double and a(n) double.
+                    	 * Returns a(n) DOUBLE.
+                    	 */
 /* GENERATED CODE */	public class DOUBLE_DOUBLE implements DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;

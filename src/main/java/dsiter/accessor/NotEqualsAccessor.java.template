@@ -3,8 +3,10 @@ package dsiter.accessor;
 import dsiter.row.IRowAccessor;
 import dsiter.row.Row;
 
+/** IRowAccessor that tests the non-equality of two other IRowAccessors */
 public interface NotEqualsAccessor extends IRowAccessor.BOOLEAN {
 
+	/** IRowAccessor that tests the non-equality of two Strings. */
 	public static class STRING_STRING implements NotEqualsAccessor {
 
 		private IRowAccessor.STRING lhs;
@@ -24,6 +26,7 @@ public interface NotEqualsAccessor extends IRowAccessor.BOOLEAN {
 	<%
 		def printClass(lhs, rhs) {
 	%>
+	/** IRowAccessor that tests the non-equality of a(n) ${lhs.nativeType} and a(n) ${rhs.nativeType}. */
 	public static class ${lhs.type}_${rhs.type} implements NotEqualsAccessor {
 
 		private IRowAccessor.${lhs.type} lhs;

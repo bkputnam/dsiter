@@ -3,9 +3,15 @@
 /* GENERATED CODE */import dsiter.row.IRowAccessor;
 /* GENERATED CODE */import dsiter.row.Row;
 /* GENERATED CODE */
+                    /**
+                     * IRowAccessor that computes the value of one IRowAccessor raised to the power of another IRowAccessor.
+                     */
 /* GENERATED CODE */public interface ExponentAccessor extends IRowAccessor.DOUBLE {
 /* GENERATED CODE */
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) int raised to the power of a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class INT_INT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -22,6 +28,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) int raised to the power of a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class INT_LONG implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -38,6 +47,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) int raised to the power of a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class INT_FLOAT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -54,6 +66,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) int raised to the power of a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class INT_DOUBLE implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.INT lhs;
@@ -70,6 +85,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) long raised to the power of a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class LONG_INT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -86,6 +104,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) long raised to the power of a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class LONG_LONG implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -102,6 +123,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) long raised to the power of a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class LONG_FLOAT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -118,6 +142,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) long raised to the power of a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class LONG_DOUBLE implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.LONG lhs;
@@ -134,6 +161,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) float raised to the power of a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_INT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -150,6 +180,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) float raised to the power of a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_LONG implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -166,6 +199,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) float raised to the power of a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_FLOAT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -182,6 +218,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) float raised to the power of a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class FLOAT_DOUBLE implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.FLOAT lhs;
@@ -198,6 +237,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) double raised to the power of a(n) int.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_INT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -214,6 +256,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) double raised to the power of a(n) long.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_LONG implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -230,6 +275,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) double raised to the power of a(n) float.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_FLOAT implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
@@ -246,6 +294,9 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */	
+                    	/**
+                    	 * IRowAccessor that computes the value of a(n) double raised to the power of a(n) double.
+                    	 */
 /* GENERATED CODE */	public static class DOUBLE_DOUBLE implements ExponentAccessor {
 /* GENERATED CODE */
 /* GENERATED CODE */		private IRowAccessor.DOUBLE lhs;
