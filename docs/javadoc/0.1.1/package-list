@@ -1,0 +1,10 @@
+dsiter
+dsiter.accessor
+dsiter.dataset
+dsiter.iterator
+dsiter.parser
+dsiter.parser.ast
+dsiter.pipe
+dsiter.reader
+dsiter.row
+dsiter.writer
