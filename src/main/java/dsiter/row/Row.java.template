@@ -48,6 +48,7 @@ public class Row {
 	 *
 	 * @param vals	The {@code ${type.nativeType}} values to populate
 	 * 				the Row with.
+	 * @return The new Row
 	 */
 	public static Row from${type.capitalized}s(${type.nativeType}... vals) {
 	    Row result = new Row();

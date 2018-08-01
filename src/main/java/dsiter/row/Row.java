@@ -78,6 +78,7 @@
                     	 *
                     	 * @param vals	The {@code int} values to populate
                     	 * 				the Row with.
+                    	 * @return The new Row
                     	 */
 /* GENERATED CODE */	public static Row fromInts(int... vals) {
 /* GENERATED CODE */	    Row result = new Row();
@@ -91,6 +92,7 @@
                     	 *
                     	 * @param vals	The {@code long} values to populate
                     	 * 				the Row with.
+                    	 * @return The new Row
                     	 */
 /* GENERATED CODE */	public static Row fromLongs(long... vals) {
 /* GENERATED CODE */	    Row result = new Row();
@@ -104,6 +106,7 @@
                     	 *
                     	 * @param vals	The {@code float} values to populate
                     	 * 				the Row with.
+                    	 * @return The new Row
                     	 */
 /* GENERATED CODE */	public static Row fromFloats(float... vals) {
 /* GENERATED CODE */	    Row result = new Row();
@@ -117,6 +120,7 @@
                     	 *
                     	 * @param vals	The {@code double} values to populate
                     	 * 				the Row with.
+                    	 * @return The new Row
                     	 */
 /* GENERATED CODE */	public static Row fromDoubles(double... vals) {
 /* GENERATED CODE */	    Row result = new Row();
@@ -130,6 +134,7 @@
                     	 *
                     	 * @param vals	The {@code String} values to populate
                     	 * 				the Row with.
+                    	 * @return The new Row
                     	 */
 /* GENERATED CODE */	public static Row fromStrings(String... vals) {
 /* GENERATED CODE */	    Row result = new Row();
@@ -143,6 +148,7 @@
                     	 *
                     	 * @param vals	The {@code boolean} values to populate
                     	 * 				the Row with.
+                    	 * @return The new Row
                     	 */
 /* GENERATED CODE */	public static Row fromBools(boolean... vals) {
 /* GENERATED CODE */	    Row result = new Row();
@@ -156,6 +162,7 @@
                     	 *
                     	 * @param vals	The {@code long} values to populate
                     	 * 				the Row with.
+                    	 * @return The new Row
                     	 */
 /* GENERATED CODE */	public static Row fromJsDates(long... vals) {
 /* GENERATED CODE */	    Row result = new Row();

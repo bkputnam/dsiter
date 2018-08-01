@@ -44,6 +44,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 * 		successfully moved to the next item, or
 	 * 		{@code false} if there are no more items
 	 * 		to be iterated over.
+	 * @throws Exception Implementation specific
 	 */
 	boolean tryMoveNext() throws Exception;
 
@@ -69,6 +70,7 @@ public interface IDatasetIterator extends AutoCloseable {
 	 *     recommended.
 	 * </p>
 	 * @return Row The current Row
+	 * @throws Exception Implementation specific
 	 */
 	Row getCurrentRow() throws Exception;
 
@@ -155,6 +157,8 @@ public interface IDatasetIterator extends AutoCloseable {
 	 *
 	 * @param pipe The pipe to be attached to this iterator
 	 * @return An iterator that represents this iterator with the pipe attached
+	 * @throws Exception Rarely happens, but since some iterators apply pipes by repeatedly
+	 * 		calling tryMoveNext, this method could throw anything that that method could throw.
 	 */
 	default IDatasetIterator pipe(IPipe pipe) throws Exception {
 		if (this.tryAbsorb(pipe)) {
@@ -204,6 +208,8 @@ public interface IDatasetIterator extends AutoCloseable {
 	 *
 	 * @param pipe The pipe that the iterator should try to absorb
 	 * @return True, if the pipe was completely absorbed (and should be discarded), else false.
+	 * @throws Exception Rarely happens, but since some iterators apply pipes by repeatedly calling
+	 * 		tryMoveNext, this method could throw anything that that method could throw.
 	 */
 	// Note: no default implementation to force authors to think about this
 	boolean tryAbsorb(IPipe pipe) throws Exception;

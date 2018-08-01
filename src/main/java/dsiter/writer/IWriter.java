@@ -17,6 +17,7 @@ public interface IWriter {
 	 *
 	 * @param it        The iterator to be written
 	 * @param outStream The OutputStream to be written to
+	 * @throws Exception If there are any errors during writing (implementation specific).
 	 */
     void writeTo(IDatasetIterator it, OutputStream outStream) throws Exception;
 

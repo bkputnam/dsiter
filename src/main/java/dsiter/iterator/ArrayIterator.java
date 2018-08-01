@@ -27,6 +27,7 @@
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.INT}
                     	 * @param values the values to iterator over
+                    	 * @return An IDatasetIterator over the passed values
                     	 */
 /* GENERATED CODE */	public static ArrayIterator fromInts (int... values) {
 /* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
@@ -40,6 +41,7 @@
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.LONG}
                     	 * @param values the values to iterator over
+                    	 * @return An IDatasetIterator over the passed values
                     	 */
 /* GENERATED CODE */	public static ArrayIterator fromLongs (long... values) {
 /* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
@@ -53,6 +55,7 @@
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.FLOAT}
                     	 * @param values the values to iterator over
+                    	 * @return An IDatasetIterator over the passed values
                     	 */
 /* GENERATED CODE */	public static ArrayIterator fromFloats (float... values) {
 /* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
@@ -66,6 +69,7 @@
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.DOUBLE}
                     	 * @param values the values to iterator over
+                    	 * @return An IDatasetIterator over the passed values
                     	 */
 /* GENERATED CODE */	public static ArrayIterator fromDoubles (double... values) {
 /* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
@@ -79,6 +83,7 @@
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.STRING}
                     	 * @param values the values to iterator over
+                    	 * @return An IDatasetIterator over the passed values
                     	 */
 /* GENERATED CODE */	public static ArrayIterator fromStrings (String... values) {
 /* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
@@ -92,6 +97,7 @@
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.BOOLEAN}
                     	 * @param values the values to iterator over
+                    	 * @return An IDatasetIterator over the passed values
                     	 */
 /* GENERATED CODE */	public static ArrayIterator fromBools (boolean... values) {
 /* GENERATED CODE */		ArrayIterator result = new ArrayIterator();
@@ -105,6 +111,7 @@
                     	/**
                     	 * Construct a new ArrayIterator with type {@code ColumnType.JSDATE}
                     	 * @param values the values to iterator over
+                    	 * @return An IDatasetIterator over the passed values
                     	 */
 /* GENERATED CODE */	public static ArrayIterator fromJsDates (long... values) {
 /* GENERATED CODE */		ArrayIterator result = new ArrayIterator();

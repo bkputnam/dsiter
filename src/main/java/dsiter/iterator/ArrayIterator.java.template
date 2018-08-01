@@ -27,6 +27,7 @@ public class ArrayIterator implements IDatasetIterator {
 	/**
 	 * Construct a new ArrayIterator with type {@code ColumnType.${type.type}}
 	 * @param values the values to iterator over
+	 * @return An IDatasetIterator over the passed values
 	 */
 	public static ArrayIterator from${type.capitalized}s (${type.nativeType}... values) {
 		ArrayIterator result = new ArrayIterator();
