@@ -4,6 +4,21 @@ import dsiter.pipe.IPipe;
 import dsiter.row.ColumnDescriptor;
 import dsiter.row.Row;
 
+/**
+ * Utility class that helps count how many times each method in IDatasetIterator was called.
+ *
+ * <h1>Example usage:</h1>
+ * <code>
+ *     IteratorCounter counter = new IteratorCounter();
+ *     IDatasetIterator iterator = theIteratorUnderTest()
+ *         .pipe(counter.getPipe());
+ *
+ *     while (it.tryMoveNext()) {
+ *         // do stuff
+ *     }
+ *     assertEquals(numItems, counter.getTryMoveNextCount());
+ * </code>
+ */
 public class IteratorCounter {
 
 	private long tryMoveNextCount = 0;
