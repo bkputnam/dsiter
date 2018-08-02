@@ -4,10 +4,8 @@ import dsiter.iterator.RangeIterator;
 import dsiter.iterator.IDatasetIterator;
 
 /**
- * Dataset that represents a range of integers.
- * Returned rows will have a single column of
- * type {@code ColumnType.INT}, named
- * {@code "value"}.
+ * Dataset that represents a range of integers. Returned rows will have a single column of type {@code ColumnType.INT},
+ * named {@code "value"}.
  *
  * @see RangeIterator
  */
