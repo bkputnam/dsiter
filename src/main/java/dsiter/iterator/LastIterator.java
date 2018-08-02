@@ -58,7 +58,10 @@ public class LastIterator implements IDatasetIterator {
 		if (srcLen == 0) {
 			return false;
 		}
-		else if (srcLen == -1) {
+		else if (srcLen != -1) {
+			return src.pipe(skip(srcLen-1)).tryMoveNext();
+		}
+		else {
 			boolean foundAny = false;
 
 			// Unfortunately, lastIterator needs to call getCurrentRow() on
@@ -68,24 +71,14 @@ public class LastIterator implements IDatasetIterator {
 			// change or invalidate the value of src.getCurrentRow(), even
 			// one that returns false.
 			row = new Row(copier.getDestShape());
-			while( src.tryMoveNext() ) {
+			while (src.tryMoveNext()) {
 				foundAny = true;
 
-				Row srcRow;
-				try {
-					srcRow = src.getCurrentRow();
-				}
-				catch (Exception e) {
-					return false;
-				}
-
+				Row srcRow = src.getCurrentRow();
 				copier.copyTo(srcRow, row);
 			}
 			alreadyReadRow = foundAny;
 			return foundAny;
-		}
-		else {
-			return src.pipe(skip(srcLen-1)).tryMoveNext();
 		}
 	}
 
