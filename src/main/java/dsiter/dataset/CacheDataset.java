@@ -10,6 +10,10 @@ import dsiter.row.RowShape;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An IDataset that immediately reads and then caches another dataset. The cache expires after a configurable amount of
+ * time. The CacheDataset will have the same Row structure as the source dataset.
+ */
 public class CacheDataset implements IDataset {
 
 	private long timeoutMillis;
@@ -19,13 +23,36 @@ public class CacheDataset implements IDataset {
 	private Row[] cache;
 	private ColumnDescriptor[] cds;
 
-	public CacheDataset(IDataset src, double timeoutSeconds) throws Exception {
-		this.src = src;
-		this.timeoutMillis = (long)(timeoutSeconds * 1000);
-		refeshCache();
+	/**
+	 * Create a CacheDataset that immediately reads the entirety of the passed @{code src} dataset and caches it
+	 * forever.
+	 * @param src The source dataset to read from and cache
+	 * @throws Exception If the source dataset throws any Exceptions.
+	 */
+	public CacheDataset(IDataset src) throws Exception {
+		this(src, -1);
 	}
 
-	private void refeshCache() throws Exception {
+	/**
+	 * Create a CacheDataset that reads the entirety of the passed @{code src} dataset and caches it for
+	 * {@code timeoutSeconds}.
+	 * @param src The source dataset to read from and cache
+	 * @param timeoutSeconds How long a cache can persist for before it is considered stale. If value is -1, cache will
+	 *		never timeout.
+	 * @throws Exception If the source dataset throws any Exceptions.
+	 */
+	public CacheDataset(IDataset src, double timeoutSeconds) throws Exception {
+		this.src = src;
+		if (timeoutSeconds == -1) {
+			this.timeoutMillis = -1;
+		}
+		else {
+			this.timeoutMillis = (long) (timeoutSeconds * 1000);
+		}
+		refreshCache();
+	}
+
+	private void refreshCache() throws Exception {
 		List<Row> rowList = new ArrayList<>();
 		IDatasetIterator srcIter = src.getIterator();
 
@@ -42,13 +69,24 @@ public class CacheDataset implements IDataset {
 		}
 
 		cache = rowList.toArray(new Row[0]);
-		lastRefresh = System.currentTimeMillis();
+		if (timeoutMillis != -1) {
+			// Minor optimization - avoid a system call if we're caching indefinitely anyway.
+			lastRefresh = System.currentTimeMillis();
+		}
 	}
 
 	private void maybeRefreshCache() throws Exception {
-		long now = System.currentTimeMillis();
-		if (cache == null || now > lastRefresh + timeoutMillis) {
-			refeshCache();
+		if (cache == null) {
+			refreshCache();
+		}
+		else if (timeoutMillis == -1) {
+			return;
+		}
+		else {
+			long now = System.currentTimeMillis();
+			if (now > lastRefresh + timeoutMillis) {
+				refreshCache();
+			}
 		}
 	}
 
