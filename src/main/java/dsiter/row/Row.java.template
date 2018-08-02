@@ -71,4 +71,12 @@ public class Row {
 		}<% } %>
 	}
 
+	/**
+	 * Construct a Row whose shape is calculated from the passed ColumnDescriptors.
+	 *
+	 * @param cds The ColumnDescriptors from which the shape will be calculated.
+	 */
+	public Row(ColumnDescriptor[] cds) {
+		this(new RowShape(cds));
+	}
 }

@@ -203,4 +203,12 @@
 /* GENERATED CODE */		}
 /* GENERATED CODE */	}
 /* GENERATED CODE */
+                    	/**
+                    	 * Construct a Row whose shape is calculated from the passed ColumnDescriptors.
+                    	 *
+                    	 * @param cds The ColumnDescriptors from which the shape will be calculated.
+                    	 */
+/* GENERATED CODE */	public Row(ColumnDescriptor[] cds) {
+/* GENERATED CODE */		this(new RowShape(cds));
+/* GENERATED CODE */	}
 /* GENERATED CODE */}
